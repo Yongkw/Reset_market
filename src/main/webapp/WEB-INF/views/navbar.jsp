@@ -309,8 +309,8 @@ border-radius: 2px;
 		</div>
 		<div class="div2">
 		<div id="menu" class="nav-bar-div">
-				<span><label for="link-1" ><a id="link-1" href="#" >1번링크</a></label></span>
-				<span><label for="link-2" ><a id="link-2" href="#" >2번링크</a></label></span>
+				<span><label for="link-1" ><a id="link-1" href="event_out" >EVENT</a></label></span>
+				<span><label for="link-2" ><a id="link-2" href="notice_out" >COMMUNITY</a></label></span>
 				<span><label for="link-3" ><a id="link-3" href="#" >3번링크</a></label></span>
 				<span><label for="link-4" ><a id="link-4" href="#" >4번링크</a></label></span>
 			</div>

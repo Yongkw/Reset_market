@@ -4,5 +4,26 @@
 
 <mapper namespace="com.enez.market.board.Service">
 
-  
+  <insert id ="insert">
+  	insert into notice (notice_no, notice_title, notice_content, notice_writer, notice_img, notice_category, groups) 
+  	values(resetnotice_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5}, resetnotice_seq.nextval)
+  </insert>
+  	
+	 <select id="noticeout" resultType="com.enez.market.board.BoardDTO">
+  		select notice_no, notice_title, to_char(notice_time,'yyyy-MM-dd')notice_time, notice_content, notice_img, notice_category from notice order by groups DESC
+ 	 </select>
+ 	 
+ 	 <select id="noupdate" resultType="com.enez.market.board.BoardDTO">
+    select * from notice where notice_no = #{param1}
+	</select>
+
+	<update id="update">
+		update notice set notice_title=#{param1}, notice_content=#{param2}, notice_img=#{param3}, notice_writer=#{param4}, 
+						  notice_time=SYSTIMESTAMP,  notice_category=#{param5} where notice_no=#{param6}
+	</update>
+	
+	<delete id="dela">
+	delete from notice where notice_no = #{param2}
+	</delete>
+
 </mapper>
