@@ -79,6 +79,12 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/product/productdetail.jsp" />
 	</definition>
+	
+	<definition name="mypage" extends="baseLayout3">
+		<put-attribute name="title" value="마이페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/product/mypage.jsp" />
+	</definition>
 
 	<!-- 이벤트 페이지 -->
  	

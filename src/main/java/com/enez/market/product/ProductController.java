@@ -24,7 +24,7 @@ public class ProductController {
 	
 		@Autowired
 		SqlSession sqlSession;
-		String path = "\\\\Mac\\Home\\Desktop\\project\\src\\main\\webapp\\image";
+		String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
 		
 		@RequestMapping(value = "/productinput")
 		public String product1() {
@@ -101,6 +101,10 @@ public class ProductController {
 		private void count(String title) {
 			Service ss = sqlSession.getMapper(Service.class);
 			ss.count(title);
+		}
+		@RequestMapping(value = "/mypage")
+		public String product5() {
+			return "mypage";
 		}
 		
 }

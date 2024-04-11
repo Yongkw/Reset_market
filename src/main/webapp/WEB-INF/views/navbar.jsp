@@ -344,7 +344,7 @@ border-radius: 2px;
 		<c:when test="${loginstate==true}"><!-- 로그인 상태 세션에 따른 변화 -->
 			<span>
 			<span style="color:black">${member_id}님!</span>
-			<a href="#">마이페이지</a>
+			<a href="mypage">마이페이지</a>
 			<a href="logout">로그 아웃</a>
 			</span>
 		</c:when>
