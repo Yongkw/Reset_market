@@ -13,7 +13,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Stylish&display=swap"
 	rel="stylesheet">
-<link href="${path}/resources/css/prosale.css" rel="stylesheet" />
+<link href="${path}/resources/css/prosale2.css" rel="stylesheet" />
 </head>
 
 <script
@@ -210,7 +210,7 @@
 				<ul class="hcyuoc">
 					<li class="iZffvT">
 						<div class="dXoRFE">
-							상품이미지 <span>*</span> <small>(3/12)</small>
+							상품이미지 <small>(3/12)</small>
 						</div>
 						<div class="nqDMw">
 							<ul class="czzFIC">
@@ -226,21 +226,22 @@
 							<div class="doQsrA">상품 이미지는 PC에서는 1:1 비율로 보여줘요</div>
 						</div>
 					<li class="iZffvT">
-						<div class="fwWxzG">
-							상품명 <span>*</span>
+						<div class="fw22">
+							상품명
 						</div>
 						<div class="nqDMw">
 							<div class="iIJDsQ">
 								<input type="text" placeholder="상품명을 입력해 주세요."
-									class="ProductNewstyle__NameInput-sc-7fge4a-11 lhjRrq" name ="title" >
+									class="lhjRrq" name ="title" >
 							</div>
 						</div>
 					</li>
 					<li class="iZffvT">
-						<div class="fwWxzG">
-							카테고리 <span>*</span>
+						<div class="fw22">
+							카테고리 
 						</div>
-						<div class="nqDMw" style="display: flex;">
+						<div class="nqDMw">
+							<div class="bDakqE">
 							<div class="kPDVsx">
 								<ul class="fAfkpF">
 									<li class="btyiVm">
@@ -259,16 +260,18 @@
 										<button type="button" class="cVEXWs">등산/캠핑</button>
 									</li>
 								</ul>
+							</div>
+								<div class="kPDVsx">
+								
+									<ul class="fAfkpF" id="test">
+									</ul>
 								<input id="max_text" type="hidden" value="아무" name="ca_name1">
 								<input id="max_text2" type="hidden" value="아무" name="ca_name2">
+								</div>
 							</div>
-
-
-							<div class="kPDVsx" style="margin-left: 5px;">
-								<ul class="fAfkpF" id="test">
-
-								</ul>
-							</div>
+							<div  style="ddisplay:flex; align-items: center; justify-content: space-between; margin: 1.5rem;" >
+								<h3 class="gMPvsn">선택한 카테고리 : <b></b> </h3>
+							</div> 
 							<!-- 
      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
         <h3 class="gMPvsn">
@@ -278,11 +281,11 @@
 						</div>
 					</li>
 					<li class="iZffvT">
-						<div class="fwWxzG">
-							거래지역 <span>*</span>
+						<div class="fw22">
+							거래지역
 						</div>
 						<div class="nqDMw">
-							<div class="csejSP">
+							<div>
 								<button type="button" class="gWFJMk">내위치</button>
 								<button type="button" class="gWFJMk">최근지역</button>
 								<input class="gWFJMk" type="button"
@@ -296,8 +299,8 @@
 						</div>
 					</li>
 					<li class="iZffvT">
-						<div class="fwWxzG">
-							가격 <span>*</span>
+						<div class="fw22">
+							가격 
 						</div>
 						<div class="nqDMw">
 							<div class="cYrISD">
@@ -308,8 +311,8 @@
 					</li>
 
 					<li class="iZffvT">
-						<div class="fwWxzG">
-							설명 <span>*</span>
+						<div class="fw22">
+							설명
 						</div>
 						<div class="nqDMw">
 							<textarea rows="6" class="gQnFKF" oninput="hideDivContent(this)" name="detail"></textarea>
@@ -496,16 +499,24 @@ $(document).on("click",".cVEXWs2",function(){
 		
 	});
 
+$(document).on("click", ".cVEXWs", function(){
+    var selectedCategory = $(this).text(); // 선택한 카테고리 텍스트 가져오기
+    $("#max_text").val(selectedCategory); // hidden input에 선택한 카테고리 저장
+    
+    // 선택한 카테고리 표시하기
+    $(".gMPvsn b").text(selectedCategory);
+});
 
- 
-  /*
-  $(document).on("click", ".kate-btnb", function(){ 
-     var kate = $(this).val();
-     console.log(kate);
-     location.href="pr_search";
-     
-  });
-  */
+$(document).on("click", ".cVEXWs2", function(){
+    var selectedSubCategory = $(this).text(); // 선택한 서브 카테고리 텍스트 가져오기
+    var selectedCategory = $("#max_text").val(); // 선택한 메인 카테고리 텍스트 가져오기
+    var fullCategory = selectedCategory + " > " + selectedSubCategory; // 전체 카테고리 텍스트 생성
+    
+    $("#max_text2").val(selectedSubCategory); // hidden input에 선택한 서브 카테고리 저장
+    
+    // 선택한 카테고리 표시하기
+    $(".gMPvsn b").text(fullCategory);
+});
   
    
    
