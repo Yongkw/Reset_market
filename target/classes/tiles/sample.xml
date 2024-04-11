@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+   <definition name="baseLayout" template="/WEB-INF/views/layout.jsp">
+      <put-attribute name="title" value=""/>
+      <put-attribute name="top" value="/WEB-INF/views/top.jsp"/>
+      <put-attribute name="body" value=""/>
+      <put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
+   </definition>
+
+   
+   <definition name="main" extends="baseLayout">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/main.jsp"/>
+   </definition>
+   
+   <definition name="baseLayout3" template="/WEB-INF/views/layout.jsp">
+      <put-attribute name="title" value=""/>
+      <put-attribute name="top" value="/WEB-INF/views/top.jsp"/>
+      <put-attribute name="body" value=""/>
+      <put-attribute name="slide_banner" value="/WEB-INF/views/slide_banner.jsp"/>
+      <put-attribute name="navbar" value="/WEB-INF/views/navbar.jsp"/>
+      <put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
+   </definition>
+   
+
+   <definition name="main_view" extends="baseLayout3">
+      <put-attribute name="title" value="메인뷰"/>
+      <put-attribute name="body" value="/WEB-INF/views/main_view.jsp"/>
+   </definition>   
+   <definition name="main" extends="baseLayout3">
+      <put-attribute name="title" value="메인화면"/>
+      <put-attribute name="body" value="/WEB-INF/views/main.jsp"/>
+   </definition>
+   <definition name="pr_searcht" extends="baseLayout3">
+      <put-attribute name="title" value="상품검색"/>
+      <put-attribute name="body" value="/WEB-INF/views/pro_search/pr_search_out.jsp"/>
+   </definition>
+   <definition name="pricechart_view" extends="baseLayout3">
+      <put-attribute name="title" value="시세검색"/>
+      <put-attribute name="body" value="/WEB-INF/views/pricechart/chartsearch.jsp"/>
+   </definition>
+   <definition name="searchresult" extends="baseLayout3">
+      <put-attribute name="title" value="시세결과"/>
+      <put-attribute name="body" value="/WEB-INF/views/pricechart/searchresult.jsp"/>
+   </definition>
+   
+   	<definition name="signup" extends="baseLayout3">
+		<put-attribute name="title" value="회원가입" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/signup.jsp" />
+	</definition>
+	<definition name="memberlist" extends="baseLayout3">
+		<put-attribute name="title" value="회원리스트" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/memberlist.jsp" />
+	</definition>
+	<definition name="login" extends="baseLayout3">
+		<put-attribute name="title" value="로그인" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/login.jsp" />
+	</definition>
+	<definition name="membersearch" extends="baseLayout3">
+		<put-attribute name="title" value="아이디/비번찾기" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/membersearch.jsp" />
+	</definition>
+	
+		<definition name="productinput" extends="baseLayout3">
+		<put-attribute name="title" value="상품등록" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/product/productinput.jsp" />
+	</definition>
+	
+	<definition name="productdetail" extends="baseLayout3">
+		<put-attribute name="title" value="상품상세페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/product/productdetail.jsp" />
+	</definition>
+	
+	
+ 
+   
+</tiles-definitions>

@@ -1,0 +1,208 @@
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.enez.market.search.Service">
+
+<select id="pr_search" resultType="com.enez.market.search.Product_search_DTO" >
+
+select 
+PRODUCT_NO ,
+SELLER_ID ,
+CATEGORY_NAME ,
+BUYER_ID ,
+PRICE ,
+TITLE ,
+DETAIL ,
+LOCATION ,
+PRODUCT_STATE ,
+PRODUCT_IMAGE ,
+VIEW_CNT ,
+CREATE_AT ,
+UPDATE_AT 
+from PRODUCT
+WHERE TITLE LIKE '%'||#{param1}||'%'
+</select>
+
+<select id="pr_search2" resultType="com.enez.market.search.Product_search_DTO" > 
+SELECT 
+        PRODUCT_NO,
+        SELLER_ID,
+        CATEGORY_NAME,
+        BUYER_ID,
+        PRICE,
+        TITLE,
+        DETAIL,
+        LOCATION,
+        PRODUCT_STATE,
+        PRODUCT_IMAGE,
+        VIEW_CNT,
+        CREATE_AT,
+        UPDATE_AT
+	FROM (
+	    SELECT  PRODUCT_NO,
+	        SELLER_ID,
+	        CATEGORY_NAME,
+	        BUYER_ID,
+	        PRICE,
+	        TITLE,
+	        DETAIL,
+	        LOCATION,
+	        PRODUCT_STATE,
+	        PRODUCT_IMAGE,
+	        VIEW_CNT,
+	        CREATE_AT,
+	        UPDATE_AT,
+	        ROW_NUMBER() OVER (ORDER BY create_at) AS num
+	    FROM
+	        product
+	    WHERE
+	        TITLE LIKE '%'||#{param1}||'%')
+	WHERE
+    num BETWEEN #{param2} AND #{param3}
+</select>
+
+<select id="pr_search3" resultType="com.enez.market.search.Product_search_DTO" > 
+SELECT 
+        PRODUCT_NO,
+        SELLER_ID,
+        CATEGORY_NAME,
+        BUYER_ID,
+        PRICE,
+        TITLE,
+        DETAIL,
+        LOCATION,
+        PRODUCT_STATE,
+        PRODUCT_IMAGE,
+        VIEW_CNT,
+        CREATE_AT,
+        UPDATE_AT
+	FROM (
+	    SELECT  PRODUCT_NO,
+	        SELLER_ID,
+	        CATEGORY_NAME,
+	        BUYER_ID,
+	        PRICE,
+	        TITLE,
+	        DETAIL,
+	        LOCATION,
+	        PRODUCT_STATE,
+	        PRODUCT_IMAGE,
+	        VIEW_CNT,
+	        CREATE_AT,
+	        UPDATE_AT,
+	        ROW_NUMBER() OVER (ORDER BY create_at) AS num
+	    FROM product)
+	WHERE
+    num BETWEEN #{param1} AND #{param2}
+</select>
+
+<select id="pr_search3_1" resultType="com.enez.market.search.Product_search_DTO" > 
+SELECT PRODUCT_NO,
+        SELLER_ID,
+        CATEGORY_NAME,
+        BUYER_ID,
+        PRICE,
+        TITLE,
+        DETAIL,
+        LOCATION,
+        PRODUCT_STATE,
+        PRODUCT_IMAGE,
+        VIEW_CNT,
+        CREATE_AT,
+        UPDATE_AT
+	FROM (
+	    SELECT  PRODUCT_NO,
+	        SELLER_ID,
+	        CATEGORY_NAME,
+	        BUYER_ID,
+	        PRICE,
+	        TITLE,
+	        DETAIL,
+	        LOCATION,
+	        PRODUCT_STATE,
+	        PRODUCT_IMAGE,
+	        VIEW_CNT,
+	        CREATE_AT,
+	        UPDATE_AT,
+	        ROW_NUMBER() OVER (ORDER BY VIEW_CNT DESC ) AS num
+	    FROM product where PRODUCT_STATE = '판매중')
+	WHERE
+    num BETWEEN #{param1} AND #{param2}
+</select>
+
+<select id="pr_search3_2" resultType="com.enez.market.search.Product_search_DTO" > 
+SELECT PRODUCT_NO,
+        SELLER_ID,
+        CATEGORY_NAME,
+        BUYER_ID,
+        PRICE,
+        TITLE,
+        DETAIL,
+        LOCATION,
+        PRODUCT_STATE,
+        PRODUCT_IMAGE,
+        VIEW_CNT,
+        CREATE_AT,
+        UPDATE_AT
+	FROM (
+	    SELECT  PRODUCT_NO,
+	        SELLER_ID,
+	        CATEGORY_NAME,
+	        BUYER_ID,
+	        PRICE,
+	        TITLE,
+	        DETAIL,
+	        LOCATION,
+	        PRODUCT_STATE,
+	        PRODUCT_IMAGE,
+	        VIEW_CNT,
+	        CREATE_AT,
+	        UPDATE_AT,
+	        ROW_NUMBER() OVER (ORDER BY PRICE DESC ) AS num
+	    FROM product where PRODUCT_STATE = '판매중')
+	WHERE
+    num BETWEEN #{param1} AND #{param2}
+</select>
+
+<select id="pr_search3_3" resultType="com.enez.market.search.Product_search_DTO" > 
+SELECT PRODUCT_NO,
+        SELLER_ID,
+        CATEGORY_NAME,
+        BUYER_ID,
+        PRICE,
+        TITLE,
+        DETAIL,
+        LOCATION,
+        PRODUCT_STATE,
+        PRODUCT_IMAGE,
+        VIEW_CNT,
+        CREATE_AT,
+        UPDATE_AT
+	FROM (
+	    SELECT  PRODUCT_NO,
+	        SELLER_ID,
+	        CATEGORY_NAME,
+	        BUYER_ID,
+	        PRICE,
+	        TITLE,
+	        DETAIL,
+	        LOCATION,
+	        PRODUCT_STATE,
+	        PRODUCT_IMAGE,
+	        VIEW_CNT,
+	        CREATE_AT,
+	        UPDATE_AT,
+	        ROW_NUMBER() OVER (ORDER BY UPDATE_AT DESC ) AS num
+	    FROM product where PRODUCT_STATE = '판매중')
+	WHERE
+    num BETWEEN #{param1} AND #{param2}
+</select>
+ 
+<insert id="insert_event">
+insert into event values(#{event_title},#{event_in},#{event_start_date},#{event_end_date},#{fname1},#{fname2})
+
+</insert>
+
+
+</mapper>

@@ -1,0 +1,23 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.enez.market.product.Service">
+
+  
+  <insert id="productsave">
+    insert into product (seller_id, product_no, product_image, title, category_name, location, price, detail)
+    values (#{param1}, pro_no.nextval, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7})
+</insert>
+	
+<select id="productout" resultType="com.enez.market.product.ProductDTO">
+	select * from product where title = #{param1}		
+</select>
+
+<update id="count">
+	update product set view_cnt=view_cnt+1 where title = #{param1}
+</update>
+
+
+
+</mapper>
