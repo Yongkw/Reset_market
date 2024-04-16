@@ -3,166 +3,307 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
+
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- bxslider cdn시작 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<!-- bxslider cdn끝 -->
 <style type="text/css">
-.main-div {
-	width: 100%;
-	display: flex;
+.dCIUug {
+    width: 1024px;
+    margin: auto;
+    padding: 3.5rem 0px 1.5rem;
 }
 
-.search-list {
-	width: 250px;
-	height: 300px;
-	margin: 10px 10px 10px 30px;
-	border: 3px solid #DCDCDC;
-	border-radius: 15px;
+.dCIUug h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
-.search-list-div {
-	width: 235px;
-	height: 280px;
-	margin-top: 5px;
-	margin-left: 5px;
+h1, h2, h3, h4, h5, h6 {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0px;
+}
+.kSnlsd {
+    display: flex;
+    flex-wrap: wrap;
+}
+.eCFZgW {
+    width: 196px;
+    margin-right: 11px;
+    margin-bottom: 11px;
+}
+.iizKix {
+    border: 1px solid rgb(238, 238, 238);
+    background: rgb(255, 255, 255);
+    display: block;
+}
+a {
+    color: rgb(33, 33, 33);
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.search-top {
-	
+.eSpfym {
+    position: relative;
+    width: 100%;
+    height: 194px;
+}
+.ikEnr {
+    padding: 15px 10px;
+    height: 80px;
 }
 
-.search-top>a {
-	margin: auto;
+.gwleiO {
+    position: relative;
+    font-size: 14px;
+    padding-bottom: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
-.search-list-div>span {
-	width: 216px;
-	height: 216px;
+.ldPLFl {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 20px;
 }
 
-.search-list-div>span>img {
-	border-radius: 10%;
-	border: none;
+.moVyh {
+    font-size: 16px;
+    font-weight: 600;
+   	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
-.main_slide{
-
+.moVyh::after {
+    content: "원";
+    font-size: 13px;
+    margin-left: 3px;
+}
+.eYNXkt {
+    font-size:12px;
+    color:rgb(136,136,136);
 }
 
+.fanqbi {
+    background: white;
+}
+.bInodS {
+    min-width: 1236px;
+}
+.eCFZgW:nth-child(5n) {
+    margin-right: 0px;
+}
+
+.ezgzFX {
+    position: relative;
+    max-width: 100%;
+    margin: 0px auto;
+    background: white;
+}
+
+.slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.ezgzFX .slick-prev {
+    left: calc(50% - 500px);
+    background-image: url(/pc-static/resource/2c3876a….png);
+}
+.ezgzFX .slick-arrow::before {
+    position: absolute;
+    display: inline-block;
+    content: "";
+    font-family: "Noto Sans KR", sans-serif;
+    width: 10px;
+    height: 10px;
+    top: 8px;
+    right: 10px;
+    color: black;
+}
+
+
+element.style {
+    width: 17408px;
+    opacity: 1;
+    transform: translate3d(-8192px, 0px, 0px);
+}
+.slick-slider .slick-track, .slick-slider .slick-list {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translateZ(0);
+}
+.slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.slick-initialized .slick-slide {
+    display: block;
+}
+.dJDUPg {
+    text-align: center;
+}
+.gLLlZb {
+    width: 100%;
+    position: relative;
+    padding-top: 29.1666%;
+    cursor: pointer;
+}
+.sc-krDsej.gLLlZb {
+    width: 100%;
+    position: relative; /* 추가 */
+    padding-top: 29.1666%;
+    cursor: pointer;
+}
+.slick-slide img {
+    display: block;
+}
+.fVUxsR {
+    top: 0px;
+    left: 0px;
+    object-fit: cover;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
 </style>
+<!-- bxslider 스크립트 -->
+<script>
+      $(document).ready(function(){
+        $(".mainslider").bxSlider({
+        	mode:'vertical',
+        	auto:true
+        	
+        });
+      });
+    </script>
+
+<meta charset="UTF-8">
+
+
+
+<title>Insert title here</title>
 
 </head>
 <body>
-<div style="margin: 0 auto; width:75%; border: 1px solid gray ; " >
-<div style=" margin:0px 30px 0px 30px; overflow: hidden; " >
-<h3>리셋마켓에서 추천 상품</h3>
-		<div style="margin: 0 auto; width:100%; border: 3px solid #DCDCDC; transform:" class="main-slide-div" >
-		<div id="search-top">
-			<span style="height: 80px;"></span>
+<div class="bInodS">
+	<div class="fanqbi">
+	<!-- 슬라이드배너 시작 -->
+		<div class="ezgzFX">
+			 <div class="mainslider">
+      <div><img src="https://www.thebodyshop.co.kr/files/public/site/2024/202402/ba4f459a-c4d4-4203-a0a3-0749f46920a2.jpg"></div>
+      <div><img src="https://www.thebodyshop.co.kr/files/public/site/2024/202402/12afe1fb-b41e-46cd-8135-94c7860fefb2.jpg"></div>
+      <div><img src="https://www.thebodyshop.co.kr/files/public/site/2023/202305/dcb064a5-fee7-4d94-a918-9c242257fdc0.jpg"></div>
+    </div>
 		</div>
-		<div class="main-div">
- 
-			<c:forEach var="i" items="${main_list}">
-				<a href="productout?title=${i.title}">
-				<div class="search-list">
-					<div class="search-list-div">
-						<span><img alt="상품 이미지" src="./image/${i.product_image}" width="200px"
-							height="200px"></span>
-
-						<table width="216px" height="70px" style="margin-top: 10px;">
-							<tr>
-								<td colspan="2"><a style="font-weight: bolder;">${i.title}</a></td>
-							</tr>
-							<tr>
-								<td colspan="2"><a>${i.location}</a></td>
-							</tr>
-							<tr>
-								<td><a>${i.price}</a></td>
-								<td style="width: 14%;"><a>${i.view_cnt}</a></td>
-							</tr>
-						</table>
+	
+	
+	<section class="dCIUug">
+		<h2>오늘의 추천상품</h2>
+		<!-- 상품리스트 시작 -->
+		<div class="kSnlsd">
+		
+		
+		 <c:forEach items="${main_list}" var="aa"  varStatus="loop">
+		 	<c:if test="${loop.index < 5}">
+			<div class="eCFZgW">
+			
+				<a class="iizKix" href="productout?title=${aa.title}" >
+					<div class="eSpfym">
+						<img alt="" src="./image/${aa.main_image}" width="194" height="194">
 					</div>
-				</div>
+					<div class="ikEnr">
+						<div class="gwleiO">${aa.title}</div>
+						<div class="ldPLFl">
+							<div class="moVyh">${aa.price}</div>
+							<div class="eYNXkt"> <span>3일전</span></div>
+						</div>
+					</div>
 				</a>
+			</div>
+			</c:if>
 			</c:forEach>
 		</div>
-		</div>
-		<input type="radio" class="main_slide" id="slide_div1" name="slide" >
-		<input type="radio" class="main_slide" id="slide_div2" name="slide" >
-		<hr>
-		
-<h3>최근 등록된 상품</h3>
-		<div style="margin: 0 auto; width:100%; border: 3px solid #DCDCDC;">
-		<div id="search-top">
-			<span style="height: 80px;"></span>
-		</div>
-		<div class="main-div">
-
-			<c:forEach var="i" items="${main_list3}">
-
-				<div class="search-list">
-					<div class="search-list-div">
-						<span><img alt="상품 이미지" src="./image/${i.product_image}" width="200px"
-							height="200px"></span>
-
-						<table width="216px" height="70px" style="margin-top: 10px;">
-							<tr>
-								<td colspan="2"><a style="font-weight: bolder;">${i.title}</a></td>
-							</tr>
-							<tr>
-								<td colspan="2"><a>${i.location}</a></td>
-							</tr>
-							<tr>
-								<td><a>${i.price}</a></td>
-								<td style="width: 14%;"><a>${i.view_cnt}</a></td>
-							</tr>
-						</table>
+	</section>
+	
+	<section class="dCIUug">
+		<h2>이달의 거래왕</h2>
+		<!-- 상품리스트 시작 -->
+		<div class="kSnlsd">
+		<c:forEach items="${main_list2}" var="aa" varStatus="loop">
+		<c:if test="${loop.index < 5}">
+			<div class="eCFZgW">
+				<a class="iizKix" href="productout?title=${aa.title}" >
+					<div class="eSpfym">
+						<img alt="" src="./image/${aa.main_image}" width="194" height="194">
 					</div>
-				</div>
-			</c:forEach>
-		</div>
-		</div>
-		<hr>
-		
-<h3>추천 상품</h3><div style="margin: 0 auto; width:100%; border: 3px solid #DCDCDC;">
-		<div id="search-top">
-			<span style="height: 80px;"></span>
-		</div>
-		<div class="main-div">
-
-			<c:forEach var="i" items="${main_list2}">
-
-				<div class="search-list">
-					<div class="search-list-div">
-						<span><img alt="상품 이미지" src="./image/${i.product_image}" width="200px"
-							height="200px"></span>
-
-						<table width="216px" height="70px" style="margin-top: 10px;">
-							<tr>
-								<td colspan="2"><a style="font-weight: bolder;">${i.title}</a></td>
-							</tr>
-							<tr>
-								<td colspan="2"><a>${i.location}</a></td>
-							</tr>
-							<tr>
-								<td><a>${i.price}</a></td>
-								<td style="width: 14%;"><a>${i.view_cnt}</a></td>
-							</tr>
-						</table>
+					<div class="ikEnr">
+						<div class="gwleiO">${aa.title}</div>
+						<div class="ldPLFl">
+							<div class="moVyh">${aa.price}</div>
+							<div class="eYNXkt"> <span>3일전</span></div>
+						</div>
 					</div>
-				</div>
+				</a>
+			</div>
+			</c:if>
 			</c:forEach>
 		</div>
+	</section>
+	
+	<section class="dCIUug">
+		<h2>내가 관심있는상품</h2>
+		<!-- 상품리스트 시작 -->
+		<div class="kSnlsd">
+		<c:forEach items="${main_list3}" var="aa" varStatus="loop">
+		<c:if test="${loop.index < 5}">
+			<div class="eCFZgW">
+				<a class="iizKix" href="productout?title=${aa.title}" >
+					<div class="eSpfym">
+						<img alt="" src="./image/${aa.main_image}" width="194" height="194">
+					</div>
+					<div class="ikEnr">
+						<div class="gwleiO">${aa.title}</div>
+						<div class="ldPLFl">
+							<div class="moVyh">${aa.price}</div>
+							<div class="eYNXkt"> <span>3일전</span></div>
+						</div>
+					</div>
+				</a>
+			</div>
+			</c:if>
+			</c:forEach>
 		</div>
-		<hr>
-		
-		
+	</section>
+	
 	</div>
-</div>
-
+	</div>
 </body>
 </html>
