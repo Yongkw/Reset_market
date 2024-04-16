@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,9 +32,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ChartController {
+	//String imagecut = "\\\\Mac\\Home\\Desktop\\project\\src\\main\\webapp\\image";
 
-	String imagecut = "C:\\Users\\Administrator\\Desktop\\project0402\\src\\main\\webapp\\image\\";
-	String resourcescut = "C:\\Users\\Administrator\\Desktop\\project0402\\src\\main\\webapp\\resources\\";
+	
+	String imagecut = "C:\\Users\\Administrator\\Desktop\\project_resetmarket\\src\\main\\webapp\\image";
+	String resourcescut = "C:\\Users\\Administrator\\Desktop\\project_resetmarket\\src\\main\\webapp\\resources\\";
 	@Autowired
 	SqlSession sqlSession;
 
@@ -48,24 +51,18 @@ public class ChartController {
 	public String mapview(Locale locale, Model model) {
 		Service service= sqlSession.getMapper(Service.class);
 		 
-		ArrayList<addMap_DTO> addData = service.getAddress();
-		System.out.println(addData.get(0).location);
-		
-		Map<Float, Float> jmap = new HashMap<Float, Float>();
 		return "mapview";
 	}
 	
 
 	@RequestMapping(value = "map_add")
 	public String mapview2(Locale locale, Model model) {
-		Service service= sqlSession.getMapper(Service.class);
 		model.addAttribute("returnno", 1);
 		return "map_add";
 	}
 	
 	@RequestMapping(value = "map_delete")
 	public String mapview3(Locale locale, Model model) {
-		Service service= sqlSession.getMapper(Service.class);
 		model.addAttribute("returnno", 2);
 		return "map_delete";
 	}
@@ -77,36 +74,73 @@ public class ChartController {
 	}
 
 
+	@SuppressWarnings("unchecked")
+	@ResponseBody
+	@RequestMapping(value = "map_productlist", method = RequestMethod.POST)
+	public void map_productlist(Model model,HttpServletResponse response,HttpServletRequest request) throws IOException {
+		Service service = sqlSession.getMapper(Service.class);
+		String[] pr_nolist = request.getParameterValues("prnolist");
+		JSONArray list = new JSONArray();
+		
+		
+            
+		       if(pr_nolist !=null && pr_nolist.length > 0) {
+		            for(String i :pr_nolist) {
+		            	Product_search_DTO dto = service.mapProductList(i);
+		            	if (dto != null) {
+		            		JSONObject pro_json = new JSONObject();
+		            		pro_json.put("product_no", Integer.toString(dto.product_no));
+		            		pro_json.put("view_cnt", Integer.toString(dto.view_cnt));
+		            		pro_json.put("price", Integer.toString(dto.price));
+		            		pro_json.put("category_name", dto.category_name);
+		            		pro_json.put("title", dto.title);
+		            		pro_json.put("img1", dto.img1);
+		            		pro_json.put("location", dto.location);
+		            		
+			            	list.add(pro_json);
+		                }
+		       	    }
+		       	} else {
+					response.setStatus(HttpServletResponse.SC_NOT_FOUND); 
+					response.getWriter().write("주소가 정보가 전달 되지 않음");	
+		      	}
+
+				String jsondata=list.toJSONString();
+				PrintWriter pw =response.getWriter();
+				pw.print(jsondata);
+		       
+		}
+	
+	
 	@ResponseBody
 	@RequestMapping(value = "map_resetjson2", method = RequestMethod.POST)
 	public void map_resetjson2(HttpServletResponse response,@RequestBody List<Map<String, String>> maplist) throws IOException {
 		Service service = sqlSession.getMapper(Service.class);
-		// 들어온 데이터 형태 : [{no:1,lat:2,lng:3}]
-		
+		/* 들어온 데이터 형태 : [{no:1,lat:2,lng:3,code:4}]
+		*/
 		if(maplist.size()>0) {
 			service.mapDelete();
 			for (Map<String, String> map : maplist) {
-				service.resetMapData(Integer.parseInt(map.get("pr_no")),map.get("lat"),map.get("lng"));
+				System.out.println(map);
+				service.resetMapData(Integer.parseInt(map.get("pr_no")),map.get("lat"),map.get("lng"),map.get("code"));
 			}
 			MapResetDate.create_jsonf(maplist);
 		}else {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND); // 성공 상태 코드를 설정합니다.
 			response.getWriter().write("주소가 정보가 전달 되지 않음");	
 		}
-    	
-    	
-    	
-		
 		response.setStatus(HttpServletResponse.SC_OK); // 성공 상태 코드를 설정합니다.
 		response.getWriter().write("Success"); // 클라이언트에게 메시지를 보냅니다.
 		}
 
 	
+	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping(value = "/map_resetjson")
 	public void map_resetjson(HttpServletResponse response,Model model,HttpServletRequest request) throws IOException {
 		Service service = sqlSession.getMapper(Service.class);
 		ArrayList<addMap_DTO> addlist =  service.getAddress(); // 나중에 판매완료를 제외하는 조건만 달면 됨
+		System.out.println("addlist : "+addlist.size());
 		Map<String, String> addMap= new TreeMap<String, String>();
 		
 		for (addMap_DTO set : addlist) {
@@ -125,6 +159,7 @@ public class ChartController {
 		String tt=mapobj.toJSONString();
 		PrintWriter pw =response.getWriter();
 		pw.print(tt);
+		
 	}
 	
 	
@@ -148,13 +183,13 @@ public class ChartController {
 		return gopage;
 	}
 	@ResponseBody
-	@RequestMapping(value = "/ajaxtest")
+	@RequestMapping(value = "/ajaxtest") //태스트용 pr_search안 test_search.jsp 와 sample안 test을 지울 것
 	public void ajaxtest(HttpServletResponse response,Model model,HttpServletRequest request) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		Service service = sqlSession.getMapper(Service.class);
 		String findname = request.getParameter("findname");
 		
-		ArrayList<Product_chart_DTO> dateAvgSet = service.findchart_dateAvgSet(findname);//��Ʈ�� �� ������ 
+		ArrayList<Product_chart_DTO> dateAvgSet = service.findchart_dateAvgSet(findname);
 		
 		if(findname.equals("")) {
 		}
@@ -168,24 +203,10 @@ public class ChartController {
 	}
 	
 
-	@SuppressWarnings("unchecked")
-	public JSONObject jsonchart(Map<String, Integer> pricelist) {
-		
-		JSONObject obj = new JSONObject();
-
-		Iterator<String> keys = pricelist.keySet().iterator();
-		
-		while (keys.hasNext()) {
-			String str = (String) keys.next();
-
-			obj.put(str, pricelist.get(str));
-
-		}
-		return  obj;
-	}
+	
 
 
-	private JSONObject priceAvg(ArrayList<Product_chart_DTO> dateAvgSet) {
+	private JSONObject priceAvg(ArrayList<Product_chart_DTO> dateAvgSet) { //차트 데이터를 json 오브젝트로 변환후 반환
 		Map<String, Integer> priceSet=new TreeMap<String, Integer>();
 		Map<String, Integer> pricelist= new TreeMap<String, Integer>();
 		for (Product_chart_DTO set : dateAvgSet) {
@@ -215,6 +236,22 @@ public class ChartController {
 		
 		
 		return chardate;
+	}
+	
+	@SuppressWarnings("unchecked") //맵데이터를 json 오브젝트로 변환후 반환
+	public JSONObject jsonchart(Map<String, Integer> pricelist) {
+		
+		JSONObject obj = new JSONObject();
+
+		Iterator<String> keys = pricelist.keySet().iterator();
+		
+		while (keys.hasNext()) {
+			String str = (String) keys.next();
+
+			obj.put(str, pricelist.get(str));
+
+		}
+		return  obj;
 	}
 	
 	

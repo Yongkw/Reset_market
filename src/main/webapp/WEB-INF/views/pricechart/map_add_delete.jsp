@@ -10,13 +10,21 @@
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-<div>
-<h1 id="ti"></h1>
+<div style="display: flex; align-items: center; justify-content: center;" >
+<h1 id="ti">
+<div id="resetmap" style=" display: none; width: 0px; height: 0px; " ></div>
+</h1>
 <br>
-
+<h2> 상품목록 지도 리셋중 3초만 기다려 주세요</h2>
 <br>
 </div>
 <script type="text/javascript">
+
+var map = new kakao.maps.Map(document.getElementById('resetmap'), { // 지도를 표시할 div
+    center : new kakao.maps.LatLng(37.2635846787744, 127.028715898311), // 지도의 중심좌표 
+    level : 1 // 지도의 확대 레벨 
+});
+var geocoder = new kakao.maps.services.Geocoder();
 $(document).ready(function() {
 	var retu=${returnno};
 	
@@ -29,8 +37,6 @@ $(document).ready(function() {
 	}
 	
 })
-
-
 function add() {
 	console.log('add');
 	
@@ -54,15 +60,15 @@ function reset(){
             var ttt = JSON.parse(tt);
             for(var i in ttt){
             	search(i,ttt[i], function(result) {
-            	    address.push({"pr_no":result[0],"lat":result[2],"lng":result[1]});
+            		productsearch(result,function(retu){
+            			console.log(retu);
+            	    	address.push({"pr_no":retu[0],"lat":retu[2],"lng":retu[1],"code":retu[3]});
+            		});
             	});
             }
             
-            
-            
             setTimeout(function() {
                 resetsend(address,function(){});
-        	    console.log(address);
             }, 3000);
             
         },
@@ -73,6 +79,17 @@ function reset(){
     });
 
 }
+
+function productsearch(result2,callback){
+	var callback2 = function(result, status) {
+	    if (status === kakao.maps.services.Status.OK) {
+	        var retu = [result2[0],result2[1],result2[2],result[0].code];
+	        callback(retu);
+	    }
+	};
+	geocoder.coord2RegionCode(result2[1], result2[2], callback2);
+}
+
 function search(no,addr, callback) {
 	
 const geocoder = new kakao.maps.services.Geocoder()
@@ -105,7 +122,6 @@ function resetsend(address, callback) {
         }
     });
 }
-
 </script>
 </body>
 </html>

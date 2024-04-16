@@ -1,7 +1,6 @@
 package com.enez.market.pricechart;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public interface Service {
 
@@ -13,8 +12,10 @@ public interface Service {
 
 	ArrayList<addMap_DTO> getAddress();
 
-	void resetMapData(int product_no, String map_lat, String map_lng);
+	void resetMapData(int product_no, String map_lat, String map_lng, String string);
 	void mapDelete();
+
+	Product_search_DTO mapProductList(String findstr);
 
 	
 }

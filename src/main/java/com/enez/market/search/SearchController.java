@@ -24,7 +24,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
 public class SearchController {
-	String imagecut = "\\\\Mac\\Home\\Desktop\\project\\src\\main\\webapp\\image";
+	
+	String imagecut = "C:\\Users\\Administrator\\Desktop\\project_resetmarket\\src\\main\\webapp\\image";
+	//String imagecut = "\\\\Mac\\Home\\Desktop\\project\\src\\main\\webapp\\image";
 	@Autowired
 	SqlSession sqlSession;
 
@@ -45,7 +47,7 @@ public class SearchController {
 	}
 
 
-	@RequestMapping(value = "eventinsert") // 
+	@RequestMapping(value = "eventinsert") 
 	public String event2(Model model,MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
 		Service service = sqlSession.getMapper(Service.class);
 
@@ -75,25 +77,33 @@ public class SearchController {
 		
 	}
 
-	@RequestMapping(value = "event_input_view") // ���� ��
+	@RequestMapping(value = "event_input_view")
 	public String event1(Model model){
 		return "event_input_view";
 	}
 	
 	
 	
-	@RequestMapping(value = "pr_search") //�˻� Ȯ��â
+	@RequestMapping(value = "pr_search") 
 	public String search2(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
 		String find = request.getParameter("navbar_p");
 		String p =request.getParameter("pr_page");
+		String kate = request.getParameter("findkate");
+
+		System.out.println("검색 조건 : 카테고리: "+kate+"검색키워드: "+find);
+		if(kate==null||kate.equals("null")||kate.equals("0")) {
+			kate="";
+		}
 		
-		
+		if(find==null||find.equals("null")||find.equals("0")) {
+			find="";
+		}
 		
 		Service service = sqlSession.getMapper(Service.class);
 		
 		int findPage=1;
-		int pageLenth=12; //��ǰ ǥ�� ����
+		int pageLenth=12; 
 		int stratpage =1;
 		int endpage =1;
 		/*1 - 1 - 3
@@ -113,11 +123,11 @@ public class SearchController {
 		
 		
 		
-		ArrayList<Product_search_DTO> product_list= service.pr_search2(find,stratpage,endpage);
-		ArrayList<Product_search_DTO> product_list2= service.pr_search(find);
+		ArrayList<Product_search_DTO> product_list= service.pr_search2(find,stratpage,endpage,kate);
+		int findProductSize= service.pr_search(find,kate);
 		
 		
-		PageboardDTO page = Search_DAO.paging(findPage,product_list2.size(),pageLenth); // ���� ������, �Խñ� ����, ���ñ� ǥ������
+		PageboardDTO page = paging(findPage,findProductSize,pageLenth);
 
 		model.addAttribute("find", find);
 		model.addAttribute("list", product_list);
@@ -132,7 +142,23 @@ public class SearchController {
 		return "productdetail";
 	}
 
+	public PageboardDTO paging(int page, int size,int pagelimit) {
+		int blocklimit = 3;
 	
+		
+		int maxpage = (int)(Math.ceil((double)size/pagelimit)); 
+		int startpage =(((int)(Math.ceil((double)page/blocklimit)))-1)*blocklimit+1; 
+		int endpage = startpage+blocklimit-1;
+		if(endpage>maxpage) {endpage = maxpage;}
+		
+		PageboardDTO dto = new PageboardDTO();
+		dto.setNow(page);
+		dto.setPull(size);
+		dto.setStart(startpage);
+		dto.setEnd(endpage);
+
+		return dto;
+	}
 	
 
 	

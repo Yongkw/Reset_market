@@ -31,14 +31,17 @@ where title like '%'||#{find_name}||'%' order by CREATE_AT DESC
 </select>
 
 <select id="getAddress" resultType="com.enez.market.pricechart.addMap_DTO">
-select PRODUCT_NO,LOCATION from PRODUCT
+select PRODUCT_NO,LOCATION from PRODUCT where (PRODUCT_STATE !='판매완료' or PRODUCT_STATE is null)
 </select>
-
 
 <delete id="mapDelete" >
 delete from PRODUCTADDRESS
 </delete>
 <insert id="resetMapData">
-insert into PRODUCTADDRESS ( PR_NO, ADDRESSX, COLUMN2) values(#{param1},#{param2},#{param3})
+insert into PRODUCTADDRESS ( PR_NO, ADDRESSX, ADDRESSY, CODE) values(#{param1},#{param2},#{param3},#{param4})
 </insert>
+<select id="mapProductList" resultType="com.enez.market.pricechart.Product_search_DTO" >
+select PRODUCT_NO, CATEGORY_NAME, BUYER_ID, PRICE, TITLE,PRODUCT_STATE, LOCATION, PRODUCT_IMAGE, VIEW_CNT
+from PRODUCT where PRODUCT_NO = #{param1} and (PRODUCT_STATE !='판매완료' or PRODUCT_STATE is null)
+</select>
 </mapper>

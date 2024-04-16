@@ -17,8 +17,10 @@ public class MapResetDate {
 
     public MapResetDate() {}
 
-    public static void create_jsonf(List<Map<String, String>> maplist) {
-        String filePath = "C:\\Users\\Administrator\\Desktop\\project0402\\src\\main\\webapp\\resources\\mapaddress.json";
+    @SuppressWarnings("unchecked")
+	public static void create_jsonf(List<Map<String, String>> maplist) {
+
+        String filePath = "C:\\Users\\Administrator\\Desktop\\project_resetmarket\\src\\main\\webapp\\resources\\mapaddress.json";
 
         // JSON 파일 생성 및 초기화
         initializeJsonFile(filePath);
@@ -39,8 +41,10 @@ public class MapResetDate {
             // 새로운 위치 정보 추가
             for(Map<String, String> map:maplist) {
                 JSONObject newPosition = new JSONObject();
+                newPosition.put("pr_no", map.get("pr_no"));
                 newPosition.put("lat", map.get("lat"));
                 newPosition.put("lng", map.get("lng"));
+                newPosition.put("code", map.get("code"));
                 positions.add(newPosition);
             }
 

@@ -7,7 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style type="text/css">
 
@@ -26,45 +25,41 @@ a{
 }
 
 :root{
-	--nav-height : 150px; /*네비바 높이*/
-	--nav-height2 : 90px; /*카테고리 박스 위치 네비바 높이 - 60*/
-
+	--nav-height : 120px; /*네비바 높이*/
+	--nav-height2 : 60px; /*카테고리 박스 위치 네비바 높이 - 60*/
 }
 .nav-bar>div {
 	height: 100%;
-}
-.navback{ /*네비바 뒤 공간*/
-	width: 100%; 
-	height:var(--nav-height);
-	top: 0px;
-	background: white;	
+	position:relative ;
+	z-index: 100;
 }
 .nav-bar {
 	width: 100%; 
 	height:var(--nav-height);
-	position: fixed;
+	position: relative;
 	top: 0px;
 	z-index: 100;
-	background: white;	
+	background: #FCFCFC;	
 	box-shadow: 0px 3px 3px 0px #008000 ;
 }
 
 .nav-bar-log{
 	margin: 0 auto;
-	width: 15%; 
+	width: 8%; 
 	float: left;
-	z-index: 100;
+	overflow: hidden;
 	}
-	
-.nav-bar-log>a{
-	margin: 0 auto;
-}
 .nav-bar-log>a>img{
+	position: relative;
+	z-index:101;
 	height: 100%;
-	
+	left:50%;
+	top:50%;
+	transform:translate(-50%,-50%);
 }
 	
-.div1{width: 10%;
+.div1{
+	width: 5%;
 	float: left;
 }
 .div1>div{
@@ -77,49 +72,67 @@ a{
 }
 	
 .div2{
-	width: 50%; 
+	width: 87%; 
 	float: left;
+	position: static;
 	}
 .nav-bar-div {
 	width:100%;
 	height:50%;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
+	padding-left:5%; 
+	padding-right: 5%;
 	
 	}
 	
 .nav-bar-div>span{
-	margin-left:5%;
+	margin-left : 2%;
+	margin-right :2%;
 	width:80%;
 	height: 50%;
-	border: 1px solid red ;
 	border-radius: 4px;
 	text-align: center;
 	font-size: large;
 }
 .nav-bar-div>span>label{
-margin:0;
-width: 100%;
-height: 100%;
+	margin:0;
+	width: 100%;
+	height: 100%;
 	display:flex;
     justify-content: center; /* 자식 요소를 가로(수평) 기준으로 가운데 정렬시킴 */
     align-items: center; /* 자식 요소를 세로(수직) 기준으로 가운데 정렬시킴 */
 }
 .nav-bar-div>span>label:hover{
-	
-	box-shadow: inset 0 -4px 4px -4px red ;
-	 
+	box-shadow: inset 0 -4px 4px -4px #ad4232 ;
+		
 }
 .nav-bar-div>span>label>a{
-color: gray;
-text-decoration: none;
+color: #b8d8b8;
 }
 
+.nav-bar-div>span>label:hover>a{
+	color: #649a64;
+	text-decoration: none;
+	
+}
 .div2-2{
+	position:relative ;
+	z-index: 99;
 	width:100%;
-	height:47%;
-	margin-top:3%;
+	height:50%;
+	left: 56%;
+	transform:translate(-50%,0);
+	display: flex;
+	justify-content: center;
+	}
+	.div2-2>form{
+	height: 100%;
+	width: 80%; 
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	}
 .div3{
 width: 25%;
@@ -151,31 +164,46 @@ float: right;
 
 .search-bar {
 	margin: 0 auto;
-	width: 90%;
+	width: 65%;
 	height: 50%;
 	border-radius: 15px;
 	border: solid 1px #006400;
 	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.search-bar>div{
+	height:100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.search-a {/*검색 구간*/
-	display:flex;
-	margin-left:3%;
-	margin-top:1%;
-	width: 85%;
-	height:90%;	
-	float: left;
-}
-.search-a>p{
+.search-bar>div>p{
 	color: gray;
 	white-space: nowrap;
+	margin: 0;
 }
-
+.search-a {/*검색 구간*/
+	width: 85%;
+	position: relative;
+	overflow: hidden;
+}
+#select-kategori{
+border:none;
+margin-left: 3px;
+white-space: nowrap;
+color: gray;
+}
 .search-b {/*버튼 구간*/
-	margin-top:1%;
-	margin-right:5%;
-	height:90%;
+	margin-right:2%;
+	height:100%;
+	width:8%;
+	position: relative;
 	float: right;
+	display: block;
+	justify-content: center;
 }
 .search-bar_input {
 	background: none;
@@ -192,7 +220,7 @@ float: right;
 
 .search-bar_input:hover {
 	outline: none;
-	width: 89%;
+	width: 80%;
 	text-align: left;
 	border-bottom: 1px solid #006400;
 }
@@ -201,48 +229,43 @@ float: right;
 	outline: none;
 	width: 95%;
 	text-align: left;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid #006400;
 }
 
 .search-submit {
 	background: none;
 	border: none;
+	margin: 0 auto;
 }
 
 
 
 .kategorielist{
 	clear:both;
-	width: 40%;
-	height: 200px !important ;
+	width: 20%;
+	height: 250px !important ;
 	margin: 0 auto;
 	box-shadow: inset 0px 3px 3px 0px #008000 ;
 	display: none;
 	overflow: hidden;
 	position: relative;
-	right: 5%;
+	right: 30%;
+	border: 1px #008000 solid;
 	
 }
 .kategorielist>div{
 height:100%;
-border: 1px red solid;
 overflow: scroll;
-	background:	white;
+background:#fcfcfc;
 }
 .kategorielist>div::-webkit-scrollbar{
   display:none;
 }
-
-
-.kategorielist>div>ul>li::last-child{
-border-bottom: none ;
-}
-
 .kategorie-a{
-width: 25%;
+width: 35%;
 }
 .kategorie-b{
-width: 75%;
+width: 65%;
 }
 
 .kategorielist>div>ul{
@@ -250,13 +273,12 @@ font-size: medium;
 }
 
 .kategorielist>div>ul>li{
- border-bottom : 1px red solid;
 width:100%;
 height:38px;
 text-align: center;
 }
-.kategorielist>div>ul>li:hover {
-background: gray;
+.kate-btnb:hover {
+	border-bottom: 1px solid #008000;
 }
 
 .kategorielist>div>ul>li>input {
@@ -290,7 +312,10 @@ border-radius: 2px;
 <body>
 	<div class="nav-bar" id="nav-bar">
 		<div class="nav-bar-log">
-			<a href="main" ><img alt="logimg" src="./image/log_s.png"></a>
+		
+			<a href="main">
+			<img alt="logimg" src="./image/log_s.png">
+			</a>
 		</div>
 		
 		
@@ -308,11 +333,53 @@ border-radius: 2px;
 			
 		</div>
 		<div class="div2">
+		
+			<div class="div2-2">
+					<form action="pr_search" method="get" >
+				<div class="search-bar">
+					<label for="search-bar_input" style="width: 100%; height: 100%;  position: absolute;z-index: 101" ></label> 
+						<div style = "border-right: 1px dotted green" ;><p>검색창</p></div>
+						<div id="select-kategori"  ></div>
+						<div class="search-a">
+							<input type="hidden" value="" id="findkate" name="findkate" >
+							<input class="search-bar_input" type="text"name="navbar_p" id="search-bar_input" />
+						</div>
+						<div class="search-b">
+							<input type="submit" style="position: relative; z-index: 102 " class="search-submit" value="검색">
+						</div>
+				</div>
+					</form>
+					
+				<div class="div3" >
+				<div class="div3-1" >
+				<c:choose>
+				<c:when test="${loginstate==true}"><!-- 로그인 상태 세션에 따른 변화 -->
+					<span>
+					<span style="color:black">${member_id}님!</span>
+					<a href="#">마이페이지</a>
+					<a href="logout">로그 아웃</a>
+					</span>
+				</c:when>
+				<c:otherwise>
+					<span>
+					<a href="login" >로그인</a>
+					<a href="signup">회원 가입</a>
+					</span>
+				</c:otherwise>
+				</c:choose>
+				</div>
+				
+				</div>	
+			</div>
 		<div id="menu" class="nav-bar-div">
 				<span><label for="link-1" ><a id="link-1" href="#" >1번링크</a></label></span>
 				<span><label for="link-2" ><a id="link-2" href="#" >2번링크</a></label></span>
 				<span><label for="link-3" ><a id="link-3" href="#" >3번링크</a></label></span>
 				<span><label for="link-4" ><a id="link-4" href="#" >4번링크</a></label></span>
+				<span><label for="link-4" ><a id="link-4" href="#" >5번링크</a></label></span>
+				<span><label for="link-4" ><a id="link-4" href="#" >6번링크</a></label></span>
+				<span><label for="link-4" ><a id="link-4" href="#" >7번링크</a></label></span>
+				<span><label for="link-4" ><a id="link-4" href="#" >8번링크</a></label></span>
 			</div>
 			
 			<!-- contents 1  -->
@@ -320,65 +387,16 @@ border-radius: 2px;
 		
 			</div>		<!-- contents 1 end -->
 				
-			<div class="div2-2">
-				<div class="search-bar">
-			<label for="search-bar_input" style="width: 100%; height: 100%; position: absolute;z-index: 101" ></label> 
-					<form action="pr_search" method="get">
-						<div class="search-a">
-							<p>검색창</p>
-							<input class="search-bar_input" type="text"name="navbar_p" id="search-bar_input" />
-						</div>
-						
-						
-						<div class="search-b">
-							<input type="submit" style="position: relative ; z-index: 102" class="search-submit" value="검색">
-						</div>
-					</form>
-			
-				</div>
-			</div>
 		</div>
-		<div class="div3" >
-		<div class="div3-1" >
-		<c:choose>
-		<c:when test="${loginstate==true}"><!-- 로그인 상태 세션에 따른 변화 -->
-			<span>
-			<span style="color:black">${member_id}님!</span>
-			<a href="#">마이페이지</a>
-			<a href="logout">로그 아웃</a>
-			</span>
-		</c:when>
-		<c:otherwise>
-			<span>
-			<a href="login" >로그인</a>
-			<a href="signup">회원 가입</a>
-			</span>
-		</c:otherwise>
-		</c:choose>
-		</div>
-		<div class="div3-2" style="position: relative;" >
-			<h5> -------임시 태스트 링크---------</h5>
-			<span style="position: absolute; width: 100%;height: 100%; display: flex; flex-wrap: wrap; justify-content: space-around;">
-			<a href="main_view">메인 뷰</a>
-			<a href="pricechart_view">시세 차트</a>
-			<a href="mapview">판매 맵</a>
-			<a href="map_add">add 맵</a>
-			<a href="map_reset">reset 맵</a> <!-- 맵 db 가 꼬였을시 사용 -->
-			<a href="map_delete">delete 맵</a>
-			<a href="productinput">상품등록</a>
-			</span>
-		</div>
-		
-		</div>	
 	
 	<div class="kategorielist" id="kategorielist">
 	<div class="kategorie-a">
 	<ul >
-	<li class="kate-a"><input type="button" id="kate-a" class="kate-btna" value="의류/잡화" ></li>
-	<li class="kate-a"><input type="button" id="kate-a2" class="kate-btna" value="가전" ></li>
-	<li class="kate-a"><input type="button" id="kate-a3" class="kate-btna" value="홈인테리어" ></li>
-	<li class="kate-a"><input type="button" id="kate-a4" class="kate-btna" value="뷰티" ></li>
-	<li class="kate-a"><input type="button" id="kate-a5" class="kate-btna" value="운동용품" ></li>
+	<li class="kate-a1"><input type="button" id="kate-a1" class="kate-btna" value="의류/잡화" ></li>
+	<li class="kate-a2"><input type="button" id="kate-a2" class="kate-btna" value="가전" ></li>
+	<li class="kate-a3"><input type="button" id="kate-a3" class="kate-btna" value="홈인테리어" ></li>
+	<li class="kate-a4"><input type="button" id="kate-a4" class="kate-btna" value="뷰티" ></li>
+	<li class="kate-a5"><input type="button" id="kate-a5" class="kate-btna" value="운동용품" ></li>
 	</ul>
 	</div>
 	<div class="kategorie-b" id="kategorie-b">
@@ -390,8 +408,6 @@ border-radius: 2px;
 	</div>
 		
 	</div>
-	<div class="navback">
-	</div>
 	
 	<script type="text/javascript">
 
@@ -402,21 +418,33 @@ border-radius: 2px;
     	$('.katebar2,#kategorielist').hover(function(){
     		$('#kategorielist').css("display","flex");
 
-    	});
+    	});	
     	$('#kategorielist').mouseleave(function(){
-    		$('#kategorielist').css("display","none");
+    	    var timer = setTimeout(function() {
+    	    	$('#kategorielist').css("display","none");
+    	    	
+    	    }, 500);
+
+    	    //타이머를 제거하여 이벤트를 방지
+    	    $('.katebar2, #kategorielist').mouseenter(function() {
+    	        clearTimeout(timer);
+    	    });
     	});
     	
-   		$(".kate-btna").click(function(){
+   		$(".kate-btna").hover(function(){
    			class_check=$(this).attr("class");
        		id_check = $(this).attr("id"); //카테고리 a 아이디 요소의 값 클레스값도 가져오기 가능
        		val_check = $(this).val(); //값
+       		$(this).attr("backgrond","gray")
        		var kateb_list = [];
-       		kateb_list = addlist(val_check); // val값, 저장값 참조 하여 리스트를 가져옴
+       		kateb_list = addlist(val_check,id_check); // val값, 저장값 참조 하여 리스트를 가져옴
        		kate_list_add(kateb_list);//리스트 매개변수
+       		
    		});
-   		function addlist(val_check) {
+   		function addlist(val_check,id_check) {
    			var kateb_list =[];
+			$('.kate-btna').css("border","0px");
+			$('#'+id_check).css("border-bottom","1px #008000 solid");
 			if(val_check=="의류/잡화"){
 				kateb_list.push('여성의류');
 				kateb_list.push('남성의류');
@@ -469,15 +497,19 @@ border-radius: 2px;
    	   	
 	});
 
-    $(document).on("click", ".kate-btnb", function(){ 
+    $(document).on("click", ".kate-btnb", function(){ //카테고리 함수1 검색에 추가
     	var kate = $(this).val();
-    	console.log(kate);
-    	location.href="pr_search"; //카테고리 완전 수정후 +"?kate="+kate 를 추가 ㄱㄱ 아마도 실행 됨 
+    	$('#select-kategori').text(kate+" >");
+    	$('#findkate').val(kate);
+    	console.log($('#findkate').val());
     	
     });
-    
-    
-		
+	/*	
+    $(document).on("click", ".kate-btnb", function(){ //카테고리 함수2 바로 링크
+    	var kate = $(this).val();
+    	location.replace('#?kate='+kate);
+    });
+    */
 		</script>
 
 </body>

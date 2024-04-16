@@ -4,24 +4,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.enez.market.search.Service">
 
-<select id="pr_search" resultType="com.enez.market.search.Product_search_DTO" >
-
+<select id="pr_search" resultType="Integer" >
 select 
-PRODUCT_NO ,
-SELLER_ID ,
-CATEGORY_NAME ,
-BUYER_ID ,
-PRICE ,
-TITLE ,
-DETAIL ,
-LOCATION ,
-PRODUCT_STATE ,
-PRODUCT_IMAGE ,
-VIEW_CNT ,
-CREATE_AT ,
-UPDATE_AT 
+count(*)
 from PRODUCT
-WHERE TITLE LIKE '%'||#{param1}||'%'
+WHERE TITLE LIKE '%'||#{param1}||'%' and CATEGORY_NAME LIKE '%'||#{param2}
 </select>
 
 <select id="pr_search2" resultType="com.enez.market.search.Product_search_DTO" > 
@@ -57,7 +44,7 @@ SELECT
 	    FROM
 	        product
 	    WHERE
-	        TITLE LIKE '%'||#{param1}||'%')
+	        TITLE LIKE '%'||#{param1}||'%' and CATEGORY_NAME LIKE '%'||#{param4})
 	WHERE
     num BETWEEN #{param2} AND #{param3}
 </select>
