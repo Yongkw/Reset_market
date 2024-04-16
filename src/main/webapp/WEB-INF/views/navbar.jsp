@@ -105,7 +105,7 @@ a{
     align-items: center; /* 자식 요소를 세로(수직) 기준으로 가운데 정렬시킴 */
 }
 .nav-bar-div>span>label:hover{
-	box-shadow: inset 0 -4px 4px -4px #ad4232 ;
+	box-shadow: inset 0 -4px 4px -4px #649a64 ;
 		
 }
 .nav-bar-div>span>label>a{
@@ -356,7 +356,7 @@ border-radius: 2px;
 				<c:when test="${loginstate==true}"><!-- 로그인 상태 세션에 따른 변화 -->
 					<span>
 					<span style="color:black">${member_id}님!</span>
-					<a href="#">마이페이지</a>
+            					<a href="mypage">마이페이지</a>
 					<a href="logout">로그 아웃</a>
 					</span>
 				</c:when>
@@ -371,15 +371,15 @@ border-radius: 2px;
 				
 				</div>	
 			</div>
-		<div id="menu" class="nav-bar-div">
-				<span><label for="link-1" ><a id="link-1" href="#" >1번링크</a></label></span>
-				<span><label for="link-2" ><a id="link-2" href="#" >2번링크</a></label></span>
+		<div id="menu" class="nav-bar-div">                
+				<span><label for="link-1" ><a id="link-1" href="event_out" >EVENT</a></label></span>
+                <span><label for="link-2" ><a id="link-2" href="notice_out" >COMMUNITY</a></label></span>
 				<span><label for="link-3" ><a id="link-3" href="#" >3번링크</a></label></span>
 				<span><label for="link-4" ><a id="link-4" href="#" >4번링크</a></label></span>
-				<span><label for="link-4" ><a id="link-4" href="#" >5번링크</a></label></span>
-				<span><label for="link-4" ><a id="link-4" href="#" >6번링크</a></label></span>
-				<span><label for="link-4" ><a id="link-4" href="#" >7번링크</a></label></span>
-				<span><label for="link-4" ><a id="link-4" href="#" >8번링크</a></label></span>
+				<span><label for="link-5" ><a id="link-5" href="#" >5번링크</a></label></span>
+				<span><label for="link-6" ><a id="link-6" href="#" >6번링크</a></label></span>
+				<span><label for="link-7" ><a id="link-7" href="#" >7번링크</a></label></span>
+				<span><label for="link-8" ><a id="link-8" href="#" >8번링크</a></label></span>
 			</div>
 			
 			<!-- contents 1  -->
@@ -419,10 +419,9 @@ border-radius: 2px;
     		$('#kategorielist').css("display","flex");
 
     	});	
-    	$('#kategorielist').mouseleave(function(){
+    	$('.katebar2,#kategorielist').mouseleave(function(){
     	    var timer = setTimeout(function() {
     	    	$('#kategorielist').css("display","none");
-    	    	
     	    }, 500);
 
     	    //타이머를 제거하여 이벤트를 방지

@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <link href="${path}/resources/css/prodetail.css" rel="stylesheet" />
 <!-- slick 라이브러리 설치 -->
@@ -15,6 +16,7 @@
 <!-- 버튼 효과 -->
 </head>
 <body>
+
 <script type="text/javascript">
 $(document).ready(function () {
     $(".slide_div").slick({
@@ -167,7 +169,7 @@ $(document).ready(function () {
 								<div class="fscFAw">상품정보</div>
 								<div>
 									<div class="eJCiaL">
-										<p style="width: 663px;">${aa.detail}</p>
+										<p style="width: 663px; height: 425px;  text-align:center;">${aa.detail}</p>
 									</div>
 
 									<div class="sBGtP">

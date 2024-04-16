@@ -189,9 +189,10 @@ function productlist(find_code) {
 	$.get("./resources/mapaddress.json", function(data) {
 		console.log(find_code);
 	      $.each(data.positions, function(i, jdata) {
-	    	  if(find_code.substr(0,2)==jdata.code.substr(0,2))
+	    	  if(find_code.substr(0,2)==jdata.code.substr(0,2)){
+		    	  prnolist.push(jdata.pr_no);
+	    	  }
 	    		  
-	    	  prnolist.push(jdata.pr_no);
 	      });
 	      console.log(prnolist);
 	      $.ajax({

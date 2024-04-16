@@ -18,6 +18,11 @@
 	update product set view_cnt=view_cnt+1 where title = #{param1}
 </update>
 
+<insert id="mainimagesave">
+ insert into imagedetail 
+ (image_no, main_image) 
+ values (image_seq.nextval,#{param1})
+</insert>
 
 
 </mapper>

@@ -59,20 +59,16 @@ width: 300px;
 height: 45px;
 border: 2px solid #dcdcdc ;
 border-radius: 100%;
-position: static;
-}
-.pagebox>span{
-display : inline-block;
 position: relative;
-	top:50%;
-	left:15%;
-	transform:translate(0%,-50%);
+display: flex;
+justify-content: center;
+align-items: center;
 }
 </style>
 
 </head>
 <body>
-<div style="margin: 0 auto; width:62%; border: 3px solid #DCDCDC ;  " >
+<div style="margin: 0 auto; width:80%; border: 3px solid #DCDCDC ;  " >
 <div id="pr-search-top" ><span style="height: 80px; " ></span></div>
 <div class="pr-main-div">
 <c:forEach var="i" items="${list}">
