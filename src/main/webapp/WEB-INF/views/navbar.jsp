@@ -120,7 +120,7 @@ color: #b8d8b8;
 .div2-2{
 	position:relative ;
 	z-index: 99;
-	width:100%;
+	width:80%;
 	height:50%;
 	left: 56%;
 	transform:translate(-50%,0);

@@ -20,8 +20,9 @@
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<!-- 카카오 api 맵키 변경 -->
 <script
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은 API KEY를 사용하세요&libraries=services"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f3adf18570dd37356fee7459e8eef8c6&libraries=services"></script>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
@@ -316,7 +317,7 @@
 						</div>
 						<div class="nqDMw">
 							<textarea rows="6" class="gQnFKF" oninput="hideDivContent(this)" name="detail"></textarea>
-							<div class="fmzTHs">
+							<div class="fmzTHs" style="pointer-events : none;">
 								구매시기, 브랜드/모델명, 제품의 상태 (사용감, 하자 유무) 등을 입력해주세여 <br> 서로가 믿고
 								거래할 수 있도록, 자세한 정보와 다양한 각도의 상품 사진을 올려주세요<br> <span>*안전하고
 									건전한 거래 환경을 위해 과학기술정보통신부, 한국인터넷진흥원과 리셋마켓와 함께합니다.</span>
