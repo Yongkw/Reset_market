@@ -5,295 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style type="text/css">
-.cTGCMU {
-	display: flex;
-	-webkit-box-pack: center;
-	justify-content: center;
-	background: rgb(255, 255, 255);
-}
-
-.dcFcMp {
-	width: 1024px;
-	margin-top: 30px;
-}
-
-.ctrKPP {
-	margin-bottom: 30px;
-}
-
-.eZIbTw {
-	display: flex;
-	width: 100%;
-}
-
-.CMDzs {
-	flex-shrink: 0;
-}
-
-.jFAmMI {
-	width: 310px;
-	height: 310px;
-	position: relative;
-	color: rgb(255, 255, 255);
-}
-
-.kECXqh {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-}
-
-.gxbdui {
-	position: absolute;
-	background-size: cover;
-	background-repeat: no-repeat;
-	z-index: 0;
-	width: 106%;
-	height: 106%;
-	top: -3%;
-	left: -3%;
-	filter: blur(10px);
-	background-image:
-		url(https://media.bunjang.co.kr/images/crop/102740946_w200.jpg);
-}
-
-.fQjOoD {
-	position: inherit;
-	display: flex;
-	width: 100%;
-	height: 100%;
-	-webkit-box-pack: center;
-	justify-content: center;
-	-webkit-box-align: center;
-	align-items: center;
-	flex-direction: column;
-	box-shadow: rgba(4, 0, 0, 0.03) 0px 5px 10px 0px;
-}
-
-.caoIJY {
-	border-radius: 50%;
-	margin-bottom: 15px;
-}
-
-.irlAx {
-	font-size: 16px;
-	margin-bottom: 10px;
-}
-
-.kSnfgg {
-	display: flex;
-}
-
-.dctxBz {
-	display: flex;
-	margin-top: 20px;
-	font-size: 12px;
-	margin-left: 20px;
-}
-
-.hPnzDB {
-	margin-right: 20px;
-	position: relative;
-	color: rgb(255, 255, 255);
-}
-
-.hPnzDB2 {
-	margin-right: 20px;
-	position: relative;
-	color: rgb(255, 255, 255);
-}
-
-a {
-	color: rgb(33, 33, 33);
-	text-decoration: none;
-	cursor: pointer;
-	background-color: transparent;
-}
-
-a:hover {
-	text-decoration: none; /* 링크에 있는 밑줄 제거 */
-	color: rgb(33, 33, 33); /* 링크에 있는 색상 변경 */
-}
-
-.hPnzDB::after {
-	content: "";
-	width: 1px;
-	height: 10px;
-	border-right: 1px solid rgb(255, 255, 255);
-	position: absolute;
-	top: 1px;
-	right: -11px;
-}
-
-.gJxoqg {
-	flex: 1 0 0%;
-	padding: 0px 30px;
-	border-top: 1px solid rgb(238, 238, 238);
-	border-right: 1px solid rgb(238, 238, 238);
-	border-bottom: 1px solid rgb(238, 238, 238);
-	display: flex;
-	height: 310px;
-	flex-direction: column;
-}
-
-.ehnbKT {
-	font-size: 18px;
-	height: 75px;
-	font-weight: 600;
-	display: flex;
-	-webkit-box-align: center;
-	align-items: center;
-	-webkit-box-pack: justify;
-	justify-content: space-between;
-	flex-shrink: 0;
-}
-
-.qCGRm {
-	display: flex;
-	-webkit-box-align: center;
-	align-items: center;
-}
-
-.bhcrYn {
-	font-size: 11px;
-	color: rgb(77, 77, 77);
-	position: relative;
-}
-
-.bhcrYn::after {
-	content: "OK";
-	color: rgb(255, 255, 255);
-	font-size: 9px;
-	background: rgb(255, 195, 34);
-	border-radius: 6px;
-	position: absolute;
-	padding: 2px 4px 1px;
-	top: -1px;
-	left: -25px;
-}
-
-.ejNmIF {
-	height: 45px;
-	display: flex;
-	-webkit-box-align: center;
-	align-items: center;
-	border-top: 1px solid rgb(250, 250, 250);
-	border-bottom: 1px solid rgb(250, 250, 250);
-	margin-bottom: 20px;
-	flex-shrink: 0;
-}
-
-.iMvNBf {
-	margin-right: 30px;
-	font-size: 13px;
-	color: rgb(136, 136, 136);
-	display: flex;
-}
-
-.htiuQW {
-	margin-left: 5px;
-	color: rgb(33, 33, 33);
-}
-
-.iMvNBf {
-	margin-right: 30px;
-	font-size: 13px;
-	color: rgb(136, 136, 136);
-	display: flex;
-}
-
-.bcsjLU {
-	-webkit-box-flex: 1;
-	flex-grow: 1;
-	width: 100%;
-	overflow-y: auto;
-	line-height: 1.57;
-	white-space: pre-wrap;
-	
-}
-.dXaXKb {
-    height: 56px;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    flex-shrink: 0;
-}
-
-.jynacn {
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    color: rgb(136, 136, 136);
-    font-size: 13px;
-}
-.dvLjiM {
-    display: flex;
-    height: 50px;
-}
-
-.gmerZt:first-child {
-    border-left: 1px solid rgb(238, 238, 238);
-}
-
-.gmerZt {
-    flex: 1 1 0%;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    display: flex;
-    border-top: 1px solid rgb(238, 238, 238);
-    border-right: 1px solid rgb(238, 238, 238);
-    border-bottom: 1px solid rgb(33, 33, 33);
-    background: rgb(250, 250, 250);
-    color: rgb(136, 136, 136);
-}
-
-.gyLEXJ {
-    margin-left: 10px;
-}
-
-.fAFdHw {
-    flex: 1 1 0%;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    display: flex;
-    border-top: 1px solid rgb(238, 238, 238);
-    border-bottom: 1px solid rgb(33, 33, 33);
-    background: rgb(250, 250, 250);
-    color: rgb(136, 136, 136);
-    border-right: 1px solid rgb(33, 33, 33);
-    }
-
-
-.dvLjiM .kHfkPy {
-    border-left: 1px solid rgb(33, 33, 33);
-}
-    .kHfkPy {
-    flex: 1 1 0%;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    display: flex;
-    border-top: 1px solid rgb(33, 33, 33);
-    border-right: 1px solid rgb(33, 33, 33);
-    border-bottom: 1px solid rgb(255, 255, 255);
-    background: rgb(255, 255, 255);
-    color: rgb(33, 33, 33);
-    font-weight: 600;
-}
-
-    
-    
-</style>
 <meta charset="UTF-8">
+<!-- css 적용 -->
+<link href="${path}/resources/css/promypage.css" rel="stylesheet" /> 
 <title>Insert title here</title>
 </head>
 <body>
@@ -325,6 +39,74 @@ $(document).ready(function(){
 $(document).ready(function(){
     $('.kHfkPy').first().css('border-left', '1px solid rgb(33, 33, 33)');
 });
+
+
+$(document).ready(function(){
+    $('.gyBPuj').click(function(){
+        // gyBPuj 클래스를 가진 요소의 형제 요소인 gaDwcW를 선택합니다.
+        var gaDwcW = $(this).siblings('.gaDwcW');
+        
+        // 선택된 gaDwcW에 대해 필요한 작업을 수행합니다.
+        // 예를 들어, 선택된 gaDwcW를 숨기거나 보이게 하려면 다음과 같이 작성합니다.
+        gaDwcW.toggle();
+    });
+});
+
+$(document).ready(function() {	
+    // test1 클래스를 가진 요소에 대해 클릭 이벤트를 추가합니다.
+    $('.test1').click(function(event) {
+        // test1_1 요소에 gbNMxu 클래스를 추가합니다.
+        $('.test1_1').addClass('gbNMxu');
+
+        // test1 이외의 클래스에서 gbNMxu 클래스를 제거합니다.
+        $('.test2_1, .test3_1, .test4_1').removeClass('gbNMxu');
+
+        // 클릭된 요소의 href 속성이 '#'이 아니면 기본 동작을 막습니다.
+        if ($(this).attr('href') !== '#') {
+            event.preventDefault();
+        }
+    });
+
+    // test2 클래스를 가진 요소에 대해 클릭 이벤트를 추가합니다.
+    $('.test2').click(function(event) {
+        // test2_1 요소에 gbNMxu 클래스를 추가합니다.
+        $('.test2_1').addClass('gbNMxu');
+
+        // test2 이외의 클래스에서 gbNMxu 클래스를 제거합니다.
+        $('.test1_1, .test3_1, .test4_1').removeClass('gbNMxu');
+
+        if ($(this).attr('href') !== '#') {
+            event.preventDefault();
+        }
+    });
+
+    // test3 클래스를 가진 요소에 대해 클릭 이벤트를 추가합니다.
+    $('.test3').click(function(event) {
+        // test3_1 요소에 gbNMxu 클래스를 추가합니다.
+        $('.test3_1').addClass('gbNMxu');
+
+        // test3 이외의 클래스에서 gbNMxu 클래스를 제거합니다.
+        $('.test1_1, .test2_1, .test4_1').removeClass('gbNMxu');
+
+        if ($(this).attr('href') !== '#') {
+            event.preventDefault();
+        }
+    });
+
+    // test4 클래스를 가진 요소에 대해 클릭 이벤트를 추가합니다.
+    $('.test4').click(function(event) {
+        // test4_1 요소에 gbNMxu 클래스를 추가합니다.
+        $('.test4_1').addClass('gbNMxu');
+
+        // test4 이외의 클래스에서 gbNMxu 클래스를 제거합니다.
+        $('.test1_1, .test2_1, .test3_1').removeClass('gbNMxu');
+
+        if ($(this).attr('href') !== '#') {
+            event.preventDefault();
+        }
+    });
+});
+
 </script>
 	<!-- 마이페이지 큰박스 시작 -->
 	<div class="cTGCMU">
@@ -416,28 +198,742 @@ $(document).ready(function(){
 				<div>
 					<div>
 						<div class="dvLjiM">
-							<a class="gmerZt">
+							<a class="gmerZt test1" href="#">
 								상품
 								<span class="gyLEXJ">34</span>
 							</a>
-							<a class="gmerZt" href="#">
+							<a class="gmerZt test2" href="#">
 								상점후기
 								<span class="gyLEXJ">21</span>
 							</a>
-							<a class="gmerZt">
+							<a class="gmerZt test3" href="#">
 								찜한상품
 								<span class="gyLEXJ">11</span>
 							</a>
-							<a class="gmerZt">
+							<a class="gmerZt test4" href="#">
 								날찜한사람
 								<span class="gyLEXJ">4</span>
 							</a>
 						</div>
 					</div>
-					<!-- 각메뉴를 눌렀을때 나와야하는 페이지 -->
-					<div>
+
+                            
 					
-					</div>
+					<!-- 각메뉴를 눌렀을때 나와야하는 페이지 -->
+					<div class="fUqZYe">
+					<!-- 상품  시작 -->
+					
+					     <div class="cFVlDW test1_1" id="gmerZt1">
+                            <div class="gvsXqb">
+                                 <div>
+                                     상품
+                                     <span class="eNfnFh">15</span>
+                                 </div>
+                                 <div class="teyL">
+                                
+                                     <div class="cTDSdC">
+                                         <div class="gyBPuj">
+                                             전체
+                                             <img  src="https://m.bunjang.co.kr/pc-static/resource/9b606ef2e7d57fafa657.png" width="10" height="6">
+                                         </div>
+                                         <div class="gaDwcW">
+                                             <a class="bmufqR">전체</a>
+                                             <a class="cmPcYP">판매중</a>
+                                             <a class="cmPcYP">거래중</a>
+                                         </div>
+                                     </div>
+                                 </div>
+                            </div>
+                            <!-- 상품리스트상단메뉴 시작 -->
+                            <div class="fpFuIY">
+                                <div class="bSiTj">
+                                    <div class="kfUvd">
+                                    
+                                        <div class="cKbwnh">
+                                            전체
+                                            <div class="gOrNhR">
+                                                15개
+                                            </div>
+                                        </div>
+                                        <div class="gGCYmy">
+                                            <a class="ffPLQP">최신순</a>
+                                            <a class="dMXLDX">고가순</a>
+                                            <a class="dMXLDX">저가순</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 상품 리스트시작 -->
+                                <div class="dhgZke">
+                                
+                                    <div class="bfphSx">
+                                        <a class="isOWuA">
+                                            <div class="bkngsY">
+                                                <img  src="https://media.bunjang.co.kr/product/82374634_1_1663585674_w292.jpg"
+                                                width="194" height="194">
+                                            </div>
+                                            <div class="bJpTlV">
+                                                <div class="gstNkb">
+                                                    얼반아웃피터스 정품 청자켓 s 아페쎄st
+                                                </div>
+                                                <!-- 가격 올린시간 div -->
+                                                <div class="cxNmps">
+                                                    <div class="heqdJ">
+                                                        50000
+                                                    </div>
+                                                    <div class="elSbmF">
+                                                        <span>22시간전</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 위치 div -->
+                                            <div class="esiKrh">
+                                                <img  src="https://m.bunjang.co.kr/pc-static/resource/5dcce33ad99f3020a4ab.png" width="15" height="17">
+                                                전국
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- 상품박스 끝 -->
+                                    
+                                    <div class="bfphSx">
+                                        <a class="isOWuA">
+                                            <div class="bkngsY">
+                                                <img  src="https://media.bunjang.co.kr/product/82374634_1_1663585674_w292.jpg"
+                                                width="194" height="194">
+                                            </div>
+                                            <div class="bJpTlV">
+                                                <div class="gstNkb">
+                                                    얼반아웃피터스 정품 청자켓 s 아페쎄st
+                                                </div>
+                                                <!-- 가격 올린시간 div -->
+                                                <div class="cxNmps">
+                                                    <div class="heqdJ">
+                                                        50000
+                                                    </div>
+                                                    <div class="elSbmF">
+                                                        <span>22시간전</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 위치 div -->
+                                            <div class="esiKrh">
+                                                <img  src="https://m.bunjang.co.kr/pc-static/resource/5dcce33ad99f3020a4ab.png" width="15" height="17">
+                                                전국
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- 상품박스 끝 -->
+                                    
+                                    <div class="bfphSx">
+                                        <a class="isOWuA">
+                                            <div class="bkngsY">
+                                                <img  src="https://media.bunjang.co.kr/product/82374634_1_1663585674_w292.jpg"
+                                                width="194" height="194">
+                                            </div>
+                                            <div class="bJpTlV">
+                                                <div class="gstNkb">
+                                                    얼반아웃피터스 정품 청자켓 s 아페쎄st
+                                                </div>
+                                                <!-- 가격 올린시간 div -->
+                                                <div class="cxNmps">
+                                                    <div class="heqdJ">
+                                                        50000
+                                                    </div>
+                                                    <div class="elSbmF">
+                                                        <span>22시간전</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 위치 div -->
+                                            <div class="esiKrh">
+                                                <img  src="https://m.bunjang.co.kr/pc-static/resource/5dcce33ad99f3020a4ab.png" width="15" height="17">
+                                                전국
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- 상품박스 끝 -->
+                                    <div class="bfphSx">
+                                        <a class="isOWuA">
+                                            <div class="bkngsY">
+                                                <img  src="https://media.bunjang.co.kr/product/82374634_1_1663585674_w292.jpg"
+                                                width="194" height="194">
+                                            </div>
+                                            <div class="bJpTlV">
+                                                <div class="gstNkb">
+                                                    얼반아웃피터스 정품 청자켓 s 아페쎄st
+                                                </div>
+                                                <!-- 가격 올린시간 div -->
+                                                <div class="cxNmps">
+                                                    <div class="heqdJ">
+                                                        50000
+                                                    </div>
+                                                    <div class="elSbmF">
+                                                        <span>22시간전</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 위치 div -->
+                                            <div class="esiKrh">
+                                                <img  src="https://m.bunjang.co.kr/pc-static/resource/5dcce33ad99f3020a4ab.png" width="15" height="17">
+                                                전국
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- 상품박스 끝 -->
+                                    <div class="bfphSx">
+                                        <a class="isOWuA">
+                                            <div class="bkngsY">
+                                                <img  src="https://media.bunjang.co.kr/product/82374634_1_1663585674_w292.jpg"
+                                                width="194" height="194">
+                                            </div>
+                                            <div class="bJpTlV">
+                                                <div class="gstNkb">
+                                                    얼반아웃피터스 정품 청자켓 s 아페쎄st
+                                                </div>
+                                                <!-- 가격 올린시간 div -->
+                                                <div class="cxNmps">
+                                                    <div class="heqdJ">
+                                                        50000
+                                                    </div>
+                                                    <div class="elSbmF">
+                                                        <span>22시간전</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 위치 div -->
+                                            <div class="esiKrh">
+                                                <img  src="https://m.bunjang.co.kr/pc-static/resource/5dcce33ad99f3020a4ab.png" width="15" height="17">
+                                                전국
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- 상품박스 끝 -->
+                                    <div class="bfphSx">
+                                        <a class="isOWuA">
+                                            <div class="bkngsY">
+                                                <img  src="https://media.bunjang.co.kr/product/82374634_1_1663585674_w292.jpg"
+                                                width="194" height="194">
+                                            </div>
+                                            <div class="bJpTlV">
+                                                <div class="gstNkb">
+                                                    얼반아웃피터스 정품 청자켓 s 아페쎄st
+                                                </div>
+                                                <!-- 가격 올린시간 div -->
+                                                <div class="cxNmps">
+                                                    <div class="heqdJ">
+                                                        50000
+                                                    </div>
+                                                    <div class="elSbmF">
+                                                        <span>22시간전</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 위치 div -->
+                                            <div class="esiKrh">
+                                                <img  src="https://m.bunjang.co.kr/pc-static/resource/5dcce33ad99f3020a4ab.png" width="15" height="17">
+                                                전국
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- 상품박스 끝 -->
+                                </div>
+                            </div>
+                        </div>
+                    <!-- 상품 리스트 박스끝 -->
+                        
+					<!-- 상점후기 시작 -->
+					<!-- <div class="gbNMxu"> -->
+                         <div class="cFVlDW test2_1" id="gmerZt2">
+                            	<div class="gvsXqb">
+                            		<div class="crEEyG">
+                            			<div>
+                            				상점후기
+                            				<span class="bNdKvM" >3</span>
+                            			</div>
+                            			<div class="iNEuHV">
+                            				<!-- 평점 박스 시작 -->
+                            				<div class="jSjZNs">
+                            					<div class="fWtYmf">
+                            						<div class="fGpXKG">7.8</div>
+                            						<div class="eyeUYg">평점</div>
+                            					</div>
+                            					<div class="qEvCW"></div>
+                            				<div class="hlvDzf">
+                            					<div class="hSIAij">91%</div>
+                            					<div class="eyeUYg">만족후기</div>
+                            				</div>
+                            					
+                            				</div>
+                            				<!-- 평점박스 끝 -->
+                            				<!-- 후기 초이스 박스 -->
+                            				<div class="hoyCQB">
+                            					<div class="fwSCvu">
+                            						<div class="jIvCjd">
+                            							<img class="cASjol" src="https://static.bunjang.co.kr/review/review-keyword-img/review_keyword_icon_1_v2.png" width="14"height="14">
+                            							상품 설명과 실제 상품이 동일해요. 
+                            						</div>
+                            						<div class="bJWsOy">
+                            							1
+                            						</div>
+                            					</div>
+                            					
+                            					<div class="fwSCvu">
+                            						<div class="jIvCjd">
+                            							<img class="cASjol" src="https://static.bunjang.co.kr/review/review-keyword-img/review_keyword_icon_5_v2.png" width="14"height="14">
+                            							톡 답변이 빨라요.
+                            						</div>
+                            						<div class="bJWsOy">
+                            							1
+                            						</div>
+                            					</div>
+                            					
+                            					<div class="fwSCvu">
+                            						<div class="jIvCjd">
+                            							<img class="cASjol" src="https://static.bunjang.co.kr/review/review-keyword-img/review_keyword_icon_6_v2.png" width="14"height="14">
+                            							친절하고 배려가 넘쳐요.
+                            						</div>
+                            						<div class="bJWsOy">
+                            							1
+                            						</div>
+                            					</div>
+                            					
+                            					<div class="fwSCvu">
+                            						<div class="jIvCjd">
+                            							<img class="cASjol" src="https://static.bunjang.co.kr/review/review-keyword-img/review_keyword_icon_7_v2.png" width="14"height="14">
+                            							포장이 깔끔해요. 
+                            						</div>
+                            						<div class="bJWsOy">
+                            							1
+                            						</div>
+                            					</div>
+                            					
+                            				</div>
+                            					
+                            			</div>
+                            			
+                            		</div>
+                            	</div>
+                            	<!-- 상점후기 초이스 박스 끝 -->
+						<!-- 상점후기 글 시작 -->
+						<div>
+							<div class="ncuqL">
+								<a class="kQxTuR">
+									<img src="https://media.bunjang.co.kr/images/crop/530629795_w120.jpg" width="60" height="60">
+								</a>
+								<div class="ltgOw">
+									<div class="kiUeQm">
+										<div class="hukTeN">
+											<a class="grmcoQ">후기남긴사람닉</a>
+											<div class="cpXGdD">
+												2년전
+											</div>
+										</div>
+										<div class="dQLwrX">평점 : 9.7</div>
+										</div>
+										
+										<a class="gIFaPc">
+											<button class="xPStH">
+												HOPE 홉스샵 야상스커트
+												<img src="https://m.bunjang.co.kr/pc-static/resource/c5ce9d5a172b0744e630.png"width="6"height="10">
+											</button>
+										</a>
+										<div class="inDnwi">친절해요 ㅎㅎ 감사해요 물건싸게 잘 구입했습니다.!!</div>
+										<div class="glxCHJ"></div>
+										<div class="dskFXS"></div>
+								</div>
+							</div>
+						</div>
+                            	<!-- 후기글 끝 -->
+                            	
+                            	<div>
+							<div class="ncuqL">
+								<a class="kQxTuR">
+									<img src="https://media.bunjang.co.kr/images/crop/530629795_w120.jpg" width="60" height="60">
+								</a>
+								<div class="ltgOw">
+									<div class="kiUeQm">
+										<div class="hukTeN">
+											<a class="grmcoQ">후기남긴사람닉</a>
+											<div class="cpXGdD">
+												2년전
+											</div>
+										</div>
+										<div class="dQLwrX">평점 : 9.7</div>
+										</div>
+										
+										<a class="gIFaPc">
+											<button class="xPStH">
+												HOPE 홉스샵 야상스커트
+												<img src="https://m.bunjang.co.kr/pc-static/resource/c5ce9d5a172b0744e630.png"width="6"height="10">
+											</button>
+										</a>
+										<div class="inDnwi">친절해요 ㅎㅎ 감사해요 물건싸게 잘 구입했습니다.!!</div>
+										<div class="glxCHJ"></div>
+										<div class="dskFXS"></div>
+								</div>
+							</div>
+						</div>
+						
+						<div>
+							<div class="ncuqL">
+								<a class="kQxTuR">
+									<img src="https://media.bunjang.co.kr/images/crop/530629795_w120.jpg" width="60" height="60">
+								</a>
+								<div class="ltgOw">
+									<div class="kiUeQm">
+										<div class="hukTeN">
+											<a class="grmcoQ">후기남긴사람닉</a>
+											<div class="cpXGdD">
+												2년전
+											</div>
+										</div>
+										<div class="dQLwrX">평점 : 9.7</div>
+										</div>
+										
+										<a class="gIFaPc">
+											<button class="xPStH">
+												HOPE 홉스샵 야상스커트
+												<img src="https://m.bunjang.co.kr/pc-static/resource/c5ce9d5a172b0744e630.png"width="6"height="10">
+											</button>
+										</a>
+										<div class="inDnwi">친절해요 ㅎㅎ 감사해요 물건싸게 잘 구입했습니다.!!</div>
+										<div class="glxCHJ"></div>
+										<div class="dskFXS"></div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="drhmhk">
+							<button class="EDFVi">
+								<div class="jBHGaB">
+									상점후기 더 보기
+								</div>
+							</button>
+						</div>
+						
+                            </div>
+					<!-- 상점후기 박스끝 -->
+					
+					<!-- 찜한상품 리스트 박스 시작 -->
+						<div class="cFVlDW test3_1" id="gmerZt3">
+							<div class="kEbOts">
+								<div class="gvsXqb">
+									<div>
+									찜한 상품
+									<span class="cRYyVr">3</span>
+									</div>
+								</div>
+								<!-- 찜한상품리스트 -->
+								
+									<div class="fFuMaZ">
+										<div class="gaevmH">
+											<a class="dILrpO">
+												<img  src="https://media.bunjang.co.kr/images/crop/96213212_w120.jpg" width="60" height="60">
+											</a>
+											<a class="gWpzaU">
+												스트릿뱅크
+											</a>
+											<div class="bYJeVd">
+												<a class="fLGMQx">
+													상품
+													<b>23</b>
+												</a>
+												<a class="bHuFGf">
+													날찜한
+													<b>11</b>
+												</a>
+											</div>
+											
+											<div>
+												<button class="hpOnCv">
+												<img  src="https://m.bunjang.co.kr/pc-static/resource/226de467653c15366c94.png" width="20" height="14">
+												찜하기</button>
+											</div>
+										</div>
+										<!-- 찜한상품 목록 리스트 -->
+										
+										
+											<div class="hXgWIg">
+												<a class="hjAHtY">
+													<img src="https://media.bunjang.co.kr/product/260353655_1_1713254305_w380.jpg" width="190" height="190">
+												</a>
+												
+												<a class="hjAHtY">
+													<img src="https://media.bunjang.co.kr/product/260353122_1_1713254033_w380.jpg" width="190" height="190">
+												</a>
+												
+												<a class="hjAHtY">
+													<img src="https://media.bunjang.co.kr/product/260346659_1_1713250787_w380.jpg" width="190" height="190">
+												</a>
+											</div>
+										
+									</div>
+									
+									<div class="fFuMaZ">
+										<div class="gaevmH">
+											<a class="dILrpO">
+												<img  src="https://media.bunjang.co.kr/images/crop/96213212_w120.jpg" width="60" height="60">
+											</a>
+											<a class="gWpzaU">
+												스트릿뱅크
+											</a>
+											<div class="bYJeVd">
+												<a class="fLGMQx">
+													상품
+													<b>23</b>
+												</a>
+												<a class="bHuFGf">
+													날찜한
+													<b>11</b>
+												</a>
+											</div>
+											
+											<div>
+												<button class="hpOnCv">
+												<img  src="https://m.bunjang.co.kr/pc-static/resource/226de467653c15366c94.png" width="20" height="14">
+												찜하기</button>
+											</div>
+										</div>
+										<!-- 찜한상품 목록 리스트 -->
+										
+										
+											<div class="hXgWIg">
+												<a class="hjAHtY">
+													<img src="https://media.bunjang.co.kr/product/260353655_1_1713254305_w380.jpg" width="190" height="190">
+												</a>
+												
+												<a class="hjAHtY">
+													<img src="https://media.bunjang.co.kr/product/260353122_1_1713254033_w380.jpg" width="190" height="190">
+												</a>
+												
+												<a class="hjAHtY">
+													<img src="https://media.bunjang.co.kr/product/260346659_1_1713250787_w380.jpg" width="190" height="190">
+												</a>
+											</div>
+										
+									</div>
+									
+									<div class="fFuMaZ">
+										<div class="gaevmH">
+											<a class="dILrpO">
+												<img  src="https://media.bunjang.co.kr/images/crop/96213212_w120.jpg" width="60" height="60">
+											</a>
+											<a class="gWpzaU">
+												스트릿뱅크
+											</a>
+											<div class="bYJeVd">
+												<a class="fLGMQx">
+													상품
+													<b>23</b>
+												</a>
+												<a class="bHuFGf">
+													날찜한
+													<b>11</b>
+												</a>
+											</div>
+											
+											<div>
+												<button class="hpOnCv">
+												<img  src="https://m.bunjang.co.kr/pc-static/resource/226de467653c15366c94.png" width="20" height="14">
+												찜하기</button>
+											</div>
+										</div>
+										<!-- 찜한상품 목록 리스트 -->
+										
+										
+											<div class="hXgWIg">
+												<a class="hjAHtY">
+													<img src="https://media.bunjang.co.kr/product/260353655_1_1713254305_w380.jpg" width="190" height="190">
+												</a>
+												
+												<a class="hjAHtY">
+													<img src="https://media.bunjang.co.kr/product/260353122_1_1713254033_w380.jpg" width="190" height="190">
+												</a>
+												
+												<a class="hjAHtY">
+													<img src="https://media.bunjang.co.kr/product/260346659_1_1713250787_w380.jpg" width="190" height="190">
+												</a>
+											</div>
+										
+									</div>
+									
+								
+								<!-- 찜한상품리스트 끝 -->
+								
+							</div>
+						</div>
+						<!-- 찜한상품 박스 끝 -->	
+					<!--날 찜한사람  -->
+						<div class="cFVlDW test4_1" id="gmerZt4">
+							<div class="kEbOts">
+								<div class="gvsXqb">
+									<div>
+										찜한사람
+										<span class="cRYyVr">5</span>
+									</div>
+								</div>
+								<!-- 찜한사람 프로필 시작 -->
+								<div>
+									<div class="ejqxUK">
+										<div class="huYmor">
+											<div class="gWQYTj">
+												<a class="ihXWvD">
+													<img src="https://media.bunjang.co.kr/images/crop/833760235_w240.jpg" width="120" height="120">
+												</a>
+												<a class="jxwzvM">
+													프로필닉네임
+												</a>
+												<a class="kIShQU">
+													<div class="dQLwrX">
+														평점 : 7.6
+													</div>
+												</a>
+												
+												<div class="bbHFKb">
+													<a class="jipGBV">
+														상품
+														<b>12</b>
+													</a>
+													<a class="dKLOxd">
+														찜
+														<b>2</b>
+													</a>
+												</div>
+												
+												<div>
+													<div class="hpOnCv">
+														<button class="hpOnCv">
+															<img src="https://m.bunjang.co.kr/pc-static/resource/226de467653c15366c94.png" width="20" height="14">
+															찜하기
+														</button>
+													</div>
+												</div>
+											</div>
+											
+											
+									</div>
+									
+									<div class="huYmor">
+											<div class="gWQYTj">
+												<a class="ihXWvD">
+													<img src="https://media.bunjang.co.kr/images/crop/833760235_w240.jpg" width="120" height="120">
+												</a>
+												<a class="jxwzvM">
+													프로필닉네임
+												</a>
+												<a class="kIShQU">
+													<div class="dQLwrX">
+														평점 : 7.6
+													</div>
+												</a>
+												
+												<div class="bbHFKb">
+													<a class="jipGBV">
+														상품
+														<b>12</b>
+													</a>
+													<a class="dKLOxd">
+														찜
+														<b>2</b>
+													</a>
+												</div>
+												
+												<div>
+													<div class="hpOnCv">
+														<button class="hpOnCv">
+															<img src="https://m.bunjang.co.kr/pc-static/resource/226de467653c15366c94.png" width="20" height="14">
+															찜하기
+														</button>
+													</div>
+												</div>
+											</div>
+											
+											
+									</div>
+									
+									<div class="huYmor">
+											<div class="gWQYTj">
+												<a class="ihXWvD">
+													<img src="https://media.bunjang.co.kr/images/crop/833760235_w240.jpg" width="120" height="120">
+												</a>
+												<a class="jxwzvM">
+													프로필닉네임
+												</a>
+												<a class="kIShQU">
+													<div class="dQLwrX">
+														평점 : 7.6
+													</div>
+												</a>
+												
+												<div class="bbHFKb">
+													<a class="jipGBV">
+														상품
+														<b>12</b>
+													</a>
+													<a class="dKLOxd">
+														찜
+														<b>2</b>
+													</a>
+												</div>
+												
+												<div>
+													<div class="hpOnCv">
+														<button class="hpOnCv">
+															<img src="https://m.bunjang.co.kr/pc-static/resource/226de467653c15366c94.png" width="20" height="14">
+															찜하기
+														</button>
+													</div>
+												</div>
+											</div>
+											
+											
+									</div>
+									
+									<div class="huYmor">
+											<div class="gWQYTj">
+												<a class="ihXWvD">
+													<img src="https://media.bunjang.co.kr/images/crop/833760235_w240.jpg" width="120" height="120">
+												</a>
+												<a class="jxwzvM">
+													프로필닉네임
+												</a>
+												<a class="kIShQU">
+													<div class="dQLwrX">
+														평점 : 7.6
+													</div>
+												</a>
+												
+												<div class="bbHFKb">
+													<a class="jipGBV">
+														상품
+														<b>12</b>
+													</a>
+													<a class="dKLOxd">
+														찜
+														<b>2</b>
+													</a>
+												</div>
+												
+												<div>
+													<div class="hpOnCv">
+														<button class="hpOnCv">
+															<img src="https://m.bunjang.co.kr/pc-static/resource/226de467653c15366c94.png" width="20" height="14">
+															찜하기
+														</button>
+													</div>
+												</div>
+											</div>
+											
+											
+									</div>
+									
+									
+									</div>
+									</div>
+									</div>
+									</div>
+									</div>
+								
+										
 				</div>
 			<!-- 마이페이지+밑내용 박스 끝 -->
 		</div>
