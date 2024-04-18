@@ -20,7 +20,23 @@ public interface Service {
 
 	String idresult(String name, String phone);
 
-	String pwresult(String id, String jumin, String name);
+	void pwresult(String id, String name, String phone, String pw);
+
+	void member_delete(String member_id);
+
+	MemberDTO select(String member_id);
+
+	void modify(String member_id, String nowpw, String phone, String address, String nickname, String fname);
+
+	void modify_2(String member_id, String new_pw, String phone, String address, String nickname, String fname);
+
+	String oldimg(String member_id);
+
+	void resign(String id, String pw);
+
+
+
+
 
 	
 

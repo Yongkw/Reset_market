@@ -19,5 +19,6 @@ public interface Service {
 	public void dela(int notice_no);
 
 	public ArrayList<BoardDTO> noticesearch(String search_content);
+	
 
 }

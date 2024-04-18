@@ -1,18 +1,20 @@
 package com.enez.market.member;
 
 public class MemberDTO {
-	String user_id, member_id, member_pw, member_name, address, phone;
+	int user_id;
+	String member_id, member_pw, member_name, address, phone;
 	int manner;
 	String nickname, category_check1, buyer_id, seller_id, profile_image;
 	String stdate;
-	
-	public MemberDTO() {}
 
-	public String getUser_id() {
+	public MemberDTO() {
+	}
+
+	public int getUser_id() {
 		return user_id;
 	}
 
-	public void setUser_id(String user_id) {
+	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
 
@@ -111,7 +113,5 @@ public class MemberDTO {
 	public void setStdate(String stdate) {
 		this.stdate = stdate;
 	}
-	
-	
 
 }

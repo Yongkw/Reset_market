@@ -9,14 +9,12 @@ html {
 	}
 	
 	body {
-	    width:50%;
+	    width:100%;
 	    height:100%;
 	    margin: 0;
-  		padding-top: 190px;
-  		padding-bottom: 40px;
   		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
   		background-repeat: no-repeat;
-  		background:linear-gradient(to bottom right, #0098FF, #6BA8D1);
+  		
 	}
 	
     .card {
@@ -31,21 +29,23 @@ html {
 </head>
 <body>
 <!-- 모달 요소 -->
-<div id="background_modal" class="background_modal" style="display: none;">
+<div style="display: flex; flex-direction: column; justify-content: center; width: 100%; background-color: none;">
+<div id="background_modal" class="background_modal" style="display: none; width:20rem; justify-content: center; ">
     <div class="card" style="border-radius: 20px; border: 1px solid #ccc;">
         <div class="card-body">
             <h4 class="card-title">
-                <b id="name_value" style="color: #113366;"></b>
+                <b id="search_value" style="color: #113366;"></b>
                 <span class="close" style="float: right; cursor: pointer;">&times;</span>
             </h4>
             <br>
-            <h2 id="id_value" style="color: black;"></h2>
+            <h2 id="value" style="color: black;"></h2>
             <br>
             <button type="button" id="finish" class="btn peach-gradient btn-rounded waves-effect" onclick="location.href='/market/login'">
                 <i class="fa fa-envelope"></i>확인
             </button>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

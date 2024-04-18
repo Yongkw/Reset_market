@@ -28,11 +28,11 @@ function idSch_click() {
         },
         success: function(data) {
             if (data == 0) {
-                $('#id_value').text("일치하는 회원 정보가 없습니다.");
+                $('#value').text("일치하는 회원 정보가 없습니다.");
             } else {
             	console.log(data)
-            	 $('#name_value').text(name+" 회원님의 아이디는");
-                $('#id_value').text(data);
+            	 $('#search_value').text(name+" 회원님의 아이디는");
+                $('#value').text(data);
                 
             }
         },
@@ -45,27 +45,28 @@ function idSch_click() {
 
 // 아이디 값 받고 출력하는 함수
 function pwSch_click() {
-    var id = $('#id').val(); // 아이디 입력 필드 값
-    var jumin = $('#jumin').val(); // 주민 입력 필드 값
+    var id = $('#sch_id').val(); // 아이디 입력 필드 값
+    var phone = $('#phone_2').val(); // 전화번호 입력 필드 값
     var name = $('#name_2').val(); // 이름 입력 필드 값
     console.log(id);
-    console.log(jumin);
+    console.log(phone);
+    console.log(name);
     $.ajax({
         type: "post",
         url: "pwsearch",
         async: true,
         data: {
             "id": id,
-            "jumin": jumin,
+            "phone": phone,
             "name" : name
         },
         success: function(data) {
             if (data == 0) {
-                $('#id_value').text("일치하는 회원 정보가 없습니다.");
+                $('#value').text("일치하는 회원 정보가 없습니다.");
             } else {
             	console.log(data)
-            	 $('#name_value').text(name+" 회원님의 패스워드는");
-                $('#id_value').text(data);
+            	 $('#search_value').text(name+" 회원님의 임시 비밀번호는");
+                $('#value').text(data);
                 
             }
         },

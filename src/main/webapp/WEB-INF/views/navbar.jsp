@@ -355,14 +355,14 @@ border-radius: 2px;
 				<c:choose>
 				<c:when test="${loginstate==true}"><!-- 로그인 상태 세션에 따른 변화 -->
 					<span>
-					<span style="color:black">${member_id}님!</span>
-            					<a href="mypage">마이페이지</a>
+					<span style="color:black"><a href="myinfo">${member_id}님!</a></span>
+            		<a href="mypage">마이페이지</a>
 					<a href="logout">로그 아웃</a>
 					</span>
 				</c:when>
 				<c:otherwise>
 					<span>
-					<a href="login" >로그인</a>
+					<a href="#" id="loginLink" data-toggle="modal" data-target="#loginModal">로그인</a>
 					<a href="signup">회원 가입</a>
 					</span>
 				</c:otherwise>
@@ -408,7 +408,7 @@ border-radius: 2px;
 	</div>
 		
 	</div>
-	
+	<%@include file="/WEB-INF/views/member/login.jsp" %>
 	<script type="text/javascript">
 
     $(document).ready(function(){
