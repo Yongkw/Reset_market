@@ -11,7 +11,7 @@
 <title><t:insertAttribute name="title"/></title>
 </head>
 <body>
-   <div id="container">
+   <div id="container" style="width:100%;">
       <div id="top">
          <t:insertAttribute name="top"/>
       </div>

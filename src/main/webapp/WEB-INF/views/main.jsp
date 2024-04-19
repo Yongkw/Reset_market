@@ -8,7 +8,7 @@
 </head>
 <body>
 
-		<div class="div3-2" style=" width:200px; position: relative; display: flex; flex-direction: column;" >
+		<div class="div3-2" style=" width:200px; position: relative; display: flex; flex-direction: column; font-size: x-large;" >
 			<h5> -------임시 태스트 링크---------</h5>
 			
 			

@@ -14,18 +14,19 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+
+
 @Controller
 public class MemberController {
 	@Autowired
 	SqlSession sqlSession;
-	String path = "\\\\Mac\\Home\\Desktop\\project\\src\\main\\webapp\\image";
+	String path = "C:\\이젠디지탈12\\spring\\ResetMarket_Member\\src\\main\\webapp\\image";
 
 	@RequestMapping(value = "/signup")
 	public String member_signup() {
@@ -52,7 +53,7 @@ public class MemberController {
 	@RequestMapping(value = "/membersave", method = RequestMethod.POST)
 	public String membersv(MultipartHttpServletRequest mul) throws IllegalStateException, IOException {
 
-		String member_id = mul.getParameter("id");
+		String member_id = mul.getParameter("sign_id");
 		String member_pw = mul.getParameter("pw1");
 		String member_name = mul.getParameter("name");
 		String phone = mul.getParameter("phone1") + "-" + mul.getParameter("phone2") + "-" + mul.getParameter("phone3");
@@ -70,7 +71,7 @@ public class MemberController {
 
 			ss.membersave(member_id, member_pw, member_name, address, phone, nickname, category_check1, fname);
 		}
-		return "redirect:main";
+		return "redirect:main_view";
 
 	}
 
@@ -101,8 +102,8 @@ public class MemberController {
 
 	@RequestMapping(value = "/loginok", method = RequestMethod.POST)
 	public String loginsuccess(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String member_id = request.getParameter("id");
-		String member_pw = request.getParameter("pw");
+		String member_id = request.getParameter("login_id");
+		String member_pw = request.getParameter("login_pw");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter piw = response.getWriter();
 		Service ss = sqlSession.getMapper(Service.class);
@@ -114,12 +115,12 @@ public class MemberController {
 			hs.setMaxInactiveInterval(1800);
 
 			piw.print("<script>alert('" + dto.member_id + "님 환영합니다!'); </script>");
-			piw.print("<script>window.location.href='/market/main';</script>");
+			piw.print("<script>window.location.href='/market/main_view';</script>");
 			piw.close();
 
 		} else {
 			piw.print("<script>alert('일치하는 회원이 없습니다!')</script>");
-			piw.print("<script> window.location.href='/market/login';</script>");
+			piw.print("<script> window.location.href='/market/main_view';</script>");
 			piw.close();
 
 		}
@@ -199,14 +200,188 @@ public class MemberController {
 	@RequestMapping(value = "/pwsearch", method = RequestMethod.POST)
 	public String pwsearch(HttpServletRequest request) {
 		String id = request.getParameter("id");
-		String jumin = request.getParameter("jumin");
+		String phone = request.getParameter("phone");
 		String name = request.getParameter("name");
+		System.out.println("아이디 :"+id);
+		System.out.println("폰번:"+phone);
+		System.out.println("이름 : "+name);
 		Service ss = sqlSession.getMapper(Service.class);
-		String pw = ss.pwresult(id, jumin, name);
-		System.out.println(pw);
-		System.out.println(id);
-		System.out.println(jumin);
+		String pw = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 7);
+		System.out.println("새비번 : "+pw);
+		ss.pwresult(id, name, phone ,pw); //반환 할 값이 없기때문에
+		
 		return pw;
 	}
+	
+	
+	@RequestMapping(value = "/myinfo")
+	public String myinfo(HttpSession hs, Model mo,HttpServletResponse response) throws IOException {
+	    String member_id = (String) hs.getAttribute("member_id"); 
+
+	    if (member_id != null) {
+	        Service ss = sqlSession.getMapper(Service.class);
+	        MemberDTO member = ss.select(member_id);
+	        if (member != null) {
+	            String phone = member.getPhone();
+	            String[] ph = phone.split("-");
+	            String phone1 = ph[0];
+	            String phone2 = ph[1];
+	            String phone3 = ph[2];
+	            
+	            mo.addAttribute("member_id", member.getMember_id());
+	            mo.addAttribute("member_pw", member.getMember_pw());
+	            mo.addAttribute("member_name", member.getMember_name());
+	            mo.addAttribute("address", member.getAddress());
+	            mo.addAttribute("phone1", phone1);
+	            mo.addAttribute("phone2", phone2);
+	            mo.addAttribute("phone3", phone3);
+	            mo.addAttribute("nickname", member.getNickname());
+	            mo.addAttribute("profile_image", member.getProfile_image());
+	            
+	            return "myinfo";
+	        }
+	        
+	    }
+	    else {
+        	response.setContentType("text/html;charset=utf-8");
+			PrintWriter piw = response.getWriter();
+			piw.print("<script>alert('로그인 후 이용가능!');</script>");
+			piw.print("<script>window.location.href='/market/login'</script>");
+			piw.close();
+			
+        	
+        }
+	    	return "redirect:login";
+	    
+	}
+	
+	@RequestMapping(value = "/membermodify", method = RequestMethod.POST)
+	public String modysave(MultipartHttpServletRequest mul,HttpSession hs) throws IOException {
+		String member_id = (String) hs.getAttribute("member_id");
+		String new_pw = mul.getParameter("new_pw");
+		String phone = mul.getParameter("phone1") + "-" + mul.getParameter("phone2") + "-" + mul.getParameter("phone3");
+		String address = mul.getParameter("addr2");
+		String nickname = mul.getParameter("new_nick");
+		MultipartFile mf = mul.getFile("profile_image");
+		Service ss = sqlSession.getMapper(Service.class);
+		String nowpw = mul.getParameter("nowpw");
+		String fname = mf.getOriginalFilename();
+		System.out.println("현재비번 :"+nowpw);
+		System.out.println("새비번 :"+new_pw);
+		System.out.println("주소 :"+address);
+		System.out.println("연락처"+phone);
+		System.out.println("닉네임 :"+nickname);
+		System.out.println("파일이름 :"+fname); // 이게 기존 저장되어있는 사진파일을 의미함..
+		System.out.println("접속된 아이디 : " + member_id);
+		String oldimg = ss.oldimg(member_id); 
+			
+		
+		if(mf != null && !mf.isEmpty()) {// 만약 새이미지가 업로드 되면 즉 mf가 널값이 아니거나 , 비어있지 않다면
+			//이전파일 삭제
+			if(!"default_image.jpg".equals(oldimg)) //이전파일이 널이 아니라면.. 이전파일을  삭제한다..
+			{
+				File oldfile = new File(path+"\\"+oldimg);
+				oldfile.delete(); // 이전 파일 삭제
+				
+			}
+			// 새로 업로드된 파일을 저장해줌
+			fname = mf.getOriginalFilename();
+			fname = filesave(fname,mf.getBytes());		
+			mf.transferTo(new File(path+"\\"+fname));
+			
+			
+		 } else { // 새 파일이 null이거나 비어있는 경우
+		            // 이전 파일이 존재하는 경우에만 파일명을 이전 파일명으로 설정
+		            fname = oldimg;
+		        }
+		    
+				
+			
+		
+		if(new_pw.equals("") || new_pw.equals(null))//새로운 패스워드가 없으면 
+		{
+			ss.modify(member_id,nowpw,phone,address,nickname,fname); // nowpw 기존 비밀번호를 삽입
+			
+		}
+		else
+		{
+			ss.modify_2(member_id,new_pw,phone,address,nickname,fname); // 새로운 비밀번호가 있으면 new_pw 넣어줌..!
+			
+		}
+		
+		return "redirect:myinfo";
+	}
+	
+	
+	@RequestMapping(value = "/resign")
+	public String resign(HttpServletRequest request, HttpSession hs , Model mo,HttpServletResponse response) throws IOException {
+		Service ss= sqlSession.getMapper(Service.class);
+		String member_id = (String)hs.getAttribute("member_id");
+		
+		if(member_id != null){
+			MemberDTO member = ss.select(member_id);
+			mo.addAttribute("member_id", member_id);
+			mo.addAttribute("member_pw", member.getMember_pw());
+			return "resign";
+		}
+		else{
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter piw = response.getWriter();
+			piw.print("<script>alert('로그인 후 이용가능!');</script>");
+			piw.print("<script>window.location.href='/market/login'</script>");
+			piw.close();
+			
+			
+		}
+		
+		return "login";
+	}
+	
+	
+	@RequestMapping(value = "resignok" , method = RequestMethod.POST)
+	public String resignok(HttpServletRequest request,HttpSession hs) {
+		String id = request.getParameter("rs_id");
+		String pw = request.getParameter("rs_pw");
+		System.out.println("회원 탈퇴 아이디는 : "+id);
+		System.out.println("회원 탈퇴 하는 사람 비밀번호는 : "+pw);
+		Service ss = sqlSession.getMapper(Service.class);
+		ss.resign(id,pw);
+		hs = request.getSession();
+		hs.removeAttribute("dto");
+		hs.removeAttribute("loginstate");
+		hs.setAttribute("loginstate", false);
+		hs.invalidate();// 세션을 완전히 종료하는 함수
+		
+		return "redirect:/main_view";
+	}
+	
+	@RequestMapping(value = "/deletemember")
+	public String deletemember(HttpServletRequest request) {
+		String member_id = request.getParameter("member_id");
+		String profile_image = request.getParameter("profile_image");
+		System.out.println("아이디는?" + member_id);
+		System.out.println("프로필 이미지는?"+profile_image);
+		Service ss = sqlSession.getMapper(Service.class);
+		
+		if(profile_image == null || profile_image.equals("") || "default_image.jpg".equals(profile_image))
+		{
+			ss.member_delete(member_id);
+			
+		}
+		else
+		{
+			File dimg = new File(path+"\\"+profile_image);
+			if(dimg.exists()) {
+				dimg.delete();
+				
+			}
+			ss.member_delete(member_id);
+			
+			
+		}
+		
+		return "redirect:memberlist";
+	}
+
 
 }

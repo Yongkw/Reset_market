@@ -10,11 +10,13 @@
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style type="text/css">
 
-* {
+.nav-bar * {
 	margin: 0;
 	padding: 0;
 }
-
+.nav-bar input, p{
+	font-size: medium;
+}
 ul li {
 	list-style: none;
 	
@@ -360,15 +362,17 @@ height: 25px;
 				<div class="div3-1" >
 				<c:choose>
 				<c:when test="${loginstate==true}"><!-- 로그인 상태 세션에 따른 변화 -->
+
 					<span class="logIO">
 					<!-- <span style="color:black">${member_id}님!</span> -->
-            					<a href="mypage"><img cite="#" alt="마이페이지" src="./image/icon-user-5264565.png"></a>
+					<span style="color:black"><a href="myinfo">${member_id}님!</a></span>
+            		<a href="mypage"><img alt="마이페이지" src="./image/icon-user-5264565.png"></a>
 					<a href="logout"><img  alt="로그아웃" src="./image/icon-logout-11502550.png"></a>
 					</span>
 				</c:when>
 				<c:otherwise>
 					<span class="logIO">
-					<a href="login" ><img   alt="로그인" src="./image/icon-login-4663997.png"> </a>
+					<a href="#" id="loginLink" data-toggle="modal" data-target="#loginModal"><img alt="로그인" src="./image/icon-login-4663997.png"></a>
 					<a href="signup"><img   alt="회원 가입" src="./image/icon-signup-6850895.png"> </a>
 					</span>
 				</c:otherwise> 
@@ -383,9 +387,6 @@ height: 25px;
 				<span><label for="link-3" ><a id="link-3" href="#" >3번링크</a></label></span>
 				<span><label for="link-4" ><a id="link-4" href="#" >4번링크</a></label></span>
 				<span><label for="link-5" ><a id="link-5" href="#" >5번링크</a></label></span>
-				<span><label for="link-6" ><a id="link-6" href="#" >6번링크</a></label></span>
-				<span><label for="link-7" ><a id="link-7" href="#" >7번링크</a></label></span>
-				<span><label for="link-8" ><a id="link-8" href="#" >8번링크</a></label></span>
 			</div>
 			
 			<!-- contents 1  -->
@@ -414,6 +415,7 @@ height: 25px;
 	</div>
 	</div>
 	<span id="imglayout" style=" display: none; font-size: 10px; width: 50px; height: 13px; background-color: black; border: 1 solid gray; color: white; text-align: center; "></span>
+	<%@include file="/WEB-INF/views/member/login.jsp" %>
 	<script type="text/javascript">
 
     $(document).ready(function(){
@@ -526,7 +528,7 @@ height: 25px;
         		"position":"absolute",
         		"z-index":"106"
         	}).show();
-	    }, 200);
+	    }, 100);
     });
     $('.logIO>a>img').mouseleave(function() {
     	$('#imglayout').css("display","none");

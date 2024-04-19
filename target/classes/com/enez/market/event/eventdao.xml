@@ -1,0 +1,38 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.enez.market.event.Service">
+
+ <insert id ="insert">
+  	INSERT INTO event (event_no, event_title, event_content, event_img, event_state, event_sday, event_fday) 
+VALUES (event_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, TO_DATE(#{param5}, 'yyyy-MM-dd'), TO_DATE(#{param6}, 'yyyy-MM-dd'))
+
+  </insert>
+  
+  <select id="eventout" resultType="com.enez.market.event.EventDTO">
+  	select event_img, event_title, event_content, event_state, event_no, event_sday, event_fday from event
+  </select>
+
+	<select id="eventupdate" resultType="com.enez.market.event.EventDTO">
+    select * from event where event_no = #{param1}
+	</select>
+
+	<update id="event_update">
+		update event set event_title=#{param1}, event_content=#{param2}, event_img=#{param3},
+		 event_state=#{param4}, event_sday=#{param5}, event_fday=#{param6} where event_no=#{param7}
+	</update>
+	
+	<select id="event_detail" resultType="com.enez.market.event.EventDTO">
+  	select event_title, event_img, event_content, event_no, event_cnt from event where event_no=#{param1}
+  </select>
+  
+  <update id="count">
+  	update event set event_cnt=event_cnt+1 where event_no=#{param1} 
+  </update>
+  
+  <delete id="ev_dela">
+	delete from event where event_no = #{param1}
+	</delete>
+  
+</mapper>
