@@ -78,10 +78,6 @@ $(document).ready(function () {
 									<div>
 										<div class="kZpimA">
 											<div class="fyiblQ">
-												<!-- 찜횟수넣기 -->
-												<div class="jHkOld">
-													<div>♥10</div>
-												</div>
 												<!--  조회수 넣기 -->
 												<div class="jHkOld">
 													<div>조회수${aa.view_cnt}</div>
@@ -113,8 +109,8 @@ $(document).ready(function () {
 
 								<div class="jEiYxO">
 									<div class="bqFmTC">
-										<button class="loFlqz">
-											<span>♥찜</span> <span>3</span>
+										<button class="loFlqz" onclick="jjimclick()">
+											<span>♥찜</span> <span id="jjimCount" >${jjim}</span>
 										</button>
 
 										<button class="cxTeZB"
@@ -342,6 +338,44 @@ $(document).ready(function () {
 			</div>
 		</div>
 	</div>
-
+	
+	<script type="text/javascript">
+	function jjimclick() {
+		const thisid = "<%=(String)session.getAttribute("member_id")%>"
+			
+		const pr_no = ${list.get(0).product_no};
+		const seller_id = "${list.get(0).seller_id}";
+		var jcount = document.getElementById('jjimCount');
+		var jcount2 =$('#jjimCount');
+		$.ajax({
+		    url: 'jjimcount', 
+		    type: 'POST', 
+		    data: {
+		    	'pr_no':pr_no,
+		    	'thisid':thisid,
+		    	'seller_id':seller_id
+		    	},
+		    dataType : 'text',
+		    traditional: true,
+		    success: function(data){
+		    	jcount2.empty();
+		    	jcount.insertAdjacentHTML('afterbegin',''+data+'');
+		    	//category_name  location  price img1 product_no  title  view_cnt 
+		    	console.log(data);
+		    	
+		    },
+		    error: function(xhr, status, error){ // 요청 실패 시 실행될 콜백 함수
+		        console.error(error); // 에러 메시지를 콘솔에 출력
+		        console.log('실패'); // 실패 메시지 출력
+		        
+		    }
+		});
+		
+	}
+	function jjimcolor(data){
+		
+	}
+	
+	</script>
 </body>
 </html>

@@ -50,21 +50,20 @@ public class ChartController {
 	@RequestMapping(value = "mapview")
 	public String mapview(Locale locale, Model model) {
 		Service service= sqlSession.getMapper(Service.class);
-		 
+		
+		ArrayList<Product_search_DTO> list = new ArrayList<Product_search_DTO>();
+		
+		
+		Map<String,ArrayList<Map<String, String>>> ttt = new HashMap<String,ArrayList<Map<String, String>>>();
+		ArrayList<Map<String, String>> list2 = new ArrayList<Map<String, String>>();
+		Map<String, String> aa= new HashMap<String, String>();
+		
+		
+		list2.add(aa);
+		ttt.put("positions", list2);
+		
+		 model.addAttribute("list", ttt);
 		return "mapview";
-	}
-	
-
-	@RequestMapping(value = "map_add")
-	public String mapview2(Locale locale, Model model) {
-		model.addAttribute("returnno", 1);
-		return "map_add";
-	}
-	
-	@RequestMapping(value = "map_delete")
-	public String mapview3(Locale locale, Model model) {
-		model.addAttribute("returnno", 2);
-		return "map_delete";
 	}
 	
 	@RequestMapping(value = "map_reset")
@@ -73,7 +72,37 @@ public class ChartController {
 		return "map_reset";
 	}
 
+	@SuppressWarnings("unchecked")
+	@ResponseBody
+	@RequestMapping(value = "findproduct_prno", method = RequestMethod.POST)
+	public void findproduct_prno(Model model,HttpServletResponse response,HttpServletRequest request) throws IOException {
+		Service service = sqlSession.getMapper(Service.class);
+		String pr_no = request.getParameter("pr_no");
+		JSONArray list = new JSONArray();
+		       if(pr_no !=null) {
+		            Product_search_DTO dto = service.mapProductList(pr_no);
+		            if (dto != null) {
+		            		JSONObject pro_json = new JSONObject();
+		            		pro_json.put("product_no", Integer.toString(dto.product_no));
+		            		pro_json.put("view_cnt", Integer.toString(dto.view_cnt));
+		            		pro_json.put("price", Integer.toString(dto.price));
+		            		pro_json.put("category_name", dto.category_name);
+		            		pro_json.put("title", dto.title);
+		            		pro_json.put("img1", dto.img1);
+		            		pro_json.put("location", dto.location);
+		            		
+			            	list.add(pro_json);
+		                }
+		       	} else {
+					response.setStatus(HttpServletResponse.SC_NOT_FOUND); 
+					response.getWriter().write("주소가 정보가 전달 되지 않음");	
+		      	}
 
+				String jsondata=list.toJSONString();
+				PrintWriter pw =response.getWriter();
+				pw.print(jsondata);	       
+		}
+	
 	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping(value = "map_productlist", method = RequestMethod.POST)
@@ -183,7 +212,7 @@ public class ChartController {
 		return gopage;
 	}
 	@ResponseBody
-	@RequestMapping(value = "/ajaxtest") //태스트용 pr_search안 test_search.jsp 와 sample안 test을 지울 것
+	@RequestMapping(value = "/chartDataSet") //차트 데이터 ajax 반환
 	public void ajaxtest(HttpServletResponse response,Model model,HttpServletRequest request) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		Service service = sqlSession.getMapper(Service.class);

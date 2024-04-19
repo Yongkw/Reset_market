@@ -41,6 +41,7 @@ a{
 	z-index: 100;
 	background: #FCFCFC;	
 	box-shadow: 0px 3px 3px 0px #008000 ;
+	overflow: hidden;
 }
 
 .nav-bar-log{
@@ -49,6 +50,7 @@ a{
 	float: left;
 	overflow: hidden;
 	}
+	
 .nav-bar-log>a>img{
 	position: relative;
 	z-index:101;
@@ -248,9 +250,10 @@ color: gray;
 	box-shadow: inset 0px 3px 3px 0px #008000 ;
 	display: none;
 	overflow: hidden;
-	position: relative;
-	right: 30%;
+	position: absolute;
+	left:0;
 	border: 1px #008000 solid;
+	z-index: 103;
 	
 }
 .kategorielist>div{
@@ -307,6 +310,9 @@ border:2px solid white ;
 border-radius: 2px;
 
 }
+.div3-1 img{
+height: 25px;
+}
 </style>
 </head>
 <body>
@@ -354,18 +360,18 @@ border-radius: 2px;
 				<div class="div3-1" >
 				<c:choose>
 				<c:when test="${loginstate==true}"><!-- 로그인 상태 세션에 따른 변화 -->
-					<span>
-					<span style="color:black">${member_id}님!</span>
-            					<a href="mypage">마이페이지</a>
-					<a href="logout">로그 아웃</a>
+					<span class="logIO">
+					<!-- <span style="color:black">${member_id}님!</span> -->
+            					<a href="mypage"><img cite="#" alt="마이페이지" src="./image/icon-user-5264565.png"></a>
+					<a href="logout"><img  alt="로그아웃" src="./image/icon-logout-11502550.png"></a>
 					</span>
 				</c:when>
 				<c:otherwise>
-					<span>
-					<a href="login" >로그인</a>
-					<a href="signup">회원 가입</a>
+					<span class="logIO">
+					<a href="login" ><img   alt="로그인" src="./image/icon-login-4663997.png"> </a>
+					<a href="signup"><img   alt="회원 가입" src="./image/icon-signup-6850895.png"> </a>
 					</span>
-				</c:otherwise>
+				</c:otherwise> 
 				</c:choose>
 				</div>
 				
@@ -389,6 +395,9 @@ border-radius: 2px;
 				
 		</div>
 	
+		
+	</div>
+	
 	<div class="kategorielist" id="kategorielist">
 	<div class="kategorie-a">
 	<ul >
@@ -403,12 +412,8 @@ border-radius: 2px;
 	<ul class ="tttt">
 	</ul>
 	</div>
-	
-	
 	</div>
-		
-	</div>
-	
+	<span id="imglayout" style=" display: none; font-size: 10px; width: 50px; height: 13px; background-color: black; border: 1 solid gray; color: white; text-align: center; "></span>
 	<script type="text/javascript">
 
     $(document).ready(function(){
@@ -509,6 +514,24 @@ border-radius: 2px;
     	location.replace('#?kate='+kate);
     });
     */
+    $('.logIO>a>img').mouseenter(function(e){
+    	var xlayout = e.clientX-70;
+    	var ylayout = e.clientY+10;
+    	var attrval = $(this).attr("alt");
+    	$('#imglayout').text(attrval);
+    	setTimeout(function() {
+    		$('#imglayout').css({
+        		"top":ylayout,
+        		"left":xlayout,
+        		"position":"absolute",
+        		"z-index":"106"
+        	}).show();
+	    }, 200);
+    });
+    $('.logIO>a>img').mouseleave(function() {
+    	$('#imglayout').css("display","none");
+	})
+    
 		</script>
 
 </body>

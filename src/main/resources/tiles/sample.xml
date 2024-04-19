@@ -145,15 +145,7 @@
    <definition name="mapview" extends="baseLayout3">
       <put-attribute name="title" value="map"/>
       <put-attribute name="body" value="/WEB-INF/views/pricechart/mapview.jsp"/>
-   </definition>
-   <definition name="map_add" extends="baseLayout3">
-      <put-attribute name="title" value="mapadd"/>
-      <put-attribute name="body" value="/WEB-INF/views/pricechart/map_add_delete.jsp"/>
-   </definition>   
-   <definition name="map_delete" extends="baseLayout3">
-      <put-attribute name="title" value="mapdele"/>
-      <put-attribute name="body" value="/WEB-INF/views/pricechart/map_add_delete.jsp"/>
-   </definition>   
+   </definition> 
    <definition name="map_reset" extends="baseLayout3">
       <put-attribute name="title" value="mapreset"/>
       <put-attribute name="body" value="/WEB-INF/views/pricechart/map_add_delete.jsp"/>

@@ -11,16 +11,33 @@
 
 
 <style type="text/css">
-.back>div{
 
-}
 #chart-search{
 width: 90%;
-margin-left:0 auto;
+margin:0 auto;
 }
-#chart-search-input{
-width: 90%;
-
+#chart-search>form{
+width: 100%;
+margin: 0 auto;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+form>input[type="text"] {
+	width: 350px;
+	height: 50px;
+	border-color: green;
+	border-radius: 10px 0 0 10px;
+	text-align: center;
+}
+form>input[type="submit"] {
+	background-color:white;
+	border-color: green;
+	border-left:none;
+	height: 50px;
+	width:40px;
+	border-radius: 0 10px 10px 0;
+	
 }
 
 /* 상품 리스트 */
@@ -56,7 +73,7 @@ border-radius: 15px;
 .pr-search-top>a{
  margin: auto;
 }
-  .pr-search-list-div > span{
+  .pr-search-list-div>span{
     width:216px;
     height:216px;
     
@@ -65,13 +82,34 @@ border-radius: 15px;
   	border-radius: 10%;
   	border: none;
 }
+#pr_list{
+margin: 25px ;
+padding: 25px 15px 15px 15px;
+background-color: white;
+height: 350px;
 
+}
+#pr_list>li{
+font-size: x-large;
+}
+#pr_list li::before {
+	content: '●';
+	color: gray;
+	margin-right: 5px;
+}
+#pr_list li::after {
+    content: "";
+    display: block;
+    height: 1px;
+    border-bottom: 3px dotted gray;
+    margin: 0 auto;
+}
 
 </style>
 
 </head>
 <body>
-<div style="margin: 0 auto; width: 80%;" class="back" >
+<div style="margin: 0 auto; width: 80%; position: relative; top: 50px;" class="back" >
 
 <div><!-- 검색 --><!-- 검색은 카테고리,제품명 기준으로-->
 <div id="chart-search" >
@@ -81,13 +119,17 @@ border-radius: 15px;
 </div>
 </div>
 
-<div><!-- 차트 -->
 <h1>${findname} 검색 결과</h1>
 <input type="hidden" id="find" value="${findname}" >
 <hr>
+<div style="display: flex; flex-wrap: wrap; padding: 20px; " >
+<canvas id="myChart" width="900" height="400"></canvas>
+<div style=" margin-left:20px; width:350px; height:400px; background-color: green ;" >
+<ul id="pr_list" >
+	
 
-<canvas id="myChart" width="500" height="200"></canvas>
-
+</ul>
+</div>
 </div>
 
 <div><!-- 최근 등록된 상품 -->
@@ -145,9 +187,10 @@ $(function () {
 	var priceSet=[]; //차트 데이터
 	var dateSet=[];
 	var findname = $('#find').val();
+	var listsave = document.getElementById('pr_list');
 	console.log(findname);
         $.ajax({
-            url: 'ajaxtest', // 서버의 엔드포인트 URL
+            url: 'chartDataSet', // 서버의 엔드포인트 URL
             type: 'POST', // HTTP 메소드
             data: { 'findname': findname }, // 보낼 데이터, 여기서는 예시로 'iddd'라는 키에 데이터를 넣습니다.	
             success: function(tt){ // 요청 성공 시 실행될 콜백 함수
@@ -158,6 +201,7 @@ $(function () {
                 	console.log(ttt);
                 	dateSet.push(i+'월');
                 	priceSet.push(ttt[i]);
+                	listsave.insertAdjacentHTML('afterbegin','<li>'+i+'월 '+ttt[i]+'원</li>');
                 }
             	console.log(priceSet);
             	console.log(dateSet);	

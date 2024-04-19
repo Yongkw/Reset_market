@@ -18,6 +18,19 @@
 	update product set view_cnt=view_cnt+1 where title = #{param1}
 </update>
 
+<select id="jjimcount" resultType="Integer" >
+SELECT count(*) FROM PRODUCT_JJIM where PRODUCT_NO in #{param1}
+</select>
+<select id="jjimcheck" resultType="Integer" >
+SELECT count(*) FROM PRODUCT_JJIM where USER_ID in #{param2} and PRODUCT_NO in #{param1} and SELLER_ID in #{param3}
+</select>
 
+ <insert id="jjimupdate_insert">
+    insert into product_jjim (product_no, user_id, seller_id) values (#{param1},#{param2},#{param3})
+</insert>
+	
+<delete id="jjimupdate_delet">
+delete from PRODUCT_JJIM where USER_ID in #{param2} and PRODUCT_NO in #{param1} and SELLER_ID in #{param3}
+</delete>
 
 </mapper>

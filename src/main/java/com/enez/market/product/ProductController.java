@@ -2,10 +2,12 @@ package com.enez.market.product;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -24,7 +27,8 @@ public class ProductController {
 	
 		@Autowired
 		SqlSession sqlSession;
-		String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
+		//String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
+		String path = "C:\\Users\\Administrator\\Desktop\\project_resetmarket\\src\\main\\webapp\\image";
 		
 		@RequestMapping(value = "/productinput")
 		public String product1() {
@@ -91,9 +95,11 @@ public class ProductController {
 		         System.out.println(img);
 		         listimg.add(img);
 		      }
-			System.out.println(listimg);
+
+			int jcount = ss.jjimcount(list.get(0).product_no);
 			mo.addAttribute("img",listimg);
 			mo.addAttribute("list",list);
+			mo.addAttribute("jjim",jcount);
 			
 			return "productdetail";
 		}
@@ -105,6 +111,31 @@ public class ProductController {
 		@RequestMapping(value = "/mypage")
 		public String product5() {
 			return "mypage";
+		}
+		@ResponseBody
+		@RequestMapping(value = "jjimcount")
+		public void product_jjim(HttpServletRequest request, HttpServletResponse response) throws IOException {
+			// 찜버튼 누를시 찜 테이블 유저 체크 select, 있다면 삭제 없다면 생성 delete, insert   
+			Service service = sqlSession.getMapper(Service.class);
+			int pr_no= Integer.parseInt(request.getParameter("pr_no"));
+			String thisid=request.getParameter("thisid");
+			String seller_id=request.getParameter("seller_id");
+			
+			System.out.println("pr_no: "+pr_no+" thisid :"+thisid+" seller_id : "+seller_id);
+			if(request.getParameter("thisid").equals("null")) { //만약 비회원 이라면 실행 안되게 
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND); // 성공 상태 코드를 설정합니다.
+				response.getWriter().write("로그인 후 이용가능 합니다.");	
+			}
+			int count=service.jjimcheck(pr_no,thisid,seller_id);
+			if(count>0) {
+			service.jjimupdate_delet(pr_no,thisid,seller_id);
+			}else{
+			service.jjimupdate_insert(pr_no,thisid,seller_id);
+			}
+			int jcount = service.jjimcount(pr_no);
+			PrintWriter pw =response.getWriter();
+			pw.print(jcount);
+			
 		}
 		
 }

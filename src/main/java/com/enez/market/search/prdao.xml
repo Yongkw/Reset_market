@@ -113,7 +113,7 @@ SELECT PRODUCT_NO,
 	        CREATE_AT,
 	        UPDATE_AT,
 	        ROW_NUMBER() OVER (ORDER BY VIEW_CNT DESC ) AS num
-	    FROM product where PRODUCT_STATE = '판매중')
+	    FROM product where PRODUCT_STATE !='판매완료' or PRODUCT_STATE is null)
 	WHERE
     num BETWEEN #{param1} AND #{param2}
 </select>
@@ -147,7 +147,7 @@ SELECT PRODUCT_NO,
 	        CREATE_AT,
 	        UPDATE_AT,
 	        ROW_NUMBER() OVER (ORDER BY PRICE DESC ) AS num
-	    FROM product where PRODUCT_STATE = '판매중')
+	    FROM product where PRODUCT_STATE != '판매완료' or PRODUCT_STATE is null)
 	WHERE
     num BETWEEN #{param1} AND #{param2}
 </select>
@@ -181,7 +181,7 @@ SELECT PRODUCT_NO,
 	        CREATE_AT,
 	        UPDATE_AT,
 	        ROW_NUMBER() OVER (ORDER BY UPDATE_AT DESC ) AS num
-	    FROM product where PRODUCT_STATE = '판매중')
+	    FROM product where PRODUCT_STATE != '판매완료' or PRODUCT_STATE is null)
 	WHERE
     num BETWEEN #{param1} AND #{param2}
 </select>

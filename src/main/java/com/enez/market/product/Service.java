@@ -11,4 +11,10 @@ public interface Service {
 
 	void count(String title);
 
+	int jjimcount(int pr_no);
+	int jjimcheck(int pr_no, String thisid, String seller_id);
+	void jjimupdate_insert(int pr_no, String thisid, String seller_id);
+	void jjimupdate_delet(int pr_no, String thisid, String seller_id);
+
+
 }
