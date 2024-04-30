@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.enez.market.member.MemberDTO;
 
 
 @Controller
@@ -79,12 +82,19 @@ public class ProductController {
 		
 		@RequestMapping(value = "/productout")
 		public String product4(HttpServletRequest request,Model mo) {
-			String title = request.getParameter("title");
-			
 			Service ss = sqlSession.getMapper(Service.class);
-			count(title);
-			ArrayList<ProductDTO>list= ss.productout(title);
-		
+			String title = request.getParameter("title");
+			String product_no = request.getParameter("product_no"); 
+			ArrayList<ProductDTO>list = new ArrayList<ProductDTO>(); 
+			
+			if(product_no!=null) {
+			 list= ss.productoutByPr_number(product_no);
+			ss.count(product_no);
+			}else {
+				list= ss.productout(title);
+				count(title);
+			}
+			
 			  String aa = list.get(0).product_image+",";
 		      ArrayList<String> listimg = new ArrayList<String>();
 		      while(true) {
@@ -97,9 +107,9 @@ public class ProductController {
 		      }
 
 			int jcount = ss.jjimcount(list.get(0).product_no);
-			mo.addAttribute("img",listimg);
-			mo.addAttribute("list",list);
 			mo.addAttribute("jjim",jcount);
+			mo.addAttribute("img",listimg);
+			mo.addAttribute("list",list); 
 			
 			return "productdetail";
 		}
@@ -109,20 +119,49 @@ public class ProductController {
 			ss.count(title);
 		}
 		@RequestMapping(value = "/mypage")
-		public String product5() {
+		public String product5(Model mo,HttpSession session) {
+			Service ss = sqlSession.getMapper(Service.class);
+			String user = (String)session.getAttribute("member_id");
+			if(user.equals("")||user.equals(null)||user.isEmpty()||ss.idcheck(user)==0) {return "redirect:main";}
+			List<String> likejjim = ss.likejjim(user); // 내가 찜한 사람들의 상품넘버 리스트
+			List<String> getjjim = ss.getjjim(user); // 날 찜한 사람들의 상품넘버 리스트
+			List<String> newgetList = getjjim.stream().distinct().collect(Collectors.toList());// 중복제거
+					
+			UserProfileDTO userdata= ss.getCreateDate(user); // 안에 있는 값 stdata, profile_image, nickname,category_check1
+			ArrayList<JjimPoriductDTO> JjimPoriduct  =new ArrayList<JjimPoriductDTO>();//내가 찜한 사람들의 상품 데이터
+			ArrayList<FollowProfileDTO> FollowProfile  =new ArrayList<FollowProfileDTO>(); //날 찜한 사람들의 프로필 데이터
+			
+			JjimPoriduct = ss.getlikejjimProduct(likejjim); 
+			FollowProfile = ss.getFollowProfile(newgetList);
+
+			// 추가로 넘겨야 할거 - 자기소계?,상점방문수 + 상품 데이터
+			mo.addAttribute("jjimPoriduct",JjimPoriduct);
+			mo.addAttribute("followProfile", FollowProfile);
+			mo.addAttribute("userdata",userdata);
 			return "mypage";
+		}
+ 
+		@RequestMapping(value = "jjimcancle")
+		public String jjimcancle(HttpServletRequest request,HttpSession session) {
+			String pr_no = request.getParameter("pr_no");
+			String user = (String)session.getAttribute("member_id");
+			Service service = sqlSession.getMapper(Service.class);
+			service.deljjim(pr_no,user);
+			
+			return "redirect:mypage";
 		}
 		@ResponseBody
 		@RequestMapping(value = "jjimcount")
 		public void product_jjim(HttpServletRequest request, HttpServletResponse response) throws IOException {
+			// 찜관련 미구현 : 자기 자신을 찜할 때에 막음
 			// 찜버튼 누를시 찜 테이블 유저 체크 select, 있다면 삭제 없다면 생성 delete, insert   
 			Service service = sqlSession.getMapper(Service.class);
 			int pr_no= Integer.parseInt(request.getParameter("pr_no"));
 			String thisid=request.getParameter("thisid");
 			String seller_id=request.getParameter("seller_id");
+			PrintWriter pw =response.getWriter();
 			
-			System.out.println("pr_no: "+pr_no+" thisid :"+thisid+" seller_id : "+seller_id);
-			if(request.getParameter("thisid").equals("null")) { //만약 비회원 이라면 실행 안되게 
+			if(thisid.equals("null")||thisid==null) { //만약 비회원 이라면 실행 안되게 
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND); // 성공 상태 코드를 설정합니다.
 				response.getWriter().write("로그인 후 이용가능 합니다.");	
 			}
@@ -133,7 +172,6 @@ public class ProductController {
 			service.jjimupdate_insert(pr_no,thisid,seller_id);
 			}
 			int jcount = service.jjimcount(pr_no);
-			PrintWriter pw =response.getWriter();
 			pw.print(jcount);
 			
 		}

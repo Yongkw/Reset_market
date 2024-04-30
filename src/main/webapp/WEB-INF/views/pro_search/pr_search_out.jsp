@@ -72,7 +72,7 @@ align-items: center;
 <div id="pr-search-top" ><span style="height: 80px; " ></span></div>
 <div class="pr-main-div">
 <c:forEach var="i" items="${list}">
-
+<a href="productout?product_no=${i.product_no}">
 <div class="pr-search-list" >
 	<div class="pr-search-list-div" >
 	<span><img alt="상품 이미지" src="./image/${i.product_image}" width="200px" height="200px" ></span>
@@ -84,6 +84,7 @@ align-items: center;
 	</table>	
 	</div>
 </div>
+</a>
 </c:forEach>
 </div>
 

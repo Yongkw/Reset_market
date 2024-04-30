@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
@@ -127,13 +127,13 @@ $(document).ready(function() {
 								<!-- 사진 시작 -->
 								<div class="fQjOoD">
 									<img class="caoIJY"
-										src="https://media.bunjang.co.kr/images/crop/102740946_w200.jpg"
+										src="./image/${userdata.profile_image}"
 										width="100" height="100">
-									<div class="irlAx">판매자닉네임</div>
-									<div class="kSnfgg">평점 : 8.9</div>
+									<div class="irlAx">${userdata.nickname}</div>
+									<div class="kSnfgg">평점 : ${userdata.manner}</div>
 									<div class="dctxBz">
-										<a class="hPnzDB"> 상품 <b>9</b>
-										</a> <a class="hPnzDB2"> 찜 <b>2</b>
+										<a class="hPnzDB"> 상품 <b>${userdata.prductsu}</b>
+										</a> <a class="hPnzDB2"> 찜 <b>${userdata.jjimget}</b>
 										</a>
 									</div>
 								</div>
@@ -144,7 +144,7 @@ $(document).ready(function() {
 					<div class="gJxoqg">
 						<!-- 닉네임 -->
 						<div class="ehnbKT">
-							<div class="qCGRm">판매자닉네임</div>
+							<div class="qCGRm">${userdata.nickname}</div>
 							<div class="bhcrYn">본인인증</div>
 						</div>
 						<!-- 방문횟수 및 찜횟수 등등 -->
@@ -167,14 +167,14 @@ $(document).ready(function() {
 								<img
 									src="https://m.bunjang.co.kr/pc-static/resource/ef9d606d24890f02bde0.png"
 									width="14" height="13"> 상품판매
-								<div class="htiuQW">23 회</div>
+								<div class="htiuQW">${userdata.prductsu} 회</div>
 							</div>
 
 							<div class="iMvNBf">
 								<img
 									src="https://m.bunjang.co.kr/pc-static/resource/b6ca1c340805703d7c62.png"
 									width="14" height="13"> 찜 횟수
-								<div class="htiuQW">10 회</div>
+								<div class="htiuQW">${userdata.jjimget} 회</div>
 							</div>
 						</div>
 						<!-- 상점 자기소개..  -->
@@ -208,11 +208,11 @@ $(document).ready(function() {
 							</a>
 							<a class="gmerZt test3" href="#">
 								찜한상품
-								<span class="gyLEXJ">11</span>
+								<span class="gyLEXJ">${jjimPoriduct.size()}</span>
 							</a>
 							<a class="gmerZt test4" href="#">
 								날찜한사람
-								<span class="gyLEXJ">4</span>
+								<span class="gyLEXJ">${followProfile.size()}</span>
 							</a>
 						</div>
 					</div>
@@ -619,18 +619,19 @@ $(document).ready(function() {
 								<div class="gvsXqb">
 									<div>
 									찜한 상품
-									<span class="cRYyVr">3</span>
+									<span class="cRYyVr">${jjimPoriduct.size()}</span>
 									</div>
 								</div>
 								<!-- 찜한상품리스트 -->
-								
-									<div class="fFuMaZ">
+								<!-- 찜 컨텐츠 04-26 작업 -->
+								<c:forEach var="i" items="${jjimPoriduct}" >
+									<div class="fFuMaZ" style="position: relative;" >
 										<div class="gaevmH">
 											<a class="dILrpO">
-												<img  src="https://media.bunjang.co.kr/images/crop/96213212_w120.jpg" width="60" height="60">
+												<img  src="./image/${i.profileimage}" width="60" height="60">
 											</a>
-											<a class="gWpzaU">
-												스트릿뱅크
+											<a  class="gWpzaU">
+												${i.nickname}
 											</a>
 											<div class="bYJeVd">
 												<a class="fLGMQx">
@@ -644,119 +645,29 @@ $(document).ready(function() {
 											</div>
 											
 											<div>
-												<button class="hpOnCv">
+												<button class="hpOnCv" type="button" onclick="location.href='jjimcancle?pr_no=${i.productno}'">
 												<img  src="https://m.bunjang.co.kr/pc-static/resource/226de467653c15366c94.png" width="20" height="14">
-												찜하기</button>
+												찜취소 하기</button>
 											</div>
 										</div>
 										<!-- 찜한상품 목록 리스트 -->
 										
 										
 											<div class="hXgWIg">
-												<a class="hjAHtY">
-													<img src="https://media.bunjang.co.kr/product/260353655_1_1713254305_w380.jpg" width="190" height="190">
+												<a class="hjAHtY" href="productout?product_no=${i.productno}" >
+													<img src="./image/${i.pr_image}" width="190" height="190">
 												</a>
 												
-												<a class="hjAHtY">
-													<img src="https://media.bunjang.co.kr/product/260353122_1_1713254033_w380.jpg" width="190" height="190">
+												<a class="hjAHtY" href="productout?product_no=${i.productno}" >
+													<img src="./image/${i.pr_image}" width="190" height="190">
 												</a>
 												
-												<a class="hjAHtY">
-													<img src="https://media.bunjang.co.kr/product/260346659_1_1713250787_w380.jpg" width="190" height="190">
+												<a class="hjAHtY" href="productout?product_no=${i.productno}" >
+													<img src="./image/${i.pr_image}" width="190" height="190">
 												</a>
 											</div>
-										
 									</div>
-									
-									<div class="fFuMaZ">
-										<div class="gaevmH">
-											<a class="dILrpO">
-												<img  src="https://media.bunjang.co.kr/images/crop/96213212_w120.jpg" width="60" height="60">
-											</a>
-											<a class="gWpzaU">
-												스트릿뱅크
-											</a>
-											<div class="bYJeVd">
-												<a class="fLGMQx">
-													상품
-													<b>23</b>
-												</a>
-												<a class="bHuFGf">
-													날찜한
-													<b>11</b>
-												</a>
-											</div>
-											
-											<div>
-												<button class="hpOnCv">
-												<img  src="https://m.bunjang.co.kr/pc-static/resource/226de467653c15366c94.png" width="20" height="14">
-												찜하기</button>
-											</div>
-										</div>
-										<!-- 찜한상품 목록 리스트 -->
-										
-										
-											<div class="hXgWIg">
-												<a class="hjAHtY">
-													<img src="https://media.bunjang.co.kr/product/260353655_1_1713254305_w380.jpg" width="190" height="190">
-												</a>
-												
-												<a class="hjAHtY">
-													<img src="https://media.bunjang.co.kr/product/260353122_1_1713254033_w380.jpg" width="190" height="190">
-												</a>
-												
-												<a class="hjAHtY">
-													<img src="https://media.bunjang.co.kr/product/260346659_1_1713250787_w380.jpg" width="190" height="190">
-												</a>
-											</div>
-										
-									</div>
-									
-									<div class="fFuMaZ">
-										<div class="gaevmH">
-											<a class="dILrpO">
-												<img  src="https://media.bunjang.co.kr/images/crop/96213212_w120.jpg" width="60" height="60">
-											</a>
-											<a class="gWpzaU">
-												스트릿뱅크
-											</a>
-											<div class="bYJeVd">
-												<a class="fLGMQx">
-													상품
-													<b>23</b>
-												</a>
-												<a class="bHuFGf">
-													날찜한
-													<b>11</b>
-												</a>
-											</div>
-											
-											<div>
-												<button class="hpOnCv">
-												<img  src="https://m.bunjang.co.kr/pc-static/resource/226de467653c15366c94.png" width="20" height="14">
-												찜하기</button>
-											</div>
-										</div>
-										<!-- 찜한상품 목록 리스트 -->
-										
-										
-											<div class="hXgWIg">
-												<a class="hjAHtY">
-													<img src="https://media.bunjang.co.kr/product/260353655_1_1713254305_w380.jpg" width="190" height="190">
-												</a>
-												
-												<a class="hjAHtY">
-													<img src="https://media.bunjang.co.kr/product/260353122_1_1713254033_w380.jpg" width="190" height="190">
-												</a>
-												
-												<a class="hjAHtY">
-													<img src="https://media.bunjang.co.kr/product/260346659_1_1713250787_w380.jpg" width="190" height="190">
-												</a>
-											</div>
-										
-									</div>
-									
-								
+									</c:forEach>
 								<!-- 찜한상품리스트 끝 -->
 								
 							</div>
@@ -768,34 +679,35 @@ $(document).ready(function() {
 								<div class="gvsXqb">
 									<div>
 										찜한사람
-										<span class="cRYyVr">5</span>
+										<span class="cRYyVr">${followProfile.size()}</span>
 									</div>
-								</div>
+								</div> 
 								<!-- 찜한사람 프로필 시작 -->
 								<div>
 									<div class="ejqxUK">
+									<c:forEach var="i" items="${followProfile}" >
 										<div class="huYmor">
 											<div class="gWQYTj">
 												<a class="ihXWvD">
-													<img src="https://media.bunjang.co.kr/images/crop/833760235_w240.jpg" width="120" height="120">
+													<img src="./image/${i.image}" width="120" height="120">
 												</a>
 												<a class="jxwzvM">
-													프로필닉네임
+													${i.nickname}
 												</a>
 												<a class="kIShQU">
 													<div class="dQLwrX">
-														평점 : 7.6
+														평점 : ${i.manner}
 													</div>
 												</a>
 												
 												<div class="bbHFKb">
 													<a class="jipGBV">
 														상품
-														<b>12</b>
+														<b>${i.productcount}</b>
 													</a>
 													<a class="dKLOxd">
 														찜
-														<b>2</b>
+														<b>${i.jjimcountget}</b>
 													</a>
 												</div>
 												
@@ -808,127 +720,11 @@ $(document).ready(function() {
 													</div>
 												</div>
 											</div>
-											
-											
 									</div>
-									
-									<div class="huYmor">
-											<div class="gWQYTj">
-												<a class="ihXWvD">
-													<img src="https://media.bunjang.co.kr/images/crop/833760235_w240.jpg" width="120" height="120">
-												</a>
-												<a class="jxwzvM">
-													프로필닉네임
-												</a>
-												<a class="kIShQU">
-													<div class="dQLwrX">
-														평점 : 7.6
-													</div>
-												</a>
-												
-												<div class="bbHFKb">
-													<a class="jipGBV">
-														상품
-														<b>12</b>
-													</a>
-													<a class="dKLOxd">
-														찜
-														<b>2</b>
-													</a>
-												</div>
-												
-												<div>
-													<div class="hpOnCv">
-														<button class="hpOnCv">
-															<img src="https://m.bunjang.co.kr/pc-static/resource/226de467653c15366c94.png" width="20" height="14">
-															찜하기
-														</button>
-													</div>
-												</div>
-											</div>
-											
-											
-									</div>
-									
-									<div class="huYmor">
-											<div class="gWQYTj">
-												<a class="ihXWvD">
-													<img src="https://media.bunjang.co.kr/images/crop/833760235_w240.jpg" width="120" height="120">
-												</a>
-												<a class="jxwzvM">
-													프로필닉네임
-												</a>
-												<a class="kIShQU">
-													<div class="dQLwrX">
-														평점 : 7.6
-													</div>
-												</a>
-												
-												<div class="bbHFKb">
-													<a class="jipGBV">
-														상품
-														<b>12</b>
-													</a>
-													<a class="dKLOxd">
-														찜
-														<b>2</b>
-													</a>
-												</div>
-												
-												<div>
-													<div class="hpOnCv">
-														<button class="hpOnCv">
-															<img src="https://m.bunjang.co.kr/pc-static/resource/226de467653c15366c94.png" width="20" height="14">
-															찜하기
-														</button>
-													</div>
-												</div>
-											</div>
-											
-											
-									</div>
-									
-									<div class="huYmor">
-											<div class="gWQYTj">
-												<a class="ihXWvD">
-													<img src="https://media.bunjang.co.kr/images/crop/833760235_w240.jpg" width="120" height="120">
-												</a>
-												<a class="jxwzvM">
-													프로필닉네임
-												</a>
-												<a class="kIShQU">
-													<div class="dQLwrX">
-														평점 : 7.6
-													</div>
-												</a>
-												
-												<div class="bbHFKb">
-													<a class="jipGBV">
-														상품
-														<b>12</b>
-													</a>
-													<a class="dKLOxd">
-														찜
-														<b>2</b>
-													</a>
-												</div>
-												
-												<div>
-													<div class="hpOnCv">
-														<button class="hpOnCv">
-															<img src="https://m.bunjang.co.kr/pc-static/resource/226de467653c15366c94.png" width="20" height="14">
-															찜하기
-														</button>
-													</div>
-												</div>
-											</div>
-											
-											
-									</div>
-									
-									
+									</c:forEach>
 									</div>
 									</div>
+									<!-- 찜 컨텐츠 04-26 작업 end -->
 									</div>
 									</div>
 									</div>

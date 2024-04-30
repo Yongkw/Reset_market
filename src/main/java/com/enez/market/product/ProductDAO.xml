@@ -33,4 +33,79 @@ SELECT count(*) FROM PRODUCT_JJIM where USER_ID in #{param2} and PRODUCT_NO in #
 delete from PRODUCT_JJIM where USER_ID in #{param2} and PRODUCT_NO in #{param1} and SELLER_ID in #{param3}
 </delete>
 
+
+<!-- 마이페이지 기능 추가 -->
+
+<select id="likejjim" resultType="String" >
+SELECT PRODUCT_NO FROM PRODUCT_JJIM where USER_ID in #{param1}
+</select>
+<select id="getjjim" resultType="String" >
+SELECT USER_ID FROM PRODUCT_JJIM where SELLER_ID in #{param1}
+</select>
+<select id="idcheck" resultType="Integer">
+	select count(*) from RESET_USER where MEMBER_ID = #{param1}
+</select>
+
+<select id="getCreateDate" resultType="com.enez.market.product.UserProfileDTO" >
+SELECT 
+	STDATE, PROFILE_IMAGE, NICKNAME,
+	CASE WHEN manner is null THEN 5 ELSE manner end as manner,
+	(select count(product_no) from product where seller_id in #{param1}) as prductsu ,
+	(select count(product_no) from PRODUCT_JJIM where SELLER_ID in #{param1}) as jjimget ,
+	(select count(product_no) from PRODUCT_JJIM where USER_ID in #{param1}) as jjimdo 
+	FROM RESET_USER where MEMBER_ID in #{param1}
+
+</select>
+<select id="getlikejjimProduct" parameterType="java.util.List" resultType="com.enez.market.product.JjimPoriductDTO">
+SELECT 
+	b.profile_image as profileimage,
+	b.NICKNAME as nickname,
+	CASE WHEN b.manner is null THEN 5 ELSE b.manner end as manner,
+	a.PRODUCT_NO as productno,
+	a.PRODUCT_IMAGE as pr_image,
+	a.SELLER_ID as id
+ FROM PRODUCT a join RESET_USER b on a.SELLER_ID =b.MEMBER_ID 
+	<choose>
+		<when test="list.size != 0">
+			WHERE a.product_no in
+			<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+            	#{item}
+            </foreach>
+		</when>
+		<otherwise>
+			WHERE a.product_no in 99999
+		</otherwise>
+	</choose>
+</select>
+
+<select id="getFollowProfile" parameterType="java.util.List" resultType="com.enez.market.product.FollowProfileDTO">
+SELECT  
+	profile_image as image,
+	NICKNAME as nickname,
+	CASE WHEN manner is null THEN 5 ELSE manner end as manner,
+	(select count(product_no)from product where seller_id in member_id) as productcount,
+	MEMBER_ID as id,
+	(select count(product_no)from PRODUCT_JJIM where SELLER_ID in member_id) as jjimcountget,
+	(select count(product_no)from PRODUCT_JJIM where USER_ID in member_id) as jjimcountdo
+ FROM 
+ RESET_USER
+	<choose>
+		<when test="list.size != 0">
+ 	WHERE member_id in
+			<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+            	#{item}
+            </foreach>
+		</when>
+		<otherwise>
+			WHERE member_id in '_'
+		</otherwise>
+	</choose>
+</select>
+<!-- 프로덕트 디테일 product_no -->
+<select id="productoutByPr_number" resultType="com.enez.market.product.ProductDTO">
+	select * from product where PRODUCT_NO = #{param1}		
+</select>
+<delete id="deljjim">
+delete from PRODUCT_JJIM where USER_ID in #{param2} and PRODUCT_NO in #{param1}
+</delete>
 </mapper>

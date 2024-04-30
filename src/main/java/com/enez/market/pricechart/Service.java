@@ -17,5 +17,7 @@ public interface Service {
 
 	Product_search_DTO mapProductList(String findstr);
 
+	ArrayList<addMap_DTO2> mapdata();
+
 	
 }

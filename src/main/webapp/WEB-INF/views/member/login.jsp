@@ -3,8 +3,6 @@
 <!DOCTYPE html>
 <html>
 <!-- Bootstrap CSS -->
-<link rel='stylesheet'
-	href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
 <!-- Font Awesome CSS -->
 <link rel='stylesheet'
 	href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'>

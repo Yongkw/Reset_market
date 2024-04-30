@@ -1,6 +1,9 @@
 package com.enez.market.product;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import com.enez.market.member.MemberDTO;
 
 public interface Service {
 
@@ -17,4 +20,22 @@ public interface Service {
 	void jjimupdate_delet(int pr_no, String thisid, String seller_id);
 
 
+
+	//마이페이지 기능추가 04-26
+	int idcheck(String user);
+
+	List<String> likejjim(String user);
+	List<String> getjjim(String user);
+
+	UserProfileDTO getCreateDate(String user);
+	ArrayList<JjimPoriductDTO> getlikejjimProduct(List<String> list);
+	ArrayList<FollowProfileDTO> getFollowProfile(List<String> list);
+
+	ArrayList<ProductDTO> productoutByPr_number(String product_no);
+	void countByPr_no(String product_no);
+
+	void deljjim(String pr_no, String user);
+
+	
+	
 }

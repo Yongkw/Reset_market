@@ -223,7 +223,8 @@ font-size: x-large;
 <div id="map_productlist" style="width:70%;margin: 0 auto; padding-top: 30px;">
 </div>
 <script>
-
+var markercodeset = [];
+console.log(markercodeset);
 var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
     center : new kakao.maps.LatLng(37.2635846787744, 127.028715898311), // 지도의 중심좌표 
     level : $('#maplevel').val() // 지도의 확대 레벨 
@@ -298,19 +299,40 @@ kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
 	productsearch(mouseEvent.latLng);
 	
 });	
-$.get("./resources/mapaddress.json", function(data) { //json 데이터 파이을 불러와 내부 데이터, 좌표를 뽑아 냄 -> 이걸 db로 대채해야함
-	
-	for (var i = 0; i < data.positions.length; i ++) {
-		var lat = data.positions[i].lat;//좌표2
-		var lng = data.positions[i].lng;//좌표1
-		var marker = new kakao.maps.Marker({
-        	position : new kakao.maps.LatLng(lat, lng),
-        	clickable:true
-        });
-        kakao.maps.event.addListener(marker, 'click', eventadd(data.positions[i].pr_no));
-    clusterer.addMarker(marker);
+
+$.ajax({
+    url: 'getdata', // 서버의 엔드포인트 URL
+    type: 'POST', // HTTP 메소드
+    dataType : 'json',
+    traditional: true,
+    success: function(jdata){
+
+		for(var i in jdata){
+		addresschange(jdata[i].pr_no,jdata[i].location, function(result) {
+			codetoaddress(result,function(retu){
+				var	setter = new Object();
+				setter.pr_no=retu[0];
+				setter.code=retu[3];
+				markercodeset.push(setter);
+    			var lat = retu[2];//좌표2	
+    			var lng = retu[1];//좌표1
+    			var marker = new kakao.maps.Marker({
+    	        	position : new kakao.maps.LatLng(lat, lng),
+    	        	clickable:true
+    	        });
+    	        kakao.maps.event.addListener(marker, 'click', eventadd(retu[0]));
+    	        
+    	        clusterer.addMarker(marker);
+    		});
+    	});
 	}
+	},
+    error: function(xhr, status, error){ // 요청 실패 시 실행될 콜백 함수
+        console.error(error); // 에러 메시지를 콘솔에 출력
+        console.log('실패'); // 실패 메시지 출력
+    }
 });
+
 function eventadd(pr_no) {
 	return function() {
 		showpr(pr_no);
@@ -357,9 +379,8 @@ function productlist(find_code) {
 	var productdiv = $('#map_productlist');
     const d1 = document.getElementById('map_productlist');
 	var prnolist =[];
-	
-	$.get("./resources/mapaddress.json", function(data) {
-	      $.each(data.positions, function(i, jdata) {//반복문
+	//$.get("./resources/mapaddress.json", function(data) {
+	      $.each(markercodeset, function(i, jdata) {//반복문
 	    	  if(find_code.substr(0,2)==jdata.code.substr(0,2)){
 		    	  prnolist.push(jdata.pr_no);
 	    	  }
@@ -397,7 +418,6 @@ function productlist(find_code) {
 	    	    }
 	    	});
 
-	  });
 	 }
 function showpr(pr_no) {
 	var productdiv2 = $('#product_show');
@@ -435,6 +455,32 @@ function showpr(pr_no) {
 	});
 	
 }
+
+function codetoaddress(result2,callback){// 좌표 -> 지역코드
+	var callback2 = function(result, status) {
+	    if (status === kakao.maps.services.Status.OK) {
+	        var retu = [result2[0],result2[1],result2[2],result[0].code];
+	        callback(retu);
+	    }
+	};
+	geocoder.coord2RegionCode(result2[1], result2[2], callback2);
+}
+
+function addresschange(no,addr, callback) { // 주소 -> 좌표
+	
+geocoder.addressSearch(addr, function(res, stat) {//res에 x값 y값이 들어 있으면 stat은 addr값이 올바른지 확인 ,addr은 주소명
+   if (stat === kakao.maps.services.Status.OK) {
+        var address = res[0].road_address || res[0].address;
+		var result = [no,res[0].x, res[0].y];
+		callback(result);
+		
+   }
+   else {
+	   callback( [no,"주소찾기실패", "주소찾기실패"]);
+	}
+});
+}
+
 
 // 추가 해야 할것 마커 클릭이벤트 - 주소 혹은 클릭시 그지역 거래품 리스트로 나오기
 </script>

@@ -44,4 +44,8 @@ insert into PRODUCTADDRESS ( PR_NO, ADDRESSX, ADDRESSY, CODE) values(#{param1},#
 select PRODUCT_NO, CATEGORY_NAME, BUYER_ID, PRICE, TITLE,PRODUCT_STATE, LOCATION, PRODUCT_IMAGE, VIEW_CNT
 from PRODUCT where PRODUCT_NO = #{param1} and (PRODUCT_STATE !='판매완료' or PRODUCT_STATE is null)
 </select>
+
+<select id="mapdata" resultType="com.enez.market.pricechart.addMap_DTO2" >
+select * from PRODUCTADDRESS
+</select>
 </mapper>

@@ -18,6 +18,7 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.Session;
 
 import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONArray;
@@ -41,29 +42,32 @@ public class ChartController {
 	SqlSession sqlSession;
 
 	@RequestMapping(value = "pricechart_view")
-	public String pricechart1(Locale locale, Model model) {
-		
-		
+	public String pricechart1() {
 		return "pricechart_view";
 	}
 	
 	@RequestMapping(value = "mapview")
-	public String mapview(Locale locale, Model model) {
-		Service service= sqlSession.getMapper(Service.class);
-		
-		ArrayList<Product_search_DTO> list = new ArrayList<Product_search_DTO>();
-		
-		
-		Map<String,ArrayList<Map<String, String>>> ttt = new HashMap<String,ArrayList<Map<String, String>>>();
-		ArrayList<Map<String, String>> list2 = new ArrayList<Map<String, String>>();
-		Map<String, String> aa= new HashMap<String, String>();
-		
-		
-		list2.add(aa);
-		ttt.put("positions", list2);
-		
-		 model.addAttribute("list", ttt);
+	public String mapview() {
 		return "mapview";
+	}
+	@SuppressWarnings("unchecked")
+	@ResponseBody
+	@RequestMapping(value = "getdata")
+	public void getmapdata(HttpServletResponse response) throws IOException {
+		Service service= sqlSession.getMapper(Service.class);
+		ArrayList<addMap_DTO> list = service.getAddress();
+		JSONArray listdata = new JSONArray();
+		for(addMap_DTO m :list) {
+			JSONObject mapDT = new JSONObject();
+			mapDT.put("pr_no",m.product_no);
+			mapDT.put("location",m.location);
+			listdata.add(mapDT);
+		}
+
+		
+		String jsondata=listdata.toJSONString();
+		PrintWriter pw =response.getWriter();
+		pw.print(jsondata);	       
 	}
 	
 	@RequestMapping(value = "map_reset")
@@ -110,9 +114,6 @@ public class ChartController {
 		Service service = sqlSession.getMapper(Service.class);
 		String[] pr_nolist = request.getParameterValues("prnolist");
 		JSONArray list = new JSONArray();
-		
-		
-            
 		       if(pr_nolist !=null && pr_nolist.length > 0) {
 		            for(String i :pr_nolist) {
 		            	Product_search_DTO dto = service.mapProductList(i);
