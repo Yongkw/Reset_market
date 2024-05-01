@@ -100,6 +100,12 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/product/mypage.jsp" />
 	</definition>
+	
+	    <definition name="productmanager" extends="baseLayout3">
+        <put-attribute name="title" value="상품관리" />
+        <put-attribute name="body"
+            value="/WEB-INF/views/product/productmanager.jsp" />
+    </definition>
 
 	<!-- 이벤트 페이지 -->
  	

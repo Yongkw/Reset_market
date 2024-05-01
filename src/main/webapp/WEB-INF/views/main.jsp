@@ -15,6 +15,7 @@
 			<!--  -->
 			<a href="main_view">메인 뷰</a>
 			<a href="productinput">상품등록</a>
+			            <a href= "productmanager">상품관리</a>
 			
 			<!--  -->
 			

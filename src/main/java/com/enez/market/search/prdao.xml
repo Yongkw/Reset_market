@@ -85,104 +85,127 @@ SELECT
 </select>
 
 <select id="pr_search3_1" resultType="com.enez.market.search.Product_search_DTO" > 
-SELECT PRODUCT_NO,
-        SELLER_ID,
-        CATEGORY_NAME,
-        BUYER_ID,
-        PRICE,
-        TITLE,
-        DETAIL,
-        LOCATION,
-        PRODUCT_STATE,
-        PRODUCT_IMAGE,
-        VIEW_CNT,
-        CREATE_AT,
-        UPDATE_AT
-	FROM (
-	    SELECT  PRODUCT_NO,
-	        SELLER_ID,
-	        CATEGORY_NAME,
-	        BUYER_ID,
-	        PRICE,
-	        TITLE,
-	        DETAIL,
-	        LOCATION,
-	        PRODUCT_STATE,
-	        PRODUCT_IMAGE,
-	        VIEW_CNT,
-	        CREATE_AT,
-	        UPDATE_AT,
-	        ROW_NUMBER() OVER (ORDER BY VIEW_CNT DESC ) AS num
-	    FROM product where PRODUCT_STATE !='판매완료' or PRODUCT_STATE is null)
-	WHERE
-    num BETWEEN #{param1} AND #{param2}
+SELECT 
+    PRODUCT_NO,
+    SELLER_ID,
+    CATEGORY_NAME,
+    BUYER_ID,
+    PRICE,
+    TITLE,
+    DETAIL,
+    LOCATION,
+    PRODUCT_STATE,
+    i.main_image,
+    VIEW_CNT,
+    CREATE_AT,
+    UPDATE_AT
+FROM (
+    SELECT  
+        pr.PRODUCT_NO,
+        pr.SELLER_ID,
+        pr.CATEGORY_NAME,
+        pr.BUYER_ID,
+        pr.PRICE,
+        pr.TITLE,
+        pr.DETAIL,
+        pr.LOCATION,
+        pr.PRODUCT_STATE,
+        pr.PRODUCT_IMAGE,
+        pr.VIEW_CNT,
+        pr.CREATE_AT,
+        pr.UPDATE_AT,
+        ROW_NUMBER() OVER (ORDER BY pr.VIEW_CNT DESC) AS num
+    FROM 
+        product pr
+    WHERE 
+        pr.PRODUCT_STATE = '판매중'
+) sub
+JOIN 
+    imagedetail i ON sub.PRODUCT_NO = i.image_no
+WHERE     num BETWEEN #{param1} AND #{param2}
 </select>
 
 <select id="pr_search3_2" resultType="com.enez.market.search.Product_search_DTO" > 
-SELECT PRODUCT_NO,
-        SELLER_ID,
-        CATEGORY_NAME,
-        BUYER_ID,
-        PRICE,
-        TITLE,
-        DETAIL,
-        LOCATION,
-        PRODUCT_STATE,
-        PRODUCT_IMAGE,
-        VIEW_CNT,
-        CREATE_AT,
-        UPDATE_AT
-	FROM (
-	    SELECT  PRODUCT_NO,
-	        SELLER_ID,
-	        CATEGORY_NAME,
-	        BUYER_ID,
-	        PRICE,
-	        TITLE,
-	        DETAIL,
-	        LOCATION,
-	        PRODUCT_STATE,
-	        PRODUCT_IMAGE,
-	        VIEW_CNT,
-	        CREATE_AT,
-	        UPDATE_AT,
-	        ROW_NUMBER() OVER (ORDER BY PRICE DESC ) AS num
-	    FROM product where PRODUCT_STATE != '판매완료' or PRODUCT_STATE is null)
-	WHERE
+SELECT 
+    PRODUCT_NO,
+    SELLER_ID,
+    CATEGORY_NAME,
+    BUYER_ID,
+    PRICE,
+    TITLE,
+    DETAIL,
+    LOCATION,
+    PRODUCT_STATE,
+    i.main_image,
+    VIEW_CNT,
+    CREATE_AT,
+    UPDATE_AT
+FROM (
+    SELECT  
+        pr.PRODUCT_NO,
+        pr.SELLER_ID,
+        pr.CATEGORY_NAME,
+        pr.BUYER_ID,
+        pr.PRICE,
+        pr.TITLE,
+        pr.DETAIL,
+        pr.LOCATION,
+        pr.PRODUCT_STATE,
+        pr.PRODUCT_IMAGE,
+        pr.VIEW_CNT,
+        pr.CREATE_AT,
+        pr.UPDATE_AT,
+        ROW_NUMBER() OVER (ORDER BY pr.PRICE DESC) AS num
+    FROM 
+        product pr
+    WHERE 
+        pr.PRODUCT_STATE = '판매중'
+) sub
+JOIN 
+    imagedetail i ON sub.PRODUCT_NO = i.image_no
+WHERE 
     num BETWEEN #{param1} AND #{param2}
 </select>
 
 <select id="pr_search3_3" resultType="com.enez.market.search.Product_search_DTO" > 
-SELECT PRODUCT_NO,
-        SELLER_ID,
-        CATEGORY_NAME,
-        BUYER_ID,
-        PRICE,
-        TITLE,
-        DETAIL,
-        LOCATION,
-        PRODUCT_STATE,
-        PRODUCT_IMAGE,
-        VIEW_CNT,
-        CREATE_AT,
-        UPDATE_AT
-	FROM (
-	    SELECT  PRODUCT_NO,
-	        SELLER_ID,
-	        CATEGORY_NAME,
-	        BUYER_ID,
-	        PRICE,
-	        TITLE,
-	        DETAIL,
-	        LOCATION,
-	        PRODUCT_STATE,
-	        PRODUCT_IMAGE,
-	        VIEW_CNT,
-	        CREATE_AT,
-	        UPDATE_AT,
-	        ROW_NUMBER() OVER (ORDER BY UPDATE_AT DESC ) AS num
-	    FROM product where PRODUCT_STATE != '판매완료' or PRODUCT_STATE is null)
-	WHERE
+SELECT 
+    PRODUCT_NO,
+    SELLER_ID,
+    CATEGORY_NAME,
+    BUYER_ID,
+    PRICE,
+    TITLE,
+    DETAIL,
+    LOCATION,
+    PRODUCT_STATE,
+    i.main_image,
+    VIEW_CNT,
+    CREATE_AT,
+    UPDATE_AT
+FROM (
+    SELECT  
+        pr.PRODUCT_NO,
+        pr.SELLER_ID,
+        pr.CATEGORY_NAME,
+        pr.BUYER_ID,
+        pr.PRICE,
+        pr.TITLE,
+        pr.DETAIL,
+        pr.LOCATION,
+        pr.PRODUCT_STATE,
+        pr.PRODUCT_IMAGE,
+        pr.VIEW_CNT,
+        pr.CREATE_AT,
+        pr.UPDATE_AT,
+        ROW_NUMBER() OVER (ORDER BY pr.UPDATE_AT DESC) AS num
+    FROM 
+        product pr
+    WHERE 
+        pr.PRODUCT_STATE = '판매중'
+) sub
+JOIN 
+    imagedetail i ON sub.PRODUCT_NO = i.image_no
+WHERE 
     num BETWEEN #{param1} AND #{param2}
 </select>
  

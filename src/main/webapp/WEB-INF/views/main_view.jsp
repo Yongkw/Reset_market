@@ -203,6 +203,33 @@ element.style {
         	
         });
       });
+      
+      $(document).ready(function() {
+          $('.updateTime').each(function() {
+              var timestamp = $(this).data('timestamp');
+              $(this).text(formatTime(timestamp));
+          });
+      });
+
+      function formatTime(timestamp) {
+          var now = new Date();
+          var updateTime = new Date(timestamp);
+          var timeDiff = now - updateTime;
+
+          // 시간 간격을 계산하여 표시 형식을 결정합니다.
+          // 이 부분은 원하는 표시 형식으로 변경할 수 있습니다.
+          if (timeDiff < 60000) {
+              return '방금 전';
+          } else if (timeDiff < 3600000) {
+              return Math.floor(timeDiff / 60000) + '분 전';
+          } else if (timeDiff < 86400000) {
+              return Math.floor(timeDiff / 3600000) + '시간 전';
+          } else if (timeDiff < 2592000000) {
+              return Math.floor(timeDiff / 86400000) + '일 전';
+          } else {
+              return Math.floor(timeDiff / 2592000000) + '달 전';
+          }
+      }
     </script>
 
 <meta charset="UTF-8">
@@ -243,7 +270,7 @@ element.style {
 						<div class="gwleiO">${aa.title}</div>
 						<div class="ldPLFl">
 							<div class="moVyh">${aa.price}</div>
-							<div class="eYNXkt"> <span>3일전</span></div>
+					<div class="eYNXkt updateTime" data-timestamp="${aa.update_at}"></div>
 						</div>
 					</div>
 				</a>
@@ -268,7 +295,7 @@ element.style {
 						<div class="gwleiO">${aa.title}</div>
 						<div class="ldPLFl">
 							<div class="moVyh">${aa.price}</div>
-							<div class="eYNXkt"> <span>3일전</span></div>
+							<div class="eYNXkt updateTime" data-timestamp="${aa.update_at}"></div>
 						</div>
 					</div>
 				</a>
@@ -293,7 +320,7 @@ element.style {
 						<div class="gwleiO">${aa.title}</div>
 						<div class="ldPLFl">
 							<div class="moVyh">${aa.price}</div>
-							<div class="eYNXkt"> <span>3일전</span></div>
+							<div class="eYNXkt updateTime" data-timestamp="${aa.update_at}"></div>
 						</div>
 					</div>
 				</a>

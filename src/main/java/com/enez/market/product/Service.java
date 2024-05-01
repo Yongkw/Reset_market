@@ -36,6 +36,8 @@ public interface Service {
 
 	void deljjim(String pr_no, String user);
 
+	void mainimagesave(String main_image);
+
 	
 	
 }

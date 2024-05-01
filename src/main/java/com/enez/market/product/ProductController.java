@@ -31,7 +31,7 @@ public class ProductController {
 		@Autowired
 		SqlSession sqlSession;
 		//String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
-		String path = "C:\\Users\\Administrator\\Desktop\\project_resetmarket\\src\\main\\webapp\\image";
+		String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
 		
 		@RequestMapping(value = "/productinput")
 		public String product1() {
@@ -68,6 +68,7 @@ public class ProductController {
 			 System.out.println("가져온 가격 :" + price);
 			 System.out.println("가져온 설명 :" + detail);
 			ss.productsave(member_id,product_image,title,category_name,location,price,detail);
+            imagedetail(product_image);
 			return "redirect:main";
 			}
 			else
@@ -75,6 +76,15 @@ public class ProductController {
 			return "redirect:login";
 			}
 		}
+        private void imagedetail(String product_image) {
+            String main_image ="";
+            Service ss = sqlSession.getMapper(Service.class);
+            if (product_image != null && !product_image.isEmpty()) {
+                String[] imageArray = product_image.split(",");
+                main_image = imageArray[0]; // 첫 번째 이미지를 대표 이미지로 선택
+            }
+            ss.mainimagesave(main_image);
+        }
 		@RequestMapping(value = "/")
 		public String product3(MultipartHttpServletRequest mul) {
 			return "";
@@ -175,5 +185,10 @@ public class ProductController {
 			pw.print(jcount);
 			
 		}
+		
+        @RequestMapping(value = "/productmanager")
+        public String product6() {
+            return "productmanager";
+        }
 		
 }
