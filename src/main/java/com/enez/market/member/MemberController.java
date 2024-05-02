@@ -26,8 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public class MemberController {
 	@Autowired
 	SqlSession sqlSession;
-	String path = "C:\\Users\\Administrator\\Desktop\\project_resetmarket\\src\\main\\webapp\\image";
-	//String path = "C:\\이젠디지탈12\\spring\\ResetMarket_Member\\src\\main\\webapp\\image";
+	String path = "C:\\이젠디지탈12\\spring\\ResetMarket_Member\\src\\main\\webapp\\image";
 
 	@RequestMapping(value = "/signup")
 	public String member_signup() {
@@ -134,7 +133,7 @@ public class MemberController {
 		HttpSession hs = request.getSession();
 		hs.removeAttribute("dto");
 		hs.removeAttribute("loginstate");
-		hs.removeAttribute("member_id"); 
+		hs.removeAttribute("member_id");
 		hs.setAttribute("loginstate", false);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter piw = response.getWriter();
@@ -351,7 +350,7 @@ public class MemberController {
 		hs = request.getSession();
 		hs.removeAttribute("dto");
 		hs.removeAttribute("loginstate");
-		hs.removeAttribute("member_id"); 
+		hs.removeAttribute("member_id");
 		hs.setAttribute("loginstate", false);
 		hs.invalidate();// 세션을 완전히 종료하는 함수
 		
@@ -384,6 +383,30 @@ public class MemberController {
 		}
 		
 		return "redirect:memberlist";
+	}
+	
+	
+	@RequestMapping(value = "mypage2")
+	public String mypage(HttpServletRequest request,HttpSession hs,Model mo) {
+		String member_id = (String)hs.getAttribute("member_id");
+		System.out.println(member_id);
+		Service ss = sqlSession.getMapper(Service.class);
+	
+		MemberDTO member = ss.select(member_id);
+		mo.addAttribute("member", member);
+
+		return "mypage2";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "introsave")
+	public String intro(HttpServletRequest request,HttpSession hs,Model mo) {
+		String member_id = (String)hs.getAttribute("member_id");
+		String intro = request.getParameter("intro");
+		Service ss = sqlSession.getMapper(Service.class);
+		ss.itrsave(member_id,intro);
+		
+		return "";
 	}
 
 

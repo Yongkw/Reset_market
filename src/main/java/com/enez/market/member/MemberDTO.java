@@ -5,7 +5,7 @@ public class MemberDTO {
 	String member_id, member_pw, member_name, address, phone;
 	int manner;
 	String nickname, category_check1, buyer_id, seller_id, profile_image;
-	String stdate;
+	String stdate , intro;
 
 	public MemberDTO() {
 	}
@@ -113,5 +113,15 @@ public class MemberDTO {
 	public void setStdate(String stdate) {
 		this.stdate = stdate;
 	}
+
+	public String getIntro() {
+		return intro;
+	}
+
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
+
+	
 
 }
