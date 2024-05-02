@@ -18,7 +18,6 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.Session;
 
 import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONArray;

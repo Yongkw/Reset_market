@@ -33,7 +33,7 @@ $(document).ready(function() {
 
 .topnav {
   margin-left: 320px;
-  margin-right: 390px;
+  margin-right: 422px;
   overflow: hidden;
   background-color: white;
   border-bottom: 1px solid #ccc;
@@ -90,7 +90,7 @@ $(document).ready(function() {
 	width: 100%;
 	height: 40px;
 	margin-top: 10px;
-	border-top: 3px solid #000;
+	border-top: 2px solid #000;
 	border-bottom: 1px solid #000;
 }
 #scroll {
@@ -133,6 +133,49 @@ $(document).ready(function() {
   filter: "alpha(opacity=100)";
   -ms-filter: "alpha(opacity=100)";
 }
+
+/*  버튼 스타일 */
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.btn { 
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  outline: none;
+  border: 0.0625rem solid #999;
+  padding: 12px 16px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #ddd;
+}
+
+.btn.active {
+  background-color: #666;
+  color: white;
+}
+
+.button {
+  background-color: #ddd;
+  border: none;
+  color: black;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 5px 5px;
+  cursor: pointer;
+  border-radius: 16px;
+}
+
+.button:hover {
+  background-color: #f1f1f1;
+}
 </style>
 <title>Insert title here</title>
 </head>
@@ -141,13 +184,12 @@ $(document).ready(function() {
 <div class="main">
 
 <div class="topnav">
-  <a class="active" href="#notice_out">공지사항</a>
-  <a href="#news">1:1문의</a>
-  <a href="#contact">사기등록</a>
+  <a class="active" href="notice_out">FAQ</a>
+  <a href="personal_form">1:1문의</a>
+  <a href="swindle_main">사기등록</a>
 </div>
 
-
-<h2>🔎 공지사항</h2>
+<h2>FAQ</h2>
  
 <div class="faqtable_header"> 
 		<p>
@@ -157,16 +199,13 @@ $(document).ready(function() {
 		</p>
 </div>
 
-
 <c:forEach items="${list }" var="aa">
-
 	<button class="accordion">
 		<span style="float: left; margin-left: 5px;">${aa.notice_category }</span>
 		<span style="margin-left: 55px;">${aa.notice_title } </span>
 		<span style="float: right;">${aa.notice_time } </span>
 	</button>
-
-<div class="panel" style="display: none;"> 
+<div class="panel" style="display: none; "> 
   <p style="margin-top: 50px; margin-left:110px; white-space:pre;">${aa.notice_content }</p>
   <img alt="" src="./image/${aa.notice_img }" width="200px" height="200px" style="margin-top: 50px; margin-left:380px;"><br>
   
@@ -179,9 +218,9 @@ $(document).ready(function() {
 </div>
 
 </c:forEach>
-<div class="search-wrap">
+<div class="btn-container">
      <button type="submit" class="btn btn-dark" onclick="location.href='noticeform'" style="float: left; margin-top: 10px;">작성하기</button>
-     <a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none;"> TOP </a>
+     <a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none; float: right;"> TOP </a>
 </div>
 
 </div>

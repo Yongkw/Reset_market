@@ -48,13 +48,14 @@
 
 /* Content */
 .content {
-  background-color: #f6fcf4;
+  background-color: white;
   padding: 10px;
 }
 
-.h5 {
- padding-top: 15px;
+.h4 {
+ padding-top: 30px;
  padding-bottom: 15px;
+ 
 }
 
 /* The "show" class is added to the filtered elements */
@@ -70,12 +71,11 @@
 }
 
 .btn { 
-  margin-top: 10px;
+  margin-top: 20px;
   margin-right: 10px;
-  border: none;
   outline: none;
   padding: 12px 16px;
-  background-color: #f6fcf4;
+  background-color: white;
   cursor: pointer;
 }
 
@@ -111,7 +111,7 @@
 <!-- MAIN (Center website) -->
 <div class="main">
 <div class="main name">
-<h2> 🍀 Event</h2>
+<h2>Event</h2>
 </div>
 
 <div id="myBtnContainer" class="btn-container">
@@ -125,18 +125,18 @@
 	<c:forEach items="${list }" var="aa">
    <div class="column '${aa.event_state }'">
     <div class="content">
-      <img src="./image/${aa.event_img }" width="300px" height="200px">
-      <h5>${aa.event_title }</h5>
+    <a href="eventdetail?event_no=${aa.event_no }">
+      <img src="./image/${aa.event_img }" width="300px" height="300px"> </a>
+      <h4><strong>${aa.event_title }</strong></h4>
       <p>기간 : 
     <fmt:parseDate value="${aa.event_sday}" var="startDate" pattern="yyyy-MM-dd HH:mm:ss" />
     <fmt:formatDate value="${startDate}" pattern="yyyy/MM/dd" />
     ~ 
     <fmt:parseDate value="${aa.event_fday}" var="endDate" pattern="yyyy-MM-dd HH:mm:ss" />
     <fmt:formatDate value="${endDate}" pattern="yyyy/MM/dd" />
-</p>
-
-      <button class="button" onclick="location.href='eventdetail?event_no=${aa.event_no }'">자세히 보기</button>
+	</p>
     </div>
+  
       </div>
     	</c:forEach>
 
@@ -145,7 +145,7 @@
 <!-- END MAIN -->
 
 <div class="btn-container">
-     <button type="submit" class="btn" onclick="location.href='eventform'">작성하기</button>
+     <button type="submit" class="btn" onclick="location.href='eventform'" style="border: 1px solid currentColor;">작성하기</button>
 </div>
 
 </div>

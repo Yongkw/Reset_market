@@ -20,5 +20,23 @@ public interface Service {
 
 	public ArrayList<BoardDTO> noticesearch(String search_content);
 	
+    public void personalsave(String personal_title, String personal_content, String personal_img, String personal_name,
+            String member_id, String personal_email, String personal_category);
+
+    public ArrayList<SwindleDTO> swindleout();
+
+    public void swindlesave(String swindle_title, String case_content, String case_img, String member_id, String suspect_id);
+
+	public ArrayList<SwindleDTO> swindle_detail(int swindle_no);
+
+	public ArrayList<SwindleDTO> swinupdate(int swindle_no);
+
+	public void swindleupdate(String swindle_title, String case_content, String case_img, String member_id,
+			String suspect_id, int swindle_no);
+
+	public void swindle_dela(int swindle_no);
+
+	public ArrayList<SwindleDTO> swindlesearch(String swindle_search);
+
 
 }

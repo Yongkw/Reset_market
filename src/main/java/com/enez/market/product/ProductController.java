@@ -135,15 +135,14 @@ public class ProductController {
 			if(user.equals("")||user.equals(null)||user.isEmpty()||ss.idcheck(user)==0) {return "redirect:main";}
 			List<String> likejjim = ss.likejjim(user); // 내가 찜한 사람들의 상품넘버 리스트
 			List<String> getjjim = ss.getjjim(user); // 날 찜한 사람들의 상품넘버 리스트
-			List<String> newgetList = getjjim.stream().distinct().collect(Collectors.toList());// 중복제거
+			//List<String> newgetList = getjjim.stream().distinct().collect(Collectors.toList());// 중복제거
 					
 			UserProfileDTO userdata= ss.getCreateDate(user); // 안에 있는 값 stdata, profile_image, nickname,category_check1
 			ArrayList<JjimPoriductDTO> JjimPoriduct  =new ArrayList<JjimPoriductDTO>();//내가 찜한 사람들의 상품 데이터
 			ArrayList<FollowProfileDTO> FollowProfile  =new ArrayList<FollowProfileDTO>(); //날 찜한 사람들의 프로필 데이터
 			
 			JjimPoriduct = ss.getlikejjimProduct(likejjim); 
-			FollowProfile = ss.getFollowProfile(newgetList);
-
+			FollowProfile = ss.getFollowProfile(getjjim);
 			// 추가로 넘겨야 할거 - 자기소계?,상점방문수 + 상품 데이터
 			mo.addAttribute("jjimPoriduct",JjimPoriduct);
 			mo.addAttribute("followProfile", FollowProfile);

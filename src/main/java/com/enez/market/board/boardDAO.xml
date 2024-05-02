@@ -14,7 +14,7 @@
  	 </select>
  	 
  	 <select id="noupdate" resultType="com.enez.market.board.BoardDTO">
-    select * from notice where notice_no = #{param1}
+    	select * from notice where notice_no = #{param1}
 	</select>
 
 	<update id="update">
@@ -25,5 +25,44 @@
 	<delete id="dela">
 	delete from notice where notice_no = #{param2}
 	</delete>
-
+	        
+    <insert id="personalsave">
+    insert into personal_qna (personal_no, personal_title, personal_content, personal_img, personal_name, personal_id, personal_email,personal_category)
+    values (personal_no.nextval, #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7})
+    </insert>
+    
+    <insert id="swindlesave">
+    insert into swindle (swindle_no, swindle_title,case_content,case_img,victim_id,suspect_id,groups)
+    values (swindle_no.nextval, #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, swindle_no.nextval)
+    </insert>
+    
+    <select id="swindleout" resultType="com.enez.market.board.SwindleDTO">
+          select swindle_no, swindle_title, to_char(create_at,'yyyy/MM/dd')create_at from swindle order by groups DESC
+    </select>
+      
+    <select id="swindle_detail" resultType="com.enez.market.board.SwindleDTO">
+  	select swindle_no, swindle_title, to_char(create_at,'yyyy/MM/dd')create_at, case_content, case_img, swindle_cnt, victim_id, suspect_id from swindle where swindle_no=#{param1}
+  </select>
+  
+  <update id="count">
+  	update swindle set swindle_cnt=swindle_cnt+1 where swindle_no=#{param1} 
+  </update>
+  
+   <select id="swinupdate" resultType="com.enez.market.board.SwindleDTO">
+    	select * from swindle where swindle_no = #{param1}
+   </select>
+   
+   <update id="swindleupdate">
+		update swindle set swindle_title=#{param1}, case_content=#{param2}, case_img=#{param3}, victim_id=#{param4}, 
+						 suspect_id=#{param5}, update_at=SYSTIMESTAMP  where swindle_no=#{param6}
+	</update>
+	
+	<delete id="swindle_dela">
+	delete from swindle where swindle_no = #{param2}
+	</delete>
+	
+	<!-- 공지사항 검색에 대한 쿼리 -->
+	<select id="swindlesearch" resultType="com.enez.market.board.SwindleDTO">
+		select swindle_no, swindle_title, to_char(create_at,'yyyy/MM/dd')create_at from swindle where swindle_title like '%' || #{param1} || '%'
+	</select>
 </mapper>

@@ -26,6 +26,7 @@ public class EventController {
 	public String eventpage(Model mo) {
 		Service ss = sqlSession.getMapper(Service.class);
 		ArrayList<EventDTO> list = ss.eventout();
+		System.out.println(list.get(0).event_img);
 		mo.addAttribute("list",list);
 		return"event_out";
 	}

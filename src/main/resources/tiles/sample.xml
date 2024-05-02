@@ -112,8 +112,7 @@
         <put-attribute name="body"
             value="/WEB-INF/views/product/productmanager.jsp" />
     </definition>
-
-	<!-- 이벤트 페이지 -->
+<!-- 이벤트 페이지 -->
  	
  		<definition name="event_out" extends="baseLayout3">
 		<put-attribute name="title" value="이벤트_메인페이지" />
@@ -168,6 +167,44 @@
 		</definition>
  	
  	<!-- 공지사항 페이지 end -->	
+ 	
+ 	<!-- 1:1문의 페이지 -->
+ 	
+ 		<definition name="personal_form" extends="baseLayout3">
+		<put-attribute name="title" value="공지사항_메인페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/personal_form.jsp" />
+		</definition>
+ 	
+ 	<!-- 1:1문의 페이지 end -->	
+ 	
+ 	<!-- 사기조회 페이지 -->
+ 	
+ 		<definition name="swindle_main" extends="baseLayout3">
+		<put-attribute name="title" value="사기등록_메인페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/swindle_main.jsp" />
+		</definition>
+		
+		<definition name="swindle_form" extends="baseLayout3">
+		<put-attribute name="title" value="사기등록_메인페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/swindle_form.jsp" />
+		</definition>
+		
+		<definition name="swindle_detail" extends="baseLayout3">
+		<put-attribute name="title" value="사기등록_디테일" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/swindle_detail.jsp" />
+		</definition>
+		
+		<definition name="swindle_update" extends="baseLayout3">
+		<put-attribute name="title" value="사기등록_업데이트" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/swindle_update.jsp" />
+		</definition>
+ 	
+ 	<!-- 사기조회 end -->
 	<!-- 지도 -->
    <definition name="mapview" extends="baseLayout3">
       <put-attribute name="title" value="map"/>
