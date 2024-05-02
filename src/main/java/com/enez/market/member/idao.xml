@@ -3,24 +3,28 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.enez.market.member.Service">
 	<insert id="membersave">
-		insert into
-		reset_user(member_id,member_pw,member_name,address,phone,nickname,category_check1,profile_image)
-		values(#{param1},#{param2},#{param3},
-		#{param4},#{param5},#{param6},#{param7},#{param8})
+		insert into reset_user (user_id, member_id,
+		member_pw, member_name, address, phone, nickname, category_check1,
+		profile_image)
+		values(user_id_seq.nextval, #{param1},
+		#{param2}, #{param3}, #{param4},
+		#{param5}, #{param6}, #{param7},
+		#{param8})
 	</insert>
 
 	<insert id="membersave1">
-		insert into
-		reset_user(member_id,member_pw,member_name,address,phone,nickname,category_check1,profile_image)
-		values(#{param1},#{param2},#{param3},
-		#{param4},#{param5},#{param6},#{param7},'default_image.jpg')
+		insert into reset_user (user_id, member_id, member_pw, member_name, address,
+		phone, nickname, category_check1, profile_image)
+		values(user_id_seq.nextval, #{param1}, #{param2}, #{param3},
+		#{param4}, #{param5}, #{param6}, #{param7},'default_image.jpg')
+
 	</insert>
 
 	<select id="idch" resultType="int">
 		select count(*) from reset_user
 		where member_id=#{param1}
 	</select>
-	
+
 	<select id="nickch" resultType="int">
 		select count(*) from reset_user
 		where nickname=#{param1}
@@ -29,7 +33,7 @@
 		resultType="com.enez.market.member.MemberDTO">
 		select * from reset_user
 	</select>
-	
+
 	<select id="loginok"
 		resultType="com.enez.market.member.MemberDTO">
 		select member_id from reset_user where member_id=#{param1}
@@ -63,20 +67,24 @@
 		= #{param6} where member_id =
 		#{param1}
 	</update>
-	
+
 	<select id="oldimg" resultType="String">
 		select profile_image from
 		reset_user where member_id = #{param1}
 	</select>
-	
+
 	<delete id="resign">
 		delete from reset_user where member_id = #{param1}
 		and member_pw = #{param2}
 	</delete>
-	
+
 	<delete id="member_delete">
 		delete from reset_user where member_id = #{param1}
 
 	</delete>
+	
+	<update id="itrsave">
+		update reset_user set intro = #{param2} where member_id = #{param1}
+	</update>
 
 </mapper>
