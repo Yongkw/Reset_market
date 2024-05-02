@@ -31,9 +31,9 @@
 <title>Insert title here</title>
 </head>
 <body >
-<div style="display: flex; flex-direction: column; justify-content: center; width: 100%; background-color: none;" >
-<script src="./resources/js/info_search.js"></script>
 <%@include file="/WEB-INF/views/member/modal_id.jsp" %>
+<div style="display: flex; flex-direction: column; justify-content: center; width:; background-color: none;" >
+
 <div class="card align-middle" style="width: 20rem; border-radius: 20px; text-align: center; ">
     <div class="card-title" style="margin-top: 30px;">
         <h2 class="card-title text-center" style="color: #113366;">회원찾기</h2>
@@ -70,7 +70,7 @@
     </div>
 
 	</div>
-
+	<script src="./resources/js/info_search.js"></script>
 	<!--아이디중복체크-->
 	<script type="text/javascript" src="./resources/js/memberchk.js"></script>
 	<!--마우스눈-->

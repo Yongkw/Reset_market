@@ -85,30 +85,33 @@ button {                                    /* 버튼 백그라운드 색깔 및
     overflow-y: auto;
     line-height: 1.57;
     white-space: pre-wrap;
+    letter-spacing: -0.5px;
 }
-	
-.bmIoCE > textarea {                        /* 상점 소개 수정 textarea ..*/
-	width: 90%; /* 부모 요소의 너비를 기준으로 전체 너비를 차지하도록 설정합니다. */
-    height: 100px; /* 원하는 높이로 설정합니다. */
+.bmIoCE {
+    display: flex;
+    justify-content: space-between; /* 자식 요소 사이의 간격을 최대화하여 오른쪽에 버튼을 위치시킵니다. */
+    
+}
+
+.bmIoCE > textarea {
+    width: calc(100% - 100px); /* 버튼의 너비를 고려하여 textarea의 너비를 조정합니다. */
+    height: 147px;
     -webkit-box-flex: 1;
     flex-grow: 1;
     resize: none;
     border: 1px solid rgb(238, 238, 238);
+    outline: none;
+    
 }
 
-.bmIoCE > button {							/* 상점 소개 수정 textarea 확인 버튼..*/
+.bmIoCE > button {
     width: 100px;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    border-top: 1px solid rgb(238, 238, 238);
-    border-right: 1px solid rgb(238, 238, 238);
-    border-bottom: 1px solid rgb(238, 238, 238);
+    height: 147px;
+    border: 1px solid rgb(238, 238, 238);
     background: rgb(250, 250, 250);
     color: rgb(136, 136, 136);
 }
+
 
 
 .hQqotf { /* 소개수정버튼 간격 */
@@ -275,13 +278,6 @@ a:hover {
 	white-space: pre-wrap;
 }
 
-.dXaXKb {
-	height: 56px;
-	display: flex;
-	-webkit-box-align: center;
-	align-items: center;
-	flex-shrink: 0;
-}
 
 .jynacn {
 	display: flex;
@@ -387,12 +383,36 @@ a:hover {
 							'1px solid rgb(33, 33, 33)');
 				});
 		
-		function itropen(){
+		function itropen(){ //수정버튼 클릭시 수정버튼 none
 			
 		        document.getElementById('itrmodi').style.display = "none";
 		        document.getElementById('txtop').style.display = "";
 		    
 		}
+		$(document).ready(function(){
+			$('#itrsub').click(function(){
+				
+				var intro = $('#intro').val();
+				
+				$.ajax({
+					url: 'introsave',
+					type: 'post',
+					data: {intro:intro},
+					success: function(data) {
+						window.location.href="mypage2";
+						console.log('OK',data)
+					},
+					error: function(data) {
+						alert("상점소개 입력   초과");
+						
+					}
+					
+				});
+				
+				
+			});
+			
+		});
 	</script>
 	<!-- 마이페이지 큰박스 시작 -->
 	<div class="cTGCMU">
@@ -462,17 +482,10 @@ a:hover {
 								<div class="htiuQW">10 회</div>
 							</div>
 						</div>
-						<div class="sc-jtRlXQ bmIoCE" style="display: none;" id="txtop"><textarea></textarea><button type="button">확인</button></div>
-						<div class="sc-jeCdPy klBxMk"></div>
+						<div class="sc-jtRlXQ bmIoCE"  style="display: none;" id="txtop"><textarea id="intro" name="intro" >${member.intro}</textarea><button type="button" id="itrsub">확인</button></div>
+						<div class="sc-jeCdPy klBxMk">${member.intro}</div>
 						<!-- 상점 자기소개..  -->
-						<div class="bcsjLU" style="text-align: left;"></div>
-						<!-- 신고하기 부분 -->
-						<div class="dXaXKb">
-							<a class="jynacn" style="display: none;"> <img
-								src="https://m.bunjang.co.kr/pc-static/resource/327172b424ab5e1910a4.png"
-								width="14" height="14"> 신고하기
-							</a>
-						</div>
+						
 						<!-- 소개글 수정버튼 -->
 						<div class="sc-bGbJRg hQqotf"><button class="sc-kasBVs blcYdX" id="itrmodi" onclick="itropen()">소개글 수정</button></div>
 					</div>

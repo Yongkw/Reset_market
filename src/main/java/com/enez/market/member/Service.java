@@ -34,6 +34,8 @@ public interface Service {
 
 	void resign(String id, String pw);
 
+	void itrsave(String member_id, String intro);
+
 
 
 

@@ -29,6 +29,7 @@
 			<a href="event_out">이벤트_메인페이지</a>
 			<a href="eventform">이벤트_입력폼</a>
 			<a id="link-2" href="notice_out" >공지사항</a>
+			<a  href="mypage2" >마이페이지2</a>
 			<!--  -->
 			</span>
 		</div>
