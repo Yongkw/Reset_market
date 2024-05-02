@@ -226,11 +226,11 @@ input[readonly] {
 					<div class="row">
 						<div class="col-md-6"
 							style="width: 100%; position: relative; left: 20%;">
-							<button class="btn btn-success btn-lg btn-block" id="ModyBtn">수정
+							<button class="btn btn-success btn-lg btn-block1" id="ModyBtn">수정 
 								완료</button>
 						</div>
 						<div class="col-md-6">
-							<button class="btn btn-warning btn-lg btn-block text-white"
+							<button class="btn btn-warning btn-lg btn-block1 text-white"
 								id="cancelBtn">메인으로</button>
 						</div>
 					
@@ -239,6 +239,7 @@ input[readonly] {
 					</div>	
 						
 					</div>
+					
 				</form>
 				<%@ include file="/WEB-INF/views/member/resign.jsp" %>
 			</div>

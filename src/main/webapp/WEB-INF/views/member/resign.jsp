@@ -9,21 +9,23 @@
 
 <head>
 <style>
- .modal {
+ .resign_modal {
     position: fixed; /* 고정 위치 */
     left: 37.5%;
     top: 10%;
     width: 500px;
-    height: 500px;
-    overflow: auto; /* 스크롤 가능하도록 */
+    height: 500px;    
+    z-index: 1042;
     
   }
-  .modal-content {
+  
+  .resign_modal-content {
     background-color: #fefefe;
     margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    
   }
   .close {
     color: #aaaaaa;
@@ -53,8 +55,8 @@
 </head>
 <body>
 
-<div id="resignModal" class="modal" style="display: none;">
-  <div class="modal-content">
+<div id="resignModal" class="resign_modal" style="display: none;">
+  <div class="resign_modal-content">
     <h5 class="modal-title">회원 탈퇴</h5>
     <p class="modal-text">탈퇴를 위한 비밀번호를 입력해주세요.</p>
     <form action="resignok" class="rsform" method="post">

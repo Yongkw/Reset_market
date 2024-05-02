@@ -358,6 +358,7 @@ border-radius: 2px;
 					<span style="color:black"><a href="myinfo">${member_id}님!</a></span>
             		<a href="mypage">마이페이지</a>
 					<a href="logout">로그 아웃</a>
+					<a href="mypage2">마이페이지2</a>
 					</span>
 				</c:when>
 				<c:otherwise>
