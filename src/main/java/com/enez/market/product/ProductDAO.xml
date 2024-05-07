@@ -108,4 +108,40 @@ SELECT
 <delete id="deljjim">
 delete from PRODUCT_JJIM where USER_ID in #{param2} and PRODUCT_NO in #{param1}
 </delete>
+
+<insert id="mainimagesave">
+ insert into imagedetail 
+ (image_no, main_image,member_id) 
+ values (image_seq.nextval,#{param1},#{param2})
+</insert>
+
+<select id="promanager" resultType="com.enez.market.product.Product_managerDTO">
+	SELECT 
+    PRODUCT_NO,
+    SELLER_ID,
+    CATEGORY_NAME,
+    BUYER_ID,
+    PRICE,
+    TITLE,
+    DETAIL,
+    LOCATION,
+    PRODUCT_STATE,
+    (SELECT MAIN_IMAGE FROM imagedetail WHERE image_no = PRODUCT_NO) AS main_image,
+    VIEW_CNT,
+    CREATE_AT,
+    UPDATE_AT
+FROM 
+    product 
+WHERE 
+    seller_id=#{param1} 
+ORDER BY 
+    PRODUCT_NO ASC
+</select>
+
+
+<update id="statevlaue">
+	update product set product_state = #{param1} where product_no = #{param2}
+</update>
+
+
 </mapper>
