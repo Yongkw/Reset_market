@@ -40,6 +40,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+$(document).ready(function(){
+ $(".statesave").click(function(){
+	var str1= $(this).attr("id").substr(10);
+	var str2 = $(this).val()
+	console.log(str1)
+	console.log(str2)
+	 
+    // AJAX 요청을 보냅니다.
+    
+    $.ajax({
+        type: "POST", // 또는 GET
+        url: "pro_state", // 요청을 처리할 컨트롤러 URL
+        data: {"state": str2,"state2" : str1}, // 보낼 데이터 (예: 상태값)
+        success: function(response) {
+            // 요청이 성공하면 이 함수가 호출됩니다.
+            console.log(response);
+            // 필요한 작업 수행
+        },
+        error: function(xhr, status, error) {
+            // 요청이 실패하면 이 함수가 호출됩니다.
+            console.error(error);
+            // 에러 처리
+        }
+    });
+});
+});
+
+
+
+
 </script>
 <div class="kXbHsX">
 	<main class="gWXLML">
@@ -105,10 +136,11 @@ document.addEventListener('DOMContentLoaded', function() {
 				</tr>
 			</thead>
 			<tbody>
+			<c:forEach items="${list}" var="aa">
 			<tr>
 				<td>
 					<a href="#">
-					<img src="https://media.bunjang.co.kr/product/260585830_1_1713429659_w304.jpg"width="152" height="152">
+					<img src="./image/${aa.main_image}" width="152" height="152">
 					</a>
 				</td>
 				<!--판매 상태 -->
@@ -116,29 +148,35 @@ document.addEventListener('DOMContentLoaded', function() {
 					<div class="css-2b097c-container"> 
 						<div class="cfkuaA">
 							<div class="css-1hwfws3">
-								<div class=" css-1uccc91-singleValue" style="text-align: center;">판매중</div>
+								<div class=" css-1uccc91-singleValue" style="text-align: center;">${aa.product_state}</div>
 							</div>
 							<div class="hoYcgM"></div>
 						</div>
 						<div class="efSUdZ">
 						<div class="kJZJBa">
-						<!-- 
-						<div id="test_1" tabindex="-1" class="kMEBRe">10개씩</div> -->
-							<div class="gQomUt">거래중</div>
-							<div class="gQomUt">삭제</div>
-							<div class="gQomUt">판매완료</div>
-						
+							
+							<div class="gQomUt"><button CLASS="statesave" type="button" id="pro_state1${aa.product_no }" value="판매중">판매중</button></div>
+							<div class="gQomUt"><button CLASS="statesave" type="button" id="pro_state2${aa.product_no }" value="거래중" >거래중</button></div>
+							<div class="gQomUt"><button CLASS="statesave" type="button" id="pro_state3${aa.product_no }" value="삭제">삭제</button></div>
+							<div class="gQomUt"><button CLASS="statesave" type="button" id="pro_state4${aa.product_no }" value="판매완료">판매완료</button></div>
+							 
+							 <!-- 
+							 <div class="gQomUt"><input type="button" class="test1" id="test1_${aa.product_no}" value="판매중"> </div>
+							<div class="gQomUt"><button CLASS="test1" type="button" v>거래중</button></div>
+							<div class="gQomUt"><button CLASS="test1" type="button" >삭제</button></div>
+							<div class="gQomUt"><button CLASS="test1" type="button" >판매완료</button></div>
+							 -->
 						</div>
 					</div>
 					</div>
 				</td>
 				<!-- 상품명 -->
 				<td>
-					<a>상품명</a>
+					<a>${aa.title}</a>
 				</td>
 				<!-- 가격 -->
 				<td>
-				15,000원
+				${aa.price}
 				</td>
 				<!-- 찜 -->
 				<td>
@@ -146,11 +184,11 @@ document.addEventListener('DOMContentLoaded', function() {
 				</td>
 				<!-- 최근 수정일 -->
 				<td>
-				2024-05-01 17:39
+				${aa.update_at}
 				</td>
 				<!-- 조회수 -->
 				<td>
-				0
+				${aa.view_cnt}
 				</td>
 				<!-- 기능 -->
 				<td>
@@ -159,61 +197,8 @@ document.addEventListener('DOMContentLoaded', function() {
 				</button>
 				</td>
 			</tr>
+			</c:forEach>
 			
-			<tr>
-				<td>
-					<a href="#">
-					<img src="https://media.bunjang.co.kr/product/260585830_1_1713429659_w304.jpg"width="152" height="152">
-					</a>
-				</td>
-				<!--판매 상태 -->
-				<td class="padiv1">
-					<div class="css-2b097c-container"> 
-						<div class="cfkuaA">
-							<div class="css-1hwfws3">
-								<div class=" css-1uccc91-singleValue" style="text-align: center;">판매중</div>
-							</div>
-							<div class="hoYcgM"></div>
-						</div>
-						<div class="efSUdZ">
-						<div class="kJZJBa">
-						<!-- 
-						<div id="test_1" tabindex="-1" class="kMEBRe">10개씩</div> -->
-							<div class="gQomUt">거래중</div>
-							<div class="gQomUt">삭제</div>
-							<div class="gQomUt">판매완료</div>
-						
-						</div>
-					</div>
-					</div>
-				</td>
-				<!-- 상품명 -->
-				<td>
-					<a>상품명</a>
-				</td>
-				<!-- 가격 -->
-				<td>
-				15,000원
-				</td>
-				<!-- 찜 -->
-				<td>
-				0
-				</td>
-				<!-- 최근 수정일 -->
-				<td>
-				2024-05-01 17:39
-				</td>
-				<!-- 조회수 -->
-				<td>
-				0
-				</td>
-				<!-- 기능 -->
-				<td>
-				<button class="eNwDap" >
-					<a href="#" >수정</a>
-				</button>
-				</td>
-			</tr>
 		</tbody>
 		</table>
 		

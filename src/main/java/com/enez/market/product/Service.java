@@ -36,8 +36,15 @@ public interface Service {
 
 	void deljjim(String pr_no, String user);
 
-	void mainimagesave(String main_image);
+	void mainimagesave(String main_image,String member_id);
 
+	ArrayList<Product_managerDTO> promanager(String member_id);
+
+	ArrayList<Product_managerDTO> promanagerimage(String member_id);
+
+
+	void statevlaue(String vlaue, int vlaue2);
+	
 	
 	
 }
