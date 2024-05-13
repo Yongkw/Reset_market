@@ -47,6 +47,7 @@ public class ChartController {
 	
 	@RequestMapping(value = "mapview")
 	public String mapview() {
+System.out.println("testview");
 		return "mapview";
 	}
 	@SuppressWarnings("unchecked")
@@ -91,7 +92,7 @@ public class ChartController {
 		            		pro_json.put("price", Integer.toString(dto.price));
 		            		pro_json.put("category_name", dto.category_name);
 		            		pro_json.put("title", dto.title);
-		            		pro_json.put("img1", dto.img1);
+		            		pro_json.put("img1", dto.getImg1());
 		            		pro_json.put("location", dto.location);
 		            		
 			            	list.add(pro_json);
@@ -123,7 +124,7 @@ public class ChartController {
 		            		pro_json.put("price", Integer.toString(dto.price));
 		            		pro_json.put("category_name", dto.category_name);
 		            		pro_json.put("title", dto.title);
-		            		pro_json.put("img1", dto.img1);
+		            		pro_json.put("img1", dto.getImg1());
 		            		pro_json.put("location", dto.location);
 		            		
 			            	list.add(pro_json);
@@ -150,7 +151,6 @@ public class ChartController {
 		if(maplist.size()>0) {
 			service.mapDelete();
 			for (Map<String, String> map : maplist) {
-				System.out.println(map);
 				service.resetMapData(Integer.parseInt(map.get("pr_no")),map.get("lat"),map.get("lng"),map.get("code"));
 			}
 			MapResetDate.create_jsonf(maplist);
@@ -168,8 +168,7 @@ public class ChartController {
 	@RequestMapping(value = "/map_resetjson")
 	public void map_resetjson(HttpServletResponse response,Model model,HttpServletRequest request) throws IOException {
 		Service service = sqlSession.getMapper(Service.class);
-		ArrayList<addMap_DTO> addlist =  service.getAddress(); // 나중에 판매완료를 제외하는 조건만 달면 됨
-		System.out.println("addlist : "+addlist.size());
+		ArrayList<addMap_DTO> addlist =  service.getAddress();
 		Map<String, String> addMap= new TreeMap<String, String>();
 		
 		for (addMap_DTO set : addlist) {

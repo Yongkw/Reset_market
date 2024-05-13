@@ -397,7 +397,7 @@ function productlist(find_code) {
 	    	       $('#prnomber').text(data.length+"개");
 	    	        for(var i in data){
 						d1.insertAdjacentHTML('afterbegin','<div class="pr_list">'
-														+'<a href="productout?title='+data[i].title+'" >'
+														+'<a href="productout?product_no='+data[i].product_no+'" >'
 														+'<div class="pr_img">'
 														+'<img alt="" src="./image/'+data[i].img1+'" width="194" height="194">'
 														+'</div>'
@@ -431,7 +431,7 @@ function showpr(pr_no) {
 	    traditional: true,
 	    success: function(data){
 	    	productdiv2.empty();
-	    	d2.insertAdjacentHTML('afterbegin','<a href="productout?title='+data[0].title+'" >'
+	    	d2.insertAdjacentHTML('afterbegin','<a href="productout?product_no='+data[0].product_no+'" >'
 	    	+'<div><img alt="" src="./image/'+data[0].img1+'"> </div>'
 	    	+'<div>'
 	    	+'<p>'+data[0].title+'</p>'

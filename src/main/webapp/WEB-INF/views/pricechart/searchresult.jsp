@@ -61,12 +61,16 @@ border-radius: 15px;
 
 
 .pr-search-list-div {
-  width: 235px;
-  height: 280px;
-  margin-top: 5px;
-  margin-left: 5px;
+  width: 100%;
+  height: 100%; 
+  overflow: hidden;
 
 }
+.pr-search-list-div table{
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
 .pr-search-top{
  
 }
@@ -79,7 +83,8 @@ border-radius: 15px;
     
   }
 .pr-search-list-div>span>img{
-  	border-radius: 10%;
+  	border-top-left-radius : 5%;
+  	border-top-right-radius : 5%;
   	border: none;
 }
 #pr_list{
@@ -138,12 +143,12 @@ font-size: x-large;
 <c:forEach var="i" items="${count_list}" begin="0" end="11" step="1" >
 <div class="pr-search-list"  >
 	<div class="pr-search-list-div" >
-	<span><img alt="상품 이미지" src="./image/${i.product_image}" width="200px" height="200px" ></span>
+	<span><img alt="상품 이미지" src="./image/${i.product_image}" width="100%" height="200px" onerror="this.onerror=null; this.src='./image/1_1.png';" ></span>
 	
 	<table width="216px" height="70px" style="margin-top:10px;" >
 	<tr> <td colspan="2" ><a style="font-weight:bolder;" >${i.title}</a></td></tr>
 	<tr> <td colspan="2"><a>${i.location}</a></td></tr>
-	<tr> <td><a>${i.price}</a></td>  <td style="width: 14%;" ><a>${i.view_cnt}</a></td></tr>
+	<tr> <td><a>${i.price}</a></td>  <td style="width: 30%;" ><a>조회수 ${i.view_cnt}</a></td></tr>
 	</table>	
 	</div>
 </div>
@@ -163,12 +168,12 @@ font-size: x-large;
 
 <div class="pr-search-list" >
 	<div class="pr-search-list-div" >
-	<span><img alt="상품 이미지" src="./image/${i.product_image}" width="200px" height="200px" ></span>
+	<span><img alt="상품 이미지" src="./image/${i.product_image}" width="100%" height="200px" onerror="this.onerror=null; this.src='./image/1_1.png';" ></span>
 	
 	<table width="216px" height="70px" style="margin-top:10px;" >
 	<tr> <td colspan="2" ><a style="font-weight:bolder;" >${i.title}</a></td></tr>
 	<tr> <td colspan="2"><a>${i.location}</a></td></tr>
-	<tr> <td><a>${i.price}</a></td>  <td style="width: 14%;" ><a>${i.view_cnt}</a></td></tr>
+	<tr> <td><a>${i.price}</a></td>  <td style="width: 30%;" ><a>조회수 ${i.view_cnt}</a></td></tr>
 	</table>	
 	
 

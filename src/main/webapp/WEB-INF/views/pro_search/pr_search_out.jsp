@@ -190,7 +190,7 @@ align-items: center;
 
 <c:choose>
 <c:when test="${page.now>=page.end}">
-<span><a>다음</a></span>
+<span>다음</span>
 </c:when>
 <c:otherwise>
 <span><a href="pr_search?navbar_p=${find}&&pr_page=${page.now+1}" >다음</a></span>
