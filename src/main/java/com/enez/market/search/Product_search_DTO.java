@@ -4,6 +4,21 @@ public class Product_search_DTO {
 int product_no,view_cnt,price,image_no;
 String seller_id,category_name,buyer_id,title,detail,product_image,product_state,create_at,update_at,main_image;
 String location;
+String img1;
+
+public String getImg1() {
+	return img1;
+}
+
+public void setImg1(String img1) {
+	
+	if(img1.contains(",")) {
+		this.img1=img1.substring(0, img1.indexOf(","));
+	}else { 
+		this.img1 = img1;
+	} 
+}
+
 public Product_search_DTO() {
 }
 public int getProduct_no() {
@@ -54,6 +69,7 @@ public String getProduct_image() {
 }
 public void setProduct_image(String product_image) {
 	this.product_image = product_image;
+	setImg1(product_image);
 }
 public String getProduct_state() {
 	return product_state;
@@ -93,7 +109,11 @@ public void setImage_no(int image_no) {
 	this.image_no = image_no;
 }
 public String getMain_image() {
-	return main_image;
+	if(main_image==null) {
+		return img1;
+	}else {
+		return main_image;
+	}
 }
 public void setMain_image(String main_image) {
 	this.main_image = main_image;

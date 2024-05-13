@@ -23,16 +23,15 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.enez.market.member.MemberDTO;
 
-
 @Controller
 public class ProductController {
 
 	
 		@Autowired
 		SqlSession sqlSession;
-		//String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
-		String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
 		
+		//String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
+		String path = "C:\\Users\\Administrator\\Desktop\\project_resetmarket\\src\\main\\webapp\\image";
 		@RequestMapping(value = "/productinput")
 		public String product1() {
 			
@@ -71,7 +70,7 @@ public class ProductController {
             imagedetail(product_image);
 			return "redirect:main";
 			}
-			else
+			else 
 			{
 			return "redirect:login";
 			}
@@ -129,14 +128,20 @@ public class ProductController {
 			ss.count(title);
 		}
 		@RequestMapping(value = "/mypage")
-		public String product5(Model mo,HttpSession session) {
+		public String product5(Model mo,HttpSession session,HttpServletRequest request) {
 			Service ss = sqlSession.getMapper(Service.class);
-			String user = (String)session.getAttribute("member_id");
+			String user ="";
+				if(""!=request.getParameter("find_id")&&!"null".equals(request.getParameter("find_id"))&&request.getParameter("find_id")!=null) {
+					user =request.getParameter("find_id");
+					System.out.println(user);
+				}else {
+					user=(String)session.getAttribute("member_id");
+					System.out.println(user);
+				}
+				System.out.println("마이페이지 아이디 : "+user);
 			if(user.equals("")||user.equals(null)||user.isEmpty()||ss.idcheck(user)==0) {return "redirect:main";}
 			List<String> likejjim = ss.likejjim(user); // 내가 찜한 사람들의 상품넘버 리스트
 			List<String> getjjim = ss.getjjim(user); // 날 찜한 사람들의 상품넘버 리스트
-			//List<String> newgetList = getjjim.stream().distinct().collect(Collectors.toList());// 중복제거
-					
 			UserProfileDTO userdata= ss.getCreateDate(user); // 안에 있는 값 stdata, profile_image, nickname,category_check1
 			ArrayList<JjimPoriductDTO> JjimPoriduct  =new ArrayList<JjimPoriductDTO>();//내가 찜한 사람들의 상품 데이터
 			ArrayList<FollowProfileDTO> FollowProfile  =new ArrayList<FollowProfileDTO>(); //날 찜한 사람들의 프로필 데이터
@@ -149,16 +154,8 @@ public class ProductController {
 			mo.addAttribute("userdata",userdata);
 			return "mypage";
 		}
- 
-		@RequestMapping(value = "jjimcancle")
-		public String jjimcancle(HttpServletRequest request,HttpSession session) {
-			String pr_no = request.getParameter("pr_no");
-			String user = (String)session.getAttribute("member_id");
-			Service service = sqlSession.getMapper(Service.class);
-			service.deljjim(pr_no,user);
-			
-			return "redirect:mypage";
-		}
+
+
 		@ResponseBody
 		@RequestMapping(value = "jjimcount")
 		public void product_jjim(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -182,9 +179,15 @@ public class ProductController {
 			}
 			int jcount = service.jjimcount(pr_no);
 			pw.print(jcount);
-			
 		}
-		
+		@ResponseBody
+		@RequestMapping(value = "jjimcount_mypage")
+		public void product_jjim_mypage(HttpServletRequest request) throws IOException {
+			// 목적 : 맞 찜하기 - 테이블 RESET_JJIM  요소 MEMBER_ID, DOJJIMER_ID
+			// 마이페이지에서 실행, 데이터는 fowid, 세션 user id
+			String a= request.getParameter("fowid");
+			System.out.println(a);
+		}
         @RequestMapping(value = "/productmanager")
         public String product6() {
             return "productmanager";

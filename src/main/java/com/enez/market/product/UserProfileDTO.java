@@ -11,15 +11,24 @@ public class UserProfileDTO {
 	 * 7.자기소계 - 미구현 
 	 * 8.메너 온도 //user
 	 * 9.프로필 이미지 //user
+	 * 10.프로필 유저 아이디
 	 */
 	
-	String stdate, profile_image, nickname,prductsu,jjimdo,jjimget,manner;
+	String stdate, profile_image, nickname,prductsu,jjimdo,jjimget,manner,id;
 	//추가 상점 방문자수, 자기소계
 
 	public UserProfileDTO() {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "UserProfileDTO [stdate=" + stdate + ", profile_image=" + profile_image + ", nickname=" + nickname

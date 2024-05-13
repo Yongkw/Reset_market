@@ -94,8 +94,9 @@ SELECT
     TITLE,
     DETAIL,
     LOCATION,
+    PRODUCT_IMAGE,
     PRODUCT_STATE,
-    i.main_image,
+    (SELECT MAIN_IMAGE FROM imagedetail WHERE image_no = PRODUCT_NO) AS main_image,
     VIEW_CNT,
     CREATE_AT,
     UPDATE_AT
@@ -107,7 +108,7 @@ FROM (
         pr.BUYER_ID,
         pr.PRICE,
         pr.TITLE,
-        pr.DETAIL,
+        pr.DETAIL,	
         pr.LOCATION,
         pr.PRODUCT_STATE,
         pr.PRODUCT_IMAGE,
@@ -118,11 +119,9 @@ FROM (
     FROM 
         product pr
     WHERE 
-        pr.PRODUCT_STATE = '판매중'
-) sub
-JOIN 
-    imagedetail i ON sub.PRODUCT_NO = i.image_no
-WHERE     num BETWEEN #{param1} AND #{param2}
+        (pr.PRODUCT_STATE !='판매완료' and pr.PRODUCT_STATE !='거래중' )  or pr.PRODUCT_STATE is null
+)
+WHERE num BETWEEN #{param1} AND #{param2}
 </select>
 
 <select id="pr_search3_2" resultType="com.enez.market.search.Product_search_DTO" > 
@@ -135,8 +134,9 @@ SELECT
     TITLE,
     DETAIL,
     LOCATION,
+    PRODUCT_IMAGE,
     PRODUCT_STATE,
-    i.main_image,
+    (SELECT MAIN_IMAGE FROM imagedetail WHERE image_no = PRODUCT_NO) AS main_image,
     VIEW_CNT,
     CREATE_AT,
     UPDATE_AT
@@ -159,10 +159,8 @@ FROM (
     FROM 
         product pr
     WHERE 
-        pr.PRODUCT_STATE = '판매중'
-) sub
-JOIN 
-    imagedetail i ON sub.PRODUCT_NO = i.image_no
+       (pr.PRODUCT_STATE !='판매완료' and pr.PRODUCT_STATE !='거래중' ) or pr.PRODUCT_STATE is null
+) 
 WHERE 
     num BETWEEN #{param1} AND #{param2}
 </select>
@@ -177,8 +175,9 @@ SELECT
     TITLE,
     DETAIL,
     LOCATION,
+    PRODUCT_IMAGE,
     PRODUCT_STATE,
-    i.main_image,
+    (SELECT MAIN_IMAGE FROM imagedetail WHERE image_no = PRODUCT_NO) AS main_image,
     VIEW_CNT,
     CREATE_AT,
     UPDATE_AT
@@ -201,10 +200,8 @@ FROM (
     FROM 
         product pr
     WHERE 
-        pr.PRODUCT_STATE = '판매중'
-) sub
-JOIN 
-    imagedetail i ON sub.PRODUCT_NO = i.image_no
+        (pr.PRODUCT_STATE !='판매완료' and pr.PRODUCT_STATE !='거래중' )  or pr.PRODUCT_STATE is null
+) 
 WHERE 
     num BETWEEN #{param1} AND #{param2}
 </select>

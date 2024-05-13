@@ -66,7 +66,7 @@ form>input[type="submit"] {
 
 <div class="click-container" >
 <div class="maplink">
-<a>지도로 검색</a>
+<a href="searchresult?">지도로 검색</a>
 </div>
 
 <div class="maplink">

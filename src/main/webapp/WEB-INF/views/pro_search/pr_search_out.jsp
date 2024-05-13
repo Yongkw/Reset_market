@@ -12,46 +12,79 @@
 
 
 <style type="text/css">
-
-.pr-main-div{
-width:100%;
-display: flex;
-flex-wrap: wrap;
-}
-.pr-search-list{
-width: 250px;
-height:300px;
-margin: 10px 10px 10px 30px;
-
-border: 3px solid gray ;
-border-radius: 15px;
-
+.resultcontainer a{
+    color: rgb(33, 33, 33);
+    text-decoration: none;
+    cursor: pointer;
 }
 
+.dCIUug {
+    width: 100%;
+    margin: auto;
+    padding: 3.5rem 0px 1.5rem;
+}
+.kSnlsd {
+    display: flex;
+    flex-wrap: wrap;
+}
+.eCFZgW {
+    width: 196px;
+    margin-right: 11px;
+    margin-bottom: 11px;
+    margin-left: 11px;
+} 
+
+.iizKix {
+    border: 1px solid rgb(238, 238, 238);
+    background: rgb(255, 255, 255);
+    display: block;
+}
+.eSpfym {
+    position: relative;
+    width: 100%;
+    height: 194px;
+}
+.ikEnr {
+    padding: 15px 10px;
+    height: 80px;
+}
+.gwleiO {
+    position: relative;
+    font-size: 14px;
+    padding-bottom: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.ldPLFl {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 20px;
+}
+.moVyh {
+    font-size: 16px;
+    font-weight: 600;
+   	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.moVyh::after {
+    content: "원";
+    font-size: 13px;
+    margin-left: 3px;
+}
+
+.eYNXkt {
+    font-size:12px;
+    color:rgb(136,136,136);
+}
 
 
-.pr-search-list-div {
-  width: 235px;
-  height: 280px;
-  margin-top: 5px;
-  margin-left: 5px;
 
-}
-.pr-search-top{
- 
-}
-.pr-search-top>a{
- margin: auto;
-}
-  .pr-search-list-div > span{
-    width:216px;
-    height:216px;
-    
-  }
-.pr-search-list-div>span>img{
-  	border-radius: 10%;
-  	border: none;
-}
 .pagebox{
 margin: 0 auto;
 background: white;
@@ -61,34 +94,82 @@ border: 2px solid #dcdcdc ;
 border-radius: 100%;
 position: relative;
 display: flex;
-justify-content: center;
+justify-content: space-evenly;
 align-items: center;
+}
+.pr-search-top{
+	height: 100px;
+}
+.pr-search-top>span{
+	width:200px;
+	height: 100px; 
+	margin:50px;
+	font-size: xx-large;
+	color: rgb(220,220,220);
 }
 </style>
 
+<script>  
+      $(document).ready(function() {
+          $('.updateTime').each(function() {
+              var timestamp = $(this).data('timestamp');
+              $(this).text(formatTime(timestamp));
+          });
+      });
+
+      function formatTime(timestamp) {
+          var now = new Date();
+          var updateTime = new Date(timestamp);
+          var timeDiff = now - updateTime;
+
+          // 시간 간격을 계산하여 표시 형식을 결정합니다.
+          // 이 부분은 원하는 표시 형식으로 변경할 수 있습니다.
+          if (timeDiff < 60000) {
+              return '방금 전';
+          } else if (timeDiff < 3600000) {
+              return Math.floor(timeDiff / 60000) + '분 전';
+          } else if (timeDiff < 86400000) {
+              return Math.floor(timeDiff / 3600000) + '시간 전';
+          } else if (timeDiff < 2592000000) {
+              return Math.floor(timeDiff / 86400000) + '일 전';
+          } else {
+              return Math.floor(timeDiff / 2592000000) + '달 전';
+          }
+      }
+    </script>
 </head>
 <body>
-<div style="margin: 0 auto; width:80%; border: 3px solid #DCDCDC ;  " >
-<div id="pr-search-top" ><span style="height: 80px; " ></span></div>
-<div class="pr-main-div">
-<c:forEach var="i" items="${list}">
-<a href="productout?product_no=${i.product_no}">
-<div class="pr-search-list" >
-	<div class="pr-search-list-div" >
-	<span><img alt="상품 이미지" src="./image/${i.product_image}" width="200px" height="200px" ></span>
-	
-	<table width="216px" height="70px" style="margin-top:10px;" >
-	<tr> <td colspan="2" ><a style="font-weight:bolder;" >${i.title}</a></td></tr>
-	<tr> <td colspan="2"><a>${i.location}</a></td></tr>
-	<tr> <td><a>${i.price}</a></td>  <td style="width: 14%;" ><a>${i.view_cnt}</a></td></tr>
-	</table>	
-	</div>
-</div>
-</a>
-</c:forEach>
-</div>
+<div class="resultcontainer" style="margin: 0 auto; width:70%; border: 3px solid #DCDCDC ;  " > 
+ 
+<!--  -->
 
+	<section class="dCIUug">
+	<div class="pr-search-top" ><span > 검색 결과 </span></div>
+		<!-- 상품리스트 시작 -->
+		<div class="kSnlsd">
+		
+		
+		 <c:forEach items="${list}" var="aa"  varStatus="loop">
+			<div class="eCFZgW">
+			
+				<a class="iizKix" href="productout?title=${aa.title}" >
+					<div class="eSpfym">
+						<img alt="" src="./image/${aa.main_image}" width="194" height="194">
+					</div>
+					<div class="ikEnr">
+						<div class="gwleiO">${aa.title}</div>
+						<div class="ldPLFl">
+							<div class="moVyh">${aa.price}</div>
+							<div class="eYNXkt updateTime" data-timestamp="${aa.update_at}"></div>
+						</div>
+					</div>
+				</a>
+			</div>
+			</c:forEach>
+		</div>
+	</section>
 
+<!--  -->
 <div class="pagebox">
 <span><a href="pr_search?navbar_p=${find}&&pr_page=${page.now-1}" >이전</a></span>
 
