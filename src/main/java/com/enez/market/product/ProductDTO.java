@@ -2,11 +2,20 @@ package com.enez.market.product;
 
 public class ProductDTO {
 int product_no,view_cnt,price;
-String seller_id,category_name,buyer_id,title,detail,product_image,product_state,create_at,update_at;
+String seller_id,category_name,buyer_id,title,detail,product_image,product_state,create_at,update_at,member_id;
 String location;
 
 public ProductDTO() {
 }
+
+public String getMember_id() {
+	return member_id;
+}
+
+public void setMember_id(String member_id) {
+	this.member_id = member_id;
+}
+
 public int getProduct_no() {
 	return product_no;
 }

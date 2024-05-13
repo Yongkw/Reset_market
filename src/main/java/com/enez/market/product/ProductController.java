@@ -59,15 +59,9 @@ public class ProductController {
 				mf.transferTo(new File(path + "\\" + filename)); // 이미지 파일을 저장
 				product_image += (product_image.isEmpty() ? "" : ",") + filename; // 이미지 파일 이름을 문자열에 추가
 		    }
-			 System.out.println("가져온 아이디값 : "+member_id );
-			 System.out.println("가져온 사진들: "+product_image);
-			 System.out.println("가져온 제목 :" + title);
-			 System.out.println("가져온 카테고리 :" + category_name);
-			 System.out.println("가져온 지역 :" + location);
-			 System.out.println("가져온 가격 :" + price);
-			 System.out.println("가져온 설명 :" + detail);
+			 
 			ss.productsave(member_id,product_image,title,category_name,location,price,detail);
-            imagedetail(product_image);
+            imagedetail(product_image,member_id);
 			return "redirect:main";
 			}
 			else 
@@ -75,14 +69,14 @@ public class ProductController {
 			return "redirect:login";
 			}
 		}
-        private void imagedetail(String product_image) {
+        private void imagedetail(String product_image, String member_id) {
             String main_image ="";
             Service ss = sqlSession.getMapper(Service.class);
             if (product_image != null && !product_image.isEmpty()) {
                 String[] imageArray = product_image.split(",");
                 main_image = imageArray[0]; // 첫 번째 이미지를 대표 이미지로 선택
             }
-            ss.mainimagesave(main_image);
+            ss.mainimagesave(main_image,member_id);
         }
 		@RequestMapping(value = "/")
 		public String product3(MultipartHttpServletRequest mul) {
@@ -189,8 +183,36 @@ public class ProductController {
 			System.out.println(a);
 		}
         @RequestMapping(value = "/productmanager")
-        public String product6() {
-            return "productmanager";
+        public String product6(Model mo , HttpSession si) {
+            String member_id = (String) si.getAttribute("member_id");
+            
+            if(member_id != null) {
+            	System.out.println("가져온 멤버아이디값 :"+member_id);
+                Service ss = sqlSession.getMapper(Service.class);
+                ArrayList<Product_managerDTO>list=ss.promanager(member_id);
+                //ArrayList<Product_managerDTO>image=ss.promanagerimage(member_id);
+                mo.addAttribute("list",list);
+                //System.out.println("리스트사이즈 :"+list.size()); 
+                return "productmanager";
+            }
+            else {
+                return "redirect:login";
+            }
+        }
+        @ResponseBody
+        @RequestMapping(value = "pro_state")
+        public void product7(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        	Service ss =sqlSession.getMapper(Service.class);
+        	String vlaue = request.getParameter("state");
+        	int vlaue2 =Integer.parseInt(request.getParameter("state2"));
+        	
+
+        	System.out.println("가져온값 : "+vlaue);
+        	System.out.println("가져온값2 : "+vlaue2);
+        	
+        	ss.statevlaue(vlaue,vlaue2);
+        
+        	
         }
 		
 }
