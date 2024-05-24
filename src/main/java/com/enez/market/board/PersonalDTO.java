@@ -2,7 +2,7 @@ package com.enez.market.board;
 
 public class PersonalDTO {
 	int personal_no;
-	String personal_category,personal_title,personal_content,personal_img,personal_name,personal_id,personal_email, create_at;
+	String personal_category,personal_title,personal_content,personal_img,personal_name,personal_id,personal_email, create_at, answer_state, answer_content;
 	public PersonalDTO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -61,6 +61,19 @@ public class PersonalDTO {
 	public void setPersonal_content(String personal_content) {
 		this.personal_content = personal_content;
 	}
+	public String getAnswer_state() {
+		return answer_state;
+	}
+	public void setAnswer_state(String answer_state) {
+		this.answer_state = answer_state;
+	}
+	public String getAnswer_content() {
+		return answer_content;
+	}
+	public void setAnswer_content(String answer_content) {
+		this.answer_content = answer_content;
+	}
+	
 	
 	
 }

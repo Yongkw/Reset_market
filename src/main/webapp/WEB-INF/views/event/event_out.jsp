@@ -73,7 +73,7 @@
 .btn { 
   margin-top: 20px;
   margin-right: 10px;
-  outline: none;
+  outline: green;
   padding: 12px 16px;
   background-color: white;
   cursor: pointer;
@@ -126,8 +126,8 @@
    <div class="column '${aa.event_state }'">
     <div class="content">
     <a href="eventdetail?event_no=${aa.event_no }">
-      <img src="./image/${aa.event_img }" width="300px" height="300px"> </a>
-      <h4><strong>${aa.event_title }</strong></h4>
+      <img src="./image/${aa.event_img_main }" width="300px" height="300px"> </a>
+      <h4 style="padding-top: 10px"><strong>${aa.event_title }</strong></h4>
       <p>기간 : 
     <fmt:parseDate value="${aa.event_sday}" var="startDate" pattern="yyyy-MM-dd HH:mm:ss" />
     <fmt:formatDate value="${startDate}" pattern="yyyy/MM/dd" />
@@ -145,7 +145,9 @@
 <!-- END MAIN -->
 
 <div class="btn-container">
+<c:if test="${sessionScope.member_id eq 'admin'}">
      <button type="submit" class="btn" onclick="location.href='eventform'" style="border: 1px solid currentColor;">작성하기</button>
+</c:if>
 </div>
 
 </div>

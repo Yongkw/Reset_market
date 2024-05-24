@@ -11,6 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <!-- bxslider cdn끝 -->
+<jsp:include page="main_popup.jsp" />
 <style type="text/css">
 .dCIUug {
     width: 1024px;
@@ -234,8 +235,6 @@ element.style {
 
 <meta charset="UTF-8">
 
-
-
 <title>Insert title here</title>
 
 </head>
@@ -329,7 +328,7 @@ element.style {
 			</c:forEach>
 		</div>
 	</section>
-	
+
 	</div>
 	</div>
 </body>

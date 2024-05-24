@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.enez.market.member.MemberDTO;
+
 @Controller
 public class EventController {
 
@@ -22,12 +25,20 @@ public class EventController {
 	SqlSession sqlSession;
 	String imagepath = "C:\\Users\\Administrator\\Desktop\\ezen-reset_market\\src\\main\\webapp\\image";
 	
+	
 	@RequestMapping(value = "/event_out")
-	public String eventpage(Model mo) {
+	public String eventpage(Model mo,HttpSession hs) {
+		String member_id = (String)hs.getAttribute("member_id");
+		if(member_id==null) {
+			member_id=" ";
+		}
+		System.out.println(member_id);
 		Service ss = sqlSession.getMapper(Service.class);
 		ArrayList<EventDTO> list = ss.eventout();
+		MemberDTO member = ss.select(member_id);
 		System.out.println(list.get(0).event_img);
 		mo.addAttribute("list",list);
+		mo.addAttribute("member", member);
 		return"event_out";
 	}
 	
@@ -49,10 +60,15 @@ public class EventController {
 		MultipartFile mf = mul.getFile("event_img");
 		String fname = mf.getOriginalFilename();
 		mf.transferTo(new File(imagepath+"//"+fname));
-		System.out.println(fname);
+		System.out.println("타이틀 이미지" +fname);
+		
+		MultipartFile mf2 = mul.getFile("event_img_main");
+		String fname2 = mf2.getOriginalFilename();
+		mf2.transferTo(new File(imagepath+"//"+fname2));
+		System.out.println("메인 이미지" +fname2);
 		
 		Service ss = sqlSession.getMapper(Service.class);
-		ss.insert(event_title,event_content,fname, event_state, event_sday,event_fday);
+		ss.insert(event_title,event_content,fname, event_state, event_sday,event_fday,fname2);
 		return "redirect:/event_out";
 	}
 	 

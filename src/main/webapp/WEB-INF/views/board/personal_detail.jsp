@@ -91,44 +91,39 @@ h1 {
 <body>
 
    <div class="container">
-     <h1>사기조회 상세보기</h1>
+     <h1>1:1문의 상세보기</h1>
      
      <div class="row row1"> 
       <table class="table">
       <c:forEach items="${list }" var="aa">
         <tr>
          <th width=20% class="text-center warning">작성자</th>
-         <td width=30% class="text-center">${aa.victim_id }</td>
+         <td width=30% class="text-center">${aa.personal_id }</td>
          <th width=20% class="text-center warning">작성일</th>
          <td width=30% class="text-center">${aa.create_at }</td>
         </tr>
         <tr>
-         <th width=20% class="text-center warning">사기범ID</th>
-         <td width=30% class="text-center">${aa.suspect_id }</td>
-         <th width=20% class="text-center warning">조회수</th>
-         <td width=30% class="text-center">${aa.swindle_cnt }</td>
-        </tr>
-        <tr>
          <th width=20% class="text-center warning">제목</th>
-         <td colspan="3" style="text-align: center;">${aa.swindle_title }</td>
+         <td width=30% class="text-center">${aa.personal_title }</td>
+         <th width=20% class="text-center warning">답변여부</th>
+         <td width=30% class="text-center">${aa.answer_state }</td>
         </tr>
-        
+             
         <tr>
           <td colspan="4" class="text-left" valign="top" height="200">
-       <div class="btn-container" style="float: right;">
-       <c:if test="${sessionScope.member_id == aa.victim_id}">
-        <button type="button" class="btn" onclick="location.href='swindle_update?swindle_no=${aa.swindle_no}'">수정</button>  
-        <button type="button" class="btn" onclick="location.href='swindle_del?swindle_no=${aa.swindle_no}&case_img=${aa.case_img}'">삭제</button>    
-   	 	</c:if>
-   	 </div><br>
-           <pre style="white-space: pre-wrap;border:none;background-color: white; text-align: center; margin-top: 20px;">${aa.case_content }</pre>
+       <div class="btn-container" style="float: right;">   
+        <c:if test="${sessionScope.member_id eq 'admin'}">
+        <button type="button" class="btn" onclick="location.href='personal_update?personal_no=${aa.personal_no}'">답변하기</button>     
+   	   </c:if>
+   	   </div><br>
+           <pre style="white-space: pre-wrap;border:none;background-color: white; text-align: center; margin-top: 20px;">${aa.personal_content }</pre>
           </td>
         </tr>           
        </c:forEach>
        
        
        <tr>
-       	  <th width=20% class="text-center warning" valign="middle" style="padding-top: 100px;">피해사진</th>
+       	  <th width=20% class="text-center warning" valign="middle" style="padding-top: 100px;">문의사진</th>
        	 
           <td colspan="4" class="text-center" valign="top" height="220">
            <c:forEach var="cc" begin="0" end="${img.size()-1}" step="1">
@@ -137,38 +132,23 @@ h1 {
           </td>
 		
         </tr>
-        <tr></tr>   
+        <tr>
+       	  <th width=20% class="text-center warning" valign="middle" style="padding-top: 100px;">답변내용</th>
+       	 
+          <td colspan="4" class="text-center" valign="top" height="220" style="white-space:pre;">
+           <c:forEach items="${list }" var="aa">
+           ${aa.answer_content }
+           </c:forEach>          
+          </td>
+		
+        </tr>
+
+        
         
       </table>
       
- 	<div class="my-10 p-10 bg-white rounded shadow-sm" style="border-collapse: collapse;">
-	<c:choose >
-	<c:when test="${move.next != 9999}">
-	
-	<button type="button" class="btn btn-outline-secondary mr-10 mb-10" onclick="location.href='swindledetail?swindle_no=${move.next}'">다음글 <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></button>
-		<a href="swindledetail?swindle_no=${move.next}" style="color: black; border-collapse: collapse; "> ${move.nexttitle} </a>
-	</c:when>
-	
-	<c:when test="${move.next == 9999}">
-	<button type="button" class="btn btn-outline-secondary mr-3 mb-3" disabled> 다음글 <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span> </button>
-	다음글이 없습니다
-	</c:when>
-	</c:choose>
-	<br/>
-	<c:choose>
-	<c:when test="${move.last != 9999}">
-	<button type="button" class="btn btn-outline-secondary mr-3 " onclick="location.href='swindledetail?swindle_no=${move.last}'"> 이전글<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span> </button>
-	<a href="swindledetail?swindle_no=${move.last}" style="color: black"> ${move.lasttitle} </a>
-	</c:when>
-	
-	<c:when test="${move.last == 9999}">
-	<button type="button" class="btn btn-outline-secondary mr-3" disabled> 이전글<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span> </button>
-	이전글이 없습니다
-	</c:when>
-	</c:choose>
-	</div>
 	<div class="btn-container" style="text-align: center;">
-        <button type="button" class="btn btn-dark btn-lg" onclick="location.href='swindlemore'">목록</button>        
+        <button type="button" class="btn btn-dark btn-lg" onclick="location.href='info_out'">목록</button>        
    	 </div><br>
      </div>
      

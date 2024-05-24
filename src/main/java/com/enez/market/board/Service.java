@@ -2,6 +2,8 @@ package com.enez.market.board;
 
 import java.util.ArrayList;
 
+import com.enez.market.member.MemberDTO;
+
 public interface Service {
 
 	public ArrayList<BoardDTO> noticeout();
@@ -38,5 +40,24 @@ public interface Service {
 
 	public ArrayList<SwindleDTO> swindlesearch(String swindle_search);
 
+	public ArrayList<SwindleDTO> swindleoutmore();
 
+	public ArrayList<SwindleDTO> page(PageDTO dto);
+
+	public int total();
+
+	public Object movePage(int swindle_no);
+
+	public MemberDTO select(String member_id);
+
+	public ArrayList<PersonalDTO> personalout(String member_id);
+
+	public ArrayList<SwindleDTO> infoswindleout(String member_id);
+
+	public ArrayList<PersonalDTO> personal_detail(int personal_no);
+
+	public ArrayList<PersonalDTO> perupdate(int personal_no);
+
+	public void personalupdate(int personal_no, String answer_content, String answer_state);
+	
 }

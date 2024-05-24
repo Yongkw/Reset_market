@@ -334,7 +334,7 @@ textarea {
 <body>
 <div class="container">
   <form action="event_upsave" method="post" enctype="multipart/form-data">
-    <h1>EVENT Update</h1>
+    <h1>EVENT UPDATE</h1>
   <c:forEach items="${list }" var="aa">
     <div class="form-group">
       <input type="text" required="required" name="event_title" maxlength="100"/>
@@ -364,7 +364,7 @@ textarea {
     </div>
 
     <div class="form-group">
-     <label for="input" class="control-label">Image</label>
+     <label for="input" class="control-label">Image Title</label>
     <label id="largeFile" for="file">
     <input type="file" id="file" name="event_img" onchange="readURL(this);" />
 	</label>

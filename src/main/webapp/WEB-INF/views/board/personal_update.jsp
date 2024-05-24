@@ -1,22 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 이미지 삽입 미리보기 -->
-<script type="text/javascript">
-function readURL(input) {
-	  if (input.files && input.files[0]) {
-	    var reader = new FileReader();
-	    reader.onload = function(e) {
-	      document.getElementById('preview').src = e.target.result;
-	    };
-	    reader.readAsDataURL(input.files[0]);
-	  } else {
-	    document.getElementById('preview').src = "";
-	  }
-	}
-</script>
 <meta charset="UTF-8">
 <style>
 @import url(https://fonts.googleapis.com/css?family=Roboto);
@@ -49,7 +36,7 @@ h1 {
 .container {
   position: relative;
   max-width: 1000px;
-  height: 1200px;
+  height: 700px;
   margin: 5rem auto;
   background: #f6fbf5;
   width: 200%;
@@ -331,49 +318,33 @@ textarea {
 </head>
 <body>
 <div class="container">
-  <form action="eventsave" method="post" enctype="multipart/form-data">
-    <h1>EVENT</h1>
+  <form action="personalupsave" method="post">
+    <h1>답변하기</h1>
+    
     <div class="form-group">
-      <input type="text" required="required" name="event_title" maxlength="100"/>
-      <label for="input" class="control-label" >Title</label><i class="bar"></i>
-    </div>
-    
-     <div class="form-group">
-      <input type="date" required="required" name="event_sday"  placeholder="이벤트 시작일"/>
-      <label for="input" class="control-label">Event Start</label><i class="bar"></i>
-    </div>
-    
-     <div class="form-group">    
-      <input type="date" required="required" name="event_fday" placeholder="이벤트 종료일"/>
-      <label for="input" class="control-label">Event Finish</label><i class="bar"></i>
+     <c:forEach items="${list }" var="aa">   
+      <label for="input">질문내용</label>
+      <input type="text" required="required" readonly="readonly" placeholder=" ${aa.personal_content }"/>  
+     </c:forEach>
     </div>
 
     <div class="form-group">
-      <textarea required="required" name="event_content"></textarea>
-      <label for="textarea" class="control-label">Event Content</label><i class="bar"></i>
+      <textarea required="required" name="answer_content"></textarea>
+      <label for="textarea" class="control-label">답변내용</label><i class="bar"></i>
     </div>
 	
-	<div class="form-group">
-     <label for="input" class="control-label">Image Main</label>
-    <label id="largeFile" for="file">
-    <input type="file" id="file" name="event_img_main" onchange="readURL(this);" />
-	</label>
-	
-	<div style="margin-left: 220px; margin-top: 20px;">
-	<img id="preview" style="width:300px; height:300px;"/>
-	</div>
- 	</div> 
- 	
-    <div class="form-group">
-     Image Title
-    <input type="file" id="file2" name="event_img"/>
- 	</div> 
-
- 	 <input type="hidden" name="event_state" value="ing_event">
+	<div style="font-size: 1.5rem; font-weight: normal;">   
+     답변 상태<br>
+       <input type="radio" name="answer_state" value="미답변">미답변
+       <input type="radio" name="answer_state" value="답변완료" checked="checked">답변완료
+      
+    </div>
+    
+ 	 <input type="hidden" value="${list.get(0).personal_no }" name="personal_no" >
  	
     <div class="button-container">
     <button type="submit" class="button"><span>작성하기</span></button>
-    <button type="button" class="button" onclick="location.href='event_out'"><span>목록</span></button>
+    <button type="button" class="button" onclick="location.href='info_out'"><span>목록</span></button>
   </div>
     
   </form>
