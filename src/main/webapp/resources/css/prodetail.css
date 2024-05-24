@@ -10,28 +10,6 @@
 	width: 1024px;
 }
 
-.OFZaq {
-	display: flex;
-	-webkit-box-align: center;
-	align-items: center;
-	-webkit-box-pack: justify;
-	justify-content: space-between;
-	padding: 30px 0px 20px;
-	height: 78px;
-	border-bottom: 1px solid rgb(63, 63, 63);
-}
-
-.fRoYhx {
-	display: flex;
-	padding: 30px 0px;
-}
-
-.cXRuyi {
-	margin-right: 40px;
-	flex-shrink: 0;
-	width: 430px;
-	height: 430px;
-}
 
 .foTdEN {
 	border: 1px solid rgb(238, 238, 238);
@@ -56,6 +34,30 @@
     height: 100%;
     object-fit: cover; /* 이미지 비율을 유지하면서 부모 요소에 맞춰 잘린 이미지를 보여줍니다. */
 }
+
+.OFZaq {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	padding: 30px 0px 20px;
+	height: 78px;
+	border-bottom: 1px solid rgb(63, 63, 63);
+}
+
+.fRoYhx {
+	display: flex;
+	padding: 30px 0px;
+}
+
+.cXRuyi {
+	margin-right: 40px;
+	flex-shrink: 0;
+	width: 430px;
+	height: 430px;
+}
+
 
 .kmFXSv {
 	width: 100%;
@@ -143,6 +145,11 @@
 	border-right: 1px solid rgb(238, 238, 238);
 	margin-left: 10px;
 	margin-right: 10px;
+}
+.img-small {
+    width: 120px;
+    height: 96px;
+    object-fit: cover; /* 이미지 비율을 유지하며 크기에 맞게 조절 */
 }
 
 .iIjQjz {

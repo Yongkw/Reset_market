@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
@@ -8,7 +8,8 @@
 <head>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <meta charset="UTF-8">
-<link href="${path}/resources/css/promanager.css" rel="stylesheet" />
+<c:set var="now" value="${System.currentTimeMillis()}" />
+<link href="${path}/resources/css/promanager.css?v=${now}" rel="stylesheet" />
 
 </head>
 <body>
@@ -43,11 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 $(document).ready(function(){
  $(".statesave").click(function(){
-	var str1= $(this).attr("id").substr(10);
-	var str2 = $(this).val()
-	console.log(str1)
-	console.log(str2)
-	 
+   var str1= $(this).attr("id").substr(10);
+   var str2 = $(this).val()
+   console.log(str1)
+   console.log(str2)
+    
     // AJAX 요청을 보냅니다.
     
     $.ajax({
@@ -68,141 +69,150 @@ $(document).ready(function(){
 });
 });
 
+$(document).ready(function(){
+    $(".prodelect").click(function(){
+        var productNo = $(this).attr("id").replace("pro_delect3", ""); // 클릭된 버튼의 ID에서 상품 번호 추출
+        var data = {"productNo": productNo}; // 삭제할 상품의 번호를 데이터로 설정
+        console.log(productNo)
+        $.ajax({
+            type: "POST",
+            url: "pro_delect", // 삭제를 처리할 URL
+            data: data,
+            success: function(response) {
+                // 성공 시 실행할 코드
+            },
+            error: function(xhr, status, error) {
+                // 오류 처리
+            }
+        });
+    });
+});
 
-
+//판매중일떄..
 
 </script>
 <div class="kXbHsX">
-	<main class="gWXLML">
-		<header class="cYodSH">
-			<form action="" class="cPIzmp" style="margin-left: 1rem">
-				<input type="text" placeholder="상품을 입력해주세요">
-				<button type="submit" class="eEJEPk">
-				</button>
-			</form>
-			<div class="fHXDuD">
-				<div class="css-2b097c-container">
-					<span class="css-1laao21-a11yText">
-						<span>
-							&nbsp;
-							option 10개씩, selected.
-						</span>
-						<span>
-						   &nbsp;
-						       0 results available. Select is focused , press Down to open the menu,  
-						</span>
-					</span>
-					<div class="cfkuaA">
-						<div class="css-1hwfws3">
-							<div class="css-1uccc91-singleValue">5개씩</div>
-						</div>
-						<div class="hoYcgM"></div>
-					</div>
-					<div class="efSUdZ">
-						<div class="kJZJBa">
-						<!-- 
-						<div id="test_1" tabindex="-1" class="kMEBRe">10개씩</div> -->
-							<div class="gQomUt">5개씩</div>
-							<div class="gQomUt">10개씩</div>
-							<div class="gQomUt">15개씩</div>
-						
-						</div>
-					</div>
-				</div>
-			</div>
-			<div style="display: flex; align-items: center; margin-left: auto;">
-				<div>
-					<div style="display:flex; column-gap: 24px;">
-						<div class="sangselect">전체</div>
-						<div class="sangselect">판매중</div>
-						<div class="sangselect">거래완료</div>
-						<div class="sangselect">판매완료</div>
-					</div>
-				</div>
-			</div>
-		</header>
-		
-		<table>
-			<thead>
-				<tr>
-					<th>사진</th>
-					<th>판매상태</th>
-					<th>상품명</th>
-					<th>가격</th>
-					<th>찜</th>
-					<th>최근수정일</th>
-					<th>조회수</th>
-					<th>기능</th>
-				</tr>
-			</thead>
-			<tbody>
-			<c:forEach items="${list}" var="aa">
-			<tr>
-				<td>
-					<a href="#">
-					<img src="./image/${aa.main_image}" width="152" height="152">
-					</a>
-				</td>
-				<!--판매 상태 -->
-				<td class="padiv1">
-					<div class="css-2b097c-container"> 
-						<div class="cfkuaA">
-							<div class="css-1hwfws3">
-								<div class=" css-1uccc91-singleValue" style="text-align: center;">${aa.product_state}</div>
-							</div>
-							<div class="hoYcgM"></div>
-						</div>
-						<div class="efSUdZ">
-						<div class="kJZJBa">
-							
-							<div class="gQomUt"><button CLASS="statesave" type="button" id="pro_state1${aa.product_no }" value="판매중">판매중</button></div>
-							<div class="gQomUt"><button CLASS="statesave" type="button" id="pro_state2${aa.product_no }" value="거래중" >거래중</button></div>
-							<div class="gQomUt"><button CLASS="statesave" type="button" id="pro_state3${aa.product_no }" value="삭제">삭제</button></div>
-							<div class="gQomUt"><button CLASS="statesave" type="button" id="pro_state4${aa.product_no }" value="판매완료">판매완료</button></div>
-							 
-							 <!-- 
-							 <div class="gQomUt"><input type="button" class="test1" id="test1_${aa.product_no}" value="판매중"> </div>
-							<div class="gQomUt"><button CLASS="test1" type="button" v>거래중</button></div>
-							<div class="gQomUt"><button CLASS="test1" type="button" >삭제</button></div>
-							<div class="gQomUt"><button CLASS="test1" type="button" >판매완료</button></div>
-							 -->
-						</div>
-					</div>
-					</div>
-				</td>
-				<!-- 상품명 -->
-				<td>
-					<a>${aa.title}</a>
-				</td>
-				<!-- 가격 -->
-				<td>
-				${aa.price}
-				</td>
-				<!-- 찜 -->
-				<td>
-				0
-				</td>
-				<!-- 최근 수정일 -->
-				<td>
-				${aa.update_at}
-				</td>
-				<!-- 조회수 -->
-				<td>
-				${aa.view_cnt}
-				</td>
-				<!-- 기능 -->
-				<td>
-				<button class="eNwDap" >
-					<a href="#" >수정</a>
-				</button>
-				</td>
-			</tr>
-			</c:forEach>
-			
-		</tbody>
-		</table>
-		
-	</main>
+   <main class="gWXLML">
+      <header class="cYodSH">
+                     <form action="prosearch" class="cPIzmp" style="margin-left: 1rem" method="get">
+                <input type="text" placeholder="상품을 입력해주세요" name="search">
+            <button type="submit" class="eEJEPk">
+            </button>
+         </form>
+         <div class="fHXDuD">
+            <div class="css-2b097c-container">
+               
+               <div class="cfkuaA">
+                  <div class="css-1hwfws3">
+                     <div class="css-1uccc91-singleValue">5개씩</div>
+                  </div>
+                  <div class="hoYcgM"></div>
+               </div>
+               <div class="efSUdZ">
+                  <div class="kJZJBa">
+                  <!-- 
+                  <div id="test_1" tabindex="-1" class="kMEBRe">10개씩</div> -->
+                     <div class="gQomUt">5개씩</div>
+                     <div class="gQomUt">10개씩</div>
+                     <div class="gQomUt">15개씩</div>
+                  
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div style="display: flex; align-items: center; margin-left: auto;">
+            <div>
+               <div style="display:flex; column-gap: 24px;">
+                  <div class="sangselect">전체</div>
+                  <div class="sangselect">판매중</div>
+                                          <div class="sangselect">거래중</div>
+                  <div class="sangselect">판매완료</div>
+               </div>
+            </div>
+         </div>
+      </header>
+      
+      <table>
+         <thead>
+            <tr>
+               <th>사진</th>
+               <th>판매상태</th>
+               <th>상품명</th>
+               <th>가격</th>
+               <th>찜</th>
+               <th>최근수정일</th>
+               <th>조회수</th>
+               <th>기능</th>
+            </tr>
+         </thead>
+         <tbody>
+         <c:forEach items="${list}" var="aa">
+         <tr>
+            <td>
+               <a href="#">
+               <img src="./image/${aa.main_image}" width="152" height="152">
+               </a>
+            </td>
+            <!--판매 상태 -->
+            <td class="padiv1">
+               <div class="css-2b097c-container"> 
+                  <div class="cfkuaA">
+                     <div class="css-1hwfws3">
+                        <div class=" css-1uccc91-singleValue" style="text-align: center;">${aa.product_state}</div>
+                     </div>
+                     <div class="hoYcgM"></div>
+                  </div>
+                  <div class="efSUdZ">
+                  <div class="kJZJBa">
+                     
+                     <div class="gQomUt"><button CLASS="statesave" type="button" id="pro_state1${aa.product_no }" value="판매중">판매중</button></div>
+                     <div class="gQomUt"><button CLASS="statesave" type="button" id="pro_state2${aa.product_no }" value="거래중" >거래중</button></div>
+                                                 <div class="gQomUt"><button CLASS="prodelect" type="button" id="pro_delect3${aa.product_no }" value="삭제">삭제</button></div>
+                     <div class="gQomUt"><button CLASS="statesave" type="button" id="pro_state4${aa.product_no }" value="판매완료">판매완료</button></div>
+                      
+                      <!-- 
+                      <div class="gQomUt"><input type="button" class="test1" id="test1_${aa.product_no}" value="판매중"> </div>
+                     <div class="gQomUt"><button CLASS="test1" type="button" v>거래중</button></div>
+                     <div class="gQomUt"><button CLASS="test1" type="button" >삭제</button></div>
+                     <div class="gQomUt"><button CLASS="test1" type="button" >판매완료</button></div>
+                      -->
+                  </div>
+               </div>
+               </div>
+            </td>
+            <!-- 상품명 -->
+            <td>
+                                   <a href="productout?title=${aa.title}">${aa.title}</a>
+            </td>
+            <!-- 가격 -->
+            <td>
+            ${aa.price}
+            </td>
+            <!-- 찜 -->
+            <td>
+            0
+            </td>
+            <!-- 최근 수정일 -->
+            <td>
+            ${aa.update_at}
+            </td>
+            <!-- 조회수 -->
+            <td>
+            ${aa.view_cnt}
+            </td>
+            <!-- 기능 -->
+            <td>
+            <button class="eNwDap" >
+                                   <a href="pro_update?product_no=${aa.product_no}" >수정</a>
+            </button>
+            </td>
+         </tr>
+         </c:forEach>
+         
+      </tbody>
+      </table>
+      
+   </main>
 </div>
 
 </body>

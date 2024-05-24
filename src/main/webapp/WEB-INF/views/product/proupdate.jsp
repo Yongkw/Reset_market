@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -195,31 +196,6 @@
     	       }
     	     }
     	   )('att_zone', 'btnAtt')
-    	   
-    	              //유효성검사
-  function check()
-    {
-        var f = document.productForm
-        var dtitle = f.title.value;
-        
-        if(dtitle =="")
-            {
-            alert("상품명을 입력하세요");
-            f.title.select();
-            return false;
-            }
-    
-    
-    var dprice = f.price.value;
-    
-    if(dprice == "")
-        {
-        alert("가격을 입력해주세요");
-        f.price.select();
-        return false;
-        }
-    f.submit();
-    }
 
     
 </script>
@@ -227,7 +203,7 @@
 <body>
 	
 		<div class="hmUNzn">
-		<form name="productForm" action="productsave" method="post" enctype="multipart/form-data">
+		<form action="proupdate2" method="post" enctype="multipart/form-data">
 			<main class="flimjd">
 				<h2 class="fGSdXi">
 					기본정보 <span>*필수항목</span>
@@ -238,12 +214,13 @@
 						<div class="dXoRFE">
 							상품이미지
 						</div>
+						<c:forEach items="${list}" var="aa">
 						<div class="nqDMw">
 							<ul class="czzFIC">
 								<li class="oHGzg">이미지등록 
 								<input type="file"
 									accept="image/jpg, image/jpeg, image/png" id="btnAtt"
-									multiple='multiple' name="product_image">
+									multiple='multiple' name="product_image" value="${aa.product_image}">
 								</li>
 								<li draggable="false" class="iUgrwC">
 									<div id='att_zone' class='att_zone'></div>
@@ -251,16 +228,22 @@
 							</ul>
 							<div class="doQsrA">상품 이미지는 PC에서는 1:1 비율로 보여줘요</div>
 						</div>
+						</c:forEach>
 					<li class="iZffvT">
+					
 						<div class="fw22">
 							상품명
 						</div>
+						<c:forEach items="${list}" var="aa">
 						<div class="nqDMw">
 							<div class="iIJDsQ">
+							
 								<input type="text" placeholder="상품명을 입력해 주세요."
-								 class="lhjRrq" name ="title"  id="title">
+									class="lhjRrq" name ="title" value="${aa.title}">
+							
 							</div>
 						</div>
+						</c:forEach>
 					</li>
 					<li class="iZffvT">
 						<div class="fw22">
@@ -310,6 +293,7 @@
 						<div class="fw22">
 							거래지역
 						</div>
+						<c:forEach items="${list}" var="aa">
 						<div class="nqDMw">
 							<div>
 								<button type="button" class="gWFJMk">내위치</button>
@@ -318,22 +302,27 @@
 									onclick="sample5_execDaumPostcode()" value="주소검색">
 							</div>
 
-							<input type="text" id="sample5_address" placeholder="주소"
-								class="kFOKFl" name = "location">
+							<input type="text" id="sample5_address" 
+								class="kFOKFl" name = "location" value="${aa.location}">
 							<div id="map"
 								style="width: 300px; height: 300px; margin-top: 10px; display: none"></div>
 						</div>
+						</c:forEach>
 					</li>
 					<li class="iZffvT">
+					
 						<div class="fw22">
 							가격 
 						</div>
+						<c:forEach items="${list}" var="aa">
 						<div class="nqDMw">
 							<div class="cYrISD">
 								<input name="price" type="text" placeholder="가격을 입력해 주세요" class="gZdwcQ"
-								 id="price"> <span>원</span>
+									value="${aa.price}"> <span>원</span>
 							</div>
 						</div>
+								<input name="product_no" type="hidden" value="${aa.product_no}" >
+						</c:forEach>	
 					</li>
 
 					<li class="iZffvT">
@@ -341,20 +330,21 @@
 							설명
 						</div>
 						<div class="nqDMw">
-							<textarea rows="6" class="gQnFKF" oninput="hideDivContent(this)" name="detail"></textarea>
+							<textarea rows="6" class="gQnFKF" oninput="hideDivContent(this)" name="detail" ></textarea>
 							<div class="fmzTHs" style="pointer-events : none;">
 								구매시기, 브랜드/모델명, 제품의 상태 (사용감, 하자 유무) 등을 입력해주세여 <br> 서로가 믿고
 								거래할 수 있도록, 자세한 정보와 다양한 각도의 상품 사진을 올려주세요<br> <span>*안전하고
 									건전한 거래 환경을 위해 과학기술정보통신부, 한국인터넷진흥원과 리셋마켓와 함께합니다.</span>
 							</div>
 						</div>
+						
 					</li>
 				</ul>
 			</main>
 
 		
 				<div class="hDtjVn">
-				    <input type="button" value="등록하기" class="fbBXvz" onclick="check()"> 
+					<input type="submit" value="수정하기" class="fbBXvz"> 
 					<input type="reset" value="취소하기" class="eQoStg">
 
 				</div>

@@ -112,7 +112,7 @@ delete from PRODUCT_JJIM where USER_ID in #{param2} and PRODUCT_NO in #{param1}
 <insert id="mainimagesave">
  insert into imagedetail 
  (image_no, main_image,member_id) 
- values (image_seq.nextval,#{param1},#{param2})
+  values (#{param1},#{param2},#{param3})
 </insert>
 
 <select id="promanager" resultType="com.enez.market.product.Product_managerDTO">
@@ -142,6 +142,48 @@ ORDER BY
 <update id="statevlaue">
 	update product set product_state = #{param1} where product_no = #{param2}
 </update>
+
+<delete id="prodelect">
+    delete from product where product_no = #{param1}
+</delete>
+<delete id="proimage">
+    delete from imagedetail where image_no = #{param1}
+</delete>
+
+
+<select id="update" resultType="com.enez.market.product.ProductDTO" >
+    select * from product where product_no = #{param1}
+</select>
+
+
+
+<update id="update2">
+    update product set product_image = #{param3}, title = #{param4}, category_name = #{param5},
+    location = #{param6}, price =#{param7} , detail = #{param8} where product_no = #{param1}
+</update>
+
+<update id="mainimageup">
+    update imagedetail set main_image = #{param1} where image_no = #{param3}
+</update>
+
+<select id="promember" resultType="com.enez.market.product.Product_memberDTO">
+    select * from reset_user where member_id = #{param1}
+</select>
+
+<select id="prosangjum" resultType="com.enez.market.product.ProductDTO">
+SELECT DISTINCT p.price, i.main_image
+FROM product p
+JOIN imagedetail i ON p.product_no = i.image_no
+WHERE i.image_no in (select product_no from product where seller_id = #{param1})
+</select>
+
+<select id="saveproduct" resultType= "Integer">
+    SELECT max(product_no) FROM product WHERE seller_id = #{param1} 
+</select>
+
+<select id="getProductsByState" parameterType="map" resultType="com.enez.market.product.Product_managerDTO">
+        SELECT * FROM products WHERE product_state = #{param1}
+    </select>
 
 
 </mapper>

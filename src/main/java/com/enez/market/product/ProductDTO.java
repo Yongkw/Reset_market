@@ -1,10 +1,10 @@
 package com.enez.market.product;
 
 public class ProductDTO {
-int product_no,view_cnt,price;
+	int product_no,view_cnt,price,image_no;
 String seller_id,category_name,buyer_id,title,detail,product_image,product_state,create_at,update_at,member_id;
 String location;
-
+String main_image;
 public ProductDTO() {
 }
 
@@ -95,5 +95,20 @@ public void setLocation(String location) {
 	this.location = location;
 }
 
+public int getImage_no() {
+    return image_no;
+}
+
+public void setImage_no(int image_no) {
+    this.image_no = image_no;
+}
+
+public String getMain_image() {
+    return main_image;
+}
+
+public void setMain_image(String main_image) {
+    this.main_image = main_image;
+}
 
 }

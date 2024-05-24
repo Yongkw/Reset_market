@@ -1,4 +1,26 @@
 @charset "UTF-8";
+
+.efSUdZ {
+    display: none; /* 기본적으로 숨김 */
+    width: 112px;
+    height: 158px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-top-width: 2px;
+    position: absolute;
+    top: 100%; /* 부모 요소 아래에 위치하도록 설정 */
+    border: 1px solid rgb(195, 194, 204);
+}
+
+.gQomUt{
+	width: 110px;
+    padding-left: 8px;
+    padding-right: 8px;
+    height: 47px;
+    margin-top: 5px;
+    background-color: white;
+}
+
 .kXbHsX {
     background: rgb(255, 255, 255);
     font-size: 16px;
@@ -69,14 +91,7 @@ button {
 .fHXDuD {
     width: 7rem;
 }
-.gQomUt{
-	width: 110px;
-    padding-left: 8px;
-    padding-right: 8px;
-    height: 47px;
-    margin-top: 5px;
-    background-color: white;
-}
+
 .css-2b097c-container {
     position: relative;
     box-sizing: border-box;
@@ -155,17 +170,7 @@ button {
 .gWXLML table tbody > tr {
     border-bottom: 1px solid rgb(220, 219, 228);
 }
-.efSUdZ {
-    display: none; /* 기본적으로 숨김 */
-    width: 112px;
-    height: 158px;
-    padding-left: 0px;
-    padding-right: 0px;
-    border-top-width: 2px;
-    position: absolute;
-    top: 100%; /* 부모 요소 아래에 위치하도록 설정 */
-    border: 1px solid rgb(195, 194, 204);
-}
+
 .sangselect {
 	font-weight: 500;
 	line-height: normal;
