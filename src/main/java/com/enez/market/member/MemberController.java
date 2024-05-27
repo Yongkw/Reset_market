@@ -4,21 +4,25 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import com.enez.market.product.FollowProfileDTO;
+import com.enez.market.product.JjimPoriductDTO;
+import com.enez.market.product.ProductDTO;
+import com.enez.market.product.UserProfileDTO;
 
 
 
@@ -26,7 +30,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public class MemberController {
 	@Autowired
 	SqlSession sqlSession;
-	String path = "C:\\이젠디지탈12\\spring\\ResetMarket_Member\\src\\main\\webapp\\image";
+	String path = "C:\\Users\\Administrator\\Desktop\\realreal market (5)\\src\\main\\webapp\\image";
 
 	@RequestMapping(value = "/signup")
 	public String member_signup() {
@@ -386,18 +390,6 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping(value = "mypage2")
-	public String mypage(HttpServletRequest request,HttpSession hs,Model mo) {
-		String member_id = (String)hs.getAttribute("member_id");
-		System.out.println(member_id);
-		Service ss = sqlSession.getMapper(Service.class);
-	
-		MemberDTO member = ss.select(member_id);
-		mo.addAttribute("member", member);
-
-		return "mypage2";
-	}
-	
 	@ResponseBody
 	@RequestMapping(value = "introsave")
 	public String intro(HttpServletRequest request,HttpSession hs,Model mo) {
@@ -408,6 +400,151 @@ public class MemberController {
 		
 		return "";
 	}
+	
+	
+	@RequestMapping(value = "sdpage")
+	public String sdpage(HttpServletRequest request , HttpSession hs , Model mo) {
+		String user_id = (String)hs.getAttribute("member_id");
+		String member_id=request.getParameter("member_id");
+		System.out.println("찜한 사람 닉네임 :"+member_id);
+		Service ss = sqlSession.getMapper(Service.class);
+		MemberDTO member = ss.select(member_id);
+	 
+		
+		//찜데이터
+		com.enez.market.product.Service pp = sqlSession.getMapper(com.enez.market.product.Service.class);
+		if(member_id.equals("")||member_id.equals(null)||member_id.isEmpty()||pp.idcheck(member_id)==0) {return "redirect:main";}
+		List<String> likejjim = pp.likejjim(member_id); // 내가 찜한 사람들의 상품넘버 리스트
+		List<String> getjjim = pp.getjjim(member_id); // 날 찜한 사람들의 상품넘버 리스트
+		
+		
+		
+		UserProfileDTO userdata= pp.getCreateDate(member_id); // 안에 있는 값 stdata, profile_image, nickname,category_check1
+		ArrayList<JjimPoriductDTO> JjimPoriduct  =new ArrayList<JjimPoriductDTO>();//내가 찜한 사람들의 상품 데이터
+		ArrayList<FollowProfileDTO> FollowProfile  =new ArrayList<FollowProfileDTO>(); //날 찜한 사람들의 프로필 데이터
+		// 상대방의 상품정보 
+		ArrayList<ProductDTO> list = pp.productout1(member_id);
+		
+		JjimPoriduct = pp.getlikejjimProduct(likejjim); 
+		FollowProfile = pp.getFollowProfile(getjjim);
+		// 추가로 넘겨야 할거 - 자기소계?,상점방문수 + 상품 데이터
+		
+		
+		if(user_id.equals(member_id) ) {
+			mo.addAttribute("list", list);
+			mo.addAttribute("member", member);
+			mo.addAttribute("jjimPoriduct",JjimPoriduct);
+			mo.addAttribute("followProfile", FollowProfile);
+			mo.addAttribute("userdata",userdata);
+			return "redirect:mypage";
+		}
+		else
+			ss.readcnt(member_id);
+			mo.addAttribute("list", list);
+			mo.addAttribute("member", member);
+			mo.addAttribute("jjimPoriduct",JjimPoriduct);
+			mo.addAttribute("followProfile", FollowProfile);
+			mo.addAttribute("userdata",userdata);
+			
+		return "mypage2";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/sort" ,method = RequestMethod.POST)
+	public List<ProductDTO> sort(HttpServletRequest request,Model mo) {
+		Service ss = sqlSession.getMapper(Service.class);
+		com.enez.market.product.Service pp = sqlSession.getMapper(com.enez.market.product.Service.class);
+		String seller_id = request.getParameter("seller_id");
+		String state = request.getParameter("state");
+		String order = request.getParameter("order");
+		//List<ProductDTO> products = null;
+		List<ProductDTO>products=pp.productout1(seller_id);
+		System.out.println("넘어온 아이디 : "+seller_id);
+		System.out.println("상태값 값 : "+state);
+		System.out.println("오더 값 : "+order);
+		if (state.equals("전체")) {
+			products = ss.sortnew(seller_id);
+		} else {
+		    products = pp.statesort(seller_id, state);
+		}
 
+		// 가격에 따른 정렬
+		if (order == "new") {
+		    products = ss.sortnew(seller_id);
+		} else if (order == "prasc") {
+		    products = ss.high(seller_id);
+		} else if (order == "prdesc") {
+		    products = ss.low(seller_id);
+		}
 
+	
+		return products;
+	
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "search_member",method = RequestMethod.POST)
+	public ArrayList<MemberDTO> member_list(@RequestParam String option,@RequestParam String value,Model mo) {
+		Service ss = sqlSession.getMapper(Service.class);
+		System.out.println("넘어온 옵션: "+option);
+		System.out.println("넘어온 밸류: "+value);
+		ArrayList<MemberDTO> dto = null;
+		if(option.equals("아이디")) {
+			dto = ss.search_id(value);
+			
+			System.out.println("아이디 dto :"+dto);
+		}
+		else if(option.equals("이름")) {
+			
+			dto = ss.search_name(value);
+			
+		}
+		else {
+			
+			dto = ss.search_phone(value);
+			
+		}
+		
+		
+		
+		return dto;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "delmem", method = RequestMethod.POST)
+	public String delmem(@RequestParam String member_id,@RequestParam String profile_image) {
+		Service ss = sqlSession.getMapper(Service.class);
+		System.out.println("삭제할 아이디 : "+member_id);
+		System.out.println("삭제할 프로필 이미지 :" + profile_image);
+
+		
+		//관리자 삭제 불가능하게
+		
+		
+		
+		if(profile_image == null || profile_image.equals("") || "default_image.jpg".equals(profile_image))
+		{
+			ss.member_delete(member_id);
+			return "success" ;
+		}
+		else if(member_id.equals("admin"))
+		{
+			return "false";
+		}
+		else
+		{
+			File dimg = new File(path+"\\"+profile_image);
+			if(dimg.exists()) {
+				dimg.delete();
+				
+			}
+			ss.member_delete(member_id);
+			return "success" ;
+			
+		}
+		
+	
+	}
+	
 }

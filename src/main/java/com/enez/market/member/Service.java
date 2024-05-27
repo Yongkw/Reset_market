@@ -1,6 +1,9 @@
 package com.enez.market.member;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import com.enez.market.product.ProductDTO;
 
 public interface Service {
 
@@ -36,8 +39,24 @@ public interface Service {
 
 	void itrsave(String member_id, String intro);
 
+	MemberDTO sdpage(String nickname);
 
+	MemberDTO memnick(String member_id, String nickname);
 
+	String sdnick(String nickname);
+
+	void readcnt(String member_id);
+
+	ArrayList<ProductDTO> product_out(String member_id);
+	
+	List<ProductDTO> sortnew(String seller_id);
+
+	//이름검색
+	ArrayList<MemberDTO> search_name(String value);
+	//전화번호 검색
+	ArrayList<MemberDTO> search_phone(String value);
+	//아이디 검색
+	ArrayList<MemberDTO> search_id(String value);
 
 
 	

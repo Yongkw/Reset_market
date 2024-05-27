@@ -86,5 +86,48 @@
 	<update id="itrsave">
 		update reset_user set intro = #{param2} where member_id = #{param1}
 	</update>
+	
+	<select id="sdpage" resultType="com.enez.market.member.MemberDTO">
+		select * from reset_user where nickname = #{param1}
+	</select>
+	
+	
+	<select id="sdnick" resultType="String">
+		select member_id from reset_user where nickname = #{param1}
+	</select>
+	
+	<update id="readcnt">
+		update reset_user set readcnt=readcnt+1 where member_id = #{param1}
+	</update>
+	
+	<select id="product_out" resultType="com.enez.market.product.ProductDTO">
+	select * from product where seller_id = #{param1}		
+	</select>
+	
+	<select id="sortnew" resultType="com.enez.market.product.ProductDTO">
+	SELECT product_no,seller_id,category_name,buyer_id,price,title,detail,product_state,location,
+    product_image,view_cnt,create_at,update_at,CASE WHEN EXTRACT(DAY FROM SYSDATE - update_at) = 0 THEN 
+    TO_CHAR(TRUNC(MOD(EXTRACT(HOUR FROM SYSDATE - update_at), 24))) || '시간 전'
+    WHEN TRUNC(MONTHS_BETWEEN(SYSDATE, update_at) / 12) >= 1 THEN
+    TO_CHAR(TRUNC(MONTHS_BETWEEN(SYSDATE, update_at) / 12)) || '년 전'
+    WHEN TRUNC(MONTHS_BETWEEN(SYSDATE, update_at)) >=1 THEN
+    TO_CHAR(TRUNC(MONTHS_BETWEEN(SYSDATE, update_at))) || '달 전'
+    ELSE TO_CHAR(EXTRACT(DAY FROM SYSDATE - update_at)) || '일 전'
+    END as period FROM product WHERE seller_id = #{param1}	order by update_at desc		
+	</select>
+	
+	<select id="search_name" resultType="com.enez.market.member.MemberDTO">
+		select * from reset_user where member_name= #{param1} 
+	</select>
+	
+	<select id="search_phone" resultType="com.enez.market.member.MemberDTO">
+		select * from reset_user where phone = #{param1} 
+	</select>
+	
+	<select id="search_id" resultType="com.enez.market.member.MemberDTO">
+		select * from reset_user where member_id = #{param1} 
+	</select>
+	
+	
 
 </mapper>

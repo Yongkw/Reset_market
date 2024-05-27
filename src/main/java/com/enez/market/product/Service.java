@@ -64,6 +64,11 @@ public interface Service {
     
     List<Product_managerDTO> getProductsByState(String state);
 	
-	
+  
+	// 0524 상품 거래 상태에 따른 정렬
+    ArrayList<ProductDTO> productout1(String member_id);
+    
+	List<ProductDTO> statesort(String seller_id, String state);
+
 	
 }

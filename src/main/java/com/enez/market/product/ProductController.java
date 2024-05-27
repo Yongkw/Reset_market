@@ -31,7 +31,8 @@ public class ProductController {
 		SqlSession sqlSession;
 		
 		//String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
-		String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
+		//String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
+		String path = "C:\\Users\\Administrator\\Desktop\\realreal market\\src\\main\\webapp\\image";
 		@RequestMapping(value = "/productinput")
 		public String product1() {
 			
