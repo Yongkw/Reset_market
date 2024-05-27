@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style type="text/css">
 
@@ -389,7 +390,7 @@ height: 25px;
                 <span><label for="link-2" ><a id="link-2" href="notice_out" >COMMUNITY</a></label></span>
 				<span><label for="link-3" ><a id="link-3" href="pricechart_view" >시세 검색</a></label></span>
 				<span><label for="link-4" ><a id="link-4" href="#" >4번링크</a></label></span>
-				<span><label for="link-5" ><a id="link-5" href="#" >5번링크</a></label></span>
+				<span><label for="link-5" ><a id="link-5" href="info_out" >MY QNA</a></label></span>
 			</div>
 			
 			<!-- contents 1  -->

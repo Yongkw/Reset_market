@@ -36,7 +36,7 @@ public interface Service {
 
 	void deljjim(String pr_no, String user);
 
-	void mainimagesave(String main_image,String member_id);
+    void mainimagesave(int product_no,String main_image,String member_id);
 
 	ArrayList<Product_managerDTO> promanager(String member_id);
 
@@ -44,6 +44,25 @@ public interface Service {
 
 
 	void statevlaue(String vlaue, int vlaue2);
+
+    void prodelect(String delect);
+
+    ArrayList<ProductDTO> update(String title);
+
+    void mainimageup(String main_image, String member_id, int product_no);
+
+    void update2(int product_no, String member_id, String product_image, String title, String category_name,
+            String location, int price, String detail);
+
+    ArrayList<Product_memberDTO> promember(String sellerId);
+
+    ArrayList<ProductDTO> prosangjum(String sellerId);
+
+    int saveproduct(String member_id);
+
+    void proimage(String delect);
+    
+    List<Product_managerDTO> getProductsByState(String state);
 	
 	
 	

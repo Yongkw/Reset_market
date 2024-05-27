@@ -9,7 +9,13 @@
       <put-attribute name="body" value=""/>
       <put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
    </definition>
-
+	<!-- 팝업창 관련 -->
+	<definition name="popuplayout" template="/WEB-INF/views/popuplayout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="top" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="" />
+	</definition>
    
    <definition name="main" extends="baseLayout">
       <put-attribute name="title" value="메인화면"/>
@@ -25,7 +31,7 @@
       <put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
    </definition>
    
-
+	<!-- 메인 -->
    <definition name="main_view" extends="baseLayout3">
       <put-attribute name="title" value="메인뷰"/>
       <put-attribute name="body" value="/WEB-INF/views/main_view.jsp"/>
@@ -34,6 +40,14 @@
       <put-attribute name="title" value="메인화면"/>
       <put-attribute name="body" value="/WEB-INF/views/main.jsp"/>
    </definition>
+      
+   <definition name="main_popup" extends="popuplayout">
+      <put-attribute name="title" value="메인 팝업"/>
+      <put-attribute name="body" value="/WEB-INF/views/main_popup.jsp"/>
+   </definition>
+   <!-- 메인 -->
+   
+   <!-- 상품검색 -->
    <definition name="pr_searcht" extends="baseLayout3">
       <put-attribute name="title" value="상품검색"/>
       <put-attribute name="body" value="/WEB-INF/views/pro_search/pr_search_out.jsp"/>
@@ -46,6 +60,8 @@
       <put-attribute name="title" value="시세결과"/>
       <put-attribute name="body" value="/WEB-INF/views/pricechart/searchresult.jsp"/>
    </definition>
+   <!-- 상품검색 -->
+   
    <!-- 회원관리  -->
    	<definition name="signup" extends="baseLayout3">
 		<put-attribute name="title" value="회원가입" />
@@ -112,7 +128,14 @@
         <put-attribute name="body"
             value="/WEB-INF/views/product/productmanager.jsp" />
     </definition>
-<!-- 이벤트 페이지 -->
+    
+        <definition name="proupdate" extends="baseLayout3">
+        <put-attribute name="title" value="상품수정" />
+        <put-attribute name="body"
+            value="/WEB-INF/views/product/proupdate.jsp" />
+    </definition>
+    
+	<!-- 이벤트 페이지 -->
  	
  		<definition name="event_out" extends="baseLayout3">
 		<put-attribute name="title" value="이벤트_메인페이지" />
@@ -203,9 +226,15 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/board/swindle_update.jsp" />
 		</definition>
+		
+		<definition name="swindlemore" extends="baseLayout3">
+		<put-attribute name="title" value="사기등록게시판" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/swindlemore.jsp" />
+		</definition>
  	
  	<!-- 사기조회 end --> 
-   <definition name="mapview" extends="baseLayout3">
+   <definition name="mapview" extends="baseLayout3"> <!-- 지도 -->
       <put-attribute name="title" value="map"/>
       <put-attribute name="body" value="/WEB-INF/views/pricechart/mapview.jsp"/>
    </definition>   
@@ -219,5 +248,31 @@
       <put-attribute name="body" value="/WEB-INF/views/message/chatroom.jsp"/>
    </definition>   
  
-    
+ 
+ 	<!-- 문의내역 창 -->
+ 
+   	<definition name="info_out" extends="baseLayout3">
+		<put-attribute name="title" value="문의내역 리스트" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/info_out.jsp" />
+	</definition>
+	
+	<definition name="info_swindle" extends="baseLayout3">
+		<put-attribute name="title" value="사기신고내역 리스트" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/info_swindle.jsp" />
+	</definition>
+	
+	<definition name="personal_detail" extends="baseLayout3">
+		<put-attribute name="title" value="1:1문의내역 detail" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/personal_detail.jsp" />
+	</definition>
+	
+	<definition name="personal_update" extends="baseLayout3">
+		<put-attribute name="title" value="1:1문의내역 update" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/personal_update.jsp" />
+	</definition>
+ 
 </tiles-definitions>

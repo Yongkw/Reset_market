@@ -2,12 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="now" value="${System.currentTimeMillis()}" />
 <!DOCTYPE html>
 <html>
 <head>
 
 <meta charset="UTF-8">
-<link href="${path}/resources/css/prodetail.css" rel="stylesheet" />
+<link href="${path}/resources/css/prodetail.css?v=${now}" rel="stylesheet" />
 <!-- slick 라이브러리 설치 -->
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -205,14 +206,16 @@ $(document).ready(function () {
 								<div class="hMRjOs">
 									<div class="iKoLJU">
 										<!-- 클릭하면 내상점(마이페이지)가게 만들기 -->
-										<a class="cfPBhM" href="#"> <img
-											src="https://media.bunjang.co.kr/images/crop/273627_w200.jpg"
-											width="48" height="48">
+										<c:forEach items="${promember}" var="qq">
+                                        <a class="cfPBhM" href="#"> 
+                                        <img src="./image/${qq.profile_image}" width="48" height="48">
 										</a>
-
+										</c:forEach>
 										<div>
 											<!-- 클릭하면 내상점(마이페이지)가게 만들기 -->
-											<a class="bPWHcM" href="#"> 닉네임(nickname) </a>
+											<c:forEach items="${promember}" var="qq">
+                                            <a class="bPWHcM" href="#"> ${qq.nickname}</a>
+                                            </c:forEach>
 											<div class="gNTMUU">
 												<!-- 상품올린 count 줘서 가져와야함 -->
 												<a class="kKVBjY" href="#"> 상품246 </a>
@@ -225,49 +228,21 @@ $(document).ready(function () {
 									<div class="qlCpb">
 										<!-- 해당상점 상품나열 -->
 										<!-- 해당이미지 6개까지만 출력가능하게.. -->
-										<a class="ibkRtu" href="#"> <img alt=""
-											src="https://media.bunjang.co.kr/images/crop/273627_w200.jpg"
-											width="120" height="96">
+							  <c:forEach items="${sangjum}" var="mm" varStatus="loop">
+                              <c:if test="${loop.index < 6}">
+                              
+                                    <div class="qlCpb">
+                                        <!-- 해당상점 상품나열 -->
+                                        <!-- 해당이미지 6개까지만 출력가능하게.. -->
+                                        <a class="ibkRtu" href="#"> 
+                                        <img alt="" src="./image/${mm.main_image}"    width="120" height="96" class="img-small">
 											<div class="kjwDIB">
-												<span>가격(price)</span>
+												<span>${mm.price}</span>
 											</div>
-											<div class="ePUXNF"></div>
-										</a> <a class="ibkRtu" href="#"> <img alt=""
-											src="https://media.bunjang.co.kr/images/crop/273627_w200.jpg"
-											width="120" height="96">
-											<div class="kjwDIB">
-												<span>가격(price)</span>
-											</div>
-											<div class="ePUXNF"></div>
-										</a> <a class="ibkRtu" href="#"> <img alt=""
-											src="https://media.bunjang.co.kr/images/crop/273627_w200.jpg"
-											width="120" height="96">
-											<div class="kjwDIB">
-												<span>가격(price)</span>
-											</div>
-											<div class="ePUXNF"></div>
-										</a> <a class="ibkRtu" href="#"> <img alt=""
-											src="https://media.bunjang.co.kr/images/crop/273627_w200.jpg"
-											width="120" height="96">
-											<div class="kjwDIB">
-												<span>가격(price)</span>
-											</div>
-											<div class="ePUXNF"></div>
-										</a> <a class="ibkRtu" href="#"> <img alt=""
-											src="https://media.bunjang.co.kr/images/crop/273627_w200.jpg"
-											width="120" height="96">
-											<div class="kjwDIB">
-												<span>가격(price)</span>
-											</div>
-											<div class="ePUXNF"></div>
-										</a> <a class="ibkRtu" href="#"> <img alt=""
-											src="https://media.bunjang.co.kr/images/crop/273627_w200.jpg"
-											width="120" height="96">
-											<div class="kjwDIB">
-												<span>가격(price)</span>
-											</div>
-											<div class="ePUXNF"></div>
-										</a>
+									</a> 
+                                    </div>
+                                    </c:if>
+                                     </c:forEach>
 									</div>
 									<!-- 상점더보기 내상점(마이페이지)로이동 -->
 									<div class="cagBoV">

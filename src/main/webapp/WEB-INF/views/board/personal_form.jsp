@@ -40,6 +40,7 @@ function nochk(){
   max-width: 1000px;
   margin: auto;
   position: relative; /* 상대적 위치 설정 */
+  margin-bottom: 60px;
 }
 .topnav {
   margin-left: 320px;
@@ -151,6 +152,66 @@ dd {
 	color: #707070;
 	line-height: 1.3;
 }
+.bJyhFc {
+    display: inline-flex;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+.bJyhFc li.on {
+    background-color: rgb(31, 31, 31);
+    border: 1px solid rgb(31, 31, 31);
+}
+
+.bJyhFc li.on > a {
+    color: rgb(255, 255, 255);
+}
+
+
+.bJyhFc li > a {
+    display: inline-block;
+    width: 100%;
+    padding: 17px 0px 15px;
+    line-height: 14px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+.bJyhFc li {
+    flex: 1 1 0%;
+    float: left;
+    border-top: 1px solid rgb(222, 222, 222);
+    border-right: 1px solid rgb(222, 222, 222);
+    border-left: 1px solid rgb(222, 222, 222);
+    border-bottom: 1px solid rgb(222, 222, 222);
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.bJyhFc li > a {
+    display: inline-block;
+    width: 100%;
+    padding: 17px 0px 15px;
+    line-height: 14px;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgb(170, 170, 170);
+}
+
+a {
+    text-decoration: none;
+    color: rgb(102, 102, 102);
+    cursor: pointer;
+}
+
+.flimjd {
+    display: block;
+    width: 1024px;
+    margin: auto;
+    margin-bottom : 60px;
+}
 </style>
 <title>Insert title here</title>
 </head>
@@ -158,12 +219,12 @@ dd {
 
 <div class="main">
 
-<div class="topnav">
-  <a href="notice_out">FAQ</a>
-  <a class="active"  href="personal_form">1:1문의</a>
-  <a href="swindle_main">사기등록</a>
-</div>
-  
+	<ul class="sc-4icuvf-0 bJyhFc" style="margin-top: 30px;">
+	<li class=""><a href="notice_out">FAQ</a></li>
+	<li class="on"><a href="personal_form">1:1문의</a></li>
+	<li class=""><a href="swindle_main">사기등록</a></li>
+	</ul>
+	
    <div class="con_tit">
         <h2 style="margin: 0;">1:1 문의 작성하기</h2>           
    </div>

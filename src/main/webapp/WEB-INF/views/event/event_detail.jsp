@@ -116,21 +116,24 @@ $(document).ready(function() {
 <!-- MAIN (Center website) -->
 <div class="main">
 <div class="main name">
-<h2> 🍀 Event</h2>
+<h2> Event</h2>
 </div>
  <c:forEach items="${list }" var="aa">
+ 
 <div class="event-container">
 <h3>${aa.event_title }</h3> 
 <h5 align="right"><img src="./image/eye_cnt.png" width="30px" height="30px"> ${aa.event_cnt }</h5>
   <img alt="" src="./image/${aa.event_img }" width="700px" height="1500px"><br>			
-   <h4 style="margin-top: 50px; white-space:pre;">${aa.event_content}</h4><br>      
+   <h5 style="margin-top: 50px; white-space:pre;">${aa.event_content}</h5><br>      
  </div>
  
 
     <div class="btn-container">
-    <button type="button" class="btn" onclick="location.href='event_update?event_no=${aa.event_no }'">수정</button>  
-    <button type="button" class="btn" onclick="location.href='event_del?event_no=${aa.event_no}&event_img=${aa.event_img}'">삭제</button>
-    <button type="button" class="btn" onclick="location.href='event_out'">목록</button>
+    <c:if test="${sessionScope.member_id eq 'admin'}">
+    <button type="button" class="btn" onclick="location.href='event_update?event_no=${aa.event_no }'" style="margin-bottom: 30px;">수정</button>  
+    <button type="button" class="btn" onclick="location.href='event_del?event_no=${aa.event_no}&event_img=${aa.event_img}'" style="margin-bottom: 30px;">삭제</button>
+    </c:if>
+    <button type="button" class="btn" onclick="location.href='event_out'" style="margin-bottom: 30px;">목록</button>
     </div>
     </c:forEach>
 <!-- END MAIN -->

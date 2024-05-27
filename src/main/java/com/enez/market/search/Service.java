@@ -2,6 +2,9 @@ package com.enez.market.search;
 
 import java.util.ArrayList;
 
+import com.enez.market.product.ProductDTO;
+import com.enez.market.product.Product_memberDTO;
+
 public interface Service {
 
 	int pr_search(String title,String kategori);
@@ -20,5 +23,7 @@ public interface Service {
 
 	ArrayList<Product_search_DTO> pr_search3_3(int i, int number);
 	
-	
+    
+    
+    
 }

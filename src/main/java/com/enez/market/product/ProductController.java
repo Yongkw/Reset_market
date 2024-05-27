@@ -31,7 +31,7 @@ public class ProductController {
 		SqlSession sqlSession;
 		
 		//String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
-		String path = "C:\\Users\\Administrator\\Desktop\\project_resetmarket\\src\\main\\webapp\\image";
+		String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
 		@RequestMapping(value = "/productinput")
 		public String product1() {
 			
@@ -61,7 +61,11 @@ public class ProductController {
 		    }
 			 
 			ss.productsave(member_id,product_image,title,category_name,location,price,detail);
-            imagedetail(product_image,member_id);
+            int product_no = ss.saveproduct(member_id); // 이 메서드는 적절히 구현되어야 합니다.
+            
+            //int product_no = savedProduct.get(0).getProduct_no();
+            System.out.println("가져온 넘버값: "+product_no);
+            imagedetail(product_image,member_id,product_no);
 			return "redirect:main";
 			}
 			else 
@@ -69,14 +73,14 @@ public class ProductController {
 			return "redirect:login";
 			}
 		}
-        private void imagedetail(String product_image, String member_id) {
+        private void imagedetail(String product_image, String member_id,int product_no) {
             String main_image ="";
             Service ss = sqlSession.getMapper(Service.class);
             if (product_image != null && !product_image.isEmpty()) {
                 String[] imageArray = product_image.split(",");
                 main_image = imageArray[0]; // 첫 번째 이미지를 대표 이미지로 선택
             }
-            ss.mainimagesave(main_image,member_id);
+            ss.mainimagesave(product_no,main_image,member_id);
         }
 		@RequestMapping(value = "/")
 		public String product3(MultipartHttpServletRequest mul) {
@@ -97,6 +101,9 @@ public class ProductController {
 				list= ss.productout(title);
 				count(title);
 			}
+            String sellerId = list.get(0).getSeller_id();
+            ArrayList<Product_memberDTO>promember= ss.promember(sellerId);
+            ArrayList<ProductDTO>sangjum = ss.prosangjum(sellerId);
 			
 			  String aa = list.get(0).product_image+",";
 		      ArrayList<String> listimg = new ArrayList<String>();
@@ -113,7 +120,9 @@ public class ProductController {
 			mo.addAttribute("jjim",jcount);
 			mo.addAttribute("img",listimg);
 			mo.addAttribute("list",list); 
-			
+            mo.addAttribute("list",list);
+            mo.addAttribute("promember",promember);
+            mo.addAttribute("sangjum",sangjum);
 			return "productdetail";
 		}
 
@@ -211,8 +220,92 @@ public class ProductController {
         	System.out.println("가져온값2 : "+vlaue2);
         	
         	ss.statevlaue(vlaue,vlaue2);
+        }
         
-        	
+        @ResponseBody
+        @RequestMapping(value = "pro_delect")
+        public String product8(HttpServletRequest request, HttpServletResponse response) {
+            Service ss = sqlSession.getMapper(Service.class);
+            String delect = request.getParameter("productNo");
+            System.out.println("삭제할 타이틀(이름값) :"+delect);
+            
+            ss.prodelect(delect);
+            ss.proimage(delect);
+            return "productmanager";
+            
+        }
+        
+        @RequestMapping(value = "pro_update") 
+        public String product9(HttpServletRequest request , Model mo) {
+            String pronum = request.getParameter("product_no");
+            System.out.println("가져온 상품번호값 :"+pronum);
+            Service ss = sqlSession.getMapper(Service.class);
+            ArrayList<ProductDTO>list= ss.update(pronum);
+            System.out.println("가져온 리스트값 :"+list);
+            mo.addAttribute("list",list);
+            
+            
+            return "proupdate";
+        }
+        
+        @RequestMapping(value = "proupdate2" , method = RequestMethod.POST)
+        public String product10(MultipartHttpServletRequest mul ,HttpSession si) throws IllegalStateException, IOException {
+            int product_no = Integer.parseInt(mul.getParameter("product_no"));
+            String member_id = (String) si.getAttribute("member_id");
+            
+            if(member_id != null)
+            {
+            String title = mul.getParameter("title");
+            String product_image="";
+            String ca_name1 = mul.getParameter("ca_name1");
+            String ca_name2 = mul.getParameter("ca_name2");
+            String category_name = ca_name1+","+ca_name2;
+            String location = mul.getParameter("location");
+            int price = Integer.parseInt(mul.getParameter("price"));
+            String detail = mul.getParameter("detail");
+            List<MultipartFile> mfArray = mul.getFiles("product_image");
+            Service ss =sqlSession.getMapper(Service.class);
+            for (MultipartFile mf : mfArray) {
+                String filename = mf.getOriginalFilename();
+                mf.transferTo(new File(path + "\\" + filename)); // 이미지 파일을 저장
+                product_image += (product_image.isEmpty() ? "" : ",") + filename; // 이미지 파일 이름을 문자열에 추가
+            }
+             
+            ss.update2(product_no,member_id,product_image,title,category_name,location,price,detail);
+            imagedetail2(product_no,product_image,member_id);
+            return "redirect:main";
+            }
+            else
+            {
+            return "redirect:login";
+            }
+        }
+
+        private void imagedetail2(int product_no, String product_image, String member_id) {
+            
+            String main_image ="";
+            Service ss = sqlSession.getMapper(Service.class);
+            if (product_image != null && !product_image.isEmpty()) {
+                String[] imageArray = product_image.split(",");
+                main_image = imageArray[0]; // 첫 번째 이미지를 대표 이미지로 선택
+            }
+            ss.mainimageup(main_image,member_id,product_no);
+            
+        }
+        /*
+        @RequestMapping(value = "/prosearch" , method = RequestMethod.POST)
+        public String product11() {
+            return "";
+        }
+        */
+        @ResponseBody
+        @RequestMapping(value = "/filterProducts")
+        public List<Product_managerDTO> filterProducts(HttpServletRequest request, HttpServletResponse response) {
+            Service ss = sqlSession.getMapper(Service.class);
+            String state = request.getParameter("state");
+            System.out.println("가져온 state값 :" + state);
+            List<Product_managerDTO> filteredProducts = ss.getProductsByState(state);
+            return filteredProducts;
         }
 		
 }

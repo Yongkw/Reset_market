@@ -87,6 +87,13 @@
  	color: #505743ab;
  	justify-content: space-between;
  }
+ 
+ .messdata>div:last-child p{
+ 	max-width: 70%;
+ 	margin:0;
+ 	text-overflow: ellipsis;
+ 	overflow-x:clip;
+ }
 .btnset{
 	width: 100%;
 	height: 50px;

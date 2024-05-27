@@ -1,6 +1,6 @@
 	<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -106,37 +106,7 @@ $(document).ready(function() {
         }
     });
 });
-$(document).ready(function(){
-	$('.pagebtn').click(function(){
-		const fowid = $(this).attr('id').substr(7);
-		location.replace("mypage?find_id="+fowid);
-	});
-	$('.jjimbtn').click(function(){
-		$('.jjimbtn').click(function(){
-			const fowid = $(this).attr('id').substr(8); //팔로워 할 아이디
-	    	console.log("followbox :"+fowid);
-			$.ajax({
-			    url: 'jjimcount_mypage', 
-			    type: 'POST', 
-			    data: {
-			    	'fowid':fowid,
-			    	},
-			    dataType : 'text',
-			    traditional: true,
-			    success: function(data){
-			    	console.log("성공");
-			    	
-			    },
-			    error: function(error){ // 요청 실패 시 실행될 콜백 함수
-			        console.error(error); // 에러 메시지를 콘솔에 출력
-			        console.log('실패'); // 실패 메시지 출력
-			        
-			    }
-			});
-			
-		});
-	}); 
-});
+
 </script>
 	<!-- 마이페이지 큰박스 시작 -->
 	<div class="cTGCMU">
@@ -175,15 +145,6 @@ $(document).ready(function(){
 						<!-- 닉네임 -->
 						<div class="ehnbKT">
 							<div class="qCGRm">${userdata.nickname}</div>
-							<c:choose>
-							<c:when test="${userdata.id != member_id}">
-							<div>
-								<button class="jjimbtn hpOnCv" id="jjimbtn_${userdata.id}">
-								찜하기
-								</button>
-							</div>
-							</c:when>
-							</c:choose>
 							<div class="bhcrYn">본인인증</div>
 						</div>
 						<!-- 방문횟수 및 찜횟수 등등 -->
@@ -224,9 +185,14 @@ $(document).ready(function(){
 						</div>
 						<!-- 신고하기 부분 -->
 						<div class="dXaXKb">
-							<a class="jynacn">
+							<a class="jynacn" href="swindleform">		
 								<img src="https://m.bunjang.co.kr/pc-static/resource/327172b424ab5e1910a4.png" width="14" height="14">
 								신고하기
+							</a>
+							<span style="margin-left: 20px;"></span>
+							<a class="jynacn" href="personal_form">		
+								<img src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/nav_side_my.png" width="14" height="14">
+								문의하기
 							</a>
 						</div>
 					</div>
@@ -261,7 +227,7 @@ $(document).ready(function(){
 					<!-- 각메뉴를 눌렀을때 나와야하는 페이지 -->
 					<div class="fUqZYe">
 					<!-- 상품  시작 -->
-					
+					 
 					     <div class="cFVlDW test1_1" id="gmerZt1">
                             <div class="gvsXqb">
                                  <div>
@@ -684,9 +650,9 @@ $(document).ready(function(){
 											</div>
 											
 											<div>
-												<button class="hpOnCv" type="button" >
+												<button class="hpOnCv" type="button" onclick="location.href='jjimcancle?pr_no=${i.productno}'">
 												<img  src="https://m.bunjang.co.kr/pc-static/resource/226de467653c15366c94.png" width="20" height="14">
-												찜하기</button>
+												찜취소 하기</button>
 											</div>
 										</div>
 										<!-- 찜한상품 목록 리스트 -->
@@ -724,8 +690,8 @@ $(document).ready(function(){
 								<!-- 찜한사람 프로필 시작 -->
 								<div>
 									<div class="ejqxUK">
-									<c:forEach var="i" items="${followProfile}">
-										<div class="huYmor" id="followbox_${i.id}">
+									<c:forEach var="i" items="${followProfile}" >
+										<div class="huYmor">
 											<div class="gWQYTj">
 												<a class="ihXWvD">
 													<img src="./image/${i.image}" width="120" height="120">
@@ -752,9 +718,9 @@ $(document).ready(function(){
 												
 												<div>
 													<div class="hpOnCv">
-														<button class="hpOnCv pagebtn" id="mypage_${i.id}">
+														<button class="hpOnCv">
 															<img src="https://m.bunjang.co.kr/pc-static/resource/226de467653c15366c94.png" width="20" height="14">
-															방문하기
+															찜하기
 														</button>
 													</div>
 												</div>

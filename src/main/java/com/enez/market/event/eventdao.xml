@@ -5,13 +5,13 @@
 <mapper namespace="com.enez.market.event.Service">
 
  <insert id ="insert">
-  	INSERT INTO event (event_no, event_title, event_content, event_img, event_state, event_sday, event_fday) 
-VALUES (event_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, TO_DATE(#{param5}, 'yyyy-MM-dd'), TO_DATE(#{param6}, 'yyyy-MM-dd'))
+  	INSERT INTO event (event_no, event_title, event_content, event_img, event_state, event_sday, event_fday,event_img_main) 
+VALUES (event_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, TO_DATE(#{param5}, 'yyyy-MM-dd'), TO_DATE(#{param6}, 'yyyy-MM-dd'),#{param7})
 
   </insert>
   
   <select id="eventout" resultType="com.enez.market.event.EventDTO">
-  	select event_img, event_title, event_content, event_state, event_no, event_sday, event_fday from event
+  	select event_img, event_title, event_content, event_state, event_no, event_sday, event_fday, event_img_main from event
   </select>
 
 	<select id="eventupdate" resultType="com.enez.market.event.EventDTO">
@@ -34,5 +34,10 @@ VALUES (event_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, TO_DATE(#
   <delete id="ev_dela">
 	delete from event where event_no = #{param1}
 	</delete>
+	
+	<select id="select"
+		resultType="com.enez.market.member.MemberDTO">
+		select * from reset_user where member_id = #{param1}
+	</select>
   
 </mapper>

@@ -37,8 +37,26 @@
     </insert>
     
     <select id="swindleout" resultType="com.enez.market.board.SwindleDTO">
-          select swindle_no, swindle_title, to_char(create_at,'yyyy/MM/dd')create_at from swindle order by groups DESC
+      <![CDATA[    SELECT swindle_no, swindle_title, TO_CHAR(create_at, 'YYYY/MM/DD') AS create_at 
+          FROM ( SELECT swindle_no, swindle_title, create_at FROM swindle  ORDER BY dbms_random.value) WHERE ROWNUM <= 5 ]]>
     </select>
+    
+    <select id="swindleoutmore" resultType="com.enez.market.board.SwindleDTO">
+      SELECT swindle_no, swindle_title, TO_CHAR(create_at, 'YYYY/MM/DD') AS create_at from swindle order by swindle_no desc 
+    </select>
+    
+    <!-- 페이징처리에서  4단계 전체레코드수 구하기 -->
+	<select id="total" resultType="int">
+	   select count(*) from swindle
+	</select>
+    
+    <!-- 페이징처리에서 전체레코드수 구하기  페이지 출력 구하기-->
+	<select id="page" resultType="com.enez.market.board.SwindleDTO">
+	   select * from ( 
+	   select rownum rn,A.* from(  
+	   SELECT swindle_no, swindle_title, TO_CHAR(create_at, 'YYYY/MM/DD') AS create_at from swindle order by swindle_no desc )A) 
+	   	   where rn between #{start} AND #{end} 
+	</select>
       
     <select id="swindle_detail" resultType="com.enez.market.board.SwindleDTO">
   	select swindle_no, swindle_title, to_char(create_at,'yyyy/MM/dd')create_at, case_content, case_img, swindle_cnt, victim_id, suspect_id from swindle where swindle_no=#{param1}
@@ -65,4 +83,44 @@
 	<select id="swindlesearch" resultType="com.enez.market.board.SwindleDTO">
 		select swindle_no, swindle_title, to_char(create_at,'yyyy/MM/dd')create_at from swindle where swindle_title like '%' || #{param1} || '%'
 	</select>
+	
+	<select id="movePage" parameterType="int" resultType="com.enez.market.board.SwindleDTO">
+	select * from(SELECT 
+			swindle_no,
+	         LEAD(swindle_no,1,9999) OVER(ORDER BY swindle_no) AS next,
+	         LAG(swindle_no,1,9999) OVER(ORDER BY swindle_no) AS last,
+	         swindle_title,
+	         LEAD(swindle_title,1,9999) OVER(ORDER BY swindle_no) AS nexttitle,
+	         LAG(swindle_title,1,9999) OVER(ORDER BY swindle_no) AS lasttitle
+	         
+			FROM swindle
+	        order by swindle_no DESC) 
+	        WHERE swindle_no = #{swindle_no}
+	</select> 
+	
+	<select id="select"
+		resultType="com.enez.market.member.MemberDTO">
+		select * from reset_user where member_id = #{param1}
+	</select>
+	
+	<select id="personalout" resultType="com.enez.market.board.PersonalDTO">
+		select personal_no, personal_title, to_char(create_at,'yyyy/MM/dd')create_at, answer_state, personal_category from personal_qna where personal_id = #{param1}
+	</select>
+	
+	<select id="infoswindleout" resultType="com.enez.market.board.SwindleDTO">
+		select swindle_no, swindle_title, to_char(create_at,'yyyy/MM/dd')create_at from swindle where victim_id = #{param1}
+	</select>
+	
+	<select id="personal_detail" resultType="com.enez.market.board.PersonalDTO">
+  	select personal_no, personal_title, to_char(create_at,'yyyy/MM/dd')create_at, personal_content, personal_img, personal_id, answer_state, answer_content from personal_qna where personal_no=#{param1}
+  </select>
+  
+  <select id="perupdate" resultType="com.enez.market.board.PersonalDTO">
+    	select * from personal_qna where personal_no = #{param1}
+	</select>
+	
+	<update id="personalupdate">
+		update personal_qna set answer_content=#{param2}, answer_state=#{param3} where personal_no=#{param1}
+	</update>
+	
 </mapper>

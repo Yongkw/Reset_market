@@ -2,11 +2,13 @@ package com.enez.market.board;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import com.enez.market.member.MemberDTO;
 
 
 
@@ -27,10 +30,18 @@ public class BoardController {
 	String imagepath = "C:\\Users\\Administrator\\Desktop\\ezen-reset_market\\src\\main\\webapp\\image";
 	
 	@RequestMapping(value = "/notice_out" )
-	public String notice(Model mo) {	 
+	public String notice(Model mo,HttpSession hs) {	 
+		String member_id = (String)hs.getAttribute("member_id");
+		if(member_id==null) {
+			member_id=" ";
+		}
+		System.out.println(member_id);
 		 Service ss = sqlSession.getMapper(Service.class);
+		 MemberDTO member = ss.select(member_id);
 		 ArrayList<BoardDTO> list = ss.noticeout();
 		 mo.addAttribute("list", list);
+		 System.out.println(list);
+		 mo.addAttribute("member", member);
 		return "notice_out";
 	}
 	
@@ -94,8 +105,19 @@ public class BoardController {
 	   }
 	
 	@RequestMapping(value = "/personal_form", method = RequestMethod.GET)
-	public String personal_form() {
+	public String personal_form(HttpSession hs, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html;charset=utf-8");
+		String member_id = (String)hs.getAttribute("member_id");
 		
+		PrintWriter piw = response.getWriter();
+		System.out.println(member_id);
+		if(member_id==null) {		
+			piw.print("<script>alert('로그인을 해주세요!'); </script>");
+			piw.print("<script>window.location.href='/market/main_view';</script>");
+			piw.close();
+		}
+		else {
+		}
 		return "personal_form";
 	}
 	
@@ -134,17 +156,22 @@ public class BoardController {
 		}
 	}
 	
-	@RequestMapping(value = "/swindle_main", method = RequestMethod.GET)
-	public String swindle_main(Model mo) {
-		Service ss = sqlSession.getMapper(Service.class);
-		ArrayList<SwindleDTO> list = ss.swindleout();
-		mo.addAttribute("list", list);
-		return "swindle_main";
-	}
+	
 	
 	@RequestMapping(value = "/swindleform", method = RequestMethod.GET)
-	public String swindle_form() {
+	public String swindle_form(HttpSession hs, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html;charset=utf-8");
+		String member_id = (String)hs.getAttribute("member_id");
 		
+		PrintWriter piw = response.getWriter();
+		System.out.println(member_id);
+		if(member_id==null) {		
+			piw.print("<script>alert('로그인을 해주세요!'); </script>");
+			piw.print("<script>window.location.href='/market/main_view';</script>");
+			piw.close();
+		}
+		else {
+		}
 		return "swindle_form";
 	}
 	
@@ -176,8 +203,11 @@ public class BoardController {
     }
     
     @RequestMapping(value = "/swindledetail", method = RequestMethod.GET)
-	public String swindledetail(HttpServletRequest request, Model mo) {
-    	
+	public String swindledetail(HttpServletRequest request, Model mo, SwindleDTO swindledto,HttpSession hs) {
+    	String member_id = (String)hs.getAttribute("member_id");
+		if(member_id==null) {
+			member_id=" ";
+		}
     	int swindle_no = Integer.parseInt(request.getParameter("swindle_no"));
     	
 		Service ss = sqlSession.getMapper(Service.class);
@@ -198,7 +228,7 @@ public class BoardController {
 	      }
 	    mo.addAttribute("img",listimg);
 	    mo.addAttribute("list", list);
-		
+	    mo.addAttribute("move", ss.movePage(swindledto.getSwindle_no()));
 		return "swindle_detail";
 	}
 
@@ -259,4 +289,148 @@ public class BoardController {
 		mo.addAttribute("list", list);
 		return "swindle_main";
 	}
+	
+	@RequestMapping (value = "/swindlesearch1", method = RequestMethod.POST)
+	public String search_notice1(HttpServletRequest request, Model mo) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("utf-8");
+		String swindle_search = request.getParameter("swindle_search");
+		Service ss = sqlSession.getMapper(Service.class);
+		ArrayList<SwindleDTO> list = new ArrayList<SwindleDTO>();
+		list = ss.swindlesearch(swindle_search);		
+		mo.addAttribute("list", list);
+		return "swindlemore";
+	}
+	
+	@RequestMapping(value = "/swindlemore", method = RequestMethod.GET)
+	public String swindlemore(HttpServletRequest request, PageDTO dto, Model mo) {
+		String nowPage=request.getParameter("nowPage");
+	    String cntPerPage=request.getParameter("cntPerPage");
+	    
+		Service ss = sqlSession.getMapper(Service.class);
+		
+		int total=ss.total();	     
+	       if(nowPage==null && cntPerPage == null) { 
+	          nowPage="1";
+	          cntPerPage="5";
+	       }
+	       else if(nowPage==null) {
+	          nowPage="1";
+	       }
+	       else if(cntPerPage==null) {
+	          cntPerPage="5";
+	       }      
+	       dto=new PageDTO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+	       mo.addAttribute("paging",dto);
+	       mo.addAttribute("list",ss.page(dto));
+	       
+	//	ArrayList<SwindleDTO> list = ss.swindleoutmore();
+	//	mo.addAttribute("list", list);
+		return "swindlemore";
+	}
+	
+	@RequestMapping(value = "/swindle_main", method = RequestMethod.GET)
+	public String swindle_main(Model mo) { 
+		Service ss = sqlSession.getMapper(Service.class);
+		ArrayList<SwindleDTO> list = ss.swindleout();
+		mo.addAttribute("list", list);
+		return "swindle_main";
+	}
+	
+	@RequestMapping(value = "/info_out")
+	public String mypage(HttpServletRequest request,HttpSession hs,Model mo, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html;charset=utf-8");
+		String member_id = (String)hs.getAttribute("member_id");
+		
+		PrintWriter piw = response.getWriter();
+		System.out.println(member_id);
+		if(member_id==null) {		
+			piw.print("<script>alert('로그인을 해주세요!'); </script>");
+			piw.print("<script>window.location.href='/market/main_view';</script>");
+			piw.close();
+		}
+		else {
+		Service ss = sqlSession.getMapper(Service.class);
+		MemberDTO member = ss.select(member_id);
+		ArrayList<PersonalDTO> list = ss.personalout(member_id);
+		mo.addAttribute("list",list);
+		mo.addAttribute("member", member);
+		}
+		return "info_out";
+	}
+	
+	@RequestMapping(value = "/info_swindle")
+	public String mypage2(HttpServletRequest request,HttpSession hs,Model mo) {
+		String member_id = (String)hs.getAttribute("member_id");		
+		System.out.println(member_id);	
+		Service ss = sqlSession.getMapper(Service.class);
+		MemberDTO member = ss.select(member_id);
+		
+		ArrayList<SwindleDTO> list = ss.infoswindleout(member_id);
+		mo.addAttribute("list",list);
+		mo.addAttribute("member", member);
+
+		return "info_swindle";
+	}
+	
+	@RequestMapping(value = "/personaldetail", method = RequestMethod.GET)
+	public String personaldetail(HttpServletRequest request, Model mo, PersonalDTO personaldto) {   	
+    	int personal_no = Integer.parseInt(request.getParameter("personal_no"));
+    	
+		Service ss = sqlSession.getMapper(Service.class);
+		
+		ArrayList<PersonalDTO> list = ss.personal_detail(personal_no);
+		
+		String aa = list.get(0).personal_img+",";
+	    ArrayList<String> listimg = new ArrayList<String>();
+	    while(true) {
+	         if(-1==aa.indexOf(",")) break;
+	         int size1 = aa.indexOf(",");
+	         String img = aa.substring(0, size1);
+	         aa=aa.substring(img.length()+1);
+	         System.out.println(img);
+	         listimg.add(img);
+	      }
+	    mo.addAttribute("img",listimg);
+	    mo.addAttribute("list", list);
+	    mo.addAttribute("move", ss.movePage(personaldto.getPersonal_no()));
+		return "personal_detail";
+	}
+	
+	@RequestMapping(value = "/personal_update",method = RequestMethod.GET  )
+	public String personal_update(HttpServletRequest request, Model mo) {	 
+		int personal_no = Integer.parseInt(request.getParameter("personal_no"));
+		System.out.println(personal_no);
+		Service ss = sqlSession.getMapper(Service.class);
+		ArrayList<PersonalDTO> list = ss.perupdate(personal_no);
+		mo.addAttribute("list", list);
+		return "personal_update";
+	}
+	
+	@RequestMapping(value = "/personalupsave", method = RequestMethod.POST)
+	public String personal_updatesave(HttpServletRequest request) {
+		int personal_no = Integer.parseInt(request.getParameter("personal_no"));
+        String answer_content = request.getParameter("answer_content");
+        String answer_state = request.getParameter("answer_state");
+    
+        Service ss =sqlSession.getMapper(Service.class);      
+        ss.personalupdate(personal_no,answer_content,answer_state);
+        return "redirect:/info_out";
+        
+	}
+	
+	@RequestMapping("/python1")
+	public String python1() throws InterruptedException, IOException {
+
+        String a1; //실행될 파이썬 파일의 경로설정
+        ProcessBuilder processBuilder; //실행객체
+        a1 = "C:\\ezenpython\\cyberout.py";
+        processBuilder = new ProcessBuilder("python",a1);
+        processBuilder.redirectErrorStream(true);
+        Process process = processBuilder.start();
+        int result = process.waitFor();
+
+        return "redirect:/swindle_main";
+    }
+	
+	
 }

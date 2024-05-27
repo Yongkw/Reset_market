@@ -1,8 +1,12 @@
 package com.enez.market.board;
 
 public class SwindleDTO {
-	int swindle_no, groups, swindle_cnt, prevNum, nextNum;
-	String  swindle_title, case_content, case_img, victim_id, suspect_id, create_at, update_at, prevTitle, nextTitle;
+	int swindle_no, groups, swindle_cnt;
+	String  swindle_title, case_content, case_img, victim_id, suspect_id, create_at, update_at;
+	private int next;
+	private int last;
+	private String nexttitle;
+	private String lasttitle;
 	public SwindleDTO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -67,30 +71,32 @@ public class SwindleDTO {
 	public void setSwindle_cnt(int swindle_cnt) {
 		this.swindle_cnt = swindle_cnt;
 	}
-	public int getPrevNum() {
-		return prevNum;
+	public int getNext() {
+		return next;
 	}
-	public void setPrevNum(int prevNum) {
-		this.prevNum = prevNum;
+	public void setNext(int next) {
+		this.next = next;
 	}
-	public int getNextNum() {
-		return nextNum;
+	public int getLast() {
+		return last;
 	}
-	public void setNextNum(int nextNum) {
-		this.nextNum = nextNum;
+	public void setLast(int last) {
+		this.last = last;
 	}
-	public String getPrevTitle() {
-		return prevTitle;
+	public String getNexttitle() {
+		return nexttitle;
 	}
-	public void setPrevTitle(String prevTitle) {
-		this.prevTitle = prevTitle;
+	public void setNexttitle(String nexttitle) {
+		this.nexttitle = nexttitle;
 	}
-	public String getNextTitle() {
-		return nextTitle;
+	public String getLasttitle() {
+		return lasttitle;
 	}
-	public void setNextTitle(String nextTitle) {
-		this.nextTitle = nextTitle;
+	public void setLasttitle(String lasttitle) {
+		this.lasttitle = lasttitle;
 	}
+	
+	
 	
 	
 }

@@ -24,11 +24,11 @@ $(document).ready(function() {
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-
 .main {
   max-width: 1000px;
   margin: auto;
   position: relative; /* 상대적 위치 설정 */
+  margin-bottom: 60px;
 }
 
 .topnav {
@@ -176,6 +176,59 @@ $(document).ready(function() {
 .button:hover {
   background-color: #f1f1f1;
 }
+.bJyhFc {
+    display: inline-flex;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+.bJyhFc li.on {
+    background-color: rgb(31, 31, 31);
+    border: 1px solid rgb(31, 31, 31);
+}
+
+.bJyhFc li.on > a {
+    color: rgb(255, 255, 255);
+}
+
+
+.bJyhFc li > a {
+    display: inline-block;
+    width: 100%;
+    padding: 17px 0px 15px;
+    line-height: 14px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+.bJyhFc li {
+    flex: 1 1 0%;
+    float: left;
+    border-top: 1px solid rgb(222, 222, 222);
+    border-right: 1px solid rgb(222, 222, 222);
+    border-left: 1px solid rgb(222, 222, 222);
+    border-bottom: 1px solid rgb(222, 222, 222);
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.bJyhFc li > a {
+    display: inline-block;
+    width: 100%;
+    padding: 17px 0px 15px;
+    line-height: 14px;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgb(170, 170, 170);
+}
+
+a {
+    text-decoration: none;
+    color: rgb(102, 102, 102);
+    cursor: pointer;
+}
 </style>
 <title>Insert title here</title>
 </head>
@@ -183,19 +236,19 @@ $(document).ready(function() {
 
 <div class="main">
 
-<div class="topnav">
-  <a class="active" href="notice_out">FAQ</a>
-  <a href="personal_form">1:1문의</a>
-  <a href="swindle_main">사기등록</a>
-</div>
+	<ul class="sc-4icuvf-0 bJyhFc" style="margin-top: 30px;">
+	<li class="on"><a href="notice_out">FAQ</a></li>
+	<li class=""><a href="personal_form">1:1문의</a></li>
+	<li class=""><a href="swindle_main">사기등록</a></li>
+	</ul>
 
 <h2>FAQ</h2>
  
 <div class="faqtable_header"> 
 		<p>
-		<span style="float: left; margin-left: 40px; margin-top: 8px;">구분</span>
-		<span style="float: left; margin-left: 70px; margin-top: 8px;">제목</span>
-		<span style="float: left; margin-left: 750px; margin-top: 8px;">등록일</span>
+		<span style="float: left; margin-left: 40px; margin-top: -8px;">구분</span>
+		<span style="float: left; margin-left: 70px; margin-top: -8px;">제목</span>
+		<span style="float: left; margin-left: 750px; margin-top: -8px;">등록일</span>
 		</p>
 </div>
 
@@ -212,14 +265,18 @@ $(document).ready(function() {
  	<input type="hidden" value="${list.get(0).notice_no }" name="notice_no" >
  	
    <div class="btn-container" style="float: left; margin-bottom: 15px;">
+   <c:if test="${sessionScope.member_id eq 'admin'}">
 	    <button type="button" class="btn" onclick="location.href='noticeupdate?notice_no=${aa.notice_no }'">수정</button>  
 	    <button type="button" class="btn" onclick="location.href='del?notice_no=${aa.notice_no }'">삭제</button>
+	     </c:if>
    </div>
 </div>
 
 </c:forEach>
 <div class="btn-container">
+	 <c:if test="${sessionScope.member_id eq 'admin'}">
      <button type="submit" class="btn btn-dark" onclick="location.href='noticeform'" style="float: left; margin-top: 10px;">작성하기</button>
+     </c:if>
      <a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none; float: right;"> TOP </a>
 </div>
 

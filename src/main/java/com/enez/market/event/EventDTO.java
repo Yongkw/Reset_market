@@ -1,7 +1,7 @@
 package com.enez.market.event;
 
 public class EventDTO {
-	String event_title, event_img, event_content, event_state, event_sday, event_fday;
+	String event_title, event_img, event_content, event_state, event_sday, event_fday,event_img_main;
 	int event_no, event_cnt;
 	public EventDTO() {
 		super();
@@ -54,6 +54,12 @@ public class EventDTO {
 	}
 	public void setEvent_cnt(int event_cnt) {
 		this.event_cnt = event_cnt;
+	}
+	public String getEvent_img_main() {
+		return event_img_main;
+	}
+	public void setEvent_img_main(String event_img_main) {
+		this.event_img_main = event_img_main;
 	}
 	
 	
