@@ -40,18 +40,67 @@
 	overflow: hidden;
 }
 
-.gxbdui {
-	position: absolute;
-	background-size: cover;
-	background-repeat: no-repeat;
-	z-index: 0;
-	width: 106%;
-	height: 106%;
-	top: -3%;
-	left: -3%;
-	filter: blur(10px);
-	background-image:
-		url(https://media.bunjang.co.kr/images/crop/102740946_w200.jpg);
+.blcYdX {                                   /* 소개글 수정 버튼내 ..*/
+    height: 20px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0px 5px;
+    color: rgb(136, 136, 136);
+    border: 1px solid rgb(238, 238, 238);
+    font-size: 11px;
+    text-align: center;
+}
+
+button {                                    /* 버튼 백그라운드 색깔 및 포인터 옵션*/
+	background-color: transparent;
+	cursor: pointer;
+	outline: none;
+}
+
+.klBxMk {									/* 상점 소개 수정 div..*/
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    width: 100%;
+    overflow-y: auto;
+    line-height: 1.57;
+    white-space: pre-wrap;
+    letter-spacing: -0.5px;
+}
+.bmIoCE {
+    display: flex;
+    justify-content: space-between; /* 자식 요소 사이의 간격을 최대화하여 오른쪽에 버튼을 위치시킵니다. */
+    
+}
+
+.bmIoCE > textarea {
+    width: calc(100% - 100px); /* 버튼의 너비를 고려하여 textarea의 너비를 조정합니다. */
+    height: 147px;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    resize: none;
+    border: 1px solid rgb(238, 238, 238);
+    outline: none;
+    
+}
+
+.bmIoCE > button {
+    width: 100px;
+    height: 147px;
+    border: 1px solid rgb(238, 238, 238);
+    background: rgb(250, 250, 250);
+    color: rgb(136, 136, 136);
+}
+
+
+
+.hQqotf { /* 소개수정버튼 간격 */
+    height: 56px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-shrink: 0;
+     
 }
 
 .fQjOoD {
@@ -397,12 +446,20 @@ a:hover {
     margin-right: 20px;
     position: relative;
     display: block;
-    color: rgb(247, 47, 51);
+    color: black;
 }
 .dMXLDX {
     margin-right: 20px;
     position: relative;
     display: block;
+    color: black;
+}
+
+.dMXLDX2 {
+    margin-right: 20px;
+    position: relative;
+    display: block;
+    color: black;
 }
 
 .dhgZke {

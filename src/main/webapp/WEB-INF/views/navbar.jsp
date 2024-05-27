@@ -385,12 +385,21 @@ height: 25px;
 				
 				</div>	
 			</div>
-		<div id="menu" class="nav-bar-div">                
+		<div id="menu" class="nav-bar-div">
+		 <c:choose>
+        <c:when test="${member_id == 'admin'}">
+            <span><label for="admin"><a id="admin" href="memberlist">회원관리</a></label></span>
+            <span><label for="link-1"><a id="link-1" href="event_out">EVENT</a></label></span>
+            <span><label for="link-2"><a id="link-2" href="notice_out">COMMUNITY</a></label></span>
+        </c:when>
+        <c:otherwise>                
 				<span><label for="link-1" ><a id="link-1" href="event_out" >EVENT</a></label></span>
                 <span><label for="link-2" ><a id="link-2" href="notice_out" >COMMUNITY</a></label></span>
 				<span><label for="link-3" ><a id="link-3" href="pricechart_view" >시세 검색</a></label></span>
 				<span><label for="link-4" ><a id="link-4" href="#" >4번링크</a></label></span>
 				<span><label for="link-5" ><a id="link-5" href="info_out" >MY QNA</a></label></span>
+			 </c:otherwise>
+    </c:choose>	
 			</div>
 			
 			<!-- contents 1  -->

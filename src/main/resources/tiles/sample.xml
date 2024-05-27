@@ -97,9 +97,16 @@
 	</definition>
 	
 	<definition name="mypage2" extends="baseLayout3">
-		<put-attribute name="title" value="마이페이지" />
+		<put-attribute name="title" value="상대방의 마이페이지" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/member/mypage2.jsp" />
+	</definition>
+	
+	
+	<definition name="mypage" extends="baseLayout3">
+		<put-attribute name="title" value="마이페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/mypage.jsp" />
 	</definition>
 	
 	<!-- 회원관리  끝-->
@@ -117,11 +124,12 @@
 			value="/WEB-INF/views/product/productdetail.jsp" />
 	</definition>
 	
+	<!--  
 	<definition name="mypage" extends="baseLayout3">
 		<put-attribute name="title" value="마이페이지" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/product/mypage.jsp" />
-	</definition>
+	</definition> -->
 	
 	    <definition name="productmanager" extends="baseLayout3">
         <put-attribute name="title" value="상품관리" />
