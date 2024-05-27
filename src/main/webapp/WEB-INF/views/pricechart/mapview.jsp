@@ -231,10 +231,8 @@ var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표�
     
 });
 var geocoder = new kakao.maps.services.Geocoder();
-//주소-좌표 변환 객체를 생성합니다
 
 $(document).ready(function() {
-// 지도 생성
 var i =$("#maplevel");
 $("#map").bind('wheel', function(event){
 	i.val(map.getLevel());
@@ -301,8 +299,8 @@ kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
 });	
 
 $.ajax({
-    url: 'getdata', // 서버의 엔드포인트 URL
-    type: 'POST', // HTTP 메소드
+    url: 'getdata', 
+    type: 'POST', 
     dataType : 'json',
     traditional: true,
     success: function(jdata){
@@ -327,9 +325,9 @@ $.ajax({
     	});
 	}
 	},
-    error: function(xhr, status, error){ // 요청 실패 시 실행될 콜백 함수
-        console.error(error); // 에러 메시지를 콘솔에 출력
-        console.log('실패'); // 실패 메시지 출력
+    error: function(xhr, status, error){ 
+        console.error(error); 
+        console.log('실패'); 
     }
 });
 
@@ -379,7 +377,6 @@ function productlist(find_code) {
 	var productdiv = $('#map_productlist');
     const d1 = document.getElementById('map_productlist');
 	var prnolist =[];
-	//$.get("./resources/mapaddress.json", function(data) {
 	      $.each(markercodeset, function(i, jdata) {//반복문
 	    	  if(find_code.substr(0,2)==jdata.code.substr(0,2)){
 		    	  prnolist.push(jdata.pr_no);
@@ -387,17 +384,17 @@ function productlist(find_code) {
 	    		  
 	      });
 	      $.ajax({
-	    	    url: 'map_productlist', // 서버의 엔드포인트 URL
-	    	    type: 'POST', // HTTP 메소드
+	    	    url: 'map_productlist',
+	    	    type: 'POST', 
 	    	    data: {'prnolist':prnolist},
 	    	    dataType : 'json',
 	    	    traditional: true,
-	    	    success: function(data){ // 요청 성공 시 실행될 콜백 함수
+	    	    success: function(data){
 	    	        productdiv.empty();
 	    	       $('#prnomber').text(data.length+"개");
 	    	        for(var i in data){
 						d1.insertAdjacentHTML('afterbegin','<div class="pr_list">'
-														+'<a href="productout?title='+data[i].title+'" >'
+														+'<a href="productout?product_no='+data[i].product_no+'" >'
 														+'<div class="pr_img">'
 														+'<img alt="" src="./image/'+data[i].img1+'" width="194" height="194">'
 														+'</div>'
@@ -407,11 +404,10 @@ function productlist(find_code) {
 														+'</div></a></div>'
 														);
 							    	        		};
-								    	        	//category_name  location  price img1 product_no  title  view_cnt 
 	    	    },
-	    	    error: function(xhr, status, error){ // 요청 실패 시 실행될 콜백 함수
-	    	        console.error(error); // 에러 메시지를 콘솔에 출력
-	    	        console.log('실패'); // 실패 메시지 출력
+	    	    error: function(xhr, status, error){ 
+	    	        console.error(error); 
+	    	        console.log('실패'); 
 	    	        productdiv.empty();
 		    	       $('#prnomber').text("0개");
 	    	        
@@ -420,18 +416,18 @@ function productlist(find_code) {
 
 	 }
 function showpr(pr_no) {
-	var productdiv2 = $('#product_show');
+	var productdiv2 = $('#product_show'); // 상품 미니 디테일 추가
     const d2 = document.getElementById('product_show');
 	var prnolist =[];
 	$.ajax({
-	    url: 'findproduct_prno', // 서버의 엔드포인트 URL
-	    type: 'POST', // HTTP 메소드
+	    url: 'findproduct_prno',
+	    type: 'POST', 
 	    data: {'pr_no':pr_no},
 	    dataType : 'json',
 	    traditional: true,
 	    success: function(data){
 	    	productdiv2.empty();
-	    	d2.insertAdjacentHTML('afterbegin','<a href="productout?title='+data[0].title+'" >'
+	    	d2.insertAdjacentHTML('afterbegin','<a href="productout?product_no='+data[0].product_no+'" >'
 	    	+'<div><img alt="" src="./image/'+data[0].img1+'"> </div>'
 	    	+'<div>'
 	    	+'<p>'+data[0].title+'</p>'
@@ -447,9 +443,9 @@ function showpr(pr_no) {
 	    	);
 	    	//category_name  location  price img1 product_no  title  view_cnt 
 	    },
-	    error: function(xhr, status, error){ // 요청 실패 시 실행될 콜백 함수
-	        console.error(error); // 에러 메시지를 콘솔에 출력
-	        console.log('실패'); // 실패 메시지 출력
+	    error: function(xhr, status, error){
+	        console.error(error); 
+	        console.log('실패');
 	        
 	    }
 	});

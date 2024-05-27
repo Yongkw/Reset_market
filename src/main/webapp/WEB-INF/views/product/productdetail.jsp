@@ -114,7 +114,7 @@ $(document).ready(function () {
 										</button>
 
 										<button class="cxTeZB"
-											style="widows: 176.645px; height: 56px;">
+											style="widows: 176.645px; height: 56px;" onclick="location.href='resetchat2?pno=${list.get(0).product_no}'">
 											<span>바로구매</span>
 										</button>
 

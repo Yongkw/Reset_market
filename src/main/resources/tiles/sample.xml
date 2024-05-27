@@ -204,17 +204,20 @@
 			value="/WEB-INF/views/board/swindle_update.jsp" />
 		</definition>
  	
- 	<!-- 사기조회 end -->
-	<!-- 지도 -->
+ 	<!-- 사기조회 end --> 
    <definition name="mapview" extends="baseLayout3">
       <put-attribute name="title" value="map"/>
       <put-attribute name="body" value="/WEB-INF/views/pricechart/mapview.jsp"/>
-   </definition> 
-   <definition name="map_reset" extends="baseLayout3">
-      <put-attribute name="title" value="mapreset"/>
-      <put-attribute name="body" value="/WEB-INF/views/pricechart/map_add_delete.jsp"/>
    </definition>   
- <!-- 지도end -->
- 
    
+   <definition name="resetchat" extends="baseLayout3"> <!-- 체팅 리스트 -->
+      <put-attribute name="title" value="chating"/>
+      <put-attribute name="body" value="/WEB-INF/views/message/chatlist.jsp"/>
+   </definition>   
+   <definition name="resetchat2" extends="baseLayout3"><!-- 체팅방 -->
+      <put-attribute name="title" value="chating"/>
+      <put-attribute name="body" value="/WEB-INF/views/message/chatroom.jsp"/>
+   </definition>   
+ 
+    
 </tiles-definitions>

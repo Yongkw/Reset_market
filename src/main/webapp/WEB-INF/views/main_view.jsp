@@ -262,7 +262,7 @@ element.style {
 		 	<c:if test="${loop.index < 5}">
 			<div class="eCFZgW">
 			
-				<a class="iizKix" href="productout?title=${aa.title}" >
+				<a class="iizKix" href="productout?product_no=${aa.product_no}" >
 					<div class="eSpfym">
 						<img alt="" src="./image/${aa.main_image}" width="194" height="194">
 					</div>
@@ -287,7 +287,7 @@ element.style {
 		<c:forEach items="${main_list2}" var="aa" varStatus="loop">
 		<c:if test="${loop.index < 5}">
 			<div class="eCFZgW">
-				<a class="iizKix" href="productout?title=${aa.title}" >
+				<a class="iizKix" href="productout?product_no=${aa.product_no}" >
 					<div class="eSpfym">
 						<img alt="" src="./image/${aa.main_image}" width="194" height="194">
 					</div>
@@ -312,7 +312,7 @@ element.style {
 		<c:forEach items="${main_list3}" var="aa" varStatus="loop">
 		<c:if test="${loop.index < 5}">
 			<div class="eCFZgW">
-				<a class="iizKix" href="productout?title=${aa.title}" >
+				<a class="iizKix" href="productout?product_no=${aa.product_no}" >
 					<div class="eSpfym">
 						<img alt="" src="./image/${aa.main_image}" width="194" height="194">
 					</div>

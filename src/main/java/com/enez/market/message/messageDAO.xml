@@ -1,0 +1,108 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.enez.market.message.Service">
+ <select id="getchatroomlist" resultType="com.enez.market.message.MesssageSendDTO">
+select 
+	a.BOARD_NO,
+	a.PR_NO,  
+	a.CHATDATE, 
+	a.TEXT, 
+	b.PRODUCT_IMAGE 	as pr_image,
+	b.title 			as pr_title,
+	b.PRODUCT_STATE		as pr_state,
+	case 
+		WHEN (select MEMBER_ID from RESET_USER where MEMBER_ID=#{param1}) in a.SEND_ID
+		then (select MEMBER_NAME from RESET_USER where MEMBER_ID=a.GET_ID) 
+		else (select MEMBER_NAME from RESET_USER where MEMBER_ID=a.SEND_ID)
+	end 				as member_name,
+	(select NVL(sum(LAST_CHECK),0) from RESET_CHATTING c where c.BOARD_NO=a.BOARD_NO and get_id=#{param1}) 
+						as LAST_CHECK
+from 
+	RESET_CHATTING a join PRODUCT b on a.pr_no = b.product_no
+where 
+    (a.BOARD_NO,a.CHATDATE,a.CHAT_NO)
+	in 
+    (select  BOARD_NO,max(CHATDATE),max(CHAT_NO) as CHATDATE
+	from  
+		RESET_CHATTING
+	where 
+		(send_id in #{param1} and close =0) or (get_id in #{param1} and closeget = 0)  GROUP BY BOARD_NO )
+        ORDER by a.chatdate DESC
+</select>
+<insert id="createchatroom">
+insert into 
+	RESET_CHATTING 
+	(BOARD_NO, CHAT_NO, PR_NO, SEND_ID, GET_ID,LAST_CHECK, TEXT,close,closeget) 
+values
+	((SELECT NVL(MAX(BOARD_NO), 0) + 1 FROM RESET_CHATTING),
+	0,#{param1},#{param2},
+ 	(select SELLER_ID from product where PRODUCT_NO = #{param1}),0,'채팅방이 생성 되었습니다.',1,1)
+</insert> 
+<select id="getboardno" resultType="String">
+select 
+	MIN(BOARD_NO) 
+from 
+	RESET_CHATTING 
+where 
+	PR_NO=#{param1} 
+		and (SEND_ID=#{param2} or get_id=#{param2})
+</select>
+<select id="getchttingdata" resultType="com.enez.market.message.MesssageSendDTO">
+select * from RESET_CHATTING where pr_no = #{param2} and BOARD_NO = #{param1} ORDER BY chat_no 
+</select> 
+<select id="checkgetid" resultType="Integer">
+select count(PRODUCT_NO) from PRODUCT where PRODUCT_NO=#{param2} and SELLER_ID = #{param1}
+</select>
+<insert id="sendchatdata2">
+insert into	RESET_CHATTING 
+	(BOARD_NO, CHAT_NO, PR_NO, SEND_ID, GET_ID, TEXT, IMAGE) 
+values
+	(#{param1}, (SELECT NVL(MAX(CHAT_NO), 0) + 1 FROM RESET_CHATTING where BOARD_NO = #{param1})
+	 ,#{param2},#{param3},#{param4},#{param5},#{param6}) 
+</insert>
+
+<select id= "newdatacheck" resultType="Integer">
+<![CDATA[ 
+select NVL(count(board_no),0) from RESET_CHATTING where (BOARD_NO = #{param1} and chat_no >#{param2})
+]]>  
+</select> 
+<select id="readchttingdata" resultType="com.enez.market.message.MesssageSendDTO">
+select * from RESET_CHATTING where (BOARD_NO = #{param1} and chat_no >#{param2} and (get_id =#{param3} or send_id=#{param3}))
+</select> 
+
+<select id="getopponent" resultType="com.enez.market.message.MesssageSendDTO">
+select 
+	b.product_image 		as pr_image, 
+	b.title 				as pr_title, 
+	a.member_name, 
+	a.PROFILE_IMAGE 		as member_img,
+	b.LOCATION			as pr_location
+from 
+	product b join reset_user a on a.member_id = b.seller_id 
+	where b.product_no = #{param1} 
+</select> 
+
+<update id="readcheck" >
+ <![CDATA[ 
+UPDATE RESET_CHATTING SET LAST_CHECK = 0 where BOARD_NO = #{param1} and chat_no<=#{param2} and GET_ID = #{param3}
+]]> 
+</update>
+<update id="readcheck2" >
+ <![CDATA[ 
+UPDATE RESET_CHATTING SET LAST_CHECK = 0 where BOARD_NO = #{param1} and GET_ID = #{param2}
+]]> 
+</update> 
+ 
+<update id="outsender" > 
+UPDATE RESET_CHATTING SET close = 1 where BOARD_NO = #{param1} and send_id = #{param2} 
+</update>
+<update id="outsender2" > 
+UPDATE RESET_CHATTING SET closeget = 1 where BOARD_NO = #{param1} and GET_ID = #{param2} 
+</update>
+ 
+<select id="getimage" resultType="String">
+select PROFILE_IMAGE from RESET_USER where (MEMBER_ID = #{param1})
+</select> 
+</mapper>

@@ -1,4 +1,4 @@
-package com.enez.market.pricechart;
+ package com.enez.market.pricechart;
 
 public class Product_search_DTO {
 	int product_no, view_cnt, price;
@@ -12,9 +12,10 @@ public class Product_search_DTO {
 
 	public void setImg1(String img1) {
 		if(img1.contains(",")) {
-			img1.substring(0, img1.indexOf(","));
-		}
-		this.img1 = img1;
+			this.img1 = img1.substring(0, img1.indexOf(","));
+		} else {
+			this.img1 = img1;}
+		
 	}
 
 	public Product_search_DTO() {
