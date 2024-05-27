@@ -68,6 +68,15 @@
 </body>
  <script type="text/javascript">
  $(document).ready(function() {
+	 $(document).ready(function() {
+	       // 엔터 키 막기
+  $('#s_id').on('keydown', function(e) {
+      if (e.key === 'Enter' || e.keyCode === 13) {
+          e.preventDefault();
+          $('#btn_search').click(); // 엔터 키로 검색 버튼 클릭
+      }
+  });
+	 
 	    $('#btn_search').click(function() {
 	        var option = $('#c_id').val();
 	        var value = $('#s_id').val();
@@ -75,35 +84,40 @@
 	        $.ajax({
 	            url: 'search_member',
 	            type: 'POST',
-	            data: {	option: option, value: value},
+	            data: { option: option, value: value },
 	            dataType: 'json',
 	            success: function(response) {
 	                var tbody = $('#member_list tbody');
 	                tbody.empty(); // 기존 내용 비우기
-	                console.log("넘어온 데이터 값:"+response);
-	                response.forEach(function(dd) {
-	                	alert("회원 찾기 성공!");
-	                    var row = '<tr>' +
-	                        '<td>' + dd.member_id + '</td>' +
-	                        '<td>' + dd.member_pw + '</td>' +
-	                        '<td>' + dd.member_name + '</td>' +
-	                        '<td>' + dd.phone + '</td>' +
-	                        '<td>' + dd.address + '</td>' +
-	                        '<td>' + dd.nickname + '</td>' +
-	                        '<td>' + dd.category_check1 + '</td>' +
-	                        '<td><img src="./image/' + dd.profile_image + '" width="50px" height="40px"></td>' +
-	                        '<td><a href="#" onclick="admdel(\'' + dd.member_id + '\', \'' + dd.profile_image + '\')">삭제</a></td>'+
-	                        '</tr>';
-	                    tbody.append(row);
-	                });
+	                console.log("넘어온 데이터 값:" + response);
+
+	                if (response && response.length > 0) {
+	                    
+	                    response.forEach(function(dd) {
+	                        var row = '<tr>' +
+	                            '<td>' + dd.member_id + '</td>' +
+	                            '<td>' + dd.member_pw + '</td>' +
+	                            '<td>' + dd.member_name + '</td>' +
+	                            '<td>' + dd.phone + '</td>' +
+	                            '<td>' + dd.address + '</td>' +
+	                            '<td>' + dd.nickname + '</td>' +
+	                            '<td>' + dd.category_check1 + '</td>' +
+	                            '<td><img src="./image/' + dd.profile_image + '" width="50px" height="40px"></td>' +
+	                            '<td><a href="#" onclick="admdel(\'' + dd.member_id + '\', \'' + dd.profile_image + '\')">삭제</a></td>' +
+	                            '</tr>';
+	                        tbody.append(row);
+	                    });
+	                } else {
+	                    var nodata = '<tr><td colspan="9">일치하는 회원이 없습니다.</td></tr>';
+	                    tbody.append(nodata);
+	                }
 	            },
 	            error: function(xhr, status, error) {
-	            	alert("일치 하는 회원이 없습니다!");
+	                alert("에러");
 	                console.error('Error:', error);
 	            }
 	        });
 	    });
-	 	    
 	});
  
 		 function admdel(member_id,profile_image) {

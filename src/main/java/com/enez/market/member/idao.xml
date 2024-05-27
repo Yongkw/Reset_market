@@ -119,15 +119,15 @@
 	</select>
 	
 	<select id="search_name" resultType="com.enez.market.member.MemberDTO">
-		select * from reset_user where member_name= #{param1} 
+		select * from reset_user where member_name like #{param1} || '%'
 	</select>
 	
 	<select id="search_phone" resultType="com.enez.market.member.MemberDTO">
-		select * from reset_user where phone = #{param1} 
+		select * from reset_user where phone like #{param1} || '%'
 	</select>
 	
 	<select id="search_id" resultType="com.enez.market.member.MemberDTO">
-		select * from reset_user where member_id = #{param1} 
+		select * from reset_user where member_id like #{param1} || '%'
 	</select>
 	
 	
