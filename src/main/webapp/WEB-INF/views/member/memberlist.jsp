@@ -68,14 +68,13 @@
 </body>
  <script type="text/javascript">
  $(document).ready(function() {
-	 $(document).ready(function() {
 	       // 엔터 키 막기
-  $('#s_id').on('keydown', function(e) {
-      if (e.key === 'Enter' || e.keyCode === 13) {
-          e.preventDefault();
-          $('#btn_search').click(); // 엔터 키로 검색 버튼 클릭
-      }
-  });
+    $('#s_id').on('keydown', function(e) {
+        if (e.key === 'Enter' || e.keyCode === 13) {
+            e.preventDefault();
+            $('#btn_search').click(); // 엔터 키로 검색 버튼 클릭
+        }
+    });
 	 
 	    $('#btn_search').click(function() {
 	        var option = $('#c_id').val();
@@ -119,6 +118,7 @@
 	        });
 	    });
 	});
+
  
 		 function admdel(member_id,profile_image) {
 		     var delok = confirm(member_id + "님을 삭제하시겠습니까?");
@@ -132,7 +132,9 @@
 		                 if (response == "success") {
 		                     alert(member_id + "님이 삭제되었습니다!");
 		                     window.location.reload();
-		                 } else {
+		                 } 
+		                 	
+		                 else {
 		                     alert("관리자는 삭제 불가능! ");
 		                     // 실패한 경우 에러 메시지 표시 등의 추가 작업 수행
 		                 }
