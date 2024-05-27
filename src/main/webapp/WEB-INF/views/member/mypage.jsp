@@ -264,7 +264,7 @@ $('#allproduct').click(function(){
         	console.log(item.product_image);
             var productHtml = ""+
             '<div class="bfphSx">' +
-            '<a class="isOWuA" href="productout?prodcut_no=' + item.product_no + '&title=' + item.title + '">' +
+            '<a class="isOWuA" href="productout?product_no=' + item.product_no + '&title=' + item.title + '">' +
                 '<input type="hidden" value="' + item.seller_id + '" name="' + item.seller_id + '" id="' + item.seller_id + '">' +
                 '<div class="bkngsY">' +
                     '<img src="./image/'+ item.product_image +'" width="194" height="194">' +

@@ -200,14 +200,14 @@ border-radius: 10px;
 							</div>
 							<div class="sns">
 								<img src="./image/github.png" onclick="location.href='https://github.com/heunnie/'">
-								<br><h5> 지가흔</h5>
+								<br><h5>지가흔</h5>
 							</div>
 							<div class="sns">
 								<img src="./image/github.png" onclick="location.href='https://github.com/Yongkw/'">
 								<br><h5>김용권</h5>
 							</div>
 							<div class="sns">
-								<img src="./image/github.png" onclick="location.href='https://github.com/sherr2/'">
+								<img src="./image/github.png" onclick="location.href='https://github.com/kjw9898/'">
 								<br><h5>김진욱</h5>
 							</div>
 						</div>

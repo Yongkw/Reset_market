@@ -468,7 +468,15 @@ public class MemberController {
 		} else {
 		    products = pp.statesort(seller_id, state);
 		}
-
+		int u =0; // 0으로 초기화
+		for (ProductDTO aa : products) { //빠른 for 문 이용
+			String image =aa.getProduct_image(); //string image 값에 product dto 객체명 aa에 저장된 이미지 값 가져온다  
+			if(image.contains(",")) { // if , 이미지 값에 ,를 포함하면 
+				image = image.substring(0,image.indexOf(",")); // string image는 이미지 0번째 부터 ,까지 (첫번째 사진을 가져오게 된다.)
+				products.get(u).setProduct_image(image);	// 첫번째사진값을 product_image에 저장 .. 
+			}
+			u++;//  증가
+		}
 		// 가격에 따른 정렬
 		if (order == "new") {
 		    products = ss.sortnew(seller_id);

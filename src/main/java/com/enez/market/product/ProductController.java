@@ -164,7 +164,7 @@ public class ProductController {
 			mo.addAttribute("member", member);
 			//세션 아이디 상품 데이터값
 			mo.addAttribute("list", list);
-			
+			System.out.println("넘어온 사진 :"+ list.get(0).product_image);
 			
 			return "mypage";
 		}
