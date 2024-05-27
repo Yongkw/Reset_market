@@ -61,12 +61,16 @@ border-radius: 15px;
 
 
 .pr-search-list-div {
-  width: 235px;
-  height: 280px;
-  margin-top: 5px;
-  margin-left: 5px;
+  width: 100%;
+  height: 100%; 
+  overflow: hidden;
 
 }
+.pr-search-list-div table{
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
 .pr-search-top{
  
 }
@@ -79,7 +83,8 @@ border-radius: 15px;
     
   }
 .pr-search-list-div>span>img{
-  	border-radius: 10%;
+  	border-top-left-radius : 5%;
+  	border-top-right-radius : 5%;
   	border: none;
 }
 #pr_list{
@@ -90,10 +95,12 @@ height: 350px;
 
 }
 #pr_list>li{
+margin-top: 15px;
 font-size: x-large;
+color: gray;
 }
 #pr_list li::before {
-	content: '●';
+	content: '● ';
 	color: gray;
 	margin-right: 5px;
 }
@@ -101,7 +108,7 @@ font-size: x-large;
     content: "";
     display: block;
     height: 1px;
-    border-bottom: 3px dotted gray;
+    border-bottom: 3px dotted #DCDCDC;
     margin: 0 auto;
 }
 
@@ -124,7 +131,7 @@ font-size: x-large;
 <hr>
 <div style="display: flex; flex-wrap: wrap; padding: 20px; " >
 <canvas id="myChart" width="900" height="400"></canvas>
-<div style=" margin-left:20px; width:350px; height:400px; background-color: green ;" >
+<div style=" margin-left:20px; width:450px; height:400px; background-color: green ;" >
 <ul id="pr_list" >
 	
 
@@ -138,12 +145,12 @@ font-size: x-large;
 <c:forEach var="i" items="${count_list}" begin="0" end="11" step="1" >
 <div class="pr-search-list"  >
 	<div class="pr-search-list-div" >
-	<span><img alt="상품 이미지" src="./image/${i.product_image}" width="200px" height="200px" ></span>
+	<span><img alt="상품 이미지" src="./image/${i.product_image}" width="100%" height="200px" onerror="this.onerror=null; this.src='./image/1_1.png';" ></span>
 	
 	<table width="216px" height="70px" style="margin-top:10px;" >
 	<tr> <td colspan="2" ><a style="font-weight:bolder;" >${i.title}</a></td></tr>
 	<tr> <td colspan="2"><a>${i.location}</a></td></tr>
-	<tr> <td><a>${i.price}</a></td>  <td style="width: 14%;" ><a>${i.view_cnt}</a></td></tr>
+	<tr> <td><a>${i.price}</a></td>  <td style="width: 30%;" ><a>조회수 ${i.view_cnt}</a></td></tr>
 	</table>	
 	</div>
 </div>
@@ -163,12 +170,12 @@ font-size: x-large;
 
 <div class="pr-search-list" >
 	<div class="pr-search-list-div" >
-	<span><img alt="상품 이미지" src="./image/${i.product_image}" width="200px" height="200px" ></span>
+	<span><img alt="상품 이미지" src="./image/${i.product_image}" width="100%" height="200px" onerror="this.onerror=null; this.src='./image/1_1.png';" ></span>
 	
 	<table width="216px" height="70px" style="margin-top:10px;" >
 	<tr> <td colspan="2" ><a style="font-weight:bolder;" >${i.title}</a></td></tr>
 	<tr> <td colspan="2"><a>${i.location}</a></td></tr>
-	<tr> <td><a>${i.price}</a></td>  <td style="width: 14%;" ><a>${i.view_cnt}</a></td></tr>
+	<tr> <td><a>${i.price}</a></td>  <td style="width: 30%;" ><a>조회수 ${i.view_cnt}</a></td></tr>
 	</table>	
 	
 
@@ -195,13 +202,14 @@ $(function () {
             data: { 'findname': findname }, // 보낼 데이터, 여기서는 예시로 'iddd'라는 키에 데이터를 넣습니다.	
             success: function(tt){ // 요청 성공 시 실행될 콜백 함수
                 console.log('차트 : 데이터 불러오기 성공'); // 성공 메시지 출력
-                
+            	console.log(tt);
                 var ttt = JSON.parse(tt);
-                for(var i in ttt){
-                	console.log(ttt);
-                	dateSet.push(i+'월');
-                	priceSet.push(ttt[i]);
-                	listsave.insertAdjacentHTML('afterbegin','<li>'+i+'월 '+ttt[i]+'원</li>');
+                for(var i in ttt){ 
+                	var a =Object.keys(ttt[i])[0]; 
+                	var value = ttt[i][a];
+                	dateSet.push(a);
+                	priceSet.push(value); 
+                	listsave.insertAdjacentHTML('afterbegin','<li>'+a+' 평균 거래가'+value+'원</li>');
                 }
             	console.log(priceSet);
             	console.log(dateSet);	

@@ -49,7 +49,7 @@ a{
 
 .nav-bar-log{
 	margin: 0 auto;
-	width: 8%; 
+	width: 13%; 
 	float: left;
 	overflow: hidden;
 	}
@@ -70,14 +70,14 @@ a{
 .div1>div{
 	margin-top: var(--nav-height2);
 }
-.div1>div>div{
+.katebar{
 	float:right;
 	outline: 0;
 	border:  0;
 }
 	
 .div2{
-	width: 87%; 
+	width: 82%; 
 	float: left;
 	position: static;
 	}
@@ -87,8 +87,8 @@ a{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding-left:5%; 
-	padding-right: 5%;
+	padding-left:0; 
+	padding-right: 15%;
 	
 	}
 	
@@ -169,7 +169,8 @@ float: right;
 
 .search-bar {
 	margin: 0 auto;
-	width: 65%;
+	margin-left: 9%;
+	width:70%;
 	height: 50%;
 	border-radius: 15px;
 	border: solid 1px #006400;
@@ -247,7 +248,7 @@ color: gray;
 
 .kategorielist{
 	clear:both;
-	width: 20%;
+	width: 600px;
 	height: 250px !important ;
 	margin: 0 auto;
 	box-shadow: inset 0px 3px 3px 0px #008000 ;
@@ -366,15 +367,17 @@ height: 25px;
 
 					<span class="logIO">
 					<!-- <span style="color:black">${member_id}님!</span> -->
-					<span style="color:black"><a href="myinfo">${member_id}님!</a></span>
+            		<a href="resetchat"><img alt="채팅" src="./image/chaticon.png"></a>
+            		<a href="myinfo"><img alt="정보수정" src="./image/icon_3.png"></a>
             		<a href="mypage"><img alt="마이페이지" src="./image/icon-user-5264565.png"></a>
 					<a href="logout"><img  alt="로그아웃" src="./image/icon-logout-11502550.png"></a>
 					</span>
+
 				</c:when>
 				<c:otherwise>
 					<span class="logIO">
 					<a href="#" id="loginLink" data-toggle="modal" data-target="#loginModal"><img alt="로그인" src="./image/icon-login-4663997.png"></a>
-					<a href="signup"><img   alt="회원 가입" src="./image/icon-signup-6850895.png"> </a>
+					<a href="signup"><img alt="회원 가입" src="./image/icon-signup-6850895.png"> </a>
 					</span>
 				</c:otherwise> 
 				</c:choose>
@@ -385,7 +388,7 @@ height: 25px;
 		<div id="menu" class="nav-bar-div">                
 				<span><label for="link-1" ><a id="link-1" href="event_out" >EVENT</a></label></span>
                 <span><label for="link-2" ><a id="link-2" href="notice_out" >COMMUNITY</a></label></span>
-				<span><label for="link-3" ><a id="link-3" href="#" >3번링크</a></label></span>
+				<span><label for="link-3" ><a id="link-3" href="pricechart_view" >시세 검색</a></label></span>
 				<span><label for="link-4" ><a id="link-4" href="#" >4번링크</a></label></span>
 				<span><label for="link-5" ><a id="link-5" href="info_out" >MY QNA</a></label></span>
 			</div>
@@ -504,19 +507,18 @@ height: 25px;
    	   	
 	});
 
+	/*	
     $(document).on("click", ".kate-btnb", function(){ //카테고리 함수1 검색에 추가
     	var kate = $(this).val();
     	$('#select-kategori').text(kate+" >");
     	$('#findkate').val(kate);
     	console.log($('#findkate').val());
-    	
-    });
-	/*	
+    }); 
+    */
     $(document).on("click", ".kate-btnb", function(){ //카테고리 함수2 바로 링크
     	var kate = $(this).val();
-    	location.replace('#?kate='+kate);
-    });
-    */
+    	location.replace('pr_search?findkate='+kate);
+    }); 
     $('.logIO>a>img').mouseenter(function(e){
     	var xlayout = e.clientX-70;
     	var ylayout = e.clientY+10;
@@ -529,12 +531,14 @@ height: 25px;
         		"position":"absolute",
         		"z-index":"106"
         	}).show();
-	    }, 100);
+    		setTimeout(function() {
+    	    	$('#imglayout').css("display","none");
+    		    }, 4000);
+	    }, 200);
     });
     $('.logIO>a>img').mouseleave(function() {
     	$('#imglayout').css("display","none");
 	})
-    
 		</script>
 
 </body>
