@@ -51,7 +51,9 @@
 
 	<select id="select"
 		resultType="com.enez.market.member.MemberDTO">
-		select * from reset_user where member_id = #{param1}
+		select user_id,member_id,member_pw,member_name,address,phone,manner,
+		nickname,category_check1,buyer_id,seller_id,profile_image,intro,EXTRACT(DAY FROM sysdate - stdate)as gaip,readcnt from reset_user
+		where member_id = #{param1}
 	</select>
 
 	<update id="modify">
