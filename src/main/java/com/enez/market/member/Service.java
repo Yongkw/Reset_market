@@ -59,6 +59,7 @@ public interface Service {
 	ArrayList<MemberDTO> search_id(String value);
 
 
+
 	
 
 	

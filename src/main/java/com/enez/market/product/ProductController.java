@@ -88,6 +88,8 @@ public class ProductController {
 			return "";
 		}
 		
+		
+		
 		@RequestMapping(value = "/productout")
 		public String product4(HttpServletRequest request,Model mo) {
 			Service ss = sqlSession.getMapper(Service.class);
@@ -134,6 +136,7 @@ public class ProductController {
 		@RequestMapping(value = "/mypage")
 		public String product5(Model mo,HttpSession session,HttpServletRequest request) {
 			Service ss = sqlSession.getMapper(Service.class);
+			com.enez.market.member.Service pp = sqlSession.getMapper(com.enez.market.member.Service.class);//멤버의 서비스
 			String user ="";
 				if(""!=request.getParameter("find_id")&&!"null".equals(request.getParameter("find_id"))&&request.getParameter("find_id")!=null) {
 					user =request.getParameter("find_id");
@@ -147,6 +150,8 @@ public class ProductController {
 			List<String> likejjim = ss.likejjim(user); // 내가 찜한 사람들의 상품넘버 리스트
 			List<String> getjjim = ss.getjjim(user); // 날 찜한 사람들의 상품넘버 리스트
 			UserProfileDTO userdata= ss.getCreateDate(user); // 안에 있는 값 stdata, profile_image, nickname,category_check1
+			ArrayList<ProductDTO> list = ss.productout1(user);// 유저의 상품 데이터
+			MemberDTO member = pp.select(user);//
 			ArrayList<JjimPoriductDTO> JjimPoriduct  =new ArrayList<JjimPoriductDTO>();//내가 찜한 사람들의 상품 데이터
 			ArrayList<FollowProfileDTO> FollowProfile  =new ArrayList<FollowProfileDTO>(); //날 찜한 사람들의 프로필 데이터
 			
@@ -156,10 +161,25 @@ public class ProductController {
 			mo.addAttribute("jjimPoriduct",JjimPoriduct);
 			mo.addAttribute("followProfile", FollowProfile);
 			mo.addAttribute("userdata",userdata);
+			mo.addAttribute("member", member);
+			//세션 아이디 상품 데이터값
+			mo.addAttribute("list", list);
+			
+			
 			return "mypage";
 		}
 
-
+		@RequestMapping(value = "jjimcancle")
+		public String jjimcancle(HttpServletRequest request,HttpSession session) {
+			String pr_no = request.getParameter("pr_no");
+			String user = (String)session.getAttribute("member_id");
+			Service service = sqlSession.getMapper(Service.class);
+			service.deljjim(pr_no,user);
+			
+			return "redirect:mypage";
+		}
+		
+		
 		@ResponseBody
 		@RequestMapping(value = "jjimcount")
 		public void product_jjim(HttpServletRequest request, HttpServletResponse response) throws IOException {

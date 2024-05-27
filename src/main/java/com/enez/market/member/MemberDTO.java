@@ -3,9 +3,11 @@ package com.enez.market.member;
 public class MemberDTO {
 	int user_id;
 	String member_id, member_pw, member_name, address, phone;
-	int manner;
+	int manner,gaip;
 	String nickname, category_check1, buyer_id, seller_id, profile_image;
 	String stdate , intro;
+	int readcnt;
+	String update_time;
 
 	public MemberDTO() {
 	}
@@ -122,6 +124,33 @@ public class MemberDTO {
 		this.intro = intro;
 	}
 
+	public int getGaip() {
+		return gaip;
+	}
+
+	public void setGaip(int gaip) {
+		this.gaip = gaip;
+	}
+
+	public int getReadcnt() {
+		return readcnt;
+	}
+
+	public void setReadcnt(int readcnt) {
+		this.readcnt = readcnt;
+	}
+
+	public String getUpdate_time() {
+		return update_time;
+	}
+
+	public void setUpdate_time(String update_time) {
+		this.update_time = update_time;
+	}
+
+	
+	
+	
 	
 
 }

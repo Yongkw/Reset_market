@@ -472,11 +472,7 @@ public class MemberController {
 		// 가격에 따른 정렬
 		if (order == "new") {
 		    products = ss.sortnew(seller_id);
-		} else if (order == "prasc") {
-		    products = ss.high(seller_id);
-		} else if (order == "prdesc") {
-		    products = ss.low(seller_id);
-		}
+		} 
 
 	
 		return products;

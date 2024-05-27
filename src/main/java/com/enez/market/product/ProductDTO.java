@@ -5,6 +5,7 @@ public class ProductDTO {
 String seller_id,category_name,buyer_id,title,detail,product_image,product_state,create_at,update_at,member_id;
 String location;
 String main_image;
+String period;
 public ProductDTO() {
 }
 
@@ -110,5 +111,16 @@ public String getMain_image() {
 public void setMain_image(String main_image) {
     this.main_image = main_image;
 }
+
+public String getPeriod() {
+	return period;
+}
+
+public void setPeriod(String period) {
+	this.period = period;
+}
+
+
+
 
 }
