@@ -292,7 +292,7 @@ a:hover {
 	height: 50px;
 }
 
-.gmerZt:second-child {
+.gmerZt:first-child {
 	border-left: 1px solid rgb(238, 238, 238);
 }
 
@@ -543,15 +543,13 @@ a {
     color: rgb(102, 102, 102);
     cursor: pointer;
 }
-
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>	
 	<!-- 마이페이지 큰박스 시작 -->
 	<div class="cTGCMU">
 		<!-- 마이페이지+밑내용 박스 시작 -->
@@ -570,9 +568,10 @@ a {
 								<!-- 백그라운드 배경 끝 -->
 								<!-- 사진 시작 -->
 								<div class="fQjOoD">
-									<img class="caoIJY" src="./image/${member.profile_image}"
+									<img class="caoIJY" src="./image/로고VER.2.png"
 										width="100" height="100">
-									<div class="irlAx">${member.nickname}</div>								
+									<div class="irlAx">관리자</div>
+														
 								</div>
 							</div>
 						</div>
@@ -581,10 +580,11 @@ a {
 					<div class="gJxoqg">
 						<!-- 닉네임 -->
 						<div class="ehnbKT">
-							<div class="qCGRm">${member.nickname}님! 안녕하세요 :)</div>
+							<div class="qCGRm">관리자님! 안녕하세요 :)</div>
 							<div class="bhcrYn">본인인증</div>
 						</div>
-						
+						<!-- 방문횟수 및 찜횟수 등등 -->
+									
 						
 						<!-- 공지 이미지 -->
 						<img src="./image/personalboard.png"
@@ -593,42 +593,75 @@ a {
 
 				</div>
 			</div>
+			
 			<!-- 메뉴 시작 -->
 			<ul class="sc-4icuvf-0 bJyhFc">
-			<li class="">
-			<a href="info_out">1:1문의내역</a>
-			</li>
 			<li class="on">
-			<a href="info_swindle">사기신고내역</a>
+			<a href="admin_qna">1:1문의내역</a>
+			</li>
+			<li class="">
+			<a href="admin_swindle">사기신고내역</a>
 			</li>
 			</ul>
-				
+			
 			<!-- 마이페이지+밑내용 박스 끝 -->
 		</div>
 		<!-- 마이페이지 큰박스 끝 -->
 	</div>
-
+	
 	 <div id="board-list">
         <div class="container">
             <table class="board-table">
                 <thead>
                 <tr>
-                    <th scope="col" class="th-num">번호</th>
+                	<th scope="col" class="th-num">번호</th>	
+                	<th scope="col" class="th-num">질문유형</th>                 
                     <th scope="col" class="th-title">제목</th>
                     <th scope="col" class="th-date">등록일</th>
+                    <th scope="col" class="th-num">답변상태</th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${list }" var="aa">
                 <tr>
-                    <td>${aa.swindle_no }</td>
-					<td><a href="swindledetail?swindle_no=${aa.swindle_no }">${aa.swindle_title }</a></td>
+                	<td>${aa.personal_no }</td>
+                	<td>${aa.personal_category }</td>                                            
+					<td><a href="personaldetail?personal_no=${aa.personal_no }">${aa.personal_title }</a></td>                     
                     <td>${aa.create_at }</td>
+                    <td>${aa.answer_state }</td>
                 </tr>
             	 </c:forEach>
                 </tbody>
-            </table>
-             <button type="button" class="btn btn-dark" onclick="location.href='swindleform'" style="margin-top: 10px;">신고하기</button>
+                
+                   <!--페이징처리 6단계  -->
+			 <tr style="border-left: none;border-right: none;border-bottom: none">
+			   <td colspan="65" style="text-align: center;">
+			   
+			   <c:if test="${paging.startPage != 1 }">
+			      <a href="admin_qna?nowPage=${paging.startPage-1 }&cntPerPage=${paging.cntPerPage}">◀</a>	      
+			   </c:if>   
+			   
+			      <c:forEach begin="${paging.startPage }" end="${paging.endPage}" var="p"> 
+			         <c:choose>
+			            <c:when test="${p == paging.nowPage}">
+			               <b><span style="color: red;">${p}</span></b>
+			            </c:when>   
+			            <c:when test="${p != paging.nowPage }">
+			               <a href="admin_qna?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+			               
+			            </c:when>   
+			         </c:choose>
+			      </c:forEach>
+			     
+			      <c:if test="${paging.endPage != paging.lastPage}">
+			      <a href="admin_qna?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}">▶</a>
+			  	 </c:if>	
+			   
+			   </td>
+			</tr>
+			
+			
+            </table>           
         </div>
         
     </div>

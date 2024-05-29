@@ -53,6 +53,10 @@ function nochk(){
 	color: #ff243e;
 }
 
+textarea {
+  width: 1000px;
+}
+
 .con_tit {
  font-size: 20px;
  margin: 30px 0;

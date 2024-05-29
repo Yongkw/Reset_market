@@ -338,7 +338,7 @@ var seller_id = $("#seller_id").val();
 						
 									
 						<!-- 소개글 신고버튼 -->
-						<div class="sc-bGbJRg hQqotf"><a class="jynacn">
+						<div class="sc-bGbJRg hQqotf"><a class="jynacn" onclick="location.href='swindleform'">
 								<img src="https://m.bunjang.co.kr/pc-static/resource/327172b424ab5e1910a4.png" width="14" height="14">
 								신고하기
 							</a></div>

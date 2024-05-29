@@ -39,6 +39,7 @@ div {
 }
 
 .eQLFCF {
+	margin-top: 60px;
 	display: flex;
 	flex-direction: column;
 	-webkit-box-align: center;

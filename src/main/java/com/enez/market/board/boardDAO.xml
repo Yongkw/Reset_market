@@ -57,6 +57,13 @@
 	   SELECT swindle_no, swindle_title, TO_CHAR(create_at, 'YYYY/MM/DD') AS create_at from swindle order by swindle_no desc )A) 
 	   	   where rn between #{start} AND #{end} 
 	</select>
+	
+	<select id="page2" resultType="com.enez.market.board.PersonalDTO">
+	   select * from ( 
+	   select rownum rn,A.* from(  
+	   SELECT personal_no, personal_title, TO_CHAR(create_at, 'YYYY/MM/DD') AS create_at, answer_state, personal_category from personal_qna order by personal_no desc )A) 
+	   	   where rn between #{start} AND #{end} 
+	</select>
       
     <select id="swindle_detail" resultType="com.enez.market.board.SwindleDTO">
   	select swindle_no, swindle_title, to_char(create_at,'yyyy/MM/dd')create_at, case_content, case_img, swindle_cnt, victim_id, suspect_id from swindle where swindle_no=#{param1}
@@ -122,5 +129,13 @@
 	<update id="personalupdate">
 		update personal_qna set answer_content=#{param2}, answer_state=#{param3} where personal_no=#{param1}
 	</update>
+	
+	<select id="faqadmin" resultType="com.enez.market.board.PersonalDTO">
+  		select personal_no, personal_title, to_char(create_at,'yyyy/MM/dd')create_at, answer_state, personal_category from personal_qna
+ 	 </select>
+ 	 
+ 	 <select id="swindleadmin" resultType="com.enez.market.board.SwindleDTO">
+  		select swindle_no, swindle_title, to_char(create_at,'yyyy/MM/dd')create_at from swindle
+ 	 </select>
 	
 </mapper>

@@ -583,39 +583,7 @@ a {
 							<div class="qCGRm">${member.nickname}님! 안녕하세요 :)</div>
 							<div class="bhcrYn">본인인증</div>
 						</div>
-						<!-- 방문횟수 및 찜횟수 등등 -->
-						<div class="ejNmIF">
-							<div class="iMvNBf">
-								<img
-									src="https://m.bunjang.co.kr/pc-static/resource/4b323fe1ef79c2b715fe.png"
-									width="14" height="13"> 상점오픈일
-								<div class="htiuQW">365 일 전</div>
-							</div>
-
-							<div class="iMvNBf">
-								<img
-									src="https://m.bunjang.co.kr/pc-static/resource/e6792c64a6ba6f2b10a2.png"
-									width="14" height="13"> 상점방문수
-								<div class="htiuQW">235 명</div>
-							</div>
-
-							<div class="iMvNBf">
-								<img
-									src="https://m.bunjang.co.kr/pc-static/resource/ef9d606d24890f02bde0.png"
-									width="14" height="13"> 상품판매
-								<div class="htiuQW">23 회</div>
-							</div>
-
-							<div class="iMvNBf">
-								<img
-									src="https://m.bunjang.co.kr/pc-static/resource/b6ca1c340805703d7c62.png"
-									width="14" height="13"> 찜 횟수
-								<div class="htiuQW">10 회</div>
-							</div>
-						</div>
-						<div class="sc-jtRlXQ bmIoCE"  style="display: none;" id="txtop"><textarea id="intro" name="intro" >${member.intro}</textarea><button type="button" id="itrsub">확인</button></div>
-						<div class="sc-jeCdPy klBxMk">${member.intro}</div>
-						<!-- 상점 자기소개..  -->
+						
 						
 						<!-- 공지 이미지 -->
 						<img src="./image/personalboard.png"

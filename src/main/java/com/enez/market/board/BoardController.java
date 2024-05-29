@@ -414,7 +414,7 @@ public class BoardController {
     
         Service ss =sqlSession.getMapper(Service.class);      
         ss.personalupdate(personal_no,answer_content,answer_state);
-        return "redirect:/info_out";
+        return "redirect:/admin_qna";
         
 	}
 	
@@ -431,6 +431,55 @@ public class BoardController {
 
         return "redirect:/swindle_main";
     }
+	
+	@RequestMapping(value = "admin_qna")
+	public String mypage_admin(HttpServletRequest request, Model mo, PageDTO dto) {		
+		String nowPage=request.getParameter("nowPage");
+	    String cntPerPage=request.getParameter("cntPerPage");
+	    
+		Service ss = sqlSession.getMapper(Service.class);
+		
+		int total=ss.total();	     
+	       if(nowPage==null && cntPerPage == null) { 
+	          nowPage="1";
+	          cntPerPage="5";
+	       }
+	       else if(nowPage==null) {
+	          nowPage="1";
+	       }
+	       else if(cntPerPage==null) {
+	          cntPerPage="5";
+	       }      
+	       dto=new PageDTO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+	       mo.addAttribute("paging",dto);
+	       mo.addAttribute("list",ss.page2(dto));
+		return "admin_qna";
+	}
+	
+	@RequestMapping(value = "/admin_swindle")
+	public String swindle_admin(HttpServletRequest request, Model mo, PageDTO dto) {
+		String nowPage=request.getParameter("nowPage");
+	    String cntPerPage=request.getParameter("cntPerPage");
+	    
+		Service ss = sqlSession.getMapper(Service.class);
+		
+		int total=ss.total();	     
+	       if(nowPage==null && cntPerPage == null) { 
+	          nowPage="1";
+	          cntPerPage="5";
+	       }
+	       else if(nowPage==null) {
+	          nowPage="1";
+	       }
+	       else if(cntPerPage==null) {
+	          cntPerPage="5";
+	       }      
+	       dto=new PageDTO(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+	       mo.addAttribute("paging",dto);
+	       mo.addAttribute("list",ss.page(dto));
+	       
+		return "admin_swindle";
+	}
 	
 	
 }

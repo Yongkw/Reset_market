@@ -3,6 +3,10 @@ package com.enez.market.board;
 public class PersonalDTO {
 	int personal_no;
 	String personal_category,personal_title,personal_content,personal_img,personal_name,personal_id,personal_email, create_at, answer_state, answer_content;
+	private int next;
+	private int last;
+	private String nexttitle;
+	private String lasttitle;
 	public PersonalDTO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -72,6 +76,30 @@ public class PersonalDTO {
 	}
 	public void setAnswer_content(String answer_content) {
 		this.answer_content = answer_content;
+	}
+	public int getNext() {
+		return next;
+	}
+	public void setNext(int next) {
+		this.next = next;
+	}
+	public int getLast() {
+		return last;
+	}
+	public void setLast(int last) {
+		this.last = last;
+	}
+	public String getNexttitle() {
+		return nexttitle;
+	}
+	public void setNexttitle(String nexttitle) {
+		this.nexttitle = nexttitle;
+	}
+	public String getLasttitle() {
+		return lasttitle;
+	}
+	public void setLasttitle(String lasttitle) {
+		this.lasttitle = lasttitle;
 	}
 	
 	

@@ -59,5 +59,13 @@ public interface Service {
 	public ArrayList<PersonalDTO> perupdate(int personal_no);
 
 	public void personalupdate(int personal_no, String answer_content, String answer_state);
+
+	public ArrayList<PersonalDTO> faqadmin();
+
+	public ArrayList<SwindleDTO> swindleadmin();
+
+	public ArrayList<PersonalDTO> page2(PageDTO dto);
+
+	
 	
 }

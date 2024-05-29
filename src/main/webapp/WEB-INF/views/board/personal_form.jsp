@@ -46,6 +46,9 @@ function nochk(){
   border-bottom: 1px solid #ccc;
 }
 
+textarea {
+ width: 1000px;
+}
 .topnav a {
   float: left;
   display: block;
@@ -119,6 +122,7 @@ function nochk(){
 }
 .list_txt {
     font-size: 13px;
+    padding-left:0px;
 }
 .mt10 {
     margin-top: 10px !important;

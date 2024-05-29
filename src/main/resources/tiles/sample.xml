@@ -282,5 +282,19 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/board/personal_update.jsp" />
 	</definition>
+	
+	<definition name="admin_qna" extends="baseLayout3">
+		<put-attribute name="title" value="관리자 문의" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/admin_qna.jsp" />
+	</definition>
+	
+	<definition name="admin_swindle" extends="baseLayout3">
+		<put-attribute name="title" value="관리자 문의(사기)" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/admin_swindle.jsp" />
+	</definition>
+	
+	
  
 </tiles-definitions>

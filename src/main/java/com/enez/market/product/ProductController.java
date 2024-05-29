@@ -29,10 +29,12 @@ public class ProductController {
 	
 		@Autowired
 		SqlSession sqlSession;
-		
-		
-		String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
-		//String path = "C:\\Users\\Administrator\\Desktop\\realreal market\\src\\main\\webapp\\image";
+	
+		//String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
+		//String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
+		String path = "C:\\Users\\Administrator\\Desktop\\ezen-reset_market\\src\\main\\webapp\\image";
+
+
 		@RequestMapping(value = "/productinput")
 		public String product1() {
 			
@@ -164,7 +166,6 @@ public class ProductController {
 			mo.addAttribute("member", member);
 			//세션 아이디 상품 데이터값
 			mo.addAttribute("list", list);
-			System.out.println("넘어온 사진 :"+ list.get(0).product_image);
 			
 			return "mypage";
 		}

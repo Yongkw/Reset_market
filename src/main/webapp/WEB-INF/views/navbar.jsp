@@ -57,7 +57,7 @@ a{
 .nav-bar-log>a>img{
 	position: relative;
 	z-index:101;
-	height: 100%;
+	height: 75%;
 	left:50%;
 	top:50%;
 	transform:translate(-50%,-50%);
@@ -324,7 +324,7 @@ height: 25px;
 		<div class="nav-bar-log">
 		
 			<a href="main">
-			<img alt="logimg" src="./image/log_s.png">
+			<img alt="logimg" src="./image/logo.png">
 			</a>
 		</div>
 		
@@ -391,12 +391,12 @@ height: 25px;
             <span><label for="admin"><a id="admin" href="memberlist">회원관리</a></label></span>
             <span><label for="link-1"><a id="link-1" href="event_out">EVENT</a></label></span>
             <span><label for="link-2"><a id="link-2" href="notice_out">COMMUNITY</a></label></span>
+            <span><label for="link-5" ><a id="link-5" href="admin_qna" >Admin Page</a></label></span>
         </c:when>
         <c:otherwise>                
 				<span><label for="link-1" ><a id="link-1" href="event_out" >EVENT</a></label></span>
                 <span><label for="link-2" ><a id="link-2" href="notice_out" >COMMUNITY</a></label></span>
 				<span><label for="link-3" ><a id="link-3" href="pricechart_view" >시세 검색</a></label></span>
-				<span><label for="link-4" ><a id="link-4" href="#" >4번링크</a></label></span>
 				<span><label for="link-5" ><a id="link-5" href="info_out" >MY QNA</a></label></span>
 			 </c:otherwise>
     </c:choose>	
