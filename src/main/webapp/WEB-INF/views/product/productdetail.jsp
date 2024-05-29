@@ -207,7 +207,7 @@ $(document).ready(function () {
 									<div class="iKoLJU">
 										<!-- 클릭하면 내상점(마이페이지)가게 만들기 -->
 										<c:forEach items="${promember}" var="qq">
-                                        <a class="cfPBhM" href="#"> 
+                                        <a class="cfPBhM" href="mypagesangjum?member_id=${qq.member_id}"> 
                                         <img src="./image/${qq.profile_image}" width="48" height="48">
 										</a>
 										</c:forEach>
@@ -234,7 +234,7 @@ $(document).ready(function () {
                                     <div class="qlCpb">
                                         <!-- 해당상점 상품나열 -->
                                         <!-- 해당이미지 6개까지만 출력가능하게.. -->
-                                        <a class="ibkRtu" href="#"> 
+                                        <a class="ibkRtu" href="productout?product_no=${mm.product_no}"> 
                                         <img alt="" src="./image/${mm.main_image}"    width="120" height="96" class="img-small">
 											<div class="kjwDIB">
 												<span>${mm.price}</span>

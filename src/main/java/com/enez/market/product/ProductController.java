@@ -30,9 +30,9 @@ public class ProductController {
 		@Autowired
 		SqlSession sqlSession;
 		
-		//String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
-		//String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
-		String path = "C:\\Users\\Administrator\\Desktop\\realreal market\\src\\main\\webapp\\image";
+		
+		String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
+		//String path = "C:\\Users\\Administrator\\Desktop\\realreal market\\src\\main\\webapp\\image";
 		@RequestMapping(value = "/productinput")
 		public String product1() {
 			
@@ -327,6 +327,35 @@ public class ProductController {
             System.out.println("가져온 state값 :" + state);
             List<Product_managerDTO> filteredProducts = ss.getProductsByState(state);
             return filteredProducts;
+        }
+        
+        @RequestMapping(value = "mypagesangjum")
+        public String producttest(HttpServletRequest request ,Model mo,HttpServletResponse response) {
+            String user = request.getParameter("member_id");
+            
+            Service ss = sqlSession.getMapper(Service.class);
+            com.enez.market.member.Service pp = sqlSession.getMapper(com.enez.market.member.Service.class);//멤버의 서비스
+            
+            if(user.equals("")||user.equals(null)||user.isEmpty()||ss.idcheck(user)==0) {return "redirect:main";}
+            List<String> likejjim = ss.likejjim(user); // 내가 찜한 사람들의 상품넘버 리스트
+            List<String> getjjim = ss.getjjim(user); // 날 찜한 사람들의 상품넘버 리스트
+            UserProfileDTO userdata= ss.getCreateDate(user); // 안에 있는 값 stdata, profile_image, nickname,category_check1
+            ArrayList<ProductDTO> list = ss.productout1(user);// 유저의 상품 데이터
+            MemberDTO member = pp.select(user);//
+            ArrayList<JjimPoriductDTO> JjimPoriduct  =new ArrayList<JjimPoriductDTO>();//내가 찜한 사람들의 상품 데이터
+            ArrayList<FollowProfileDTO> FollowProfile  =new ArrayList<FollowProfileDTO>(); //날 찜한 사람들의 프로필 데이터
+            
+            JjimPoriduct = ss.getlikejjimProduct(likejjim); 
+            FollowProfile = ss.getFollowProfile(getjjim);
+            // 추가로 넘겨야 할거 - 자기소계?,상점방문수 + 상품 데이터
+            mo.addAttribute("jjimPoriduct",JjimPoriduct);
+            mo.addAttribute("followProfile", FollowProfile);
+            mo.addAttribute("userdata",userdata);
+            mo.addAttribute("member", member);
+            //세션 아이디 상품 데이터값
+            mo.addAttribute("list", list);
+            
+            return "mypagesangjum";
         }
 		
 }

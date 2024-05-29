@@ -171,7 +171,7 @@ ORDER BY
 </select>
 
 <select id="prosangjum" resultType="com.enez.market.product.ProductDTO">
-SELECT DISTINCT p.price, i.main_image
+SELECT DISTINCT *
 FROM product p
 JOIN imagedetail i ON p.product_no = i.image_no
 WHERE i.image_no in (select product_no from product where seller_id = #{param1})
