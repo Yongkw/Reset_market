@@ -199,7 +199,6 @@ element.style {
 <script>
       $(document).ready(function(){
         $(".mainslider").bxSlider({
-        	mode:'vertical',
         	auto:true
         	
         });

@@ -36,8 +36,20 @@ public class ProductController {
 
 
 		@RequestMapping(value = "/productinput")
-		public String product1() {
+		public String product1(HttpServletRequest request,HttpSession hs,Model mo, HttpServletResponse response) throws IOException {
+			response.setContentType("text/html;charset=utf-8");
+			String member_id = (String)hs.getAttribute("member_id");
 			
+			PrintWriter piw = response.getWriter();
+			System.out.println(member_id);
+			if(member_id==null) {		
+				piw.print("<script>alert('로그인을 해주세요!'); </script>");
+				piw.print("<script>window.location.href='/market/main_view';</script>");
+				piw.close();
+			}
+			else {
+			
+			}
 			return "productinput";
 		}
 		
@@ -214,21 +226,25 @@ public class ProductController {
 			System.out.println(a);
 		}
         @RequestMapping(value = "/productmanager")
-        public String product6(Model mo , HttpSession si) {
-            String member_id = (String) si.getAttribute("member_id");
-            
-            if(member_id != null) {
+        public String product6(Model mo , HttpSession si,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        	response.setContentType("text/html;charset=utf-8");
+        	String member_id = (String) si.getAttribute("member_id");
+        	PrintWriter piw = response.getWriter();
+        	
+            if(member_id==null){
+            	piw.print("<script>alert('로그인을 해주세요!'); </script>");
+    			piw.print("<script>window.location.href='/market/main_view';</script>");
+    			piw.close();
+            }       	
+            else if (member_id != null) {
             	System.out.println("가져온 멤버아이디값 :"+member_id);
                 Service ss = sqlSession.getMapper(Service.class);
                 ArrayList<Product_managerDTO>list=ss.promanager(member_id);
                 //ArrayList<Product_managerDTO>image=ss.promanagerimage(member_id);
                 mo.addAttribute("list",list);
                 //System.out.println("리스트사이즈 :"+list.size()); 
-                return "productmanager";
             }
-            else {
-                return "redirect:login";
-            }
+            return "productmanager";
         }
         @ResponseBody
         @RequestMapping(value = "pro_state")

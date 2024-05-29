@@ -398,6 +398,8 @@ height: 25px;
                 <span><label for="link-2" ><a id="link-2" href="notice_out" >COMMUNITY</a></label></span>
 				<span><label for="link-3" ><a id="link-3" href="pricechart_view" >시세 검색</a></label></span>
 				<span><label for="link-5" ><a id="link-5" href="info_out" >MY QNA</a></label></span>
+				<span><label for="link-3" ><a id="link-3" href="productinput" >상품등록</a></label></span>
+				<span><label for="link-5" ><a id="link-5" href="productmanager" >상품관리</a></label></span>
 			 </c:otherwise>
     </c:choose>	
 			</div>
