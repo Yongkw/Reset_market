@@ -30,7 +30,7 @@ RESET_MARKET는 JAVA 와 Sping MVC 를 기반으로 제작한 프로젝트입니
 
 ## 👨‍👩‍👧‍👦 팀 소개
 
-|   Name   | 이채현                            | 김용권                                            | 이가흔                             | 김진욱                                                       |
+|   Name   | 이채현                            | 김용권                                            | 지가흔                             | 김진욱                                                       |
 | :------: | ------------------------------------ | ------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------ |
 | Profile  |<p align="center"><img src = "https://github.com/Yongkw/Reset_market/assets/74645069/b705ced4-2670-40a8-a01a-5e3449ff9721" width="127px" height="160px"></p>|<p align="center"><img src = "https://github.com/Yongkw/Reset_market/assets/74645069/f21400f7-58bc-4c7b-b552-98e12983b9f2" width="127px" height="160px"></p>|<p align="center"><img src = "https://github.com/Yongkw/Reset_market/assets/74645069/0c0e127b-9029-4077-9f46-da2878e5ce04" width="127px" height="160px" ></p>|<p align="center"><img src = "https://github.com/Yongkw/Reset_market/assets/74645069/8fd1250a-d430-40c1-afe4-526a3ec1149e" width="127px" height="160px"></p>| 
 | Position | Front/Backend Develop  | Front/Backend Develop                                   | Front/Backend Develop                   | Front/Backend Develop                              |kjw9898
