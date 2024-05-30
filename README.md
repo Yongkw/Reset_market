@@ -20,7 +20,7 @@ RESET_MARKET는 JAVA 와 Sping MVC 를 기반으로 제작한 프로젝트입니
 
 
 ## RESET MARKET를 소개합니다.! 👍  
-
+<img src = "https://github.com/Yongkw/Reset_market/assets/74645069/b705ced4-2670-40a8-a01a-5e3449ff9721" width="127px" height="160px">
 
 
 ## 🗓️ 프로젝트 기간  
