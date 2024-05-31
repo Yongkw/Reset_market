@@ -81,7 +81,7 @@ public class ChartController {
 				pro_json.put("title", dto.title);
 				pro_json.put("img1", dto.getImg1());
 				pro_json.put("location", dto.location);
-
+				pro_json.put("create_at", dto.create_at);
 				list.add(pro_json);
 			}
 		} else {
@@ -114,6 +114,7 @@ public class ChartController {
 					pro_json.put("title", dto.title);
 					pro_json.put("img1", dto.getImg1());
 					pro_json.put("location", dto.location);
+					pro_json.put("create_at", dto.create_at);
 
 					list.add(pro_json);
 				}

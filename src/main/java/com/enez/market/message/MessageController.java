@@ -57,15 +57,15 @@ public class MessageController {
 			
 		}  
 		@RequestMapping(value = "/resetchat2")
-		public String message2(@RequestParam( value = "bno", required = false)String bno,@RequestParam("pno")String pno,Model model,HttpSession session) {
+		public String message2(@RequestParam( value = "bno", required = false)String bno,@RequestParam(value = "pno")String pno,Model model,HttpSession session) {
 			Service service = sqlSession.getMapper(Service.class);
 			String userId =(String)session.getAttribute("member_id");
 			ArrayList<MesssageSendDTO> list = new ArrayList<MesssageSendDTO>();
-			if(userId==null)return "redirect:/productout?product_no="+pno;   
-
-			if(bno==null)bno=service.getboardno(pno,userId); 
-			if(bno==null) {
-				if (service.checkgetid(userId,pno)==0) { 
+ 
+			if(userId==null)return "redirect:/productout?product_no="+pno;  // 로그인 체크
+			if(bno==null)bno=service.getboardno(pno,userId);  				// 상점 페이지에서 들어오면 null 값, 체팅리스트에서 들어오면 not null
+			if(bno==null) {													// 위 데이터 베이스에 bno의 값이 없으면 체팅방을 만들지 확인
+				if (service.checkgetid(userId,pno)==0) {  					// 만약 판매자 본인이 판매자와 채팅 클릭시 처리
 					service.createchatroom(pno,userId);    
 					bno=service.getboardno(pno,userId);
 				}else {
@@ -73,9 +73,11 @@ public class MessageController {
 					
 				}
 			}
-			list =  service.getchttingdata(Integer.parseInt(bno),Integer.parseInt(pno));
+			list =  service.getchttingdata(Integer.parseInt(bno),Integer.parseInt(pno)); 
+			if(!list.get(0).get_id.equals(userId) && !list.get(0).send_id.equals(userId)) return "redirect:/main"; // 다른 아이디로 url 경로로 들어올시 처리
+			
 			String opponent =""; 
-			if(list.get(0).get_id.equals(userId)) { 
+			if(list.get(0).get_id.equals(userId)) {
 				opponent = list.get(0).send_id;
 			}else {
 				opponent = list.get(0).get_id;
@@ -83,14 +85,13 @@ public class MessageController {
 			String opponentimage = service.getimage(opponent);
 			MesssageSendDTO product= service.getopponent(Integer.parseInt(pno));
 			product.setLast_check(1);
-			model.addAttribute("list",list); 
-			model.addAttribute("me", userId);
-			model.addAttribute("opponent",opponent); 
-			model.addAttribute("opponentimage",opponentimage); 
-			model.addAttribute("product",product); 
+			model.addAttribute("list",list); 					// 채팅 데이터
+			model.addAttribute("me", userId);					// 자신의 아이디
+			model.addAttribute("opponent",opponent); 			// 상대 아이디
+			model.addAttribute("opponentimage",opponentimage); 	// 상대 프로필
+			model.addAttribute("product",product); 				// 상대 상점 정보
 			
 			return "resetchat2";
-			
 		}  
 
 

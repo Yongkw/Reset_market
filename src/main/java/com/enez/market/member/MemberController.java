@@ -30,7 +30,8 @@ import com.enez.market.product.UserProfileDTO;
 public class MemberController {
 	@Autowired
 	SqlSession sqlSession;
-	String path = "C:\\Users\\Administrator\\Desktop\\realreal market (5)\\src\\main\\webapp\\image";
+	//String path = "C:\\Users\\Administrator\\Desktop\\realreal market (5)\\src\\main\\webapp\\image";
+	String path = "C:\\Users\\Administrator\\Desktop\\project_resetmarket\\src\\main\\webapp\\image";
 
 	@RequestMapping(value = "/signup")
 	public String member_signup() {
@@ -82,7 +83,6 @@ public class MemberController {
 	private String filesave(String fname, byte[] bytes) {
 		UUID ud = UUID.randomUUID();
 		String name = ud.toString() + "_" + fname;
-
 		return name;
 
 	}
@@ -193,11 +193,8 @@ public class MemberController {
 	public String idsearch(HttpServletRequest request) {
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
-		System.out.println(phone);
-		System.out.println(name);
 		Service ss = sqlSession.getMapper(Service.class);
 		String id = ss.idresult(name, phone);
-		System.out.println(id);
 		return id;
 	}
 
@@ -207,12 +204,8 @@ public class MemberController {
 		String id = request.getParameter("id");
 		String phone = request.getParameter("phone");
 		String name = request.getParameter("name");
-		System.out.println("아이디 :"+id);
-		System.out.println("폰번:"+phone);
-		System.out.println("이름 : "+name);
 		Service ss = sqlSession.getMapper(Service.class);
 		String pw = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 7);
-		System.out.println("새비번 : "+pw);
 		ss.pwresult(id, name, phone ,pw); //반환 할 값이 없기때문에
 		
 		return pw;
@@ -271,13 +264,6 @@ public class MemberController {
 		Service ss = sqlSession.getMapper(Service.class);
 		String nowpw = mul.getParameter("nowpw");
 		String fname = mf.getOriginalFilename();
-		System.out.println("현재비번 :"+nowpw);
-		System.out.println("새비번 :"+new_pw);
-		System.out.println("주소 :"+address);
-		System.out.println("연락처"+phone);
-		System.out.println("닉네임 :"+nickname);
-		System.out.println("파일이름 :"+fname); // 이게 기존 저장되어있는 사진파일을 의미함..
-		System.out.println("접속된 아이디 : " + member_id);
 		String oldimg = ss.oldimg(member_id); 
 			
 		
@@ -347,8 +333,6 @@ public class MemberController {
 	public String resignok(HttpServletRequest request,HttpSession hs) {
 		String id = request.getParameter("rs_id");
 		String pw = request.getParameter("rs_pw");
-		System.out.println("회원 탈퇴 아이디는 : "+id);
-		System.out.println("회원 탈퇴 하는 사람 비밀번호는 : "+pw);
 		Service ss = sqlSession.getMapper(Service.class);
 		ss.resign(id,pw);
 		hs = request.getSession();
@@ -526,27 +510,26 @@ public class MemberController {
 		//관리자 삭제 불가능하게
 		
 		
-		
-		if(profile_image == null || profile_image.equals("") || "default_image.jpg".equals(profile_image))
-		{
-			ss.member_delete(member_id);
-			return "success" ;
-		}
-		else if(member_id.equals("admin"))
-		{
-			return "false";
-		}
-		else
-		{
-			File dimg = new File(path+"\\"+profile_image);
-			if(dimg.exists()) {
-				dimg.delete();
-				
-			}
-			ss.member_delete(member_id);
-			return "success" ;
-			
-		}
+		if(member_id.equals("admin"))
+	      {
+	         return "false";
+	      }
+	      else if(profile_image == null || profile_image.equals("") || "default_image.jpg".equals(profile_image))
+	      {
+	         ss.member_delete(member_id);
+	         return "success" ;
+	      }
+	      else
+	      {
+	         File dimg = new File(path+"\\"+profile_image);
+	         if(dimg.exists()) {
+	            dimg.delete();
+	            
+	         }
+	         ss.member_delete(member_id);
+	         return "success" ;
+	         
+	      }
 		
 	
 	}

@@ -18,7 +18,7 @@
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<!-- 카카오 api 맵키 변경 -->
 <script
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f3adf18570dd37356fee7459e8eef8c6&libraries=services"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=72ebca630ea5429ce5a774b8cb02ca2d6&libraries=services"></script>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
@@ -45,27 +45,10 @@
                 // 주소 정보를 해당 필드에 넣는다.
                 document.getElementById("sample5_address").value = addr;
                 // 주소로 상세 정보를 검색
-                geocoder.addressSearch(data.address, function(results, status) {
-                    // 정상적으로 검색이 완료됐으면
-                    if (status === daum.maps.services.Status.OK) {
-
-                        var result = results[0]; //첫번째 결과의 값을 활용
-
-                        // 해당 주소에 대한 좌표를 받아서
-                        var coords = new daum.maps.LatLng(result.y, result.x);
-                        // 지도를 보여준다.
-                        mapContainer.style.display = "block";
-                        map.relayout();
-                        // 지도 중심을 변경한다.
-                        map.setCenter(coords);
-                        // 마커를 결과값으로 받은 위치로 옮긴다.
-                        marker.setPosition(coords)
-                    }
-                });
             }
         }).open();
+        
     }
-    
     
     ( /* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
     	       imageView = function imageView(att_zone, btn){
@@ -311,11 +294,11 @@
 								<button type="button" class="gWFJMk">내위치</button>
 								<button type="button" class="gWFJMk">최근지역</button>
 								<input class="gWFJMk" type="button"
-									onclick="sample5_execDaumPostcode()" value="주소검색">
+									onclick="sample5_execDaumPostcode()"  value="주소검색">
 							</div>
 
 							<input type="text" id="sample5_address" placeholder="주소"
-								class="kFOKFl" name = "location">
+								class="kFOKFl" name = "location" >
 							<div id="map"
 								style="width: 300px; height: 300px; margin-top: 10px; display: none"></div>
 						</div>

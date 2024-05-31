@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="now" value="${System.currentTimeMillis()}" />
 <!DOCTYPE html>
@@ -68,7 +69,7 @@ $(document).ready(function () {
 										<div class="gYcooF">${aa.title}</div>
 										<div class="jFrdEF">
 											<div class="dJuwUw">
-												${aa.price}<span>원</span>
+											<fmt:formatNumber value="${aa.price }" pattern="#,###" /><span>원</span>
 											</div>
 										</div>
 										</c:forEach>
@@ -218,9 +219,9 @@ $(document).ready(function () {
                                             </c:forEach>
 											<div class="gNTMUU">
 												<!-- 상품올린 count 줘서 가져와야함 -->
-												<a class="kKVBjY" href="#"> 상품246 </a>
+												<a class="kKVBjY" href="#"> ${sangjum.size()} </a>
 												<!-- 찜이랑 다르게 즐겨찾기를 만들까요.? -->
-												<a class="kKVBjY" href="#"> 즐겨찾기37 </a>
+												<a class="kKVBjY" href="#"> 즐겨찾기 ${FollowProfile} </a>
 											</div>
 										</div>
 									</div>
@@ -246,7 +247,7 @@ $(document).ready(function () {
 									</div>
 									<!-- 상점더보기 내상점(마이페이지)로이동 -->
 									<div class="cagBoV">
-										<a class="cvXaIH"> <span class="dNCdnS">상품(cunt)개 </span>
+										<a class="cvXaIH"> <span class="dNCdnS">상품(${sangjum.size()})개 </span>
 											상점더보기>
 										</a>
 									</div>

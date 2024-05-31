@@ -200,16 +200,43 @@ WHERE i.image_no in (select product_no from product where seller_id = #{param1})
 
 <!-- 상품 상태별 출력 거래중,판매중,판매완료 -->
 <select id="statesort" resultType="com.enez.market.product.ProductDTO">
-	SELECT product_no,seller_id,category_name,buyer_id,price,title,detail,product_state,location,
-    product_image,view_cnt,create_at,update_at,CASE WHEN EXTRACT(DAY FROM SYSDATE - update_at) = 0 THEN 
-    TO_CHAR(TRUNC(MOD(EXTRACT(HOUR FROM SYSDATE - update_at), 24))) || '시간 전'
-    WHEN TRUNC(MONTHS_BETWEEN(SYSDATE, update_at) / 12) >= 1 THEN
-    TO_CHAR(TRUNC(MONTHS_BETWEEN(SYSDATE, update_at) / 12)) || '년 전'
-    WHEN TRUNC(MONTHS_BETWEEN(SYSDATE, update_at)) >=1 THEN
-    TO_CHAR(TRUNC(MONTHS_BETWEEN(SYSDATE, update_at))) || '달 전'
-    ELSE TO_CHAR(EXTRACT(DAY FROM SYSDATE - update_at)) || '일 전'
-    END as period FROM product WHERE seller_id = #{param1} and product_state = #{param2}	
+SELECT 
+	product_no,
+	seller_id,
+	category_name,
+	buyer_id,
+	price,
+	title,
+	detail,
+	product_state,
+	location,
+    product_image,
+    view_cnt,
+    create_at,
+    update_at,
+    CASE 
+    	WHEN 
+    		EXTRACT(DAY FROM SYSDATE - update_at) = 0 
+	    	THEN 
+	    		TO_CHAR(TRUNC(MOD(EXTRACT(HOUR FROM SYSDATE - update_at), 24))) || '시간 전'
+	    WHEN 
+	    	TRUNC(MONTHS_BETWEEN(SYSDATE, update_at) / 12) >= 1 
+		    THEN
+		    	TO_CHAR(TRUNC(MONTHS_BETWEEN(SYSDATE, update_at) / 12)) || '년 전'
+	    WHEN
+	     	TRUNC(MONTHS_BETWEEN(SYSDATE, update_at)) >=1 
+		    THEN
+		    	TO_CHAR(TRUNC(MONTHS_BETWEEN(SYSDATE, update_at))) || '달 전'
+	   	 	ELSE 
+	    		TO_CHAR(EXTRACT(DAY FROM SYSDATE - update_at)) || '일 전'
+    END 																				as period 
+    FROM 
+    	product 
+    WHERE 
+    	seller_id = #{param1} and product_state = #{param2}	
 </select>
-
+<delete id="massage">
+    delete from RESET_CHATTING where pr_no = #{param1} 
+</delete>
 
 </mapper>

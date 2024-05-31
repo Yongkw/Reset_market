@@ -348,7 +348,7 @@ height: 25px;
 					<form action="pr_search" method="get" >
 				<div class="search-bar">
 					<label for="search-bar_input" style="width: 100%; height: 100%;  position: absolute;z-index: 101" ></label> 
-						<div style = "border-right: 1px dotted green" ;><p>검색창</p></div>
+						<div style = "width:30px; border-right: 1px dotted green"> <img style=" width:15px; filter: opacity(0.5);" alt="검색창" src="./image/do.png"> </div>
 						<div id="select-kategori"  ></div>
 						<div class="search-a">
 							<input type="hidden" value="" id="findkate" name="findkate" >

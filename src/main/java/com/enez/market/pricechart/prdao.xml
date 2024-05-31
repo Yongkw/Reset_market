@@ -36,7 +36,7 @@ delete from PRODUCTADDRESS
 insert into PRODUCTADDRESS ( PR_NO, ADDRESSX, ADDRESSY, CODE) values(#{param1},#{param2},#{param3},#{param4})
 </insert>
 <select id="mapProductList" resultType="com.enez.market.pricechart.Product_search_DTO" >
-select PRODUCT_NO, CATEGORY_NAME, BUYER_ID, PRICE, TITLE,PRODUCT_STATE, LOCATION, PRODUCT_IMAGE, VIEW_CNT
+select PRODUCT_NO, CATEGORY_NAME, BUYER_ID, PRICE, TITLE,PRODUCT_STATE, LOCATION, PRODUCT_IMAGE, VIEW_CNT, CREATE_AT
 from PRODUCT where PRODUCT_NO = #{param1} and ((PRODUCT_STATE !='판매완료' and PRODUCT_STATE !='거래중' )  or PRODUCT_STATE is null)
 </select>
 

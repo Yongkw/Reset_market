@@ -42,6 +42,9 @@
 .productdata>div{
 	width: 70%;
 	font-size: xx-large;
+	text-wrap: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: clip;
 }
 .chatarea{
 	margin:0 auto;
@@ -175,7 +178,7 @@ max-height: 300px;
  
 </head>
 <body> 
-	
+	<br style=" height: 15px;">
 	<div class="lsitcontainer">
 		<div class="productdata">
 		
@@ -201,6 +204,7 @@ max-height: 300px;
 					 	<p> ${i.text}</p>${point}
 					 </div>
 				</c:when>
+				
 				<c:otherwise>
 					<img alt="상대방 마이페이지로 가기" src="./image/${opponentimage}" onerror="this.onerror=null; this.src='./image/icon-user.png'" onclick="location.href='mypage?find_id=${opponent}'">
 					<div class="getchat chatting">
@@ -248,6 +252,7 @@ max-height: 300px;
 	    var now = new Date();
 	    var updateTime = new Date(timestamp);
 	    var timeDiff = now - updateTime;
+	    
  
 	    if (timeDiff < 60000) {
 	        return '방금 전';
@@ -266,6 +271,7 @@ max-height: 300px;
  			const boardNo=  ${list.get(0).getBoard_no()};
  			const prNo = ${list.get(0).getPr_no()}; 
  			const getId = "${opponent}"; 
+ 			const opponentimage = "${opponentimage}";
  			let chatMaxNo = ${list.get(list.size()-1).chat_no};
  			const userid = "${me}";
 			scrollbottum();
@@ -385,7 +391,11 @@ max-height: 300px;
 		        				scrollbottum(); 
 		                    	}else{
 		                    		console.log(2)
-		                    		chattingarea.insertAdjacentHTML("beforeend","<div class='chatContainer'> "+
+		                    		chattingarea.insertAdjacentHTML("beforeend",""+
+		                    				"<div class='chatContainer'> "+
+		                    				"<img alt=\"상대방 마이페이지로 가기\" src=\'./image/"+opponentimage+"'"+
+		                    				" onerror=\"this.onerror=null; this.src='./image/icon-user.png'\" onclick='location.href=mypage?find_id="+getId+"'>"+
+		                    				
 			                    			"<div class='getchat chatting'>"+
 											"<img class='setimg' src='./image/"+data[i]['image']+"' onerror=\"this.style.display='none'\">"+
 											"<p>"+data[i]['text']+"</p></div>"+

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -476,7 +478,8 @@ $('#allproduct').click(function(){
                                                 <!-- 가격 올린시간 div -->
                                                 <div class="cxNmps">
                                                     <div class="heqdJ">
-                                                        ${i.price}
+                                                    <fmt:formatNumber value="${i.price }" pattern="#,###" />
+
                                                     </div>
                                                     <div class="elSbmF">
                                                         <span>${i.period}</span>
@@ -710,17 +713,11 @@ $('#allproduct').click(function(){
 										
 										
 											<div class="hXgWIg">
+											<c:forTokens items="${i.pr_image}" delims = "," var="imagelen">
 												<a class="hjAHtY" href="productout?product_no=${i.productno}" >
-													<img src="./image/${i.pr_image}" width="190" height="190">
+													<img src="./image/${imagelen}" width="190" height="190">
 												</a>
-												
-												<a class="hjAHtY" href="productout?product_no=${i.productno}" >
-													<img src="./image/${i.pr_image}" width="190" height="190">
-												</a>
-												
-												<a class="hjAHtY" href="productout?product_no=${i.productno}" >
-													<img src="./image/${i.pr_image}" width="190" height="190">
-												</a>
+											</c:forTokens>
 											</div>
 									</div>
 									</c:forEach>

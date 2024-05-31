@@ -70,5 +70,7 @@ public interface Service {
     
 	List<ProductDTO> statesort(String seller_id, String state);
 
+	void massage(String delect);
+
 	
 }

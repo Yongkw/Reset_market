@@ -115,6 +115,7 @@
 }
 .btnset>input:first-child{border-left: none;}
 .btnset>input:last-child{border-right: none;}
+
 hr{margin: 1px auto;    width: 97%;    border: 1px solid #dae9da;}
 </style>
 <script type="text/javascript">
@@ -171,7 +172,7 @@ function formatTime(timestamp) {
 			<div class="messlist">
 			<c:forEach items="${list}" var="i" > 
 			
-			<div data-state="${i.pr_state}"  class="mess" onclick="location.href='resetchat2?bno=${i.board_no}&pno=${i.pr_no}'">
+			<div data-state="${i.pr_state}"  class="mess" style="display: flex" onclick="location.href='resetchat2?bno=${i.board_no}&pno=${i.pr_no}'">
 				<div class="profileimg">
 					<div>
 					<img alt="" src="./image/${i.pr_image}">
@@ -191,8 +192,7 @@ function formatTime(timestamp) {
 					<div class="updateTime"  data-timestamp="${i.chatdate}"></div> 
 					</div>
 				</div> 
-			</div>	
-			<hr>
+			</div>
 			</c:forEach>
 				
 			</div> 

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 
 <html>
@@ -20,7 +21,8 @@
 }
 
 .dCIUug h2 {
-    font-size: 1.5rem;
+    font-size: x-large;
+    font-weight: 549;
     margin-bottom: 1.5rem;
 }
 
@@ -266,8 +268,8 @@ element.style {
 					</div>
 					<div class="ikEnr">
 						<div class="gwleiO">${aa.title}</div>
-						<div class="ldPLFl">
-							<div class="moVyh">${aa.price}</div>
+						<div class="ldPLFl"> 
+						<div class="moVyh"><fmt:formatNumber value="${aa.price}" pattern="#,###" /> </div>
 					<div class="eYNXkt updateTime" data-timestamp="${aa.update_at}"></div>
 						</div>
 					</div>
@@ -292,7 +294,7 @@ element.style {
 					<div class="ikEnr">
 						<div class="gwleiO">${aa.title}</div>
 						<div class="ldPLFl">
-							<div class="moVyh">${aa.price}</div>
+						<div class="moVyh"><fmt:formatNumber value="${aa.price}" pattern="#,###" /> </div>
 							<div class="eYNXkt updateTime" data-timestamp="${aa.update_at}"></div>
 						</div>
 					</div>
@@ -317,7 +319,7 @@ element.style {
 					<div class="ikEnr">
 						<div class="gwleiO">${aa.title}</div>
 						<div class="ldPLFl">
-							<div class="moVyh">${aa.price}</div>
+						<div class="moVyh"><fmt:formatNumber value="${aa.price}" pattern="#,###" /> </div>
 							<div class="eYNXkt updateTime" data-timestamp="${aa.update_at}"></div>
 						</div>
 					</div>

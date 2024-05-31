@@ -135,6 +135,9 @@ height: 50%;
 margin:0 auto;
 display:flex;
 flex-direction: column; 
+text-wrap: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: clip;
 }
 #product_show img{
 align-self:center;
@@ -173,7 +176,7 @@ margin-bottom: 10px;
 #product_show span ~ p:before{content: "*";}
 
 #product_show div>p:first-child{
-	font-size: xx-large;
+	font-size: x-large;
 }
 #product_show div>p:first-child+p{
 font-size: x-large;
@@ -344,7 +347,9 @@ $(document).on('keypress', '#searchadd',function () {//input text 앤터 처리
 	if (event.keyCode === 13) { 
         searchadd();
     }
+    
 });
+
 
 function searchadd(){
 var searchaddress = $('#searchadd').val();
@@ -400,7 +405,7 @@ function productlist(find_code) {
 														+'</div>'
 														+'<div>'
 														+'<div>'+data[i].title+'</div>'
-														+'<div><p>'+data[i].price+'</p><span>3일전</span></div>'
+														+'<div><p>'+data[i].replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")+'</p>'+data[i].create_at.slice(0,10)+'</div>'
 														+'</div></a></div>'
 														);
 							    	        		};
@@ -415,6 +420,8 @@ function productlist(find_code) {
 	    	});
 
 	 }
+	 
+	 
 function showpr(pr_no) {
 	var productdiv2 = $('#product_show'); // 상품 미니 디테일 추가
     const d2 = document.getElementById('product_show');
@@ -426,19 +433,19 @@ function showpr(pr_no) {
 	    dataType : 'json',
 	    traditional: true,
 	    success: function(data){
+	    	console.log(data[0].create_at);
 	    	productdiv2.empty();
 	    	d2.insertAdjacentHTML('afterbegin','<a href="productout?product_no='+data[0].product_no+'" >'
-	    	+'<div><img alt="" src="./image/'+data[0].img1+'"> </div>'
-	    	+'<div>'
-	    	+'<p>'+data[0].title+'</p>'
-	    	+'<p>'+data[0].price+' 원</p>'
-	    	+'<hr>'
-	    	+'<span><p>조회수'+data[0].view_cnt+'</p><p>등록 날자</p></span>'
-	    	+'<p>상품 상태 </p>'
-	    	+'<p>거래 지역 '+data[0].location+'</p>'
-	    	+'<p>카테 고리 '+data[0].category_name+'</p>'
-	    	+'</div>'
-	    	+'</a>'
+		    	+'<div><img alt="" src="./image/'+data[0].img1+'"> </div>'
+		    	+'<div>'
+		    	+'<p>'+data[0].title+'</p>'
+		    	+'<p>'+data[0].price.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")+' 원</p>'
+		    	+'<hr>'
+		    	+'<span><p>조회수 :'+data[0].view_cnt+'</p><p>등록 날자 : '+data[0].create_at.slice(0,10)+'</p></span>'
+		    	+'<p>거래 지역 '+data[0].location+'</p>'
+		    	+'<p>카테 고리 '+data[0].category_name+'</p>'
+		    	+'</div>'
+		    	+'</a>'
 	    	
 	    	);
 	    	//category_name  location  price img1 product_no  title  view_cnt 
@@ -449,6 +456,7 @@ function showpr(pr_no) {
 	        
 	    }
 	});
+	
 	
 }
 
@@ -478,7 +486,6 @@ geocoder.addressSearch(addr, function(res, stat) {//res에 x값 y값이 들어 �
 }
 
 
-// 추가 해야 할것 마커 클릭이벤트 - 주소 혹은 클릭시 그지역 거래품 리스트로 나오기
 </script>
 </body>
 </html>

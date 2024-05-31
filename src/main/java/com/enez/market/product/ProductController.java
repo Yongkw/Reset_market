@@ -32,7 +32,7 @@ public class ProductController {
 	
 		//String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
 		//String path = "\\\\Mac\\Home\\Desktop\\Sourectree\\YongKwon\\src\\main\\webapp\\image";
-		String path = "C:\\Users\\Administrator\\Desktop\\ezen-reset_market\\src\\main\\webapp\\image";
+		String path = "C:\\Users\\Administrator\\Desktop\\project_resetmarket\\src\\main\\webapp\\image";
 
 
 		@RequestMapping(value = "/productinput")
@@ -132,13 +132,16 @@ public class ProductController {
 		         System.out.println(img);
 		         listimg.add(img);
 		      }
+		     
+            List<String> getjjim = ss.getjjim(sellerId); // 날 찜한 사람들의 상품넘버 리스트
+            int FollowProfile = ss.getFollowProfile(getjjim).size();
 
 			int jcount = ss.jjimcount(list.get(0).product_no);
 			mo.addAttribute("jjim",jcount);
 			mo.addAttribute("img",listimg);
-			mo.addAttribute("list",list); 
-            mo.addAttribute("list",list);
+			mo.addAttribute("list",list);  
             mo.addAttribute("promember",promember);
+            mo.addAttribute("FollowProfile",FollowProfile);
             mo.addAttribute("sangjum",sangjum);
 			return "productdetail";
 		}
@@ -265,10 +268,10 @@ public class ProductController {
         public String product8(HttpServletRequest request, HttpServletResponse response) {
             Service ss = sqlSession.getMapper(Service.class);
             String delect = request.getParameter("productNo");
-            System.out.println("삭제할 타이틀(이름값) :"+delect);
             
             ss.prodelect(delect);
             ss.proimage(delect);
+            ss.massage(delect);
             return "productmanager";
             
         }
@@ -349,6 +352,8 @@ public class ProductController {
         @RequestMapping(value = "mypagesangjum")
         public String producttest(HttpServletRequest request ,Model mo,HttpServletResponse response) {
             String user = request.getParameter("member_id");
+            
+
             
             Service ss = sqlSession.getMapper(Service.class);
             com.enez.market.member.Service pp = sqlSession.getMapper(com.enez.market.member.Service.class);//멤버의 서비스

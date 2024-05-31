@@ -667,17 +667,11 @@ var seller_id = $("#seller_id").val();
 										
 										
 											<div class="hXgWIg">
+											<c:forTokens items="${i.pr_image}" delims = "," var="imagelen">
 												<a class="hjAHtY" href="productout?product_no=${i.productno}" >
-													<img src="./image/${i.pr_image}" width="190" height="190">
+													<img src="./image/${imagelen}" width="190" height="190">
 												</a>
-												
-												<a class="hjAHtY" href="productout?product_no=${i.productno}" >
-													<img src="./image/${i.pr_image}" width="190" height="190">
-												</a>
-												
-												<a class="hjAHtY" href="productout?product_no=${i.productno}" >
-													<img src="./image/${i.pr_image}" width="190" height="190">
-												</a>
+											</c:forTokens>
 											</div>
 									</div>
 									</c:forEach>

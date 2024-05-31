@@ -52,7 +52,7 @@
 	<select id="select"
 		resultType="com.enez.market.member.MemberDTO">
 		select user_id,member_id,member_pw,member_name,address,phone,manner,
-		nickname,category_check1,buyer_id,seller_id,profile_image,intro,EXTRACT(DAY FROM sysdate - stdate)as gaip,readcnt from reset_user
+		nickname,category_check1,profile_image,intro,EXTRACT(DAY FROM sysdate - stdate)as gaip,readcnt from reset_user
 		where member_id = #{param1}
 	</select>
 
@@ -107,17 +107,20 @@
 	</select>
 	
 	
-	<select id="search_name" resultType="com.enez.market.member.MemberDTO">
-		select * from reset_user where member_name like #{param1} || '%'
-	</select>
 	
-	<select id="search_phone" resultType="com.enez.market.member.MemberDTO">
-		select * from reset_user where phone like #{param1} || '%'
-	</select>
+<select id="search_name" resultType="com.enez.market.member.MemberDTO">
+      select * from reset_user where member_name like  '%' || #{param1} || '%'
+   </select>
+   
+   <select id="search_phone" resultType="com.enez.market.member.MemberDTO">
+      select * from reset_user where phone like  '%' || #{param1} || '%'
+   </select>
+   
+   <select id="search_id" resultType="com.enez.market.member.MemberDTO">
+      select * from reset_user where member_id like  '%' || #{param1} || '%'
+   </select>
 	
-	<select id="search_id" resultType="com.enez.market.member.MemberDTO">
-		select * from reset_user where member_id like #{param1} || '%'
-	</select>
+	
 	
 	<select id="sortnew" resultType="com.enez.market.product.ProductDTO">
    SELECT product_no,seller_id,category_name,buyer_id,price,title,detail,product_state,location,
@@ -131,6 +134,5 @@
     TO_CHAR(TRUNC(MONTHS_BETWEEN(SYSDATE, update_at))) || '달 전'
     ELSE TO_CHAR(EXTRACT(DAY FROM SYSDATE - update_at)) || '일 전'
     END as period FROM product WHERE seller_id = #{param1}   order by update_at desc      
-   </select>
-
+   </select> 
 </mapper>

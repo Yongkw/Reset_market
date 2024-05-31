@@ -22,8 +22,9 @@ import com.enez.market.member.MemberDTO;
 public class EventController {
 
 	@Autowired
-	SqlSession sqlSession;
-	String imagepath = "C:\\Users\\Administrator\\Desktop\\ezen-reset_market\\src\\main\\webapp\\image";
+	SqlSession sqlSession; 
+	//String imagepath = "C:\\Users\\Administrator\\Desktop\\ezen-reset_market\\src\\main\\webapp\\image";
+	String imagepath = "C:\\Users\\Administrator\\Desktop\\project_resetmarket\\src\\main\\webapp\\image";
 	
 	
 	@RequestMapping(value = "/event_out")
@@ -36,7 +37,6 @@ public class EventController {
 		Service ss = sqlSession.getMapper(Service.class);
 		ArrayList<EventDTO> list = ss.eventout();
 		MemberDTO member = ss.select(member_id);
-		System.out.println(list.get(0).event_img);
 		mo.addAttribute("list",list);
 		mo.addAttribute("member", member);
 		return"event_out";

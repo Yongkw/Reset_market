@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -139,7 +140,7 @@ align-items: center;
     </script>
 </head>
 <body>
-<div class="resultcontainer" style="margin: 0 auto; width:70%; border: 3px solid #DCDCDC ;  " > 
+<div class="resultcontainer" style="margin: 0 auto; width:70%;  " > 
  
 <!--  -->
 
@@ -152,14 +153,14 @@ align-items: center;
 		 <c:forEach items="${list}" var="aa"  varStatus="loop">
 			<div class="eCFZgW">
 			
-				<a class="iizKix" href="productout?title=${aa.title}" >
+				<a class="iizKix" href="productout?product_no=${aa.product_no}" >
 					<div class="eSpfym">
 						<img alt="" src="./image/${aa.main_image}" width="194" height="194">
 					</div>
 					<div class="ikEnr">
 						<div class="gwleiO">${aa.title}</div>
 						<div class="ldPLFl">
-							<div class="moVyh">${aa.price}</div>
+							<div class="moVyh"><fmt:formatNumber value="${aa.price}" pattern="#,###" /> </div>
 							<div class="eYNXkt updateTime" data-timestamp="${aa.update_at}"></div>
 						</div>
 					</div>
@@ -171,7 +172,15 @@ align-items: center;
 
 <!--  -->
 <div class="pagebox">
+
+<c:choose>
+<c:when test="${page.now == 1 }">
+<span><a>이전</a></span>
+</c:when>
+<c:otherwise>
 <span><a href="pr_search?navbar_p=${find}&&pr_page=${page.now-1}" >이전</a></span>
+</c:otherwise>
+</c:choose> 
 
 <c:forEach begin="${page.start}" end="${page.end}" var="i" step="1" >
 <span>
