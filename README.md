@@ -117,5 +117,5 @@ DB 설계 및 ERD 제작 / 회원가입 /  로그인,아웃 /  회원정보 수�
 </ul>
 </details>
 
-# 🛠️ 주요 기능 소개
-**📌 메인화면**  
+## 📌 [주요 기능 상세보기](https://perfect-clover-1f6.notion.site/4aa3852486f341aa92318042803ec19b?pvs=4)
+
