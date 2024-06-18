@@ -186,7 +186,7 @@ align-items: center;
 <span>
 <c:choose>
 <c:when test="${i eq page.now}">
-<a>${i}</a>
+<h3>${i}</h3>
 </c:when>
 
 <c:otherwise>
@@ -198,7 +198,7 @@ align-items: center;
 </c:forEach>
 
 <c:choose>
-<c:when test="${page.now>=page.end}">
+<c:when test="${page.now==pageM}">
 <span><a>다음</a></span>
 </c:when>
 <c:otherwise>

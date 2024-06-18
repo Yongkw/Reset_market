@@ -127,12 +127,17 @@ public class SearchController {
 		int findProductSize= service.pr_search(find,kate);
 		
 		
-		PageboardDTO page = paging(findPage,findProductSize,pageLenth);
-
+		PageboardDTO page = paging(findPage,findProductSize,pageLenth); 
 		model.addAttribute("find", find);
 		model.addAttribute("list", product_list);
-		model.addAttribute("page", page);
-		
+		model.addAttribute("page", page); 
+ 
+		if(page.pull%pageLenth>0) { 
+			model.addAttribute("pageM",page.pull/pageLenth+1);
+		}else {
+			model.addAttribute("pageM", page.pull/pageLenth);
+		}
+		 
 		return "pr_searcht";
 		
 	}

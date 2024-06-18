@@ -15,6 +15,7 @@
 	height: 790px;
 	background: #486100; 
 	margin: 0 auto;
+	position: relative;
  }
  .messlist{
 	margin: 0 auto;
@@ -95,53 +96,88 @@
  	overflow-x:clip;
  }
 .btnset{
-	width: 100%;
-	height: 50px;
-	background: #c8ebc4; 
-	display: flex;
+	position:absolute;
+	width: 20%;
+	height: 0;
+	overflow:hidden;
+	background: #f3fff2;  
+	display: none;
+	flex-direction:column;
 	justify-content: space-around;
+	top: 0%;
+	left: 100%;	
 }
 .btnset>input[type=button]{
-	border: 1px solid #87a783;
-	background: #b1d1ad; 
-	width:25%;
+	border: 1px solid #afcbac;
+	width:100%;
 	font-size:x-large;
+	background:none;
 	color:#486100;
+	height: 35px;
 	
 	&:hover{
 		background: #477942;
 		color:white;
 	}
-}
-.btnset>input:first-child{border-left: none;}
-.btnset>input:last-child{border-right: none;}
+} 
+.messageCR{
+height: 70px;
+width: 100%;
+padding-right:30px;
+
+display: flex;
+justify-content: flex-end;
+align-items: center;
+color: white;
+
+} 
 
 hr{margin: 1px auto;    width: 97%;    border: 1px solid #dae9da;}
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
+	let subToggle=true; 
+	$('.liststate').on("click",function(){
+		$('.btnset').css("height","140px");   
+		  if(subToggle){
+		    $(".btnset").slideDown(500);
+		  }else{
+		    $(".btnset").slideUp(300);
+		  }
+		  subToggle=!subToggle;
+	});
+	
+	
     $('.updateTime').each(function() {
-        var timestamp = $(this).data('timestamp');
-        $(this).text(formatTime(timestamp));
+    	let timestamp = $(this).data('timestamp');
+        $(this).text(formatTime(timestamp)); 
     });
+    
+    
     $('.btn-state').on("click",function(){
-    	var state = $(this).val();
+    	let state = $(this).val();
+    	$('.btn-state').css("background","none");   
+    	$('.btn-state').css("color","#486100");   
+		$(this).css("background","#477942");  
+		$(this).css("color","white");  
     	$('.mess').css("display","none");
     	$('.mess[data-state='+state+']').css("display","flex");
     });
 
     $('.btn-stateall').on("click",function(){
-    	var state = $(this).val();
+    	let state = $(this).val();
+    	$('.btn-state').css("background","none");  
+    	$('.btn-state').css("color","#486100");  
     	$('.mess').css("display","flex");
     });
 
      
 });
-
+ 
 function formatTime(timestamp) {
-    var now = new Date();
-    var updateTime = new Date(timestamp);
-    var timeDiff = now - updateTime;
+	let now = new Date();
+	let updateTime = new Date(timestamp);
+	let timeDiff = now - updateTime;
 
     // 시간 간격을 계산하여 표시 형식을 결정합니다.
     // 이 부분은 원하는 표시 형식으로 변경할 수 있습니다.
@@ -160,15 +196,10 @@ function formatTime(timestamp) {
 </script>
 </head>
 <body> 
-		<div class="listcontainer"> 
-			<div class="btnset" >
-				<input type="button" class="btn-stateall" value="전체보기">
-				<input type="button" class="btn-state" value="판매중">
-				<input type="button" class="btn-state" value="거래중">
-				<input type="button" class="btn-state" value="판매완료">
+		<div class="listcontainer">  
+			<div class="messageCR">	
+				<div class="liststate"> FILTER</div>
 			</div>
-			
-			
 			<div class="messlist">
 			<c:forEach items="${list}" var="i" > 
 			
@@ -196,7 +227,15 @@ function formatTime(timestamp) {
 			</c:forEach>
 				
 			</div> 
+			
+			<div class="btnset" >
+				<input type="button" class="btn-stateall" value="전체보기">
+				<input type="button" class="btn-state" value="판매중">
+				<input type="button" class="btn-state" value="거래중">
+				<input type="button" class="btn-state" value="판매완료">
+			</div>
 		</div> 
+		 
 </body>
 
 </html>
